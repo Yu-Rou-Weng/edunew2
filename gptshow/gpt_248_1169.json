@@ -1,0 +1,12 @@
+{
+  "session_id": 1169,
+  "log": [
+    {
+      "input": "A small ball is launched horizontally from a height ( h ) with an initial velocity ( v_0 ). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.Considering both gravity and air resistance ( f = -bv ).Draw the ball and floor.Let the ball move for 3 seconds and then stop.Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.Do not resize the scene.The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.center = vector(0, 0, 0)\nscene.width = 800\nscene.height = 600\n\n# Parameter Settings\nh = 10  # initial height\nv_0 = 5  # initial velocity\nb = 0.1  # air resistance coefficient\ng = 9.81  # acceleration due to gravity\n\n# Objects\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\nball = sphere(pos=vector(0, h, 0), radius=1, color=color.red, make_trail=True)\n\n# Initial Conditions\nt = 0\ndt = 0.01\nball.v = vector(v_0, 0, 0)\n\n# Motion Loop\nwhile t < 3:\n    rate(100)\n    \n    # Update position\n    ball.pos.x += ball.v.x * dt\n    ball.pos.y += ball.v.y * dt - 0.5 * g * dt**2\n    \n    # Update velocity\n    ball.v.y += -g * dt\n    ball.v.y += -b * ball.v.y * dt\n    \n    # Check for collision with floor\n    if ball.pos.y <= 1:\n        ball.pos.y = 1\n        ball.v.y = -ball.v.y\n    \n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-23 19:53:04",
+      "serial_number": 1
+    }
+  ]
+}

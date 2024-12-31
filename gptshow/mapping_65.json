@@ -1,0 +1,4 @@
+{
+  "cyberInputMappingInfo": "\n\n3. Cyber Input Variable Mapping Information:\n\n(1) pendulum_length is mapped to the variable named Friction_I with an initial value set to a 1-dimensional value 5\n(2) When the value of Friction_I changes, let the animation rerun to the starting point and start with the updated pendulum_length.\n",
+  "created_at": "2024-11-02T03:33:44.545163+00:00"
+}

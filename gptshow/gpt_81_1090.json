@@ -1,0 +1,12 @@
+{
+  "session_id": 1090,
+  "log": [
+    {
+      "input": "gr1. Screen Settings:Set the canvas width to 700 and height to 400. Do not change the canvas size.2. Object Motion & Parameter Settings:Create a VPython animation to illustrate the following physics experiment:Add import time to your code.# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ound is elastic.\n\n3. Cyber Input Variable Mapping Information:\n    (1) acceleration is mapped to the variable named acceleration with an initial value set to a 1-dimensional value 5\n    (2) When the value of acceleration changes, let the animation rerun to the starting point and start with the updated acceleration.\n    ",
+      "output": "from vpython import *\n\ncanvas(width=700, height=400)\n\nh = 10\nv0 = 20\nacceleration = 5\n\nball = sphere(pos=vector(0, h, 0), radius=1, color=color.blue, make_trail=True)\nground = box(pos=vector(0, 0, 0), size=vector(30, 0.1, 10), color=color.green)\n\ndt = 0.01\nt = 0\n\nwhile True:\n    ball.pos.x = v0 * t\n    ball.pos.y = h - 0.5 * acceleration * t**2\n    t += dt\n    rate(100)\n    \n    if ball.pos.y <= ball.radius:\n        t = 0",
+      "mode": "initial",
+      "timestamp": "2024-11-06 23:11:00",
+      "serial_number": 1
+    }
+  ]
+}

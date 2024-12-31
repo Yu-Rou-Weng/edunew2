@@ -1,0 +1,2 @@
+requests
+iottalk-py~=2.3.1

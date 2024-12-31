@@ -1,0 +1,12 @@
+{
+  "session_id": 1178,
+  "log": [
+    {
+      "input": "Free Fall with Inelastic Collision (Coefficient of Restitution, \\(e\\)):Similar to the elastic collision case, the ball falls under gravity and rebounds after contacting the ground. However, the coefficient of restitution (\\(e\\)) determines how much of the kinetic energy is retained after each bounce, resulting in progressively lower bounce heights. For example:- **\\(e = 0.9\\)**: The ball retains 90% of its velocity after each bounce.- **\\(e = 0.8\\)**: The ball retains 80% of its velocity after each bounce.Draw the ball and floor.Let the ball move for 3 seconds and then stop.",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nball = sphere(pos=vector(0, 5, 0), radius=0.5, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(10, 0.2, 10), color=color.green)\n\ng = 9.81\nt = 0\ndt = 0.01\ne = 0.9\nv = 0\n\nwhile t < 3:\n    rate(100)\n    ball.pos.y = ball.pos.y + v*dt - 0.5*g*dt*dt\n    if ball.pos.y - ball.radius < floor.pos.y + floor.size.y/2:\n        v = -e * v\n    v = v - g*dt\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 10:41:09",
+      "serial_number": 1
+    }
+  ]
+}

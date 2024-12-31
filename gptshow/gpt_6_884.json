@@ -1,0 +1,12 @@
+{
+  "session_id": 884,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball's movement. The center point of the canvas must be correctly set, thus the order of writing in the Parameter Settings must be after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally launched projectile: a ball thrown horizontally, which bounces upon hitting the ground.\nDraw the ball and the ground. Assume that the ball undergoes an elastic collision with the ground, considering only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, remake the animation with the updated ball speed according to the new value of Speed_I.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0,0,0), resizable=False)\n\n# Parameter Settings\ng = vector(0, -9.8, 0) # gravity\ndt = 0.01 # time step\nt = 0 # initial time\n\n# Object Motion\nball = sphere(radius=1, color=color.red)\nball.mass = 0.1\nball.pos = vector(-15, 0, 0)\nball.v = vector(5, 0, 0)\n\nground = box(pos=vector(0,-1,0), size=vector(40,2,10))\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 1\n\nwhile t < 6:\n    rate(100)\n    \n    # update velocity and position\n    ball.v = ball.v + g*dt\n    ball.pos = ball.pos + ball.v*dt\n\n    # check for collision with ground\n    if ball.pos.y <= ground.pos.y + ground.size.y/2 + ball.radius and ball.v.y < 0:\n        ball.v.y = -ball.v.y # reverse y velocity (bounce)\n        \n    # update ball speed according to Speed_I\n    ball.v.x = Speed_I\n    \n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:48:01",
+      "serial_number": 1
+    }
+  ]
+}

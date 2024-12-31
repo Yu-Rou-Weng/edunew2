@@ -1,0 +1,26 @@
+{
+  "session_id": 952,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the width of the canvas to 700 and the height to 400. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings:\nPlease draw a simple harmonic motion animation using Vpython:\nDraw a block, an elastic spring, and a wall. On a horizontal smooth table, there is a block connected to the wall on the left by an elastic spring. Pull the block to the right for a certain distance and then release it from rest, allowing the block and spring to undergo simple harmonic motion.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Speed_I as a cyber input variable, set Speed_I=0.\n\n(2) Speed_I is the initial velocity of the block. When Speed_I changes to a new value, the initial velocity of the block also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nscene = canvas(width=700, height=400)\n\nwall = box(pos=vec(-5,0,0), size=vec(0.2,1,1), color=color.green)\nspring = helix(pos=wall.pos, axis=vec(1,0,0), color=color.yellow, thickness=0.1, coils=10, radius=0.3)\n\nblock = box(pos=vec(1,0,0), size=vec(0.5,0.5,0.5), color=color.red)\nblock.velocity = vec(0,0,0)\nblock.m = 1\nblock.k = 1\nblock.amplitude = 1\n\nSpeed_I = 0\n\ndef update_velocity():\n    global Speed_I\n    block.velocity.x = Speed_I\n\nwhile True:\n    rate(100)\n    update_velocity()\n    block.pos = block.pos + block.velocity*dt\n    spring.axis = block.pos - wall.pos",
+      "mode": "initial",
+      "timestamp": "2024-08-19 15:08:05",
+      "serial_number": 1
+    },
+    {
+      "input": "Please update the program by fixing the following error:\ndt is not defined\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas(width=700, height=400)\n\nwall = box(pos=vec(-5,0,0), size=vec(0.2,1,1), color=color.green)\nspring = helix(pos=wall.pos, axis=vec(1,0,0), color=color.yellow, thickness=0.1, coils=10, radius=0.3)\n\nblock = box(pos=vec(1,0,0), size=vec(0.5,0.5,0.5), color=color.red)\nblock.velocity = vec(0,0,0)\nblock.m = 1\nblock.k = 1\nblock.amplitude = 1\n\nSpeed_I = 0\n\ndef update_velocity():\n    global Speed_I\n    block.velocity.x = Speed_I\n\nwhile True:\n    rate(100)\n    update_velocity()\n    block.pos = block.pos + block.velocity*dt\n    spring.axis = block.pos - wall.pos",
+      "output": "from vpython import *\n\nscene = canvas(width=700, height=400)\n\nwall = box(pos=vec(-5,0,0), size=vec(0.2,1,1), color=color.green)\nspring = helix(pos=wall.pos, axis=vec(1,0,0), color=color.yellow, thickness=0.1, coils=10, radius=0.3)\n\nblock = box(pos=vec(1,0,0), size=vec(0.5,0.5,0.5), color=color.red)\nblock.velocity = vec(0,0,0)\nblock.m = 1\nblock.k = 1\nblock.amplitude = 1\n\nSpeed_I = 0\ndt = 0.01\n\ndef update_velocity():\n    global Speed_I\n    block.velocity.x = Speed_I\n\nwhile True:\n    rate(100)\n    update_velocity()\n    block.pos = block.pos + block.velocity*dt\n    spring.axis = block.pos - wall.pos",
+      "mode": "fix_error",
+      "timestamp": "2024-08-19 15:08:15",
+      "serial_number": 2
+    },
+    {
+      "input": "Please update the program by fixing the following error:\ndt is not defined\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas(width=700, height=400)\n\nwall = box(pos=vec(-5,0,0), size=vec(0.2,1,1), color=color.green)\nspring = helix(pos=wall.pos, axis=vec(1,0,0), color=color.yellow, thickness=0.1, coils=10, radius=0.3)\n\nblock = box(pos=vec(1,0,0), size=vec(0.5,0.5,0.5), color=color.red)\nblock.velocity = vec(0,0,0)\nblock.m = 1\nblock.k = 1\nblock.amplitude = 1\n\nSpeed_I = 0\n\ndef update_velocity():\n    global Speed_I\n    block.velocity.x = Speed_I\n\nwhile True:\n    rate(100)\n    update_velocity()\n    block.pos = block.pos + block.velocity*dt\n    spring.axis = block.pos - wall.pos",
+      "output": "from vpython import *\n\nscene = canvas(width=700, height=400)\n\nwall = box(pos=vec(-5,0,0), size=vec(0.2,1,1), color=color.green)\nspring = helix(pos=wall.pos, axis=vec(1,0,0), color=color.yellow, thickness=0.1, coils=10, radius=0.3)\n\nblock = box(pos=vec(1,0,0), size=vec(0.5,0.5,0.5), color=color.red)\nblock.velocity = vec(0,0,0)\nblock.m = 1\nblock.k = 1\nblock.amplitude = 1\n\nSpeed_I = 0\ndt = 0.01\n\ndef update_velocity():\n    global Speed_I\n    block.velocity.x = Speed_I\n\nwhile True:\n    rate(100)\n    update_velocity()\n    block.pos = block.pos + block.velocity*dt\n    spring.axis = block.pos - wall.pos",
+      "mode": "fix_error",
+      "timestamp": "2024-08-19 15:08:16",
+      "serial_number": 3
+    }
+  ]
+}

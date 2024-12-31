@@ -1,0 +1,12 @@
+{
+  "session_id": 1040,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\"># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) h is mapped to the variable named Height_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Height_I changes, let the animation rerun to the starting point and start with the updated h.",
+      "output": "```python\nfrom vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Cyber Input Variable Mapping\nHeight_I = 5\n\ndef setup_scene():\n    global ball, ground, h, v0, g, dt\n    \n    h = Height_I\n    v0 = 10\n    g = 9.81\n    dt = 0.01\n    \n    scene.autoscale = False\n    scene.range = 15\n    \n    ball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.blue, make_trail=True)\n    ground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\n\ndef reset_scene():\n    ball.pos = vector(0, h, 0)\n    ball.velocity = vector(v0, 0, 0)\n\ndef update_scene():\n    while ball.pos.y >= 0:\n        rate(100)\n        ball.velocity.y -= g * dt\n        ball.pos += ball.velocity * dt\n        \n        if ball.pos.y <= 0:\n            ball.velocity.y = -0.9 * ball.velocity.y\n\nsetup_scene()\nwhile True:\n    reset_scene()\n    update_scene()\n```\n\nThis code sets up a VPython animation to illustrate the horizontal projectile motion of a ball launched from a height \\( h \\) with an initial velocity \\( v_0 \\) and bouncing on the ground. The animation will rerun whenever the value of the variable Height_I changes, starting with the updated height.",
+      "mode": "initial",
+      "timestamp": "2024-09-23 23:45:33",
+      "serial_number": 1
+    }
+  ]
+}

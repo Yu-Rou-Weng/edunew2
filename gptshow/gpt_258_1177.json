@@ -1,0 +1,12 @@
+{
+  "session_id": 1177,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Considering both gravity and air resistance \\( f = -bv \\). Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "scene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * dt**2\n    ball.pos.y = max(ball.pos.y, ball.radius)\n    v = sqrt((v0**2) + 2 * g * h)\n    v = max(v - b * v * dt, 0)\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-28 13:14:27",
+      "serial_number": 1
+    }
+  ]
+}

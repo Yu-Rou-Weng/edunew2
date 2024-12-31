@@ -1,0 +1,12 @@
+{
+  "session_id": 1065,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\n\n3. Cyber Input Variable Mapping Information:\n\n(1) h is mapped to the variable named Orientation_I with an initial value set to a 3-dimensional vector [0, 0, 0]\n(2) When the value of Orientation_I changes, let the animation rerun to the starting point and start with the updated h.\n</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) canvas_height is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated canvas_height.\n    ",
+      "output": "scene.width = 700\nscene.height = 400\n\nball = sphere(radius=0.5, color=color.red, make_trail=True)\nground = box(pos=vector(0, -5, 0), size=vector(20, 0.2, 10), color=color.green)\n\ng = 9.81\nv0 = 10\n\ndef update_ball_orientation():\n    ball.pos = vector(0, Orientation_I.x, 0)\n    ball.velocity = vector(v0, 0, 0)\n\ndef update_animation():\n    rate(100)\n    while ball.pos.y > -5:\n        ball.velocity.y -= g\n        ball.pos += ball.velocity * 0.01\n        if ball.pos.y < -5:\n            ball.velocity.y *= -Elasticity_I\n\nOrientation_I = vector(0, 0, 0)\nElasticity_I = 5\n\nupdate_ball_orientation()\nupdate_animation()",
+      "mode": "initial",
+      "timestamp": "2024-11-02 11:04:59",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 967,
+  "log": [
+    {
+      "input": "1. **Screen Settings:**\n   Adjust the canvas width to 700 and height to 400. Please do not alter the canvas size.\n\n2. **Object Motion & Parameter Settings:**\n   Create a VPython animation as follows: Hang a small ball from the ceiling using a string, with the angle between the string and the vertical line (pendulum angle) set to 10 degrees. Release the ball from rest, allowing it to swing back and forth under the influence of gravity.\n\n3. **Cyber Input Variable Mapping Information:**\n\n   (1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value of 0. This variable represents the angular velocity of the pendulum bob.\n\n   (2) During the animation, whenever the value of the `Speed_I` variable changes, the angular velocity of the pendulum bob should be immediately updated to the new value of `Speed_I`.\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\ncanvas(width = 700, height = 400)\n\n# Object Motion & Parameter Settings\nball = sphere(pos = vector(5*sin(radians(10)), -5*cos(radians(10)), 0), radius = 0.5, color = color.red)\nceiling = box(pos = vector(0, 0, 0), length = 10, height = 0.5, width = 0.5, color = color.blue)\nstring = curve(vector(0, 0, 0), ball.pos, color = color.yellow)\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 0\nball.velocity = vector(0, 0, 0)\ng = 9.8\ndt = 0.01\n\nwhile True:\n    rate(100)\n    angle = atan(ball.pos.x / -ball.pos.y)\n    a = -g*sin(angle)\n    ball.velocity.x = Speed_I * cos(angle)\n    ball.velocity.y = Speed_I * sin(angle)\n    Speed_I += a*dt\n    ball.pos = ball.pos + ball.velocity*dt\n    string.pos = [vector(0, 0, 0), ball.pos]",
+      "mode": "initial",
+      "timestamp": "2024-08-21 13:33:40",
+      "serial_number": 1
+    }
+  ]
+}

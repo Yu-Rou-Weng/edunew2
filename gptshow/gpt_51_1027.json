@@ -1,0 +1,12 @@
+{
+  "session_id": 1027,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\"># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) height is mapped to the variable named Height_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Height_I changes, let the animation rerun to the starting point and start with the updated height.",
+      "output": "```python\nfrom vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Cyber Input Variable Mapping Information\nHeight_I = slider(min=1, max=10, value=5, step=1, bind=lambda: reset())\n\n# Constants\ng = 9.81  # acceleration due to gravity\nv0 = 10  # initial horizontal velocity\ndt = 0.01  # time step\nt = 0  # initial time\ny = Height_I.value  # initial height\n\n# Objects\nball = sphere(pos=vector(0, y, 0), radius=0.5, color=color.blue, make_trail=True)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\n# Animation Loop\ndef reset():\n    global y, t\n    t = 0\n    y = Height_I.value\n    ball.pos = vector(0, y, 0)\n    ball.clear_trail()\n\ndef update_position():\n    global t, y\n    while ball.pos.y > 0:\n        rate(100)\n        t += dt\n        ball.pos.x = v0 * t\n        ball.pos.y = y - 0.5 * g * t**2\n    v0 = -v0  # reverse direction after bounce\n\nreset()\nwhile True:\n    update_position()\n```",
+      "mode": "initial",
+      "timestamp": "2024-09-23 22:00:20",
+      "serial_number": 1
+    }
+  ]
+}

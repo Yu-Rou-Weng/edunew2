@@ -1,0 +1,96 @@
+{
+  "session_id": 1106,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.add import time to your code",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Constants\nh = 10\nv0 = 5\ng = 9.81\n\n# Objects\nground = box(pos=vector(0, -h, 0), size=vector(20, 0.2, 10), color=color.green)\nball = sphere(pos=vector(-10, h, 0), radius=0.5, color=color.red)\nball.velocity = vector(v0, 0, 0)\n\n# Animation\ndt = 0.01\nt = 0\n\nwhile True:\n    rate(100)\n    \n    ball.pos.x += ball.velocity.x * dt\n    ball.pos.y += ball.velocity.y * dt - 0.5 * g * t ** 2\n    t += dt\n    \n    if ball.pos.y <= ground.pos.y + ball.radius:\n        ball.velocity.y = -ball.velocity.y\n        t = 0",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:55:54",
+      "serial_number": 1
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nvp.sphere()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:07",
+      "serial_number": 2
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nvp.scene.caption = \"VPython Example\"\nvp.box()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:29",
+      "serial_number": 3
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:32",
+      "serial_number": 4
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:33",
+      "serial_number": 5
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nball = vp.sphere(pos=vp.vector(0,0,0), radius=0.5, color=vp.color.red)\nfloor = vp.box(pos=vp.vector(0,-1,0), size=vp.vector(10,0.1,10), color=vp.color.green)\n\nball.velocity = vp.vector(0,1,0)\ndt = 0.01\n\nwhile True:\n    vp.rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    if ball.pos.y < floor.pos.y + ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    time.sleep(0.01)",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:33",
+      "serial_number": 6
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:39",
+      "serial_number": 7
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:40",
+      "serial_number": 8
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nvp.sphere()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:40",
+      "serial_number": 8
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import time",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:48",
+      "serial_number": 9
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\n# Create a 3D box\nbox = vp.box()\n\n# Pause for 2 seconds\ntime.sleep(2)\n\n# Move the box\nbox.pos = vp.vector(1, 1, 1)",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:49",
+      "serial_number": 10
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nvp.sphere()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:53",
+      "serial_number": 11
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nvp.sphere()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 20:56:54",
+      "serial_number": 12
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+*.sw[op]
+*.py[co]
+*~
+*.egg-info
+*.DS_Store
+.cache
+.eggs
+.tox
+htmlcov
+.coverage
+.coverage.*
+tmp
+share/iottalk.ini

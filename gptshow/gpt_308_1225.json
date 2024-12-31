@@ -1,0 +1,82 @@
+{
+  "session_id": 1225,
+  "log": [
+    {
+      "input": "### Gravity-Induced Simple Harmonic Motion (Circular Ring, Initial Velocity = 0, Starting from Endpoint)This motion explores **simple harmonic motion caused by gravity** within a system where a small mass **m** starts from rest at one endpoint of a line perpendicular to the center of a massive circular ring of uniform mass distribution **M** and radius **r**.\u00a0The small mass is influenced by the gravitational forces exerted by all the points on the ring. When the displacement of the small mass from the center is relatively small, these forces create a restoring effect proportional to the displacement, resulting in oscillatory motion.## Theoretical CalculationThe period of oscillation is determined using the following parameters:- **Gravitational constant (G)**- **Mass of the ring (M)**- **Mass of the oscillating body (m)**- **Radius of the ring (r)**The theoretical period for small oscillations aligns with the principles of simple harmonic motion.",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-27 02:01:33",
+      "serial_number": 1
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:35",
+      "serial_number": 2
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:36",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:36",
+      "serial_number": 2
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:36",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:39",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:39",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:39",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:39",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:39",
+      "serial_number": 6
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = ring(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "output": "from vpython import *\n\nG = 6.67e-11\nM = 1e12\nm = 1\nr = 10\n\nscene = canvas(width=800, height=600)\n\nring = cylinder(pos=vector(0,0,0), axis=vector(0,0,1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r,0,0), radius=0.5, color=color.red, make_trail=True)\n\nv = sqrt(G*M/r)\nomega = v/r\nperiod = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < period:\n    rate(100)\n    theta = omega * t\n    x = r * cos(theta)\n    y = r * sin(theta)\n    mass.pos = vector(x, y, 0)\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-27 02:01:39",
+      "serial_number": 7
+    }
+  ]
+}

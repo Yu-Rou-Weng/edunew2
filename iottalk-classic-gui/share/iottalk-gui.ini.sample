@@ -1,0 +1,106 @@
+# The configure for iottalk GUI/CCM
+[gui]
+
+# debug = 0
+
+# rootdir = /path/to/iottalk-gui
+# userdir = /home/yourname/.iottalk
+# logdir = ${rootdir}/log
+# web-da-dir = ${rootdir}/da
+
+flask-secret-key = my-secret-key
+
+# The public IP of GUI/CCM server.
+# In case of Docker, please set it to `0.0.0.0`
+bind = 0.0.0.0
+# port = 7788
+
+# in minutes
+# session-timeout = 10080
+
+# in seconds, by default, it's disabled.
+ownership-timeout = 0
+
+# support output device single bind (by YB), by default, it's disabled.
+# odf-single-bind = 0
+
+[gui-db]
+
+# example for SQLite:
+# url = sqlite+pysqlite:////home/yourname/.iottalk/iottalk-gui.db
+#
+# example for MySQL:
+# url = mysql+pymysql://<username>:<password>@<host>/<dbname>
+
+# pool-recycle = 600
+
+# redis-host = localhost
+# redis-port = 6379
+
+[gui-mqtt]
+
+# You must use mqtts as the scheme if MQTT auth function is enabled
+scheme = ${core-mqtt:scheme}
+host = ${core-mqtt:host}
+port = ${core-mqtt:port}
+
+# csm-host = ${host}
+# csm-port = ${port}
+
+# API topics setting
+#
+# device-req-topic = iottalk/api/req/ccm/device
+# device-res-topic = iottalk/api/res/ccm/device
+# graph-req-topic = iottalk/api/req/ccm/graph/{}
+# graph-res-topic = iottalk/api/res/ccm/graph/{}
+# gui-req-topic = iottalk/api/gui/req/{}
+# gui-res-topic = iottalk/api/gui/res/{}
+
+[gui-ws]
+
+scheme = ${core-ws:scheme}
+host = ${core-ws:host}
+port = ${core-ws:port}
+
+[gui-log]
+
+# level-gui = info
+# color-gui = brightmagenta
+# level-device = debug
+# color-device = brightblue
+# level-graph = debug
+# color-graph = brightyellow
+# level-sim = debug
+# color-sim = brightcyan
+
+[gui-ec]
+ec-endpoint = http://localhost:9992
+
+[gui-simtalk]
+# simtalk-endpoint =
+
+[gui-sagen]
+# sagen-endpoint =
+
+# [subsystems]
+# aitalk-endpoints = /aitalk /aitalk/mlmodel
+# datatalk-endpoints = /datatalk /datatalk/databank
+
+[gui-oauth2]
+# OAuth 2.0 Client ID
+client-id =
+
+# OAuth 2.0 Client Secret
+client-secret =
+
+# OAuth 2.0 Redirect URI
+redirect-uri =
+
+# OpenID Connect Discovery Endpoint
+oidc-discovery-endpoint =
+
+# OAuth 2.0 revocation endpoint
+revocation-endpoint =
+
+# Oauth 2.0 Introspect Token Endpoint
+introspect-endpoint =

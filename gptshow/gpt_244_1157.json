@@ -1,0 +1,19 @@
+{
+  "session_id": 1157,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nDraw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nDo not resize the scene. \nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) mass is mapped to the variable named Mass_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Mass_I changes, let the animation rerun to the starting point and start with the updated mass.</br>",
+      "output": "from vpython import *\n\n# Set up scene\nscene = canvas(width=700, height=400)\n\n# Create objects\nball = sphere(pos=vector(0, 5, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(10, 0.2, 5), color=color.green)\n\n# Initialize variables\nvelocity = vector(0, 0, 0)\ngravity = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\n\n# Animation loop\nwhile t < 3:\n    rate(100)\n    \n    # Update ball position\n    ball.pos = ball.pos + velocity * dt\n    velocity = velocity + gravity * dt\n    \n    # Check for floor collision \n    if ball.pos.y < ball.radius + floor.size.y/2:\n        ball.pos.y = ball.radius + floor.size.y/2\n        velocity.y = abs(velocity.y) * 0.9\n        \n    t = t + dt\n\nprint(\"Animation complete\")",
+      "mode": "initial",
+      "timestamp": "2024-12-20 11:55:42",
+      "serial_number": 1
+    },
+    {
+      "input": "A small ball is launched horizontally from a height ( h ) with an initial velocity ( v_0 ). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.Draw the ball and floor.\nLet the ball move for 3 seconds and then stop.Do not resize the scene.\nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "from vpython import *\n\nscene.width = 800\nscene.height = 600\nscene.center = vector(0, -5, 0)\n\nh = 10\nv0 = 5\ng = 9.81\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.blue, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\n\nt = 0\ndt = 0.01\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= floor.pos.y + ball.radius:\n        v0 *= -0.9",
+      "mode": "initial",
+      "timestamp": "2024-12-21 23:33:23",
+      "serial_number": 1
+    }
+  ]
+}

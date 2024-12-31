@@ -1,0 +1,12 @@
+{
+  "session_id": 1123,
+  "log": [
+    {
+      "input": "1. Screen Settings:Set the canvas width to 700 and height to 400. Do not change the canvas size.2. Object Motion & Parameter Settings:Create a VPython animation to illustrate the following physics experiment:# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) velocity is mapped to the variable named Number_I with an initial value set to a 1-dimensional value 5</br>\n(2) When the value of Number_I changes, let the animation rerun to the starting point and start with the updated velocity.</br>\n",
+      "output": "from vpython import *\n\n# Screen Settings\ncanvas.width = 700\ncanvas.height = 400\n\n# Constants\nh = 10 # initial height\ng = 9.81 # acceleration due to gravity\n\n# Objects\nground = box(pos=vector(0,0,0), size=vector(30,0.1,5), color=color.green)\nball = sphere(pos=vector(0,h,0), radius=0.5, color=color.blue)\n\n# Parameters\nvelocity = 5\n\ndef reset_scene():\n    ball.pos = vector(0, h, 0)\n    ball.velocity = vector(velocity, 0, 0)\n\ndef update_velocity(evt):\n    ball.velocity = vector(evt.new, 0, 0)\n    reset_scene()\n\nscene.bind('keydown', update_velocity)\n\nreset_scene()\n\ndt = 0.01\nwhile True:\n    rate(100)\n    ball.pos.y = ball.pos.y - ball.velocity.y * dt\n    ball.velocity.y = ball.velocity.y - g * dt\n    if ball.pos.y < ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    ball.pos.x = ball.pos.x + ball.velocity.x * dt",
+      "mode": "initial",
+      "timestamp": "2024-11-10 13:16:21",
+      "serial_number": 1
+    }
+  ]
+}

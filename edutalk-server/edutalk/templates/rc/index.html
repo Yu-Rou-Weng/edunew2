@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control Panel {{ dm_name }} | EduTalk</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/rc/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/rc/slider.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap3.3.7.min.css') }}">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/rc/modal.css') }}">
+
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery1.12.4.min.js') }}"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
+  <!--script type="text/javascript" src="//iottalk.github.io/iottalk-js/iottalkjs-v2.3.3.js"></script-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/iottalk/index.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap3.3.7.min.js') }}"></script>
+</head>
+
+<body>
+  <script>
+    var dev = "{{ dev }}";
+    var dmName = "{{ dm_name }}";
+    var idfList = {{ idf_list | tojson }};
+    var idfs = JSON.parse('{{ idfs | tojson | safe }}');
+    var ivList = JSON.parse('{{ iv_list | tojson | safe }}');
+    var exclude_idfs = JSON.parse('{{ exclude_idfs | tojson | safe }}');
+    var urls = {
+      csmUrl: '{{ csm_url }}',
+      rcBind: function (id) {
+        return '{{ url_for("root.rc.bind", lec_id=lecture.id, d_id="")}}' + id
+      },
+      bind_callbacks: JSON.parse('{{ bind_callbacks | tojson | safe }}'),
+    };
+
+    let csrf = {
+      token: '{{ csrf_token() }}',
+    };
+  </script>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="permission_modal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3>Click to start.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="RC">
+    <div class="iv-container">
+      <template v-for="(iv, iv_index) in ivList">
+        <div class="iv-name">
+          [[ iv.giv_name + iv.index]]
+        </div>
+        <template>
+          <template v-for="(param, param_index) in iv.params">
+            <div :class="param.device == 'RangeSlider' ? 'slidecontainer' : 'idf-block'">
+              <div class="param-label" v-if="iv.params.length > 1" :id="param.device == 'RangeSlider' ? 'R' : ''">
+                <label v-if="param_index == 0"><i>x</i></label>
+                <label v-if="param_index == 1"><i>y</i></label>
+                <label v-if="param_index == 2"><i>z</i></label>
+              </div>
+              <div v-if="param.device == 'RangeSlider'" class="column slider">
+                <input type="range" :min="param.min" :max="param.max" step="0.01" :value="param.default"
+                  :name="getIdfName(iv_index, param_index)">
+              </div>
+
+              <div v-else-if="param.device == 'Input Box'" class='column' :name="getIdfName(iv_index, param_index)">
+                <input v-if="param.type == 'string'" type="text" class="input-num" style="text-align: center;width: 40%">
+                <input v-else type="number" class="input-num" style="text-align: center;width: 40%">
+                <button class='submit-btn'>OK</button>
+                <p class='error-msg' style="display: none">input is not in a valid number format</p>
+              </div>
+
+              <template v-if="param.sensor == 'Acceleration'">
+                <span> Using Acceleration Sensor with function [[ param.function ]] </span>
+              </template>
+
+              <template v-if="param.sensor == 'Gyroscope'">
+                <span> Using Gyroscope Sensor with function [[ param.function ]] </span>
+              </template>
+
+              <template v-if="param.sensor == 'Orientation'">
+                <span> Using Orientation Sensor with function [[ param.function ]] </span>
+              </template>
+
+              <template v-if="param.sensor == 'Magnetometer'">
+                <span> Using Magnetometer Sensor with function [[ param.function ]] </span>
+              </template>
+
+              <template v-if="param.device == 'Morsensor' && param.sensor == 'Humidity'">
+                <span> Using Humidity Sensor </span>
+              </template>
+
+              <template v-if="param.device == 'Morsensor' && param.sensor == 'UV'">
+                <span> Using UV Sensor </span>
+              </template>
+
+              <template v-if="param.device == 'Morsensor' && param.sensor == 'Alcohol'">
+                <span> Using Alcohol Sensor </span>
+              </template>
+
+              <template v-if="param.device == 'M2'">
+                <span> Using M2 [[ param.sensor ]] Sensor </span>
+              </template>
+            </div>
+          </template>
+        </template>
+      </template>
+    </div>
+    <div class="sensor-container">
+      <div class="sensor-block" v-for="(tag, sensor, index) in sensorList">
+        <section>
+          <h4> [[sensor]]
+            <template v-if="tag == 'acc' || tag == 'gyr'">
+              <button class="btn btn-danger control_btn motion_btn" :id="tag + '_btn'"
+                @click="switchBtn($event)">off</button>
+            </template>
+            <template v-else-if="tag == 'ori' || tag == 'mag'">
+              <button class="btn btn-danger control_btn" :id="tag + '_btn'" @click="switchBtn($event)">off</button>
+            </template>
+            <template v-else>
+              <button class="btn btn-success control_btn morsensor_btn" :id="tag + '_btn'"
+                @click="switchBtn($event)">on</button>
+            </template>
+          </h4>
+        </section>
+        <section>
+          <template v-if="tag == 'acc' || tag == 'mag'">
+            <div class="col col-xs-4 col-sm-4">
+              <label><i>x</i></label>
+              <span :id="tag + '_x'"></span>
+            </div>
+            <div class="col col-xs-4 col-sm-4">
+              <label><i>y</i></label>
+              <span :id="tag + '_y'"></span>
+            </div>
+            <div class="col col-xs-4 col-sm-4">
+              <label><i>z</i></label>
+              <span :id="tag + '_z'"></span>
+            </div>
+          </template>
+          <template v-else-if="tag == 'gyr' || tag == 'ori'">
+            <div class="col col-xs-4 col-sm-4">
+              <label><i>&alpha;</i></label>
+              <span :id="tag + '_x'"></span>
+            </div>
+            <div class="col col-xs-4 col-sm-4">
+              <label><i>&beta;</i></label>
+              <span :id="tag + '_y'"></span>
+            </div>
+            <div class="col col-xs-4 col-sm-4">
+              <label><i>&gamma;</i></label>
+              <span :id="tag + '_z'"></span>
+            </div>
+          </template>
+          <template v-else>
+            <div class="col col-xs-4 col-sm-4">
+              <span :id="tag + '_x'"></span>
+            </div>
+          </template>
+          <div class="col col-xs-12 col-sm-12">
+            <label><i>time</i></label>
+            <span :id="tag + '_time'"></span>
+          </div>
+        </section>
+      </div>
+      <div class='hint-message'>
+        <span>Morsensor not pluged in<br></span>
+        <span>Auto turn off control button.</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/rc/main.js') }}"></script>
+</body>
+</html>

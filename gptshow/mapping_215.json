@@ -1,0 +1,4 @@
+{
+  "cyberInputMappingInfo": "</br>3. Cyber Input Variable Mapping Information:</br>\n(1) angle is mapped to the variable named Angle_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated angle.</br>\n",
+  "created_at": "2024-12-16T12:47:06.962787+00:00"
+}

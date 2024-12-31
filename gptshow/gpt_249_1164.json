@@ -1,0 +1,40 @@
+{
+  "session_id": 1164,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Only the effect of gravity is considered, and the collision between the ball and the ground is elastic. Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings. 3. Cyber Input Variable Mapping Information: (1) mass1 is mapped to the variable named mass1 with an initial value set to a 1-dimensional value 5 (2) When the value of mass1 changes, let the animation rerun to the starting point and start with the updated mass1.",
+      "output": "scene.width = 700\nscene.height = 400\n\nh = 10\nv0 = 5\ng = 9.81\nt = 0\ndt = 0.01\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.blue)\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * t**2\n    t += dt\n    \n    if ball.pos.y < 0:\n        ball.pos.y = 0\n        v0 *= -1\n        t = 0",
+      "mode": "initial",
+      "timestamp": "2024-12-24 12:40:09",
+      "serial_number": 1
+    },
+    {
+      "input": "A small ball is launched horizontally from a height ( h ) with an initial velocity ( v_0 ). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.Draw the ball and floor.\nLet the ball move for 3 seconds and then stop.Do not resize the scene.\nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=800, height=600, center=vector(0, 0, 0), background=color.white)\n\n# Parameter Settings\nh = 10\nv0 = 5\ng = 9.81\ndt = 0.01\nt = 0\n\n# Objects\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.blue)\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red, make_trail=True)\n\n# Motion\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * t * t\n    t += dt\n    if ball.pos.y <= ball.radius:\n        v0 *= -1\n        t = 0",
+      "mode": "initial",
+      "timestamp": "2024-12-25 12:24:27",
+      "serial_number": 1
+    },
+    {
+      "input": "Free fall with a stop upon ground contact:\nA ball is dropped from a specific height and accelerates downward due to gravity until it reaches the ground, where it stops moving. The motion is influenced solely by gravitational acceleration (9.8 m/s\u00b2), and there is no rebound.Draw the ball and floor.\nLet the ball move for 3 seconds and then stop.",
+      "output": "from vpython import *\n\nscene = canvas(title='Free Fall with Stop', width=800, height=600)\n\nball = sphere(pos=vector(0, 20, 0), radius=1, color=color.blue)\nfloor = box(pos=vector(0, 0, 0), size=vector(40, 0.5, 40), color=color.green)\n\nball.velocity = vector(0, 0, 0)\nball.acceleration = vector(0, -9.8, 0)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt\n    ball.velocity = ball.velocity + ball.acceleration * dt\n    t = t + dt\n\nball.velocity = vector(0, 0, 0)",
+      "mode": "initial",
+      "timestamp": "2024-12-26 10:02:44",
+      "serial_number": 1
+    },
+    {
+      "input": "# Simple Harmonic Motion Caused by GravityA small mass **m** is initially at rest and positioned at the midpoint of the perpendicular bisector of the line connecting two fixed massive spheres of equal mass **M**.The motion begins from one endpoint of this perpendicular bisector. The mass **m** experiences gravitational forces from the two spheres, resulting in a restoring force proportional to its displacement when the displacement is small. This leads to oscillatory motion.The theoretical period of this oscillation is calculated using the following parameters:- Gravitational constant **G**- Masses **m** and **M**- Relevant distances",
+      "output": "from vpython import *\n\n# Parameters\nG = 6.67e-11 # Gravitational constant\nm = 1 # Mass of small mass\nM = 10 # Mass of fixed massive spheres\nr = 1 # Distance between fixed massive spheres\nd = r/2 # Distance between small mass and midpoint\n\n# Calculate period of oscillation\nT = 2 * pi * sqrt((d**3)/(G*(m + M)))\n\nprint(\"Theoretical period of oscillation:\", T)",
+      "mode": "initial",
+      "timestamp": "2024-12-26 16:44:49",
+      "serial_number": 1
+    },
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Only the effect of gravity is considered, and the collision between the ball and the ground is elastic. Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "scene.width = 700\nscene.height = 400\n\nh = 10\nv0 = 5\ng = 9.81\n\nfloor = box(pos=vector(0,0,0), size=vector(20,0.1,10), color=color.green)\nball = sphere(pos=vector(0,h,0), radius=0.5, color=color.red, make_trail=True)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * (t+dt)**2 - 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= ball.radius:\n        v0 *= -1\n\nball.pos.y = ball.radius",
+      "mode": "initial",
+      "timestamp": "2024-12-27 15:16:18",
+      "serial_number": 1
+    }
+  ]
+}

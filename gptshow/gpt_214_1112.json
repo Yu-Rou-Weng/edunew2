@@ -1,0 +1,12 @@
+{
+  "session_id": 1112,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\n\nConsidering both gravity and air resistance \\( f = -bv \\).  \n\nDraw the ball and floor.\n\nLet the ball move for 3 seconds and then stop.\n\nDo not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.\n\nDo not resize the scene. \n\nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) angle is mapped to the variable named Angle_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated angle.</br>",
+      "output": "canvas(width=700, height=400)\n\n# Parameters\nh = 10\nv0 = 15\nb = 0.1\ng = 9.81\n\n# Objects\nfloor = box(pos=vector(0, -h, 0), size=vector(40, 0.1, 10))\nball = sphere(pos=vector(-20, h, 0), radius=1, color=color.red, make_trail=True)\n\n# Initial conditions\nball.v = vector(v0, 0, 0)\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile t < 3:\n    rate(100)\n    ball.f = vector(-b * ball.v.x, -g, 0)\n    ball.v += ball.f * dt\n    ball.pos += ball.v * dt\n    if ball.pos.y < floor.pos.y + ball.radius:\n        ball.v.y = -ball.v.y\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-16 20:38:23",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+#device-iframe {
+  width: 90%;
+  height: 95%;
+  vertical-align: top;
+}
+
+#video-iframe {
+  width: 30%;
+  height: 315px;
+  vertical-align: top;
+}
+
+#animation-content {
+  display: none;
+  margin-top: 30px;
+}
+
+.animation-header {
+  margin-top: -14px;
+  display: flex;
+  align-items: center;
+}
+
+.animation-data-source {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.source-dropdown {
+  width: 69%;
+  min-width: 10em;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.source-dropdown > .source-name {
+  width: 90%;
+  overflow: hidden;
+  text-align: start;
+}
+
+#data-card {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  padding: 3%;
+  margin: 3%;
+  color: black;
+  border: 2px solid;
+  border-radius: 8px;
+}
+
+#historical-data-source {
+  -webkit-appearance: menulist-button;
+  width: 120px;
+  height: 33px;
+  line-height: 35px;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.btn-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 36%;
+}
+
+#download-btn {
+  color: #878787;
+  border-color: #878787;
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 5%;
+}
+
+#use-data-btn {
+  color: #198754;
+  border-color: #198754;
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+}
+
+#loading-spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin-right: 160px;
+  border: 3px solid gray;
+  border-top: 3px solid white;
+  border-radius: 50%;
+  transition-property: transform;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==  replay DA start == */
+.control-panel {
+  display: flex;
+  align-items: center;
+}
+
+.control-panel .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  margin-left: 10px;
+  cursor: var(--cursor);
+}
+
+.control-cell {
+  display: flex;
+  filter: var(--filter);
+}
+
+.percentage-bar {
+  position: relative;
+  width: 200px;
+  margin-left: 15px;
+  cursor: var(--cursor);
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  border-radius: 0;
+}
+
+.progress-wrap {
+  background: #ddd;
+  margin: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  background: #444;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.percentage-bar .mouse-display{
+  display: none;
+}
+.percentage-bar:hover .mouse-display {
+  display: var(--display);
+  float: none;
+  position: absolute;
+  top: -2em;
+  z-index: 1;
+  width: 6em;
+  font-size: 0.6em;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 3px;  
+}
+
+/*table {
+  border-style: none;
+}*/
+/* ==  replay DA end == */

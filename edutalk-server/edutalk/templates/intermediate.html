@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+<style>
+    .link {
+        font-size: 24px;
+        color: #007bff;
+        text-decoration: none;
+        display: block;
+        margin-top: 20px;
+    }
+    .link:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock head %}
+{% block content %}
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12 sign'>
+      EduTalk
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-12 text-center'>
+      <a href="{{ url_for('root.index') }}" class="link">GenAI</a>
+      <a href="#" class="link">Manual_Gen</a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{
+  "session_id": 1207,
+  "log": [
+    {
+      "input": "## Turning Ball MotionIf a small ball has a mass of \\( m \\), a velocity of \\( v \\), an angular velocity of \\( \\omega \\), and a turning radius of curvature \\( R \\), then the required centripetal acceleration for the turn is:\\[a_c = \\frac{v^2}{R} = R \\omega^2\\]From Newton's second law of motion, the centripetal force is:\\[F_c = m a_c = m \\cdot \\frac{v^2}{R} = m \\cdot R \\omega^2\\]Only the uniform circular motion of the ball is depicted.",
+      "output": "from vpython import *\n\nm = 1\nv = 5\nR = 2\nomega = v / R\n\nball = sphere(pos=vector(-R, 0, 0), radius=0.1, color=color.blue)\nball.velocity = vector(v, 0, 0)\nball.angular_velocity = vector(0, 0, omega)\n\ndt = 0.01\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt\n    ball.rotate(angle=omega*dt, axis=vector(0, 0, 1))",
+      "mode": "initial",
+      "timestamp": "2024-12-26 13:16:21",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 1115,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nDraw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nDo not resize the scene. \nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) mass is mapped to the variable named Mass_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Mass_I changes, let the animation rerun to the starting point and start with the updated mass.</br>",
+      "output": "from vpython import *\n\n# Create scene and objects\nscene = canvas(width=800, height=600, background=color.white)\nball = sphere(pos=vector(0,0,0), radius=1, color=color.red)\ncube = box(pos=vector(5,5,5), size=vector(2,2,2), color=color.blue)\n\n# Set velocities and accelerations\nball.velocity = vector(1, -1, 0)\ncube.acceleration = vector(0, -9.8, 0)\n\n# Animation parameters\ndt = 0.01\ntime = 0\nend_time = 10.0\n\n# Main animation loop\nwhile time < end_time:\n    rate(100)\n    \n    # Update positions\n    ball.pos = ball.pos + ball.velocity * dt\n    cube.pos = cube.pos + cube.acceleration * dt * dt/2\n    \n    # Collision check\n    if cube.pos.y < 0:\n        cube.acceleration.y = -cube.acceleration.y\n    \n    # Update time\n    time += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-16 21:08:15",
+      "serial_number": 1
+    }
+  ]
+}

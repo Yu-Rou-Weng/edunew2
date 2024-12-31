@@ -1,0 +1,12 @@
+{
+  "session_id": 639,
+  "log": [
+    {
+      "input": "Program to be written: Generate arrows using a for loop\n\nThis program is very short compared to previous ones; it just needs to finish drawing the arrows, so it doesn't even include generating animation. What's special about it is the use of three nested for loops. The variable in the first loop is i, used to generate the x-coordinate of the position; the variable in the second loop is j, used to generate the y-coordinate; the third loop's variable is k, used to generate the z-coordinate. Since it uses range(N) with N = 4 to generate values, it only produces 0, 1, 2, 3; thus, the positions for drawing the arrows are -L/2, -L/4, 0, L/4.\n\nScreenshot of the program:\n![image](https://hackmd.io/_uploads/SytP0jauR.png)\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nL = 2.0 # length of the cube's edge\nN = 4 # number of intervals along each edge\n\n# Create arrows\nfor i in range(N):\n    for j in range(N):\n        for k in range(N):\n            arrow(pos=vector(L*(i/(N-1)-1/2), L*(j/(N-1)-1/2), L*(k/(N-1)-1/2)), axis=vector(1,1,1), color=color.red)",
+      "mode": "initial",
+      "timestamp": "2024-07-24 06:32:32",
+      "serial_number": 1
+    }
+  ]
+}

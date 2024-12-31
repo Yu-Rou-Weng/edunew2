@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Python Education</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('#remote-control-iframe').attr('src', 'http://' + window.location.hostname + ':7789/');
+            $('#device-iframe').attr('src', '/da/vp/web_py_index.html#' + /vp=([^&]+)/.exec(window.location.href)[1]);
+
+            $('#device-iframe').on('load',function() {
+                document.title = document.getElementById("device-iframe").contentDocument.title;
+            });
+        })
+    </script>
+  </head>
+
+  <body>
+        <iframe id="remote-control-iframe" src="" style="height:99%;width:29%" frameborder="0"></iframe>
+        <iframe id="device-iframe"  src="" style="height:99%; width:70%"  frameborder="0"></iframe>
+  </body>
+</html>

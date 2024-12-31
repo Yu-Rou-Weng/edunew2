@@ -1,0 +1,35 @@
+.list {
+  margin-top: 50px;
+  font-size:20px;
+  border-radius: 1px;
+}
+
+.sign {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 5em;
+  height: 45%;
+}
+
+.username {
+  font-size:20px;
+}
+
+.tmp {
+  margin-right: 40px;
+}
+
+.lesson-discription {
+  font-size: 16px;
+}
+
+#add-new-course {
+  border-color: #5bc0de;
+  color: #5bc0de;
+  z-index: 100;
+}
+#add-new-course:hover {
+  background-color: #5bc0de;
+  color: white;
+}

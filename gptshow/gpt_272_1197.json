@@ -1,0 +1,12 @@
+{
+  "session_id": 1197,
+  "log": [
+    {
+      "input": "### Gravity-Induced Simple Harmonic Motion (Circular Ring, Initial Velocity = 0, Starting from Endpoint)---Please note that VPython includes the following classes: arrow, box, cone, curve, cylinder, ellipsoid, helix, label, points, pyramid, ring, sphere, text, compound, vertex, triangle, quad, extrusion, shapes, paths, graph, gcurve, gdots, gvbars, ghbars, button, checkbox, menu, radio, slider, wtext, canvas, scene. To prevent naming conflicts, avoid using these names as variable names in your code.Please use variable names that differ from VPython class names. For example:- Use `my_ring` instead of `ring`.- Use `my_sphere` instead of `sphere`.\u00a0This motion explores **simple harmonic motion caused by gravity** within a system where a small mass **m** starts from rest at one endpoint of a line perpendicular to the center of a massive circular ring of uniform mass distribution **M** and radius **r**.\u00a0The small mass is influenced by the gravitational forces exerted by all the points on the ring. When the displacement of the small mass from the center is relatively small, these forces create a restoring effect proportional to the displacement, resulting in oscillatory motion.",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e13\nm = 1\nr = 10\ntheta = 0\nomega = 0\nt = 0\ndt = 0.001\n\nmy_ring = ring(radius=r, thickness=0.1, axis=vector(0,1,0), color=color.blue)\n\nmy_sphere = sphere(pos=vector(r,0,0), radius=0.5, color=color.red)\n\nwhile True:\n    rate(1000)\n    \n    theta += omega * dt\n    F = -G * M * m / r**2\n    alpha = F * r / (m * r**2)\n    omega += alpha * dt\n    t += dt\n    \n    my_sphere.pos = vector(r * cos(theta), r * sin(theta), 0)\n    my_sphere.rotate(angle=omega * dt, axis=vector(0,0,1))",
+      "mode": "initial",
+      "timestamp": "2024-12-30 11:51:28",
+      "serial_number": 1
+    }
+  ]
+}

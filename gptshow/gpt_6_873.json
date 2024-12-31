@@ -1,0 +1,12 @@
+{
+  "session_id": 873,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please plot the trajectory of the ball. The center point of the canvas needs to be correctly set, therefore the sequence of writing the Parameter Settings must follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a horizontal projectile motion animation using VPython: Launch a horizontal ball that bounces off the floor upon impact.\nDraw the ball and the floor. Assume that the collision between the ball and the ground is elastic, considering only the effect of gravity, meaning the ball accelerates downwards due to gravity and bounces up upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nscene = canvas(title='Projectile Motion', width=700, height=400, center=vector(0,0,0), background=color.white)\n",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:28:14",
+      "serial_number": 1
+    }
+  ]
+}

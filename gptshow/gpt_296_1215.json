@@ -1,0 +1,12 @@
+{
+  "session_id": 1215,
+  "log": [
+    {
+      "input": "If a small ball has a mass of \\( m \\), a velocity of \\( v \\), an angular velocity of \\( \\omega \\), and a turning radius of curvature \\( R \\), then the required centripetal acceleration for the turn is:\\[a_c = \\frac{v^2}{R} = R \\omega^2\\]From Newton's second law of motion, the centripetal force is:\\[F_c = m a_c = m \\cdot \\frac{v^2}{R} = m \\cdot R \\omega^2\\]For vertical circular motion, draw the velocity, tangential acceleration, and normal acceleration.",
+      "output": "from vpython import *\n\nscene = canvas()\n\nm = 1\nv = 5\nomega = 2\nR = 2\n\nball = sphere(pos=vector(0, R, 0), radius=0.5, color=color.blue, make_trail=True)\n\nball.velocity = vector(0, v, 0)\nball.omega = omega\n\nwhile True:\n    rate(60)\n    ball.pos.y = R * cos(ball.omega * scene.dt)  # vertical circular motion\n    ball.velocity.y = -R * omega * sin(ball.omega * scene.dt)  # tangential acceleration\n    ball.acceleration = -R * omega**2 * cos(ball.omega * scene.dt)  # normal acceleration",
+      "mode": "initial",
+      "timestamp": "2024-12-26 14:26:38",
+      "serial_number": 1
+    }
+  ]
+}

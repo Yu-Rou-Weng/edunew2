@@ -1,0 +1,125 @@
+* {
+  /*********************************************************
+   * Override the box-sizing setting provided by Bootstrap *
+   * See: https://tinyurl.com/y3cjlobe                     *
+   *********************************************************/
+  box-sizing: content-box;
+}
+
+body {
+  background-color: #141414;
+}
+.bulb-light {
+  position: relative;
+  border: 0;
+  background: transparent;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  cursor: pointer;
+  display: block;
+  z-index: 1;
+}
+.bulb-top {
+  position: relative;
+  border: 0;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 999px;
+  background: #E7E7E7;
+}
+.reflection {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background: rgba(255, 255, 255, 0.5);
+  width: 50px;
+  height: 50px;
+  border-radius: 999px 400px;
+}
+.base-top {
+  margin: -18px auto -4px auto;
+  padding: 0;
+  width: 132px;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 21px solid rgb(180, 180, 180);
+  border-radius: 999px;
+}
+.base-spiral {
+  background: rgb(200, 200, 200);
+  width: 150px;
+  height: 15px;
+  border-radius: 999px;
+  margin: -1px auto 0px;
+  padding: 0;
+  transform: rotate(-3deg);
+}
+.base-body {
+  background: rgb(180, 180, 180);
+  width: 135px;
+  height: 15px;
+  margin: -1px auto 0px;
+  padding: 0;
+  transform: rotate(-3deg);
+}
+.base-bottom {
+  margin: -1px auto 0px;
+  padding: 0;
+  width: 78px;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 20px solid rgb(180, 180, 180);
+  border-radius: 8px;
+  transform: rotate(-3deg);
+}
+.base-connector {
+  margin: 0 auto;
+  padding: 0;
+  width: 15px;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 15px solid #444;
+  transform: rotate(-3deg);
+}
+.bulb-middle-1, .bulb-middle-2, .bulb-middle-3 {
+  transition: border 0.5s ease-in-out;
+}
+.text-align-center {
+  text-align: center;
+  display: block;
+}
+.white-font {
+  color: white;
+}
+
+#light {
+  opacity: 0;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  box-shadow: 0px 0px 500px rgba(255,210,00,1), inset 0px 0px 500px 90px rgba(255,210,00,0.42);
+  border-radius: 999px;
+  width: 290px;
+  height: 290px;
+  background: none;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+}
+#base {
+  position:relative;
+  z-index: 2;
+}
+#bulb {
+  opacity: 1;
+  z-index: 3;
+}
+body, .bulb-top, .bulb-bottom {
+  transition: background 0.5s ease-in-out;
+}

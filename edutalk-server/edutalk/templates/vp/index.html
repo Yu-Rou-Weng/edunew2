@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VPython</title>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/jquery.mousewheel.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/jquery-ui.custom.min.js') }}"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <!--script type="text/javascript" src="//iottalk.github.io/iottalk-js/iottalkjs-v2.3.3.js"></script-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/iottalk/index.js') }}"></script>
+</head>
+
+<body>
+  <div id="device-name"></div>
+  <div id="glowscript" class="glowscript"></div>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/RScompiler.3.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/RSrun.3.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/glow.3.2.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/vp-resource/symbols.3.2.min.js') }}"></script>
+  <script type="text/javascript">
+    var dev = '{{ dev }}';
+    var urls = {
+      vpCode: "{{ url_for('root.vp.code', lec_id=lecture.id) }}",
+      csmUrl: '{{ csm_url }}',
+      vpBind: function (id) {
+        return '{{ url_for("root.vp.bind", lec_id=lecture.id, d_id="")}}' + id
+      },
+    };
+
+    let csrf = {
+      token: '{{ csrf_token() }}',
+    };
+
+    let output_variables = {{ output_variables | tojson | safe }};
+    let input_variables = [];
+
+    {%- for iv in iv_list -%}
+        {%- set _var = iv.giv_name ~ iv.index -%}
+        input_variables.push('{{ _var }}');
+        {%- if iv.params | length == 1 -%}
+            var {{ _var }} = null;
+            {%- set v0 = iv.params[0].default -%}
+            {%- if v0 is string -%}
+            {{ _var }} = str({{ v0 | safe }}) ;
+            {% else -%}
+            {{ _var }} = {{ v0 | safe }} ;
+            {% endif %}
+
+            function {{ odf_list[loop.index-1][0] }} (data) {
+                if (data){
+                    for (let i=0;i<data.length;i++){
+                        if (typeof data[i] === 'string') data[i] = str(data[i]);
+                    }
+                    {{ _var }} = data[0];
+                    if (typeof(window.on_{{ _var }}) == "function" && window.on_{{ _var }}.length===1)
+                        window.on_{{ _var }}({{ _var }});
+                }
+            };
+        {% elif iv.type == 'vector' -%}
+            var {{ _var }} = vec(0, 0, 0);
+            {%- set v0 = iv.params[0].default -%}
+            {%- if v0 is string -%}
+            {{ _var }}.x = str({{ v0 | safe }}) ;
+            {% else -%}
+            {{ _var }}.x = {{ v0 | safe }} ;
+            {% endif %}
+            {%- set v1 = iv.params[1].default -%}
+            {%- if v1 is string -%}
+            {{ _var }}.y = str({{ v1 | safe }}) ;
+            {% else -%}
+            {{ _var }}.y = {{ v1 | safe }} ;
+            {% endif %}
+            {%- set v2 = iv.params[2].default -%}
+            {%- if v2 is string -%}
+            {{ _var }}.z = str({{ v2 | safe }}) ;
+            {% else -%}
+            {{ _var }}.z = {{ v2 | safe }} ;
+            {% endif %}
+
+            function {{ odf_list[loop.index-1][0] }} (data){
+                if (data){
+                    for (let i=0;i<data.length;i++){
+                        if (typeof data[i] === 'string') data[i] = str(data[i]);
+                    }
+                    {{ _var }}.x = data[0];
+                    {{ _var }}.y = data[1];
+                    {{ _var }}.z = data[2];
+                    if (typeof(window.on_{{ _var }}) == "function" && window.on_{{ _var }}.length===1)
+                        window.on_{{ _var }}(vec({{ _var }}));
+                }
+            }
+        {% else -%}
+            var {{ _var }} = list_wrap([]);
+            {%- for p in iv.params -%}
+                {%- set v0 = p.default -%}
+                {%- if v0 is string -%}
+                {{ _var }}.append(str({{ v0 | tojson }})) ;
+                {% else -%}
+                {{ _var }}.append({{ v0 | safe }});
+                {% endif %}
+            {% endfor -%}
+
+            function {{ odf_list[loop.index-1][0] }} (data){
+                if (data){
+                    for (let i=0;i<data.length;i++){
+                        if (typeof data[i] === 'string') data[i] = str(data[i]);
+                        {{ _var }}[i] = data[i];
+                    }
+                    if (typeof(window.on_{{ _var }}) == "function" && window.on_{{ _var }}.length===1)
+                        window.on_{{ _var }}(list_wrap({{ _var }}));
+                }
+            }
+        {% endif %}
+    {% endfor -%}
+
+    // 設定
+    const profile = {
+        'dm_name': '{{ dm_name }}',
+        'idf_list': {{ idf_list | safe }},
+        'odf_list': {{ odf_list | todf_list | safe }},
+    };
+  </script>
+  <script src="{{ url_for('static', filename='js/vp-resource/app.js') }}"></script>
+</body>
+</html>

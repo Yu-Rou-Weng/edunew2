@@ -1,0 +1,12 @@
+{
+  "session_id": 951,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the width of the canvas to 700 and the height to 400. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings:\nPlease create a Vpython animation of simple harmonic motion:\nDraw a wooden block, a spring, and a wall. On a horizontal smooth table, there is a wooden block connected to the wall on the left with an elastic spring. Pull the block to the right a certain distance and release it from rest, allowing the block and the spring to undergo simple harmonic motion.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Speed_I as a cyber input variable, set Speed_I=0\n\n(2) Speed_I is the initial velocity of the block. When Speed_I changes to a new value, the initial velocity of the block also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "canvas(width=700, height=400)",
+      "mode": "initial",
+      "timestamp": "2024-08-19 15:05:45",
+      "serial_number": 1
+    }
+  ]
+}

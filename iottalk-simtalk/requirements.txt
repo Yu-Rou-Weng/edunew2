@@ -1,0 +1,11 @@
+django~=3.1
+django-cors-headers~=3.7.0
+
+# https://docs.djangoproject.com/en/3.1/ref/databases/#mysql-db-api-drivers
+mysqlclient>=1.4.0
+
+python-dotenv>=0.15.0
+
+requests~=2.25.1
+
+Authlib~=0.15.3

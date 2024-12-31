@@ -1,0 +1,31 @@
+@media only screen and (max-width: 768px) {
+  .modal-content { 
+    width: 80%; 
+    margin-left: 10%;
+  }
+  .close-modal{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    width: 5%;
+    height: 5%;
+    cursor: pointer;
+    background-color: transparent;
+    text-align: center;
+    pointer-events: auto;
+  }
+}
+
+.modal{
+  z-index: 1050;
+}
+
+.modal-backdrop.fade.in 
+{
+    opacity: 0.65;
+}
+
+.modal-dialog{
+    max-width: 600px;
+    margin-top: 100px;
+}

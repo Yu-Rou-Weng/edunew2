@@ -1,0 +1,12 @@
+{
+  "session_id": 778,
+  "log": [
+    {
+      "input": "Please write the VPython code for \"Simple Harmonic Motion Caused by Electrostatic Forces (Positioned above the Vertical Line)\"\n\nAt the positions (-10, 0, 0) and (10, 0, 0), there are two blue spheres, each with a radius of 1. A small sphere with a radius of 0.3 is released from the position (0, 3, 0) and begins to undergo simple harmonic motion caused by the electrostatic forces from the two large spheres. The motion is confined between the points (0, 3, 0) and (0, -3, 0). There is a yellow line connecting the centers of the two blue spheres. At (0, 3, 0) and (0, -3, 0), there are two white horizontal lines, each 5 cm in length.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1.\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nRadius_I = 1\n\nlarge_sphere1 = sphere(pos=vector(-10, 0, 0), radius=Radius_I, color=color.blue)\nlarge_sphere2 = sphere(pos=vector(10, 0, 0), radius=Radius_I, color=color.blue)\n\nsmall_sphere = sphere(pos=vector(0, 3, 0), radius=0.3, color=color.red)\n\nline = cylinder(pos=large_sphere1.pos, axis=large_sphere2.pos-large_sphere1.pos, radius=0.1, color=color.yellow)\n\nhorizontal_line1 = cylinder(pos=vector(0, 3, -2.5), axis=vector(0, 0, 5), radius=0.1, color=color.white)\nhorizontal_line2 = cylinder(pos=vector(0, -3, -2.5), axis=vector(0, 0, 5), radius=0.1, color=color.white)\n\ndef update_radius(radius):\n    small_sphere.radius = radius\n\nscene.bind('keydown', update_radius)\n\nwhile True:\n    rate(100)\n    small_sphere.pos.y = 3 * sin(2 * pi * scene.k)",
+      "mode": "initial",
+      "timestamp": "2024-07-25 21:01:50",
+      "serial_number": 1
+    }
+  ]
+}

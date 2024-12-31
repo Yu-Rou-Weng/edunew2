@@ -1,0 +1,12 @@
+{
+  "session_id": 979,
+  "log": [
+    {
+      "input": "1. **Screen Settings:**\n   Adjust the canvas width to 700 and height to 400. Maintain the current canvas size without changes.\n\n2. **Object Motion & Parameter Settings:**\n   Please set up a VPython animation: Hang a small ball from the ceiling using a string at a 10-degree angle with the vertical line (pendulum angle). Release the ball from a stationary position, allowing it to swing back and forth due to gravity.\n\n3. **Cyber Input Variable Mapping Information:**\n\n   (1) Create and initialize a Cyber Input Variable named `Speed_I` with an initial value of 0. This variable represents the angular velocity of the pendulum bob.\n\n   (2) During the animation, whenever the value of the `Speed_I` variable changes, the angular velocity of the pendulum bob should be updated immediately to match the new value of `Speed_I`.\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings:\ncanvas(width=700, height=400)\n\n# Object Motion & Parameter Settings:\nball = sphere(pos=vector(0,-1,0), radius=0.1, color=color.red)\nstring = cylinder(pos=vector(0,0,0), axis=ball.pos, radius=0.01)\npivot = vector(0,0,0)\nball.m = 1\nball.v = vector(0,0,0)\ng = vector(0,9.8,0)\ntheta = radians(10)\nball.pos = pivot + vector(sin(theta), -cos(theta), 0)\n\n# Cyber Input Variable Mapping Information:\nSpeed_I = 0\n\ndef update_velocity():\n    global Speed_I\n    ball.v = Speed_I * norm(ball.pos - pivot)\n\ndef update():\n    dt = 0.01\n    rate(100)\n    ball.a = -g - (2*ball.v*Speed_I)\n    ball.v += ball.a*dt\n    ball.pos += ball.v*dt\n    string.axis = ball.pos - pivot\n    update_velocity()\n\nwhile True:\n    update()",
+      "mode": "initial",
+      "timestamp": "2024-08-21 18:59:40",
+      "serial_number": 1
+    }
+  ]
+}

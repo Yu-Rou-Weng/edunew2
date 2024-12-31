@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.ico')}}">
+
+    <title>IoTtalk - Monitor</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <style>
+    [v-cloak] {
+      display: none;
+    }
+    </style>
+  </head>
+  
+  <body>
+    <div id="app" v-cloak>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" role="tablist">
+              <li class="active"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
+              <li><a href="#project" aria-controls="project" role="tab" data-toggle="tab">Project</a></li>
+              <li><a href="#device" aria-controls="device" role="tab" data-toggle="tab">Device</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 tab-content">
+          <!-- User -->
+          <div id="user" role="tabpanel" class="tab-pane active">
+            <div class="panel panel-default">
+              <div class="panel-heading">Users</div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td style="width: 5%">#</td>
+                    <td style="width: 30%">Name</td>
+                    <td style="width: 30%">Admin</td>
+                    <td style="width: 35%">Action</td>
+                  </tr>
+                </thead>
+                <tr v-for="user in users">
+                  <td>[[ user.u_id ]]</td>
+                  <td>[[ user.u_name ]]</td>
+                  <td>[[ user.is_admin ]]&nbsp;<button type="button" class="btn btn-xs btn-info" @click="switchUser(user)">switch</button></td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-success" @click="changeUserPass(user)">Change Pass</button>
+                    <button type="button" class="btn btn-sm btn-danger" @click="deleteUser(user)">Delete</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Project -->
+          <div id="project" role="tabpanel" class="tab-pane">
+
+            <div class="panel panel-default">
+              <div class="panel-heading">Projects</div>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td style="width: 5%">#</td>
+                    <td style="width: 15%">Name</td>
+                    <td style="width: 15%">Status</td>
+                    <td style="width: 15%">Sim</td>
+                    <td style="width: 15%">User</td>
+                    <td style="width: 35%">Action</td>
+                  </tr>
+                </thead>
+                <tr v-for="project in projects">
+                  <td>[[ project.p_id ]]</td>
+                  <td>[[ project.p_name ]]</td>
+                  <td>[[ project.status ]]</td>
+                  <td>[[ project.sim ]]</td>
+                  <td :u-id="[[ project.u_id ]]">[[ project.u_name ]]</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-warning" @click="stopProject(project)">Stop</button>
+                    <button type="button" class="btn btn-sm btn-warning hidden" @click="stopSim(project)">Stop Sim</button>
+                    <button type="button" class="btn btn-sm btn-danger" @click="deleteProject(project)">Delete</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Device -->
+          <div id="device" role="tabpanel" class="tab-pane">
+
+            <div class="panel panel-default">
+              <div class="panel-heading">Devices</div>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Name</td>
+                    <td>status</td>
+                    <td>mac_addr</td>
+                    <td>is_sim</td>
+                    <td>Projects</td>
+                    <td>Action</td>
+                  </tr>
+                </thead>
+                <tr v-for="device in devices">
+                  <td>[[ device.d_id ]]</td>
+                  <td>[[ device.d_name ]]</td>
+                  <td>[[ device.status ]]</td>
+                  <td>[[ device.mac_addr ]]</td>
+                  <td>[[ device.is_sim ]]</td>
+                  <td><div v-for="s in device.projects">[[ s ]]</div></td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-warning" @click="unbindDevice(device)">Unbind All</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <script src="{{url_for('static', filename='admin.js')}}"></script>
+    <script>var login_user={{ user }}</script>
+  </body>
+</html>

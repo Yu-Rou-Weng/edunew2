@@ -1,0 +1,334 @@
+{
+  "session_id": 1111,
+  "log": [
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nNo prompt provided\n\nHere's the current program:\n",
+      "output": "import time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:18",
+      "serial_number": 28
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "import time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "mode": "modification",
+      "timestamp": "2024-11-13 22:39:20",
+      "serial_number": 29
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:20",
+      "serial_number": 30
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:23",
+      "serial_number": 31
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:23",
+      "serial_number": 32
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "mode": "modification",
+      "timestamp": "2024-11-13 22:39:24",
+      "serial_number": 33
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:26",
+      "serial_number": 34
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nQRCode is not a constructor\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), vel=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.vel",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:26",
+      "serial_number": 35
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:27",
+      "serial_number": 36
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:29",
+      "serial_number": 37
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), vel=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.vel",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:29",
+      "serial_number": 37
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "modification",
+      "timestamp": "2024-11-13 22:39:29",
+      "serial_number": 37
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:30",
+      "serial_number": 38
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "output": "import vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:32",
+      "serial_number": 39
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:32",
+      "serial_number": 39
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:33",
+      "serial_number": 40
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nQRCode is not a constructor\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:34",
+      "serial_number": 41
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nimport vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "output": "import vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:35",
+      "serial_number": 41
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:35",
+      "serial_number": 42
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:36",
+      "serial_number": 43
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nimport vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "output": "import vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:38",
+      "serial_number": 44
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:38",
+      "serial_number": 44
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:39",
+      "serial_number": 45
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt\n    time.sleep(dt)",
+      "output": "from vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "mode": "modification",
+      "timestamp": "2024-11-13 22:39:40",
+      "serial_number": 46
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:40",
+      "serial_number": 47
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nimport vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "output": "import vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:42",
+      "serial_number": 48
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:42",
+      "serial_number": 49
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nQRCode is not a constructor\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:43",
+      "serial_number": 50
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nimport vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "output": "import vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:45",
+      "serial_number": 51
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:45",
+      "serial_number": 51
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:46",
+      "serial_number": 52
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:46",
+      "serial_number": 53
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nimport vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), velocity=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.velocity",
+      "output": "import vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), vel=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.vel",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:48",
+      "serial_number": 54
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:49",
+      "serial_number": 55
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:49",
+      "serial_number": 55
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "output": "from vpython import *\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nceiling = 5\nfloor = -5\nright_wall = 5\nleft_wall = -5\ngravity = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= gravity\n\n    if ball.pos.y < floor or ball.pos.y > ceiling:\n        ball.velocity.y = -ball.velocity.y\n\n    if ball.pos.x > right_wall or ball.pos.x < left_wall:\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "modification",
+      "timestamp": "2024-11-13 22:39:50",
+      "serial_number": 56
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:51",
+      "serial_number": 57
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nimport vpython\nimport time\n\nscene = vpython.canvas()\nball = vpython.sphere(pos=vpython.vector(0,0,0), vel=vpython.vector(0.1,0.1,0))\n\nwhile True:\n    vpython.rate(100)\n    ball.pos += ball.vel",
+      "output": "import vpython\nimport vpython as vp\nimport time\n\nscene = vp.canvas()\nball = vp.sphere(pos=vp.vector(0,0,0), vel=vp.vector(0.1,0.1,0))\n\nwhile True:\n    vp.rate(100)\n    ball.pos += ball.vel",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:51",
+      "serial_number": 58
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "mode": "modification",
+      "timestamp": "2024-11-13 22:39:51",
+      "serial_number": 58
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:52",
+      "serial_number": 59
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:52",
+      "serial_number": 60
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nQRCode is not a constructor\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nceiling = 5\nfloor = -5\nright_wall = 5\nleft_wall = -5\ngravity = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= gravity\n\n    if ball.pos.y < floor or ball.pos.y > ceiling:\n        ball.velocity.y = -ball.velocity.y\n\n    if ball.pos.x > right_wall or ball.pos.x < left_wall:\n        ball.velocity.x = -ball.velocity.x",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nceiling = 5\nfloor = -5\nright_wall = 5\nleft_wall = -5\ngravity = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= gravity\n\n    if ball.pos.y < floor or ball.pos.y > ceiling:\n        ball.velocity.y = -ball.velocity.y\n\n    if ball.pos.x > right_wall or ball.pos.x < left_wall:\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:55",
+      "serial_number": 61
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nQRCode is not a constructor\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:55",
+      "serial_number": 61
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 4: import time\n\nHere's the current program:\nimport vpython\nimport vpython as vp\nimport time\n\nscene = vp.canvas()\nball = vp.sphere(pos=vp.vector(0,0,0), vel=vp.vector(0.1,0.1,0))\n\nwhile True:\n    vp.rate(100)\n    ball.pos += ball.vel",
+      "output": "import vpython\nimport vpython as vp\nimport time\n\nscene = vp.canvas()\nball = vp.sphere(pos=vp.vector(0,0,0), velocity=vp.vector(0.1,0.1,0))\n\nwhile True:\n    vp.rate(100)\n    ball.pos += ball.velocity",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:55",
+      "serial_number": 61
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    time.sleep(0.01)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:55",
+      "serial_number": 61
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "output": "from vpython import *\nimport time\n\nscene = canvas()\nball = sphere()\n\nball.pos = vector(0,0,0)\nball.velocity = vector(0.1,0.1,0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity\n    ball.velocity.y -= 0.01  # Add gravity effect\n    if ball.pos.y < -5:  # Collision with the ground\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y > 5:  # Ceiling collision\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.x > 5 or ball.pos.x < -5:  # Wall collision\n        ball.velocity.x = -ball.velocity.x",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:56",
+      "serial_number": 62
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "output": "import time\nfrom vpython import *\n\nscene = canvas()\nball = sphere(pos=vector(0,0,0), velocity=vector(0.1,0.1,0))\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos += ball.velocity * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-11-13 22:39:56",
+      "serial_number": 63
+    }
+  ]
+}

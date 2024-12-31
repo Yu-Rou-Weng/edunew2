@@ -1,0 +1,13 @@
+default:
+  image: "python:3.7-alpine"
+
+stages:
+  - lint
+
+flake8:
+  stage: lint
+  before_script:
+    - apk update && apk add git
+    - pip install flake8
+  script:
+    - flake8

@@ -1,0 +1,12 @@
+{
+  "session_id": 910,
+  "log": [
+    {
+      "input": "Please write a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the canvas with the center point at (0, 7.5, 0). The floor length is 25. From the X-coordinate position -10, horizontally throw a ball with a radius of 0.5 at a height of 15, with an initial velocity of 5. Assume that the ball has an elastic collision with the ground, only considering the impact of gravity, meaning the ball accelerates downwards due to gravity and bounces upon hitting the ground. Stop the motion when the ball reaches the X-coordinate position of 12.5. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Cyber input variable\nRadius_I = 0.5\n\n# Set the scene\nscene = canvas(center=vector(0, 7.5, 0))\n\n# Create the floor and ball\nfloor = box(pos=vector(0, 0, 0), size=vector(25, 0.2, 10), color=color.green)\nball = sphere(pos=vector(-10, 15, 0), radius=Radius_I, color=color.red, make_trail=True)\n\n# Set the ball's initial velocity\nball.velocity = vector(5, 0, 0)\n\n# Set the gravity\ng = 9.8\n\n# Set the time and time step\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile ball.pos.x < 12.5:\n    rate(100)\n    # Update the ball's velocity\n    ball.velocity.y = ball.velocity.y - g * dt\n    # Update the ball's position\n    ball.pos = ball.pos + ball.velocity * dt\n    # Check for collision with the floor\n    if ball.pos.y <= Radius_I:\n        ball.velocity.y = -ball.velocity.y\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-07-31 15:07:10",
+      "serial_number": 1
+    }
+  ]
+}

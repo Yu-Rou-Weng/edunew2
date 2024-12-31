@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width initial-scale=0.7 maximum-scale=1.0 user-scalable=yes"
+          charset="utf-8"/>
+    <title>MBoxCtl</title>
+    <script src="../js/socket_io.js" type="text/javascript"></script>
+    <script src="../js/jquery-2.1.4.js" type="text/javascript"></script>
+    <script src="../js/MidiConvert.js" type="text/javascript"></script>
+    <script src="../js/Tone.js" type="text/javascript"></script>
+    <script src="../js/csmapi.js" type="text/javascript"></script>
+    <script src="../js/dan.js" type="text/javascript"></script>
+    <script src="../js/semantic.js" type="text/javascript"></script>
+    <script>
+        var iottalkIP = "<%= iottalkIP %>";
+        var IDFList = ("<%= IDFList %>").split(',');
+
+    </script>
+    <script src="../js/MBoxCtl.js" type="text/javascript"></script>
+
+
+    <link href="../css/semantic.css" rel="stylesheet" type="text/css">
+    <link href="../css/MBoxCtl.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="containerPlayer">
+    <div id="navigateBar">
+        <div id="dropdownContainer">
+            <div class="ui selection dropdown" id="c">
+                <div class="dropdownTitle">
+                    <div class="featureName">C</div>
+                </div>
+                <input type="hidden" name="C">
+                <div class="default text" id="cVal"><%= ctlDefaultValues.C %></div>
+                <div class="menu">
+                    <div class="item C">1</div>
+                    <div class="item C">2</div>
+                    <div class="item C">3</div>
+                    <div class="item C">4</div>
+                    <div class="item C">5</div>
+                    <div class="item C">6</div>
+                    <div class="item C">7</div>
+                </div>
+            </div>
+            <div class="ui selection dropdown" id="n">
+                <input type="hidden" name="n">
+                <div class="dropdownTitle">
+                    <div class="featureName">N</div>
+                </div>
+                <div class="default text" id="nVal"><%= ctlDefaultValues.N %></div>
+                <div class="menu">
+                    <div class="item inputN">1</div>
+                    <div class="item inputN">2</div>
+                    <div class="item inputN">3</div>
+                    <div class="item inputN">4</div>
+                    <div class="item inputN">5</div>
+                    <div class="item inputN">6</div>
+                    <div class="item inputN">7</div>
+                    <div class="item inputN">8</div>
+                    <div class="item inputN">9</div>
+                    <div class="item inputN">10</div>
+                </div>
+            </div>
+            <div class="ui selection dropdown" id="l">
+                <input type="hidden" name="l">
+                <div class="dropdownTitle">
+                    <div class="featureName">L</div>
+                </div>
+                <div class="default text" id="lVal"><%= ctlDefaultValues.L %></div>
+                <div class="menu">
+                    <div class="item inputL">0.0</div>
+                    <div class="item inputL">0.1</div>
+                    <div class="item inputL">0.2</div>
+                    <div class="item inputL">0.3</div>
+                    <div class="item inputL">0.4</div>
+                    <div class="item inputL">0.5</div>
+                    <div class="item inputL">0.6</div>
+                    <div class="item inputL">0.7</div>
+                    <div class="item inputL">0.8</div>
+                    <div class="item inputL">0.9</div>
+                    <div class="item inputL">1.0</div>
+                </div>
+            </div>
+            <div class="ui selection dropdown" id="mode">
+                <input type="hidden" name="mode">
+                <div class="dropdownTitle">
+                    <div class="featureName">Mode</div>
+                </div>
+                <div class="default text" id="modeVal"><%= ctlDefaultValues.Mode %></div>
+                <div class="menu">
+                    <div class="item inputMode">sequential</div>
+                    <div class="item inputMode">parallel</div>
+                </div>
+            </div>
+            <div class="ui selection dropdown" id="period">
+                <div class="dropdownTitle">
+                    <div class="featureName">Period</div>
+                </div>
+                <input type="hidden" name="Period">
+                <div class="default text" id="periodVal"><%= ctlDefaultValues.Period %></div>
+                <div class="menu">
+                    <div class="item inputPeriod">20</div>
+                    <div class="item inputPeriod">30</div>
+                    <div class="item inputPeriod">40</div>
+                    <div class="item inputPeriod">50</div>
+                    <div class="item inputPeriod">60</div>
+                    <div class="item inputPeriod">70</div>
+                    <div class="item inputPeriod">80</div>
+                    <div class="item inputPeriod">90</div>
+                    <div class="item inputPeriod">100</div>
+                    <div class="item inputPeriod">110</div>
+                    <div class="item inputPeriod">120</div>
+                </div>
+            </div>
+            <div class="ui selection dropdown" id="key">
+                <div class="dropdownTitle">
+                    <div class="featureName">Key</div>
+                </div>
+                <input type="hidden" name="Key">
+                <div class="default text" id="keyVal"><%= ctlDefaultValues.Key %></div>
+                <div class="menu">
+                    <div class="item inputKey">-3</div>
+                    <div class="item inputKey">-2</div>
+                    <div class="item inputKey">-1</div>
+                    <div class="item inputKey">0</div>
+                    <div class="item inputKey">1</div>
+                    <div class="item inputKey">2</div>
+                    <div class="item inputKey">3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="listContainer" class="playlistContainer">
+        <ul id="playListContainer">
+            <% for(var i = 0; i < songs.songNames.length; i++){ %>
+            <li class="list" name="<%= songs.songNames[i] %>"><%= songs.displaySongNames[i] %></li>
+            <% } %>
+        </ul>
+    </div>
+
+    <div id="playerContainer">
+        <div class="playerControl">
+            <ul class="controls">
+                <li><a class="left"></a></li>
+                <li><a class="play"></a></li>
+                <li><a class="right"></a></li>
+                <li><a class="repeat"></a></li>
+            </ul>
+        </div>
+        <div class="progress">
+            <div data-attr="seekableTrack" class="seekableTrack"></div>
+            <div class="updateProgress"></div>
+        </div>
+        <div class="volumeControl">
+            <div class="volume volume1"></div>
+            <input class="volumeBar" data-attr="rangeVolume" type="range" min="-10" max="10" step="1"
+                   value="<%= ctlDefaultValues.Volume %>"/>
+            <div id="volumeFeature">Volume  <span><%= ctlDefaultValues.Volume %></span></div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

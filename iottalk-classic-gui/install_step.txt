@@ -1,0 +1,149 @@
+I. Prepare
+
+	1. Mosquitto
+
+		IoTtalk use 1884 for websockets
+
+		a. install
+
+			$ sudo apt-get install -y mosquitto
+
+		b. config, append below line to `/etc/mosquitto/mosquitto.conf`
+
+			# /etc/mosquitto/mosquitto.conf
+			port 1883
+			listener 1884
+			protocol websockets
+
+		c. restart mosquitto
+
+			$ sudo service mosquitto restart
+
+	2. Redis
+
+		a. install
+
+			$ sudo apt-get install -y redis-server
+
+		Everything done.
+
+	3. MySQL (optional, you can use any db server instead)
+
+		a. install
+
+			$ sudo apt-get install -y mysql-server
+
+			> enter your root password
+
+		b. config, add below line to `/etc/mysql/mysql.cnf`
+
+			# /etc/mysql/mysql.cnf
+			[mysqld]
+			user = mysql
+			init_connect = 'SET collation_connection = utf8_bin'
+			init_connect = 'SET NAMES utf8'
+			character-set-server = utf8
+			collation-server = utf8_bin
+
+		c. setting, in mysql cli
+
+			$ mysql -u root -p
+			: enter your root password
+
+			i. create db
+
+				> CREATE DATABASE your_db_name;
+
+			ii. create user
+
+				> CREATE USER your_username@localhost IDENTIFIED BY 'your_password';
+
+			iii. add user to database
+
+				> GRANT ALL PRIVILEGES ON your_db_name.* TO your_username@localhost;
+
+			iv. set select list is not in group by clause issue
+
+				> SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY,',''));
+
+	4. Virtual-env (optional)
+
+		We suggest use python virtualenv to isolated envirement.
+
+		a. install
+
+			$ sudo apt-get install -y virtualenv
+
+		b. create
+
+			$ virtualenv -p python3 venv3
+
+		c. useage
+
+			$ source venv3/bin/activate
+
+		If you use virtualenv, please confirm that every below command run in venv.
+
+II. Install
+
+	1. CSM/ESM
+
+		a. clone
+
+			$ git clone https://gitlab.com/IoTtalk/iottalk-core-ksoy.git
+			$ cd iottalk-core-ksoy
+
+		b. install
+
+			$ pip install -e.
+
+		c. config, modify <pkg_path>/iot/config.py
+
+			# Line 52, set mqtt host to your ip
+		    __mqtt = {
+		        'scheme': 'mqtt',
+		        'host': '<change_to_your_external_ip>',
+		        'port': 1883,
+		    }
+
+	2. CCM/GUI/DA
+
+		a. clone
+
+			$ git clone https://gitlab.com/IoTtalk/iottalk-classic-gui.git
+			$ cd iottalk-classic-gui
+
+		b. install
+
+			$ pip install -e.
+
+		c. config, modify <pkg_path>/iotgui/config.py
+
+			# Line 18 (optional), set db url, if you want to use mysql
+			DB_URL = 'mysql+pymysql://your_username:your_password@localhost/your_db_name?charset=utf8'
+
+			# Line 23, set Flask secret key, you need given a random string
+			FLASK_SECRET_KEY = 'your_secret_key'
+
+			# Line 44, set MQTT server ip
+				host = "your_mqtt_server_external_ip"
+
+			# Line 53, set CSM server ip
+				csm_host = "your_csm_server_external_ip"
+
+		d. init default db data
+
+			$ iotgui db create
+
+III. Run
+	1. GUI
+
+		$ iotgui start gui
+
+	2. CSM
+
+		$ iotctl start csm
+
+	3. CCM
+
+		$ iotgui start ccm

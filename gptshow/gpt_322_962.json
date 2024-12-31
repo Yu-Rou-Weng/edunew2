@@ -1,0 +1,19 @@
+{
+  "session_id": 962,
+  "log": [
+    {
+      "input": "**Screen Settings:**\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n**Object Motion & Parameter Settings:**\nPlease create a VPython animation: Suspend a small ball from the ceiling with a string, with the angle between the string and the vertical line (pendulum angle) set to 10 degrees. The ball is released from rest and swings back and forth under the influence of gravity.\n\n**Cyber Input Variable Mapping Information:**\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 0. This variable represents the angular velocity of the pendulum bob.\n\n(2) During the animation, whenever the value of the `Speed_I` variable changes, the angular velocity of the pendulum bob should be immediately updated to the new value of `Speed_I`.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings:\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings:\nrod = cylinder(pos=vector(0,0,0), axis=vector(0,-1,0), radius=0.01)\nbob = sphere(pos=vector(0,-1,0), radius=0.1)\n\n# Initialize Variables:\ng = 9.8\nl = 1\ntheta = radians(10)\nSpeed_I = 0\n\n# Animation:\nwhile True:\n    rate(100)\n    alpha = -g/l*sin(theta)\n    Speed_I = Speed_I + alpha\n    theta = theta + Speed_I\n    bob.pos = vector(l*sin(theta), -l*cos(theta), 0)\n    rod.axis = bob.pos",
+      "mode": "initial",
+      "timestamp": "2024-08-21 12:40:01",
+      "serial_number": 1
+    },
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2.  Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nHorizontal projectile motion refers to the process in which an object is thrown horizontally from a certain height and moves along a curved path under the influence of gravity. When the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds. ",
+      "output": "{\n  \"Screen_Settings\": {\n    \"canvas_width\": 700,\n    \"canvas_height\": 400\n  },\n  \"Object_Motion_Parameter_Settings\": {\n    \"Gravity\": -9.8,\n    \"Initial_Height\": \"user_defined\",\n    \"Initial_Velocity\": \"user_defined\",\n    \"Animation_Time\": 6,\n    \"Ball_Radius\": \"user_defined\",\n    \"Ball_Color\": \"user_defined\",\n    \"Bounce_Coefficient\": \"user_defined\"\n  }\n}",
+      "mode": "initial",
+      "timestamp": "2024-08-27 10:17:08",
+      "serial_number": 1
+    }
+  ]
+}

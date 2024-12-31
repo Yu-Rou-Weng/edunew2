@@ -1,0 +1,12 @@
+{
+  "session_id": 1229,
+  "log": [
+    {
+      "input": "# Motion of a Charged Particle in a Magnetic Field---## DescriptionThe motion of a charged particle in a uniform magnetic field is influenced by the Lorentz force:\\[\\mathbf{F} = q (\\mathbf{v} \\times \\mathbf{B})\\]Where:- \\( q \\): Charge of the particle\u00a0\u00a0- \\( \\mathbf{v} \\): Velocity of the particle\u00a0\u00a0- \\( \\mathbf{B} \\): Magnetic field\u00a0\u00a0Depending on the initial velocity and its angle relative to the magnetic field, the possible motions are as follows:1. **Parallel or Anti-parallel Motion** (\\( \\theta = 0^\\circ \\) or \\( 180^\\circ \\)):\u00a0\u00a0\u00a0 \u00a0- Uniform linear motion along the magnetic field.2. **Perpendicular Motion** (\\( \\theta = 90^\\circ \\)):\u00a0\u00a0\u00a0 \u00a0- Uniform circular motion in the plane perpendicular to the magnetic field.3. **Oblique Motion** (Other Angles):\u00a0\u00a0\u00a0 \u00a0- Helical motion, combining circular motion with forward progression along the magnetic field.---## Objectives- Simulate and visualize the three types of motion:\u00a0 1. Uniform linear motion\u00a0 2. Uniform circular motion\u00a0 3. Helical motion- Adjust the viewing angle dynamically based on the velocity and magnetic field direction to facilitate observation.",
+      "output": "from vpython import *\n\n# Constants\nq = 1.6e-19  # Charge of the particle (Coulombs)\nm = 9.11e-31  # Mass of the particle (kg)\nB = vector(0, 0, 0.1)  # Magnetic field (T)\n\n# Objects\nparticle = sphere(pos=vector(0, 0, 0), radius=0.1, color=color.red)\narrow_B = arrow(pos=vector(0, 0, 0), axis=B, color=color.cyan)\n\n# Initial conditions\nv_parallel = vector(1, 0, 0)\nv_perpendicular = vector(0, 1, 0)\nv_oblique = vector(1, 1, 0)\n\n# Function to calculate Lorentz force\ndef lorentz_force(q, v, B):\n    return q * cross(v, B)\n\n# Simulation loop\ndt = 0.01\nt = 0\nwhile True:\n    rate(100)\n    \n    # Calculate forces\n    F_parallel = lorentz_force(q, v_parallel, B)\n    F_perpendicular = lorentz_force(q, v_perpendicular, B)\n    F_oblique = lorentz_force(q, v_oblique, B)\n    \n    # Update velocities\n    v_parallel += F_parallel / m * dt\n    v_perpendicular += F_perpendicular / m * dt\n    v_oblique += F_oblique / m * dt\n    \n    # Update positions\n    particle.pos += v_parallel * dt\n    particle.pos += v_perpendicular * dt\n    particle.pos += v_oblique * dt\n    \n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-27 02:39:51",
+      "serial_number": 1
+    }
+  ]
+}

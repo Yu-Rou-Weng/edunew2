@@ -1,0 +1,12 @@
+{
+  "session_id": 793,
+  "log": [
+    {
+      "input": "Please write a VPython program for \"Speed Selector with Barriers at the Exit\":\n\nThere are two blue charged plates parallel to each other located at (0,5,0) and (0,-5,0), each with a length of 10 cm. At the end of these charged plates, there are two gray barriers located from (10,5,0) to (10,3,0) and from (10,2.5,0) to (10,-5,0). A green arrow representing the electric field points from (0,5,0) to (0,-5,0) and is labeled \"E\". An orange arrow representing the magnetic field points from (0,0,0) to (0,0,5) and is labeled \"B\". A red particle with a radius of 0.005 starts from (0,0,0) and travels in a straight line through the gap between the two barriers.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1.\n(2) Radius_I represents the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Scene setup\nscene = canvas()\n\n# Cyber input variables\nRadius_I = 1\n\n# Creating the environment\nplate1 = box(pos=vec(0, 5, 0), size=vec(10, 0.1, 10), color=color.blue)\nplate2 = box(pos=vec(0, -5, 0), size=vec(10, 0.1, 10), color=color.blue)\n\nbarrier1 = box(pos=vec(10, 4, 0), size=vec(0.1, 2, 10), color=color.gray(0.5))\nbarrier2 = box(pos=vec(10, -1.25, 0), size=vec(0.1, 7.5, 10), color=color.gray(0.5))\n\nE_arrow = arrow(pos=vec(0, 5, 0), axis=vec(0, -10, 0), color=color.green)\nB_arrow = arrow(pos=vec(0, 0, 0), axis=vec(0, 0, 5), color=color.orange)\n\nE_label = label(pos=E_arrow.pos, text='E', xoffset=20, color=E_arrow.color)\nB_label = label(pos=B_arrow.pos, text='B', yoffset=-25, color=B_arrow.color)\n\n# Particle\nparticle = sphere(pos=vec(0, 0, 0), radius=Radius_I, color=color.red)\n\n# Animation\nwhile True:\n    rate(100)\n    particle.pos.x += 0.05",
+      "mode": "initial",
+      "timestamp": "2024-07-26 00:49:48",
+      "serial_number": 1
+    }
+  ]
+}

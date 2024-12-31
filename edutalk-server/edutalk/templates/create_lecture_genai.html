@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% set title = 'Create New Lecture' %}
+
+{% block head %}
+{% include 'vp/head.html' %}
+{% include 'codemirror.html' %}
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/superagent/4.1.0/superagent.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/iottalk/index.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/new-card.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tutorial.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/animation-creation.css') }}">
+<script>
+  let daName = '';
+  let lesson = '';
+  let unitList = {{ unit_list | tojson | safe }};
+  let ivList = [];
+  let output_variables = [];
+  let available_actuators_device = {};
+  let available_sensors_device = {};
+  let odfToIdfMapping = {};
+  let idfs = [];
+  let idfList = [];
+  let fileList = [];
+  let dmName = '';
+  let dev = '';
+  let title = 'Create New Lecture | EduTalk';
+  let videoURL = '';
+  let lectureName = '';
+  let hackmdURL = '';
+  let urlHistory = [];
+  let videoHistory = [];
+  let odm = '';
+  let sensorOptions = {{ sensorOptions | tojson | safe }};
+  let actuatorVarTypeOfDim = {{ actuatorVarTypeOfDim | tojson | safe }};
+  let actuatorDm = {{ actuatorDm | tojson | safe }};
+</script>
+{% endblock head %}
+
+{% block nav_header %}
+<div style="padding-right: 15px; display: inline-block;">
+  <a class="navbar-brand" href="{{ url_for('root.index') }}" style="margin: 0px auto;"> EduTalk </a>
+</div>
+{% endblock nav_header %}
+
+{% block nav_left %}
+<li id='lecture-btn' class='active'>
+  <a class='states btn-link'>
+    Lecture
+  </a>
+</li>
+<li id='animation-creation-btn'>
+  <a class='states btn-link'>
+    Animation Program
+  </a>
+</li>
+<li id='program-btn'>
+  <a class='states btn-link'>
+    Program
+  </a>
+</li>
+<li id='animation-btn'>
+  <a class='states btn-link'>
+    Animation
+  </a>
+</li>
+{% endblock nav_left %}
+
+{% block content %}
+<!-- 添加模态对话框 -->
+<div class="modal fade" id="lectureNameModal" tabindex="-1" role="dialog" aria-labelledby="lectureNameModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="lectureNameModalLabel">Please enter the lecture name</h5>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="lectureName">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="saveLectureName">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page-content-wrapper">
+  <div class='container-fluid main-div'>
+    <div class='row'>
+      <div class='content' id='lecture-content'>
+        <div class='tutorial-editor'>
+          {% include 'card.html' %}
+        </div>
+      </div>
+      <div id="ide-container">
+        {% include 'ide.html' %}
+      </div>
+      <div id="animation-container">  
+        {% include 'animation.html' %}
+      </div>
+      <div id="animation-creation-container">
+        {% include 'animation-creation.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='tutorial.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='card.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='animation-creation.js') }}"></script>
+
+<script>
+$(document).ready(function() {
+  $('#lectureNameModal').modal({
+    backdrop: 'static',
+    keyboard: false
+  });
+
+  $('#saveLectureName').click(function() {
+    var lectureName = $('#lectureName').val();
+    if (lectureName) {
+      $.ajax({
+        url: '{{ url_for("root.lecture.create_genai") }}',
+        method: 'POST',
+        data: { lecture_name: lectureName },
+        success: function(response) {
+          if (response.success) {
+            $('#lectureNameModal').modal('hide');
+            // 更新 animation-creation.html 和 card.html 中的课程名称
+            $('.lecture-name').text(lectureName);
+            if (window.animationCreateApp) {
+              window.animationCreateApp.lectureName = lectureName;
+            }
+            if (window.app) {
+              window.app.lectureName = lectureName;
+            }
+          } else {
+            alert('Error: ' + response.error);
+          }
+        },
+        error: function() {
+          alert('An error occurred while saving the lecture name.');
+        }
+      });
+    } else {
+      alert('Please enter a lecture name.');
+    }
+  });
+});
+</script>
+{% endblock content %}

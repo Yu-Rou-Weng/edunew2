@@ -1,0 +1,12 @@
+{
+  "session_id": 1188,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Only considering the effect of gravity, the coefficient of restitution of the ball with the ground is \\( e \\). Do not resize the scene. Draw the ball and floor. Let the ball run for 6 seconds and then stop.",
+      "output": "canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 5, 0), radius=1, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.green)\n\ng = 9.81\nv0 = 10\nh = 5\ne = 0.8\n\nt = 0\ndt = 0.01\n\nwhile t < 6:\n    rate(100)\n    ball.pos.x = v0 * t\n    ball.pos.y = h - 0.5 * g * t**2\n    if ball.pos.y <= 0:\n        ball.pos.y = 0\n        v0 *= -e\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 11:16:37",
+      "serial_number": 1
+    }
+  ]
+}

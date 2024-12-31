@@ -1,0 +1,920 @@
+- model: Group
+
+  records:
+    - name: administrator
+
+    - name: teacher
+
+    - name: student
+
+# WARNING: Lecture can't have the same dm name with the Template
+- model: Lecture
+
+  records:
+    - name: 行星運動
+      idx: 1
+      url_history:
+        - https://hackmd.io/s/SyHHNSIl7
+      idm: UniverseRC
+      odm: Universe
+      joins:
+        UniverseGravity_I-O:
+          - - UniverseRangeSlider-I1
+            - ''
+            - 0
+        UniverseSpeed_I-O:
+          - - UniverseRangeSlider-I2
+            - ''
+            - 0
+      code_path: ./src/Universe.py
+      iv_list:
+        - giv_name: Gravity_I
+          type: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 0
+              function: ''
+              unit: m/s^2
+              type: float
+          index: ''
+        - giv_name: Speed_I
+          type: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 0
+              function: ''
+              unit: m/s
+              type: float
+          index: ''
+
+    - name: 自由落體實驗
+      idx: 2
+      url_history:
+        - https://hackmd.io/s/HJZeINxxQ
+      idm: BallFreeFallRC
+      odm: BallFreeFall
+      joins:
+        BallFreeFallGravity_I-O:
+          - - BallFreeFallRangeSlider-I1
+            - ''
+            - 5
+        BallFreeFallRadius_I-O:
+          - - BallFreeFallRangeSlider-I2
+            - ''
+            - 5
+      code_path: ./src/BallFreeFall.py
+      iv_list:
+        - giv_name: Gravity_I
+          type: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 5
+              function: ''
+              unit: m/s^2
+              type: float
+          index: ''
+        - giv_name: Radius_I
+          type: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 5
+              function: ''
+              unit: m
+              type: float
+          index: ''
+
+    - name: 多球體拋物運動實驗
+      idx: 3
+      url_history:
+        - https://hackmd.io/s/HJIMo2uem
+      idm: ProjectileMotionRC
+      odm: ProjectileMotion
+      joins:
+        ProjectileMotionSpeed_I-O:
+          - - ProjectileMotionRangeSlider-I1
+            - ''
+            - 25
+        ProjectileMotionAngle_I-O:
+          - - ProjectileMotionRangeSlider-I2
+            - ''
+            - 0
+      code_path: ./src/ProjectileMotion.py
+      iv_list:
+        - giv_name: Speed_I
+          type: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 30
+              default: 25
+              function: ''
+              unit: m/s
+              type: float
+          index: ''
+        - giv_name: Angle_I
+          type: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 0
+              function: ''
+              unit: deg
+              type: float
+          index: ''
+
+# WARNING: Template dm name should add a prefix "Template_"
+- model: Template
+
+  records:
+    - dm: New
+      code_path: ./src/New-template.py
+      iv_list: []
+
+    - dm: Template_BallFreeFall
+      code_path: ./src/BallFreeFall-template.py
+      iv_list:
+        - giv_name: Gravity_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 5
+              function: ''
+              unit: None
+              type: float
+          index: ''
+        - giv_name: Radius_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0
+              max: 10
+              default: 5
+              function: ''
+              unit: None
+              type: float
+          index: ''
+
+    # TODO: fix BallSpin template source
+
+    - dm: Template_AtomicSolid
+      code_path: ./src/AtomicSolid-template.py
+      iv_list:
+        - giv_name: Number_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 2
+              max: 6
+              default: 3
+              function: ''
+              unit: None
+              type: float
+          index: ''
+
+    - dm: Template_BinaryStar
+      code_path: ./src/BinaryStar-template.py
+      iv_list:
+        - giv_name: Mass_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 2
+              max: 3.5
+              default: 2
+              function: ''
+              unit: None
+              type: float
+          index: 1
+        - giv_name: Mass_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0.5
+              max: 2
+              default: 1
+              function: ''
+              unit: None
+              type: float
+          index: 2
+
+    - dm: Template_Bounce
+      code_path: ./src/Bounce-template.py
+      iv_list:
+        - giv_name: Mass_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 0.5
+              max: 10
+              default: 1
+              function: ''
+              unit: None
+              type: float
+          index: ''
+
+    - dm: Template_DoublePendulum
+      code_path: ./src/DoublePendulum-template.py
+      iv_list:
+        - giv_name: Mass_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 1
+              max: 10
+              default: 1
+              function: ''
+              unit: None
+              type: float
+          index: 1
+        - giv_name: Mass_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 1
+              max: 10
+              default: 1
+              function: ''
+              unit: None
+              type: float
+          index: 2
+
+    - dm: Template_Gyroscope
+      code_path: ./src/Gyroscope-template.py
+      iv_list:
+        - giv_name: Velocity_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: -10
+              max: 10
+              default: 0
+              function: ''
+              unit: None
+              type: float
+          index: 1
+        - giv_name: Velocity_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: -50
+              max: 50
+              default: 30
+              function: ''
+              unit: None
+              type: float
+          index: 2
+        - giv_name: Velocity_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: -1
+              max: 1
+              default: 0
+              function: ''
+              unit: None
+              type: float
+          index: 3
+
+    - dm: Template_HardSphereGas
+      code_path: ./src/HardSphereGas-template.py
+      iv_list:
+        - giv_name: Number_I
+          type:
+            key: 'value'
+          params:
+            - device: Input Box
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              default: 200
+              function: ''
+              unit: None
+              type: float
+          index: ''
+
+    - dm: Template_Plot3D
+      code_path: ./src/Plot3D-template.py
+      iv_list:
+        - giv_name: Number_I
+          type:
+            key: 'value'
+          params:
+            - device: Range Slider
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 10
+              max: 60
+              default: 50
+              function: ''
+              unit: None
+              type: float
+          index: ''
+
+    - dm: Template_RotatingCubes
+      code_path: ./src/RotatingCubes-template.py
+      iv_list:
+        - giv_name: Orientation_I
+          type:
+            key: 'vector'
+          params:
+            - device: Smartphone
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: deg/s
+              sensor: Orientation
+              function: x1
+              unit: deg/s
+              type: float
+            - device: Smartphone
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: deg/s
+              sensor: Orientation
+              function: x2
+              unit: deg/s
+              type: float
+            - device: Smartphone
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: deg/s
+              sensor: Orientation
+              function: x3
+              unit: deg/s
+              type: float
+          index: ''
+
+    - dm: Template_RotatingPoints
+      code_path: ./src/RotatingPoints-template.py
+      iv_list:
+        - giv_name: Number_I
+          type:
+            key: 'value'
+          params:
+            - device: Input Box
+              model: Smartphone
+              mac_addr: ''
+              sensor_unit: None
+              min: 10000
+              max: 50000
+              default: 15000
+              function: ''
+              unit: None
+              type: float
+          index: ''
+
+
+- model: InputVariable
+
+  records:
+    - name: Gravity_I
+
+    - name: Radius_I
+
+    - name: Speed_I
+
+    - name: Friction_I
+
+    - name: Angle_I
+
+    - name: Number_I
+
+    - name: Mass_I
+
+    - name: Velocity_I
+
+    - name: Acceleration_I
+
+    - name: Gyroscope_I
+
+    - name: Orientation_I
+
+    - name: Magnetometer_I
+
+    - name: Humidity_I
+
+    - name: UV_I
+
+    - name: Alcohol_I
+
+
+- model: OutputVariable
+
+  records:
+    - name: Luminance_O
+
+    - name: Color_O
+
+    - name: Speed_O
+
+    - name: Angle_O
+
+    - name: Number_O
+
+    - name: Velocity_O
+
+    - name: Orientation_O
+
+
+- model: Unit
+
+  records:
+    - name: None
+
+    - name: cm
+
+    - name: cm/s
+
+    - name: cm/s^2
+
+    - name: m
+
+    - name: m/s
+
+    - name: m/s^2
+
+    - name: km
+
+    - name: km/s
+
+    - name: km/s^2
+
+    - name: rad/s
+
+    - name: deg
+
+    - name: deg/s
+
+    - name: '%'
+
+    - name: '°C'
+
+    - name: '°F'
+
+
+- ccmapi: function
+
+  records:
+    - name: x4
+      code: "def run(*args):\n    return args[3]"
+
+    - name: x41
+      code: "def run(*args):\n    return args[3][0]"
+
+    - name: x42
+      code: "def run(*args):\n    return args[3][1]"
+
+    - name: x43
+      code: "def run(*args):\n    return args[3][2]"
+
+    - name: x5
+      code: "def run(*args):\n    return args[4]"
+
+    - name: x51
+      code: "def run(*args):\n    return args[4][0]"
+
+    - name: x52
+      code: "def run(*args):\n    return args[4][1]"
+
+    - name: x53
+      code: "def run(*args):\n    return args[4][2]"
+
+    - name: x6
+      code: "def run(*args):\n    return args[5]"
+
+    - name: x61
+      code: "def run(*args):\n    return args[5][0]"
+
+    - name: x62
+      code: "def run(*args):\n    return args[5][1]"
+
+    - name: x63
+      code: "def run(*args):\n    return args[5][2]"
+
+    - name: x7
+      code: "def run(*args):\n    return args[6]"
+
+    - name: x71
+      code: "def run(*args):\n    return args[6][0]"
+
+    - name: x72
+      code: "def run(*args):\n    return args[6][1]"
+
+    - name: x73
+      code: "def run(*args):\n    return args[6][2]"
+
+    - name: x8
+      code: "def run(*args):\n    return args[7]"
+
+    - name: x81
+      code: "def run(*args):\n    return args[7][0]"
+
+    - name: x82
+      code: "def run(*args):\n    return args[7][1]"
+
+    - name: x83
+      code: "def run(*args):\n    return args[7][2]"
+
+    - name: x9
+      code: "def run(*args):\n    return args[8]"
+
+    - name: x91
+      code: "def run(*args):\n    return args[8][0]"
+
+    - name: x92
+      code: "def run(*args):\n    return args[8][1]"
+
+    - name: x93
+      code: "def run(*args):\n    return args[8][2]"
+
+
+
+- ccmapi: devicefeature
+
+  records:
+    - name: UniverseRangeSlider-I1
+      type: input
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+        - param_type: string
+        - param_type: string
+      comment: "edutalk, Universe"
+
+    - name: UniverseRangeSlider-I2
+      type: input
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+        - param_type: string
+        - param_type: string
+      comment: "edutalk, Universe"
+
+    - name: UniverseSpeed_I-O
+      type: output
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+      comment: "edutalk, Universe"
+
+    - name: UniverseGravity_I-O
+      type: output
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+      comment: "edutalk, Universe"
+
+    - name: BallFreeFallRangeSlider-I1
+      type: input
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+        - param_type: string
+        - param_type: string
+      comment: "edutalk, BallFreeFall"
+
+    - name: BallFreeFallRangeSlider-I2
+      type: input
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+        - param_type: string
+        - param_type: string
+      comment: "edutalk, BallFreeFall"
+
+    - name: BallFreeFallGravity_I-O
+      type: output
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+      comment: "edutalk, BallFreeFall"
+
+    - name: BallFreeFallRadius_I-O
+      type: output
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+      comment: "edutalk, BallFreeFall"
+
+    - name: ProjectileMotionRangeSlider-I1
+      type: input
+      parameter:
+        - min: 0.0
+          max: 30.0
+          param_type: float
+        - param_type: string
+        - param_type: string
+      comment: "edutalk, ProjectileMotion"
+
+    - name: ProjectileMotionRangeSlider-I2
+      type: input
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+        - param_type: string
+        - param_type: string
+      comment: "edutalk, ProjectileMotion"
+
+    - name: ProjectileMotionSpeed_I-O
+      type: output
+      parameter:
+        - min: 0.0
+          max: 30.0
+          param_type: float
+      comment: "edutalk, ProjectileMotion"
+
+    - name: ProjectileMotionAngle_I-O
+      type: output
+      parameter:
+        - min: 0.0
+          max: 10.0
+          param_type: float
+      comment: "edutalk, ProjectileMotion"
+
+
+    - name: M2AtPressure-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2CO2-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Humidity1-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Humidity2-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Infrared-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Luminance-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Moisture-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2PH1-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2RainMeter-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2SoilEC-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2SoilTemp-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Temperature1-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2Temperature2-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2UV1-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2WindDir-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: M2WindSpeed-I
+      type: input
+      parameter:
+        - param_type: float
+        - param_type: string
+        - param_type: string
+      comment: edutalk
+
+    - name: Switch1
+      type: output
+      parameter:
+        - param_type: float
+      comment: edutalk
+
+    - name: Switch2
+      type: output
+      parameter:
+        - param_type: float
+      comment: edutalk
+
+
+- ccmapi: devicemodel
+
+  records:
+    - name: SwitchSet
+      dfs:
+        - key: Switch-O1
+        - key: Switch-O2
+        - key: Switch-O3
+        - key: Switch-O4
+        - key: Switch-O5
+        - key: Switch-O6
+        - key: Switch-O7
+        - key: Switch-O8
+        - key: Switch-O9
+
+    - name: M2
+      dfs:
+        - key: M2AtPressure-I
+        - key: M2CO2-I
+        - key: M2Humidity1-I
+        - key: M2Humidity2-I
+        - key: M2Infrared-I
+        - key: M2Luminance-I
+        - key: M2Moisture-I
+        - key: M2PH1-I
+        - key: M2RainMeter-I
+        - key: M2SoilEC-I
+        - key: M2SoilTemp-I
+        - key: M2Temperature1-I
+        - key: M2Temperature2-I
+        - key: M2UV1-I
+        - key: M2WindDir-I
+        - key: M2WindSpeed-I
+
+    - name: ProjectileMotion
+      dfs:
+        - key: ProjectileMotionSpeed_I-O
+        - key: ProjectileMotionAngle_I-O
+
+    - name: ProjectileMotionRC
+      dfs:
+        - key: ProjectileMotionRangeSlider-I1
+        - key: ProjectileMotionRangeSlider-I2
+
+    - name: BallFreeFall
+      dfs:
+        - key: BallFreeFallGravity_I-O
+        - key: BallFreeFallRadius_I-O
+
+    - name: BallFreeFallRC
+      dfs:
+        - key: BallFreeFallRangeSlider-I1
+        - key: BallFreeFallRangeSlider-I2
+
+    - name: Universe
+      dfs:
+        - key: UniverseSpeed_I-O
+        - key: UniverseGravity_I-O
+
+    - name: UniverseRC
+      dfs:
+        - key: UniverseRangeSlider-I1
+        - key: UniverseRangeSlider-I2

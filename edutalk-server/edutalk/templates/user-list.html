@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% set title = 'User List' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user-list.css') }}">
+{% endblock head %}
+
+{% block nav_header %}
+<div style="padding-right: 15px; display: inline-block;">
+  <a class="navbar-brand" href="{{ url_for('root.index') }}" style="margin: 0px auto;"> EduTalk </a>
+</div>
+{% endblock nav_header %}
+
+{% block nav_left %}
+<li id='user-list' class="active">
+  <a href="{{ url_for('root.account.list_') }}">User List</a>
+</li>
+<li id='user-list'>
+  <a href="{{ url_for('root.account.not_approved_list_') }}">Pending User List</a>
+</li>
+{% endblock nav_left %}
+
+{% block content %}
+<div class="container" style="margin-top:80px;">
+  <div class="table-header">
+    <span class="table-title">{{ title }}</span>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <table class="table col-md-3">
+      <thead>
+        <tr>
+          {% for x in ["id", "name", "group", "email", ""] %}
+          <th>{{ x | title }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for u in users %}
+        <tr class="user_record" data-uid="{{ u.id }}">
+          <td class="col-lg-2">{{ u.id }}</td>
+          <td class="col-lg-2">{{ u.username }}</td>
+          <td class="col-lg-2">{{ u.group.name | title }}
+            {% if u.id == new_admin %}
+            <br>(changed to admin)
+            {% endif %}
+          </td>
+          <td class="col-lg-3">
+            <!-- <span class="glyphicon glyphicon-ok-circle" aria-hidden="true" style="color: #5cb85c"></span> -->
+            <!-- <span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="color: #f8bf1f"></span> -->
+            {{ u.email }}
+          </td>
+          <td class="col-lg-3">
+            {% if current_user.username != u.username %}
+            <div class="dropdown hidden_flag" style="display: inline-block;">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuOperation"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span> Operation </span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuOperation" data-uname="{{u.username}}">
+                {% if u.id != new_admin %}
+                <li>
+                  {% if u.group.name == 'teacher' %}
+                  <a href="#" class="change_group" data-gid='3'> Change to Student</a>
+                  {% else %}
+                  <a href="#" class="change_group" data-gid='2'> Change to Teacher</a>
+                  {% endif %}
+                </li>
+                <li>
+                  <a href="#" class="assign_admin"> Change to Administrator</a>
+                </li>
+                {% else %}
+                <li>
+                  <a href="#" id="change_admin_cancel"> Cancel the change to administrator</a>
+                </li>
+                {% endif %}
+                <li>
+                  <a href="#" class="delete_user"> Delete account</a>
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+        <!-- for users -->
+      </tbody>
+    </table>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="assign_modal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="padding-top: 0px;">
+      <div class="modal-body ">
+        <div class="modal-msg">
+          <span id="assign_msg"></span>
+        </div>
+        <div>
+          <div class="btn btn-success" id="assign_conf">Yes</div>
+          <div class="btn btn-default" data-dismiss="modal">Cancel</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let adminUid = null;
+  $('.delete_user').on('click', function () {
+    const targetElement = $(this).parents('.user_record');
+    const uid = targetElement.attr('data-uid');
+
+    ajaxJson(
+      '{{ url_for("root.account.delete") }}',
+      'DELETE',
+      { users: [uid] },
+      () => targetElement.remove(),
+    );
+  });
+
+  $('.change_group').on('click', function () {
+    const targetElement = $(this).parents('.user_record');
+    const uid = targetElement.attr('data-uid');
+    const gid = $(this).attr('data-gid');
+    ajaxJson(
+      `{{ url_for("root.account.index") }}chgrp/${gid}`,
+      'PUT',
+      { users: [uid] },
+      () => window.location = '{{ url_for("root.account.list_") }}',
+    );
+  });
+
+  $('.assign_admin').on('click', function () {
+    const targetElement = $(this).parents('.user_record');
+    adminUid = targetElement.attr('data-uid');
+    $('#assign_msg').html(`Change <b>${$(this).parent().parent().attr('data-uname')}</b> to the administrator? <br>You can cancel it before he/she agrees.<br>If he/she agrees, you will become a teacher.<br>`);
+    $('#assign_modal').modal('show');
+  });
+
+  $('#assign_conf').on('click', () => {
+    if (adminUid != null) {
+      ajaxJson(
+        '{{ url_for("root.account.change_admin") }}',
+        'POST',
+        { uid: adminUid },
+        () => window.location = '{{ url_for("root.account.list_") }}',
+      );
+    }
+  });
+
+  $('#change_admin_cancel').on('click', function () {
+    const targetElement = $(this).parents('.user_record');
+    adminUid = targetElement.attr('data-uid');
+    ajaxJson(
+      `{{ url_for("root.account.index") }}chg_admin_cancel/${adminUid}`,
+      'DELETE',
+      {},
+      () => window.location = '{{ url_for("root.account.list_") }}',
+    );
+  });
+</script>
+{% endblock content %}

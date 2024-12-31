@@ -1,0 +1,34 @@
+.content {
+  width: 100%;
+}
+.tutorial-editor {
+  margin-top: 0;
+}
+
+.CodeMirror {
+  font-size: 15px;
+  width: 100%;
+  height: 100%;
+}
+#IDE {
+  height: 100%;
+  margin-top: 30px;
+}
+.ide-header {
+  margin-top: -14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.editor-btn {
+  color: #008F95;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.editor-btn:hover {
+  color: #94618E;
+}
+.content-title {
+  font-size: 24px;
+  font-weight: 500;
+}

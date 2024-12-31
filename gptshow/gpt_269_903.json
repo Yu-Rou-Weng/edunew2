@@ -1,0 +1,12 @@
+{
+  "session_id": 903,
+  "log": [
+    {
+      "input": "Please write a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the scene with (0, 7.5, 0) as the center point. The floor length is 25. From the X-coordinate position -5, horizontally launch a ball at a height of 15 with an initial velocity of 5. Assume that the ball has an elastic collision with the ground, and only the effect of gravity is considered, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion when the ball reaches the X-coordinate position 12.5. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Define and initialize a variable named Radius_I\nRadius_I = 0.5\n\n# Set the scene\nscene = canvas(center=vec(0, 7.5, 0))\n\n# Create the floor\nfloor = box(pos=vec(0, 0, 0), size=vec(25, 0.01, 25), color=color.green)\n\n# Create the ball\nball = sphere(pos=vec(-5, 15, 0), radius=Radius_I, color=color.red)\nball.velocity = vec(5, 0, 0)\n\n# Create the trajectory\ntrajectory = curve(color=ball.color)\n\n# Set the gravitational acceleration\ng = vec(0, -9.8, 0)\n\n# Time step\ndt = 0.01\n\nwhile ball.pos.x < 12.5:\n    rate(100)\n    # Update the ball's position\n    ball.pos = ball.pos + ball.velocity * dt\n\n    # Update the trajectory\n    trajectory.append(pos=ball.pos)\n\n    # Update the ball's velocity\n    ball.velocity = ball.velocity + g * dt\n\n    # Elastic collision with the ground\n    if ball.pos.y < ball.radius:\n        ball.velocity.y = -ball.velocity.y\n\n# Update the ball's radius\nball.radius = Radius_I",
+      "mode": "initial",
+      "timestamp": "2024-07-31 14:29:29",
+      "serial_number": 1
+    }
+  ]
+}

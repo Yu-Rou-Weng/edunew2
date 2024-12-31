@@ -1,0 +1,12 @@
+{
+  "session_id": 1164,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\"># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span></br></br>3. Cyber Input Variable Mapping Information:\n    (1) initial_height is mapped to the variable named Height_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Height_I changes, let the animation rerun to the starting point and start with the updated initial_height.",
+      "output": "```python\nfrom vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Cyber Input Variable Mapping\nHeight_I = 5\n\n# Constants\ng = 9.81  # acceleration due to gravity\n\n# Function to reset the ball position\ndef reset_ball():\n    ball.pos = vec(0, Height_I, 0)\n    ball.v = vec(v0, 0, 0)\n    ball.visible = True\n\n# Create the ground\nground = box(pos=vec(0, 0, 0), size=vec(20, 0.1, 10), color=color.green)\n\n# Create the ball\nball = sphere(pos=vec(0, Height_I, 0), radius=0.5, color=color.red)\nv0 = 5  # initial horizontal velocity of the ball\nball.v = vec(v0, 0, 0)\nball.m = 1\n\n# Animation loop\ndt = 0.01\nt = 0\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.v * dt - 0.5 * vec(0, g, 0) * dt**2\n    ball.v = ball.v - vec(0, g, 0) * dt\n    \n    if ball.pos.y - ball.radius < ground.pos.y:\n        ball.v.y *= -1  # Bounce\n        ball.pos.y = ground.pos.y + ball.radius\n        t = 0\n    \n    t += dt\n    if t > 2*v0/g:  # To stop the animation after some time\n        ball.visible = False\n        reset_ball()\n```",
+      "mode": "initial",
+      "timestamp": "2024-09-24 10:19:19",
+      "serial_number": 1
+    }
+  ]
+}

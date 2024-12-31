@@ -1,0 +1,12 @@
+{
+  "session_id": 1198,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# Projectile Motion \n\nA small ball is launched from the ground with an initial velocity \\( v_0 \\) at an angle \\( \\theta \\) relative to the horizontal. The ball accelerates downward under the influence of gravity. The goal is to calculate the ball's **flight time** and **horizontal range**.Considering only the effect of gravity, the ball stops moving when it hits the floor.\n\nOnly the effect of gravity is considered.The ball stops moving upon hitting the ground.\n\nDraw the ball and floor.\n\nLet the ball move for 6 seconds and then stop.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Constants\ng = vector(0, -9.8, 0)  # acceleration due to gravity\n\n# Objects\nball = sphere(pos=vector(0, 0, 0), radius=0.1, color=color.red)\nfloor = box(pos=vector(0, -0.1, 0), size=vector(10, 0.2, 10), color=color.green)\n\n# Initial conditions\nv0 = 5  # initial velocity magnitude\ntheta = radians(30)  # launch angle in radians\nv = vector(v0*cos(theta), v0*sin(theta), 0)  # initial velocity vector\nt = 0  # initial time\ndt = 0.01  # time step\n\n# Motion calculation\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v * dt\n    v = v + g * dt\n    t = t + dt\n    if ball.pos.y <= floor.pos.y + floor.size.y / 2:\n        break",
+      "mode": "initial",
+      "timestamp": "2024-12-26 12:05:56",
+      "serial_number": 1
+    }
+  ]
+}

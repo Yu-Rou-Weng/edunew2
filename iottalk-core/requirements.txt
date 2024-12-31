@@ -1,0 +1,9 @@
+pyzmq
+tornado==4.5.1
+pony>=0.6.6
+six
+future
+iottalk-paho-mqtt==1.4.0.dev3
+requests
+zope.event==4.4
+iottalk-utils @ git+https://gitlab+deploy-token-272715:DyLkF6iaM254i8ZLPKHQ@gitlab.com/IoTtalk/iottalk-utils#egg=iottalk-utils

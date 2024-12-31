@@ -1,0 +1,12 @@
+{
+  "session_id": 1195,
+  "log": [
+    {
+      "input": "### Gravity-Induced Simple Harmonic Motion (Circular Ring, Initial Velocity = 0, Starting from Endpoint)---Please note that VPython includes the following classes: arrow, box, cone, curve, cylinder, ellipsoid, helix, label, points, pyramid, ring, sphere, text, compound, vertex, triangle, quad, extrusion, shapes, paths, graph, gcurve, gdots, gvbars, ghbars, button, checkbox, menu, radio, slider, wtext, canvas, scene. To prevent naming conflicts, avoid using these names as variable names in your code.Please use variable names that differ from VPython class names. For example:- Use `my_ring` instead of `ring`.- Use `my_sphere` instead of `sphere`.\u00a0This motion explores **simple harmonic motion caused by gravity** within a system where a small mass **m** starts from rest at one endpoint of a line perpendicular to the center of a massive circular ring of uniform mass distribution **M** and radius **r**.\u00a0The small mass is influenced by the gravitational forces exerted by all the points on the ring. When the displacement of the small mass from the center is relatively small, these forces create a restoring effect proportional to the displacement, resulting in oscillatory motion.## Theoretical CalculationThe period of oscillation is determined using the following parameters:- **Gravitational constant (G)**- **Mass of the ring (M)**- **Mass of the oscillating body (m)**- **Radius of the ring (r)**The theoretical period for small oscillations aligns with the principles of simple harmonic motion.",
+      "output": "from vpython import *\n\n# Constants\nG = 6.67430e-11  # Gravitational constant\nM = 10  # Mass of the ring\nm = 1  # Mass of the oscillating body\nr = 5  # Radius of the ring\n\n# Initial conditions\ninitial_angle = pi  # Starting from the endpoint\ninitial_angular_velocity = 0\n\n# Calculations\nomega = sqrt(G * M / (r ** 3))  # Angular frequency\nT = 2 * pi / omega  # Period\n\n# Objects\nmy_ring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1)\nmy_body = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red)\n\n# Animation\ndt = 0.01\nt = 0\nwhile t < 10 * T:\n    rate(100)\n    \n    angle = initial_angle * cos(omega * t)\n    my_body.pos = vector(r * cos(angle), r * sin(angle), 0)\n    \n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-30 11:45:01",
+      "serial_number": 1
+    }
+  ]
+}

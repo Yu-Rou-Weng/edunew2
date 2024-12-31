@@ -1,0 +1,8 @@
+{
+  "session_id": 1004,
+  "1004_1_08_25_15_20_23": {
+    "input": "1. Screen Settings:\n\nAdjust the canvas width to 700 and height to 400. Do not modify the canvas size.\n\n2. Object Motion & Parameter Settings:\n\nDevelop a Vpython animation to demonstrate the physics experiment described below: Pendulum motion involves the movement of an object suspended from a fixed pivot point, swinging back and forth due to the influence of gravity.\n\n3. Cyber Input Variable Mapping Information:\n\nThe length of the Pendulum is linked to the variable named Length_I, with an initial value of 5.\n\nWhen the value of Length_I changes, restart the animation from the beginning with the updated length of the Pendulum.\n(1) Do not import packages that are not supported by VPython such as numpy, math and time",
+    "output": "canvas(width=700, height=400)",
+    "mode": "initial"
+  }
+}

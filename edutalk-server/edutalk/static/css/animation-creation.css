@@ -1,0 +1,817 @@
+#animation-creation {
+  width: 100000%;
+  height: max-content;
+  max-width: 1500px;
+  margin: -14px auto auto;
+  font-size: 1em;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 1px;
+  margin-top: -130px; 
+  /*border-bottom: 1px solid #ccc;*/
+}
+
+.animation-creation-block {
+  font-size: 1.5em;
+  padding:0 -1000em;
+  height: -max-content;
+}
+
+.animation-creation-text {
+  clear: both;
+  color: rgba(0, 0, 0, .68);
+}
+
+.animation-creation-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.col-sm-2 {
+  flex: 0 0 auto;
+  width: 16.66667%;  /* 2/12 = 16.66667% */
+  display: flex;
+  align-items: center;
+}
+
+.col-sm-10 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.col-sm-3 {
+  flex: 0 0 auto;
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.col-sm-9 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.title-label {
+  color: red;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #ffeeee;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.animation-creation-lesson-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding-left: 10px;
+}
+.animation-creation-title h5,
+.lecture-name {
+  font-size: 1em;  /* 與其他標題保持一致 */
+  font-weight: normal;  /* 移除粗體效果 */
+  margin: 0;  /* 移除默認邊距 */
+}
+.prompt-parent-container {
+  display: flex;
+  justify-content: center;
+}
+
+.prompt-container {
+  position: relative;  
+  width: 280%;
+  max-width: 1200px;
+  height: 500p;
+  margin-top: 30px;  /* 改用 margin-top 而不是 padding-top */
+}
+.code-row h5{
+  font-size: 1em;  /* 確保所有標題大小一致 */
+  font-weight: normal;  /* 移除粗體效果 */
+  width: 500%;
+  margin: 0;  /* 移除默認邊距 */
+}
+/* 專門為 Prompt 標題添加新的樣式 */
+.prompt-title {
+  font-size: 1em;
+  font-weight: bold;
+  color: rgba(0, 0, 0, .68);
+  margin: 0 0 10px 0;  /* 添加底部間距 */
+}
+/* 修改 Lecture 字樣的樣式和位置 */
+.prompt-window-title {
+  position: absolute;  
+  top: -50px;         /* 調整這個值，使其離 Prompt 更遠一些 */
+  left: 0;            
+  font-size: 1em;
+  font-weight: bold;
+  color: rgba(0, 0, 0, .68);
+  margin: 0;
+}
+.lecture-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.animation-creation-lesson-title span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.rename-btn {
+  display: none; /* 隱藏筆符號 */
+}
+
+.url {
+  width: 50%;
+  min-width: 350px;
+  margin: 30px;
+}
+#prompt-textarea, /* 假设Prompt视窗的id是prompt-textarea */
+.prompt-window {  /* 或者使用适当的类名 */
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-control:focus {
+  border-color: #DCDFE6;
+  box-shadow: 0 0px 0 #ccc, 0 -1px #fff inset;
+  outline: 0 none;
+}
+
+.rename-btn,
+.edit-url-btn {
+  margin-left: 8px;
+  color: #85ce61;
+}
+
+.rename-btn:hover,
+.edit-url-btn:hover {
+  cursor: pointer;
+  color: #5f9942;
+}
+
+.animation-creation-input-title,
+.animation-creation-input-url,
+.animation-creation-input-video-url {
+  display: none;
+}
+
+input.animation-creation-input {
+  width: 200px;
+  display: inline;
+  margin-right: 0px;
+  vertical-align: middle;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: normal;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.success-message {
+  color: #6ac259;
+  float: right;
+  font-size: 25px;
+  margin-right: 10px;
+  display: none;
+  justify-content: center;
+}
+
+#delete-lesson-btn {
+  float: right;
+  width: 150px;
+  color: white;
+  background-color: #55555599;
+  margin-bottom: 20px;
+}
+
+#delete-lesson-btn:hover {
+  background-color: #f44336;
+  box-shadow: none;
+  color: white;
+}
+
+.animation-creation-lesson-url {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+  margin-bottom: 10px; 
+}
+
+.hackmd-url {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  line-height: 1.1;
+  font-weight: 700;
+  color: inherit;
+}
+
+.da-name {
+  font-weight: 700;
+}
+
+.da-info {
+  margin: 5px 0;
+}
+
+.df-label {
+  display: inline-block;
+  margin: 0.2em 0;
+  padding: 0.6em;
+}
+
+.da-info span:nth-of-type(6n+1) {
+  background: #00bcd4;
+}
+
+.da-info span:nth-of-type(6n+2) {
+  background: #ff9800;
+}
+
+.da-info span:nth-of-type(6n+3) {
+  background: #4caf50;
+}
+
+.da-info span:nth-of-type(6n+4) {
+  background: #3379b7;
+}
+
+.da-info span:nth-of-type(6n+5) {
+  background: #777;
+}
+
+.da-info span:nth-of-type(6n+6) {
+  background: #d9534e;
+}
+
+.da-info span:last-child {
+  background: transparent;
+}
+
+.da-info .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: #55555599;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.da-info .material-symbols-outlined:focus,
+.da-info .material-symbols-outlined:hover {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: #0e0d0d99;
+}
+
+.close {
+  position: absolute;
+  right: 1.5%;
+}
+
+option[id="iv-name-option"] {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  width: 60px;
+}
+
+#setting-animation-creation {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  padding: 3%;
+}
+
+.sensor-select {
+  width: 85%;
+}
+
+.unit-warning {
+  color: #ff9800;
+}
+
+#vpython-ide {
+  margin-top: 20px;
+}
+
+.ide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ide-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#vpython-editor {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #140303;
+}
+
+.CodeMirror {
+  height: 100%;
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animation-creation-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  position: relative;
+}
+
+.mode-toggle {
+  position: absolute;
+  right: 10;
+}
+
+.history-select {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-select .session-select,
+.history-select .serial-number-select {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.history-select label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.history-select select {
+  padding: 5px;
+  font-size: 0.875em;
+}
+
+#status-messages p {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  margin-right: 10px;
+}
+
+.default-value-input {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.default-value-input label {
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.default-value-input input {
+  width: 100px;
+}
+.d-none {
+  display: none !important;
+}
+#idfListModal .modal-body a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#idfListModal .modal-body a:hover {
+  text-decoration: underline;
+}
+#physicalFeatureBindingModal .setting-cell {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+#physicalFeatureBindingModal .setting-cell:last-child {
+  border-bottom: none;
+}
+#physicalFeatureBindingModal .d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+}
+#physicalFeatureBindingModal .d-flex.align-items-center .form-control {
+  flex: 1;
+  max-width: 150px;
+}
+#physicalFeatureBindingModal .d-flex.align-items-center .form-control.ml-2 {
+  margin-left: 5px;
+}
+
+@media (max-width: 600px) {
+  #physicalFeatureBindingModal .d-flex.align-items-center .form-control {
+    max-width: 120px;
+  }
+}
+#physicalFeatureBindingModal .dim-tag {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#physicalFeatureBindingModal .dim-options {
+  display: flex;
+  align-items: center;
+}
+
+#physicalFeatureBindingModal .dim-options > * {
+  margin-right: 10px;
+}
+
+#physicalFeatureBindingModal .form-control {
+  width: auto;
+}
+
+.idf-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  max-height: 300px;
+  overflow-y: auto;
+}
+/* 隱藏下拉選單中的單選按鈕，但保留它們的功能 */
+.idf-dropdown input[type="radio"] {
+  display: none;
+}
+
+.idf-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.idf-dropdown li {
+  margin-bottom: 5px;
+}
+
+.idf-dropdown .add-new-variable {
+  display: block;
+  margin-bottom: 10px;
+}
+.idf-list-container {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* 自定义滚动条样式 */
+.idf-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.idf-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.idf-list-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.idf-list-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.input-group-horizontal {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.input-group-horizontal input {
+  min-width: 60px; /* Adjust this width if necessary */
+  max-width: 100px;
+  margin-right: 5px; /* Add margin between inputs */
+}
+.d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+}
+.d-flex.align-items-center .form-control {
+  flex: 1;
+  max-width: 150px; /* Adjust as needed */
+}
+.d-flex.align-items-center .form-control.ml-2 {
+  margin-left: 5px;
+}
+@media (max-width: 600px) {
+  .d-flex.align-items-center .form-control {
+    max-width: 120px;
+  }
+}
+.prompt-container .form-control[contenteditable="true"] {
+  font-size: 20px; /* 調整這個值來改變字體大小 */
+  line-height: 1.5; /* 調整行高以提高可讀性 */
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 10 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.color-red{
+  color:#e63946;
+  }
+  #animation-creation .form-control[contenteditable="true"],
+  #animation-creation textarea.form-control {
+    height: 200px !important;
+    min-height: 500px !important;
+    max-height: 200px !important;
+    overflow-y: auto !important;
+  }
+  
+.code-row {
+  margin-bottom: 15px; /* 調整與其他元素的間距 */
+  display: flex;
+  align-items: center;
+}
+
+.code-row h5 {
+  margin: 0;
+  padding-right: 10px;
+}
+
+.code-select-container {
+  width: 100%;
+}
+
+.code-select {
+  width: 100%;
+  height: 34px; /* 與其他輸入框保持一致的高度 */
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+}
+
+.code-select:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}
+
+/* 確保 prompt 視窗和 code 選單有相同的寬度 */
+#animation-creation .form-control {
+  width: 100%;
+}
+
+/* 添加到animation-creation.css */
+#animation-preview-modal .modal-dialog {
+  max-width: 800px;
+}
+
+#animation-preview-modal .modal-content {
+  background-color: white;
+  border-radius: 8px;
+}
+
+#preview-canvas {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #ddd;
+}
+
+#controls-panel {
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#variable-panel {
+  padding: 10px;
+}
+
+.variable-control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.variable-control label {
+  width: 120px;
+  margin-right: 10px;
+}
+
+.variable-control input {
+  width: 100px;
+}
+
+#animation-preview-modal .modal-dialog {
+  max-width: 800px;
+}
+
+#animation-preview-modal .modal-content {
+  background: white;
+  border-radius: 8px;
+}
+
+#preview-canvas {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #ddd;
+}
+
+.preview-controls {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.preview-controls button {
+  margin: 0 5px;
+}
+
+
+
+/*#control-slider-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  height: 80px;
+}*/
+/* 修改這些 QR code 相關的樣式 */
+
+
+
+#qrcode {
+    width: 100%;
+    height: 100%;
+    display: block !important; /* 強制顯示 */
+}
+
+#qrcode img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: contain;
+    border: 1px solid green; /* 添加綠色邊框用於調試 */
+}
+
+/* 確保父容器可以容納絕對定位的元素 */
+#white-window {
+    position: relative !important;
+    height: 270px !important; /* 確保高度足夠 */
+    background: #fff;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    overflow: visible !important;
+}
+
+#debug-error-modal {
+  display: block !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0,0,0,0.5) !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#debug-error-modal .modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+#debug-error-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+#debug-error-modal .round-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+#debug-error-modal .error-message {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  color: #dc3545;
+  margin-top: 8px;
+}
+#debug-error-modal .close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modal-title {
+  text-align: center;
+  width: 100%;
+}
+/* 在 animation-creation.css 中添加 */
+.alert-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 10px;
+}
+.loading-indicator {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 0.2em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: loading-spinner 0.75s linear infinite;
+}
+@keyframes loading-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 只調整 control panel 的位置 */
+#control-panel-container {
+  position: absolute;
+  bottom: 20px;
+  left: 360px;
+  width: 0px;  /* Increased from 300px */
+  height: 250px; /* Increased from 200px */
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#control-panel {
+  width: 100%;
+  height: 100%;
+}
+/* 確保 QR code 和控制面板不會重疊 */
+#qrcode-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 250px;
+  height: 250px;
+}
+body #glowscript,
+body .glowscript,
+#glowscript[class*="glowscript"],
+div[id="glowscript"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+#glowscript {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.glowscript {
+  display: none !important;
+}

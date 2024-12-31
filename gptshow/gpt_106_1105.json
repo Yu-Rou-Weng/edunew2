@@ -1,0 +1,12 @@
+{
+  "session_id": 1105,
+  "log": [
+    {
+      "input": "Please update the following program based on this instruction:\ngle) is \ud835\udf03\u2080, and the ball is released from rest, then when the pendulum angle is \ud835\udf03, the ball is subjected to gravitational force and the tension in the string. The torque relative to the suspension point is given by: $$ \\vec{\\tau} = \\vec{r} \\times \\vec{F} \\quad \\Rightarrow \\quad \\tau = r F \\sin \\theta $$ If the moment of inertia (\ud835\udc3c) is defined as: $$ I = m r^2 $$ Since the torque (\ud835\udf0f) is in the opposite direction of the angular acceleration (\ud835\udefc), the relationship between them is: $$ \\tau = -I \\alpha \\quad \\Rightarrow \\quad r F \\sin \\theta = -m r^2 \\frac{d^2 \\theta}{dt^2} \\quad \\Rightarrow \\quad \\frac{F}{m r} \\sin \\theta = - \\frac{d^2 \\theta}{dt^2} $$ If $r = L$ and $F = mg$, and when $\\theta < 5^\\circ$, we can approximate $\\sin \\theta \\approx \\theta$. The above equation can be rewritten as: $$ \\frac{g}{L} \\theta = - \\frac{d^2 \\theta}{dt^2} $$ The solution is: $$ \\theta(t) = \\theta_0 \\cos \\left( \\sqrt{\\frac{g}{L}} t \\right) = \\theta_0 \\cos(\\omega t) $$ In the above equation, $\\omega$ is the angular frequency of the pendulum\u2019s oscillation, and the period is: $$ T = \\frac{2\\pi}{\\omega} = 2\\pi \\sqrt{\\frac{L}{g}} $$\n\nCurrent program:\nscene.width = 700\nscene.height = 400\n\nball = sphere(pos=vector(0, -5, 0), radius=1, color=color.red)\nstring = cylinder(pos=vector(0, 0, 0), axis=ball.pos - vector(0, 0, 0), radius=0.1)\n\ng = 9.81\nL = 5\ntheta_0 = radians(10)\nomega = sqrt(g/L)\nT = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < 10*T:\n    rate(100)\n    theta = theta_0*cos(omega*t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    string.axis = ball.pos - string.pos\n    t += dt",
+      "output": "scene.width = 700\nscene.height = 400\n\nball = sphere(pos=vector(0, -5, 0), radius=1, color=color.red)\nstring = cylinder(pos=vector(0, 0, 0), axis=ball.pos - vector(0, 0, 0), radius=0.1)\n\ng = 9.81\nL = 5\ntheta_0 = radians(10)\nomega = sqrt(g/L)\nT = 2*pi/omega\n\nt = 0\ndt = 0.01\n\nwhile t < 10*T:\n    rate(100)\n    theta = theta_0*cos(omega*t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    string.axis = ball.pos - string.pos\n    t += dt",
+      "mode": "modification",
+      "timestamp": "2024-11-18 04:21:52",
+      "serial_number": 1
+    }
+  ]
+}

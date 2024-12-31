@@ -1,0 +1,12 @@
+{
+  "session_id": 1107,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nDraw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nDo not resize the scene. \nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) m1 is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated m1.</br>",
+      "output": "scene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nt = 0\ndt = 0.01\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= 0:\n        ball.pos.y = 0\n        v0 *= -m1[0]\n\nt = 0",
+      "mode": "initial",
+      "timestamp": "2024-12-16 16:29:02",
+      "serial_number": 1
+    }
+  ]
+}

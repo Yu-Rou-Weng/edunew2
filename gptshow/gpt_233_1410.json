@@ -1,0 +1,12 @@
+{
+  "session_id": 1410,
+  "log": [
+    {
+      "input": "Please fix the following error in the program and and you must import time and you must add import time to your program:\nundefined_acceleration is not defined\n\nHere's the current program:\nundefined",
+      "output": "from vpython import *\nimport time\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.blue)\nground = box(pos=vector(0,-1,0), size=vector(4,0.1,4), color=color.green)\n\nball.velocity = vector(0,0,0)\nball.acceleration = vector(0,-9.8,0)\n\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    ball.velocity = ball.velocity + ball.acceleration*dt\n    ball.pos = ball.pos + ball.velocity*dt\n\n    if ball.pos.y < ground.pos.y + ball.radius:\n        ball.velocity.y = -ball.velocity.y * 0.9\n        ball.pos.y = ground.pos.y + ball.radius\n\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-12-17 16:00:42",
+      "serial_number": 1
+    }
+  ]
+}

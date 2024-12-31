@@ -1,0 +1,12 @@
+{
+  "session_id": 1189,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Considering both gravity and air resistance \\( f = -bv \\). Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings. 3. Cyber Input Variable Mapping Information: (1) mass2 is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional value 5 (2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated mass2.",
+      "output": "scene.width = 700\nscene.height = 400\n\ng = 9.81\nh = 10\nv0 = 20\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(30, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    t += dt\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * (t ** 2) - v0 * b * t\n\n    if ball.pos.y <= ball.radius:\n        ball.pos.y = ball.radius\n        v0 *= -0.9\n\nElasticity_I = 5\n\ndef update_scene():\n    global Elasticity_I, v0\n    v0 = 20\n    Elasticity_I = mass2\n\nscene.bind('keydown', update_scene)",
+      "mode": "initial",
+      "timestamp": "2024-12-28 14:45:19",
+      "serial_number": 1
+    }
+  ]
+}

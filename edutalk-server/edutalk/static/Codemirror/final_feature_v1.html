@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Code Mirror CDN</title>
+
+  <!--<link rel="stylesheet" href="doc/docs.css">-->
+  <!-- Color Scheme: Boy Coy, https://www.dtelepathy.com/blog/inspiration/beautiful-color-palettes-for-your-next-web-project -->
+
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <link rel="stylesheet" href="theme/twilight.css">
+  <link rel="stylesheet" href="addon/dialog/dialog.css">
+  <link rel="stylesheet" href="addon/hint/show-hint.css">
+  <link rel="stylesheet" href="addon/merge/merge.css">
+  <link rel="stylesheet" href="addon/fold/foldgutter.css">
+  <!--<link rel="stylesheet" href="addon/search/matchonscrollbar.css">-->
+
+  <script src="lib/codemirror.js"></script>
+  <script src="mode/javascript/javascript.js"></script>
+  <script src="mode/xml/xml.js"></script>
+  <script src="mode/python/python.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="addon/hint/javascript-hint.js"></script>
+  <script src="addon/hint/show-hint.js"></script>
+  <script src="addon/selection/active-line.js"></script>
+  <script src="addon/edit/matchbrackets.js"></script>
+  <script src="addon/merge/dep/diff_match_patch.js"></script>
+  <script src="addon/merge/merge.js"></script>
+  <script src="addon/dialog/dialog.js"></script>
+  <script src="addon/scroll/annotatescrollbar.js"></script>
+  <script src="addon/search/searchcursor.js"></script>
+  <script src="addon/search/search.js"></script>
+  <script src="addon/search/jump-to-line.js"></script>
+  <!--<script src="addon/search/matchonscrollbar.js"></script>-->
+  <script src="addon/fold/brace-fold.js"></script>
+  <script src="addon/fold/comment-fold.js"></script>
+  <script src="addon/fold/foldcode.js"></script>
+  <script src="addon/fold/foldgutter.js"></script>
+  <script src="final.js"></script>
+  <script src="addon/fold/indent-fold.js"></script>
+  <script src="addon/fold/markdown-fold.js"></script>
+  <script src="addon/fold/xml-fold.js"></script>
+  <script src="keymap/extra.js"></script>
+  
+<!--
+  <link rel="stylesheet" href="css/show-hint.css">
+  <link rel="stylesheet" href="css/theme/neonsyntax.css">
+  <link rel="stylesheet" href="css/addon/search/matchesonscrollbar.css">
+  <script src="js/addon/search/jump-to-line.js"></script>
+  <script src="js/highlight/jquery-3.3.1.min.js"></script> 
+  <script src="js/xml-hint.js"></script>
+  <script src="js/html-hint.js"></script>
+  <script src="js/htmlmixed.js"></script>
+  <script src="js/css.js"></script>
+  <script src="js/active-line.js"></script>
+  <script src="js/matchbrackets.js"></script>
+  <script src="js/addon/scroll/annotatescrollbar.js"></script>
+  <script src="js/addon/search/matchesonscrollbar.js"></script>
+-->
+
+
+<style>
+  .CodeMirror { 
+    line-height: 1.2;
+    font-size: 20px; 
+    height: auto; 
+    width: 100%; 
+    border: 1px 
+    solid #ddd; 
+  }
+
+  /*Dont display gap in middle*/
+  .CodeMirror-merge-2pane .CodeMirror-merge-pane {
+    width: 50%;
+  }
+  .CodeMirror-merge-gap {
+    display: none;
+  }
+  
+
+  @media screen and (min-width: 1300px) {
+    article { max-width: 1000px; }
+  }
+
+  span.clicky {
+    cursor: pointer;
+    background: #d70;
+    color: white;
+    padding: 0 3px;
+    border-radius: 3px;
+  }
+
+  .CodeMirror-scroll { max-height: 500px; }
+  .CodeMirror pre { padding-left: 7px; line-height: 1.25; }
+
+  .button {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+</style>
+
+<button id="search" class="button">Search</button>
+<span>
+  <button id="next" class="button">Next</button> 
+  <button id="previous" class="button">Previous</button>
+  <button id="diff" class="button">Compare</button>
+</span>
+<article>
+
+<div id="view"></div>
+
+<input id="fileInput" type="file"/>
+
+
+<script>
+var value, orig1, orig2, dv, dvm, panes = 1, highlight = true, connect = "align", collapse = false, folded_areas = [];
+
+var Pos = CodeMirror.Pos;
+
+function initUI() {
+  if (value == null) return;
+  var target = document.getElementById("view");
+  target.innerHTML = "";
+  if (panes == 2){
+    dv = CodeMirror.MergeView(target, {
+      value: value,
+      origLeft: panes == 3 ? orig1 : null,
+      orig: orig2,
+      lineNumbers: true,
+      mode: "python",
+      theme: "twilight",
+      highlightDifferences: highlight,
+      connect: connect,
+      extraKeys: {
+        "Ctrl-Space": "autocomplete"
+      },
+      collapseIdentical: collapse,
+      foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+    foldCode_own(folded_areas, dv);
+    
+    dv.editor().on("gutterClick", panestwoed);
+
+
+  }
+  else {
+    dv = CodeMirror(target, {
+        mode: {name: "python",
+               version: 3,
+               singleLineStringErrors: false},
+        theme: "twilight",
+        indentUnit: 4,
+        lineWrapping: true,
+        lineNumbers: true,
+        styleActiveLine: true,
+        matchBrackets: true,
+        extraKeys: {
+          "Ctrl-Space": "autocomplete"
+        },
+        value: value,
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+      });
+    foldCode_own(folded_areas, dv);
+  }
+
+
+
+  document.querySelector("#search").onclick = function(){
+    if(panes == 1) {
+      dv.execCommand("find"); 
+    }
+    else {
+      dv.editor().execCommand("find");
+    }
+  };
+
+  document.querySelector("#next").onclick = function(){
+    if(panes == 1) {
+     dv.execCommand("findNext"); 
+    }
+    else {
+      dv.editor().execCommand("findNext");
+    }
+  };
+
+  document.querySelector("#previous").onclick = function(){
+    if(panes == 1) {
+      dv.execCommand("findPrev"); 
+    }
+    else {
+      dv.editor().execCommand("findPrev")
+    }
+  };
+
+
+  document.querySelector("#diff").onclick = function(){ 
+    if(panes == 1) {
+      value = dv.getValue();
+      folded_areas = findMarks();
+      panes = 2;
+      initUI();
+    }
+    else {
+      value = dv.editor().getValue();
+      folded_areas = findMarks();
+      panes = 1;
+      initUI();
+    }
+
+  };
+  
+}
+
+
+function Pos(line, ch) {
+    if (!(this instanceof Pos)) return new Pos(line, ch);
+    this.line = line; this.ch = ch;
+  }
+
+function isFolded(cm, line) {
+  var marks = cm.findMarks(Pos(line, 0), Pos(line + 1, 0));
+  for (var i = 0; i < marks.length; ++i)
+    if (marks[i].__isFold && marks[i].find().from.line == line) return marks[i];
+}
+
+
+
+
+function findMarks() {
+  var all_marks = [], marks = [], fmarks = [];
+
+  if(panes == 1) {
+    marks = dv.getDoc().getAllMarks();
+
+    fmarks = reverseMarks(marks);
+  }
+  else{
+    var all_marks = dv.editor().getDoc().getAllMarks();
+    for (var i = 0; i<all_marks.length; i++) {
+      if ("__isFold" in all_marks[i]) {
+        marks.push(all_marks[i]);
+      }
+    }
+    fmarks = reverseMarks(marks);
+  }
+  return fmarks;
+}
+
+function clearFolds(array) {
+  $.each(array, function(index) {
+    array[index].clear();
+  })
+}
+
+function updateright() {
+  va
+}
+
+function foldCode_own(array, target) {
+  if(panes == 2) {
+    $.each(array, function(index) {
+      dv.editor().foldCode(array[index].find().from);
+      dv.rightOriginal().foldCode(array[index].find().from);
+    })
+  }
+  else {
+    $.each(array, function(index) {
+      dv.foldCode(array[index].find().from);
+    })    
+  }
+
+
+}
+
+function reverseMarks(array) {
+  var res = [];
+  for (var i = array.length-1; i>=0; i--) {
+    res.push(array[i]);
+  }
+  return res;
+}
+/*
+function getFoldState() {
+  var res = { marks: [] };
+
+  if (panes == 1) {
+    var marks = dv.getDoc().getAllMarks();
+    console.log(marks.hashCode);
+  }
+
+  else {
+    var marks = dvm.editor().getDoc().getAllMarks();
+    console.log(marks.hashCode);
+  }
+
+  if ( marks.length ){
+    // We reverse the array in order to start in the last folded parts in case of nesting
+    for ( var i = marks.length - 1; i >= 0; i-- ){
+      if ( marks[i].collapsed && (marks[i].type === 'range') ){
+        res.marks.push(marks[i].find().from);
+        alert(marks[i]);
+      }
+    }
+  }
+  return res;
+}
+
+function setFoldState(state) {
+  if (state.marks) {
+    alert("Enter setfoldState");
+    if (panes == 1) {
+      alert("panes 1" + state.marks[0] + "first");
+      $.each(state.marks, function(i,a){
+        alert("panes 1" + a);
+        dv.editor().foldCode(a);
+      });
+    }
+    else {
+      alert("panes 2" + state.marks[0] + "first");
+      $.each(state.marks, function(i,a){
+        alert("panes 2" + a);
+        dvm.foldCode(a);
+      });
+    }
+  }
+}
+*/
+function toggleDifferences() {
+  dv.setShowDifferences(highlight = !highlight);
+}
+
+var fileInput = document.getElementById('fileInput');
+var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+fileInput.addEventListener('change', function(e) {
+  var file = fileInput.files[0];
+  var textType = /text.*/;
+
+  if (file.type.match(textType)) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      value = reader.result;
+      orig2 = reader.result;
+      initUI();
+      //dv.setOption("orig2", reader.result);
+    }
+
+    reader.readAsText(file);  
+  } else {
+    fileDisplayArea.innerText = "File not supported!"
+    
+  }
+});
+
+</script>
+</article>
+</body>
+</html>

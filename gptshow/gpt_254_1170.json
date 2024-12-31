@@ -1,0 +1,12 @@
+{
+  "session_id": 1170,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Only the effect of gravity is considered, and the collision between the ball and the ground is elastic. Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings. 3. Cyber Input Variable Mapping Information: (1) mass1 is mapped to the variable named mass1 with an initial value set to a 1-dimensional value 5 (2) When the value of mass1 changes, let the animation rerun to the starting point and start with the updated mass1.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Object Motion & Parameter Settings\nfloor = box(pos=vector(0,-1,0), size=vector(10,0.1,5), color=color.blue)\nball = sphere(pos=vector(-5,0,0), radius=0.5, color=color.red, make_trail=True)\nv0 = 5\nh = 3\n\ndef reset_animation():\n    ball.pos = vector(-5, 0, 0)\n    ball.clear_trail()\n    ball.v = vector(v0, 0, 0)\n    t = 0\n\ndef update_mass1(value):\n    global mass1\n    mass1 = value\n    reset_animation()\n\nmass1 = 5\nupdate_mass1(mass1)\n\nt = 0\ndt = 0.01\nwhile t < 3:\n    rate(100)\n    ball.pos.x = v0 * (t - h)\n    ball.pos.y = 0.5 * (-9.81) * (t - h)**2\n    if ball.pos.y < 0 and ball.v.y < 0:\n        ball.v.y *= -1\n    t += dt\n\nball.v = vector(0,0,0)",
+      "mode": "initial",
+      "timestamp": "2024-12-28 12:41:10",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+{% endblock head %}
+{% block nav_left %}
+<li><a href="{{ url_for('root.intermediate') }}">EduTalk(GenAI)</a></li>
+{% endblock nav_left %}
+{% block nav_right %}
+{% endblock nav_right %}
+{% block content %}
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12 sign'>
+    </div>
+  </div>
+</div>
+{% if current_user.id %}
+{% if current_user.id | int == new_admin | int %}
+<!-- If this user is assigned as the administrator, pop out the confirmation modal-->
+<div class="modal fade" tabindex="-1" role="dialog" id="assigned_conf_modal" data-backdrop="static"
+  data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="padding-top: 0px;">
+      <div class="modal-body ">
+        <div class="modal-msg">
+          <span>
+            You're changed to the administrator.
+            <br>
+            Do you agree?
+          </span>
+        </div>
+        <div>
+          <div class="btn btn-success answer" data-dismiss="modal">Yes</div>
+          <div class="btn btn-default answer" data-dismiss="modal">No</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(() => {
+    console.log('{{new_admin}}');
+    if ('{{ current_user.id }}' === '{{ new_admin }}') {
+      $('#assigned_conf_modal').modal('show');
+    }
+  });
+
+  $('.answer').on('click', function () {
+    let answer = '';
+    if ($(this).text() === 'Yes') {
+      answer = 'agree';
+    } else {
+      answer = 'refuce';
+    }
+
+    ajaxJson(
+      '{{ url_for("root.account.become_new_admin") }}',
+      'POST',
+      { answer },
+      () => window.location = "{{ url_for('root.index') }}",
+    );
+  });
+  function createAndRedirect(event) {
+    event.preventDefault();
+    
+    // 发送 AJAX 请求来创建新的 Lecture
+    $.ajax({
+        url: '{{ url_for("root.lecture.create_and_redirect") }}',
+        type: 'GET',
+        success: function(response) {
+            // 重定向到新创建的 Lecture 页面
+            window.location.href = response.redirect_url;
+        },
+        error: function(xhr, status, error) {
+            console.error("Error creating new lecture:", error);
+            alert("Error creating new lecture. Please try again.");
+        }
+    });
+}
+</script>
+{% endif %}
+{% endif %}
+{% endblock content %}

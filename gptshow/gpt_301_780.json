@@ -1,0 +1,12 @@
+{
+  "session_id": 780,
+  "log": [
+    {
+      "input": "Please write the VPython code for \"Simple Harmonic Motion Caused by Electrostatic Forces (Placed Above the Vertical Line)\"\n\nAt locations (-10, 0, 0) and (10, 0, 0), there are blue spheres each with a radius of 1. A small sphere with a radius of 0.3, released from position (0, 3, 0), starts experiencing simple harmonic motion induced by the electrostatic forces from the two spheres. The motion of the small sphere is restricted between the points (0, 3, 0) and (0, -3, 0). There is a yellow line connecting the centers of the two large blue spheres. At (0, 3, 0) and (0, -3, 0), there are two white horizontal lines, each 5 cm long.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the sphere. When Radius_I changes to a new value, the radius of the sphere also changes accordingly.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nscene = canvas()\nRadius_I = 1\n\nblue_sphere1 = sphere(pos=vector(-10, 0, 0), radius=Radius_I, color=color.blue)\nblue_sphere2 = sphere(pos=vector(10, 0, 0), radius=Radius_I, color=color.blue)\nsmall_sphere = sphere(pos=vector(0, 3, 0), radius=0.3, color=color.red)\n\nline = cylinder(pos=blue_sphere1.pos, axis=blue_sphere2.pos-blue_sphere1.pos, radius=0.1, color=color.yellow)\nline1 = cylinder(pos=vector(0, 3, 0), axis=vector(5, 0, 0), radius=0.1, color=color.white)\nline2 = cylinder(pos=vector(0, -3, 0), axis=vector(5, 0, 0), radius=0.1, color=color.white)\n\nk = 9e9\nq = 1e-9\nm = 1e-3\ndt = 0.01\n\nwhile True:\n    rate(100)\n    F = k*q*q/(mag(small_sphere.pos-blue_sphere1.pos)**2)*norm(blue_sphere1.pos-small_sphere.pos) + k*q*q/(mag(small_sphere.pos-blue_sphere2.pos)**2)*norm(blue_sphere2.pos-small_sphere.pos)\n    small_sphere.pos = small_sphere.pos + F/m*dt**2",
+      "mode": "initial",
+      "timestamp": "2024-07-25 21:10:40",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,423 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap4-btn.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
+
+<script>
+  let lectureName = '{{ lecture.name }}';
+  let hackmdURL = '{{ lecture.url }}';
+  let urlHistory = JSON.parse('{{ lecture.url_history | tojson | safe }}');
+  let videoHistory = JSON.parse('{{ lecture.video_history | tojson | safe }}');
+  let sensorOptions = JSON.parse('{{ sensorOptions | tojson | safe }}');
+  let actuatorVarTypeOfDim = JSON.parse('{{ actuatorVarTypeOfDim | tojson | safe }}');
+  let actuatorDm = JSON.parse('{{ actuatorDm | tojson | safe }}');
+</script>
+
+<div class="card edit-lesson" id="card">
+  <div class="card-block">
+    <div class="card-text">
+      <div class="card-header">
+  <div class="lecture-info">
+    <h5 style="transform: translateX(170px);">Lecture</h5>  <!-- 使用 transform 來移動 -->
+    <span class="lecture-name" :title="lectureName">[[lectureName]]</span>
+    <a class="rename-btn" @click="showInput('title')">
+      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+    </a>
+  </div>
+        <div class="hackmd-info">
+          <h5>HackMD URL</h5>
+          <div class="hackmd-url-container">
+            <a class="hackmd-url" :href="hackmdURL" target="_blank">[[ hackmdURL ]]</a>
+            <a class="edit-url-btn" @click="showInput('url')">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            </a>
+            <!-- 把 card-input-url 移到這裡 -->
+            <div class="card-input-url">
+              <div class="dropdown" style="width: 200px; display: inline-block; position: relative;">
+                <input class="card-input form-control" id="url" stype="text" :value="hackmdURL" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="true">
+                <div v-if="urlHistory.length > 1" class="dropdown-menu" id="history">
+                  <template v-for="index in urlHistory.length - 1">
+                    <li><a href="#" @click="setUrl">[[ urlHistory[index] ]]</a></li>
+                  </template>
+                </div>
+              </div>
+              <button class="btn btn-success btn-outline" @click="updateLectureUrl">Save</button>
+              <button class="btn btn-default btn-outline" @click="hideInput('url')">Cancel</button>
+              <div class="error-message" id="url" style="display: block;">Error</div>
+            </div>
+          </div>
+        </div>
+
+      <div class="program-config">
+        <div class="row visually-hidden">
+          <div class="col-sm-3">
+            <h5>Video Stream URL</h5>
+          </div>
+          <div class="col-sm-9">
+            <div class="card-lesson-video-url">
+              <div>
+                <a class="video-url" :href="videoURL" target="_blank">[[ videoURL ]]</a>
+                <a class="edit-url-btn" @click="showInput('video-url')">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="success-message" id="video-url">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="card-input-video-url">
+              <div class="dropdown" style="width: 200px; display: inline-block; position: relative;">
+                <input class="card-input form-control" id="video-url" stype="text" :value="videoURL" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="true">
+                <div v-if="videoHistory.length > 1" class="dropdown-menu" id="video-history">
+                  <template v-for="index in videoHistory.length - 1">
+                    <li><a href="#" @click="setVideoUrl">[[ videoHistory[index] ]]</a></li>
+                  </template>
+                </div>
+              </div>
+              <button class="btn btn-success btn-outline" @click="updateVideoUrl">Save</button>
+              <button class="btn btn-default btn-outline" @click="hideInput('video-url')">Cancel</button>
+              <div class="error-message" id="video-url" style="display: block;">Error</div>
+            </div>
+          </div>
+        </div>
+        <div class="row visually-hidden">
+          <div class="col-sm-3">
+            <h5>Program Name</h5>
+          </div>
+          <div class="col-sm-9">
+            <h5 class="da-name">[[ daName ]]</h5>
+          </div>
+        </div>
+        <div class="row visually-hidden">
+          <div class="col-sm-3">
+            <h5>Cyber Input Variables</h5>
+          </div>
+          <div class="col-sm-9">
+            <div class="da-info">
+              {% for iv in lecture.iv_list %}
+              <span class="label df-label">{{ iv.giv_name }}{{ iv.index }}</span>
+              {% endfor %}
+              <span class="material-symbols-outlined" data-toggle="modal" data-target="#setting-modal"
+                id="settings-icon"> settings </span>
+            </div>
+          </div>
+        </div>
+        <div class="row visually-hidden">
+          <div class="col-sm-3">
+            <h5>Cyber Output Variables</h5>
+          </div>
+          <div class="col-sm-9">
+            {% if lecture.output_variables|length >0 %}
+            <div class="da-info">
+              {% for v in lecture.output_variables %}
+              <span class="label df-label">{{ v.name }}</span>
+              {% endfor %}
+              <span class="material-symbols-outlined" data-toggle="modal" data-target="#setting-actuator-modal"
+                id="settings-actuator-icon"> settings </span>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <a class="btn btn-default visually-hidden" data-toggle="modal" data-target="#delete-modal" id="delete-lesson-btn">
+        Delete
+      </a>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="setting-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" style="width:80%">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div id="setting-card">
+            <!--  Program -->
+            <div class="form-group">
+              <div class="grid">
+                <div class="input-variable">
+                  <div class="iv-container">
+                    <div class="iv-header"><label class="iv-title">Physical Feature Binding</label></div>
+                    <div class="iv-content">
+                      <label> Cyber Input variables&ensp; </label>
+                      <select class="iv-select" id="selected-iv-select" @change="selectDfIv">
+                        <option v-for="(iv, index) in ivList" :value="index"> [[ iv.giv_name + iv.index ]]
+                        </option>
+                      </select>
+                      <div v-if="settingIv.show">
+                          <div>
+                          <label> Number of parameters (dimensions)&ensp;: [[ settingIv.params.length ]] &ensp; </label>
+                        </div>
+                        <div>
+                          <label> Type of variable: [[ settingIv.type || 'vector' ]] &ensp; </label>
+                        </div>
+                        <div class="setting-cell" v-for="(p, index) in settingIv.params.length">
+                          <template v-if="settingIv.params.length>1">
+                              <div class="dim-tag" v-if="settingIv.type=='vector'"> [[ String.fromCharCode('x'.charCodeAt() + index) ]] </div>
+                              <div class="dim-tag" v-else> [[ index ]] </div>
+                          </template>
+                          <div class="dim-options">
+                              <!--choose device model-->
+                              <!--div class="option-2">
+                              <select class="device-model-select" :index="index" v-model="settingIv.params[index].model"
+                              @change="updateSensors()&initParam(index)">
+                                  <option>Smartphone</option>
+                                  <option>M2</option>
+                              </select>
+                            </div-->
+
+                              <!--choose device-->
+                              <div class="option-2">
+                              <select class="device-address-select" :index="index" style="width: 90%"
+                                      v-model="settingIv.params[index].mac_addr"
+                                      @change="settingIv.params[index].model=(availableSensorDevices.find((d)=>d.mac_addr==$event.target.value).model || ''); deviceAddresses[settingIv.params[index].model]=$event.target.value; updateSensors()&initParam(index)">
+                                  <option v-if="!available_sensors_device[settingIv.params[index].model].map((d)=>d.mac_addr).includes(settingIv.params[index].mac_addr)"
+                                  :value="settingIv.params[index].mac_addr">
+                                      [[ settingIv.params[index].mac_addr ]]
+                                  </option>
+                                  <template v-for="sensor in availableSensorDevices">
+                                      <option :value="sensor.mac_addr">[[ sensor.d_name ]]</option>
+                                  </template>
+                              </select>
+                            </div>
+
+                            <div class="option-3">
+                              <select class="sensor-select" :index="index" @change="initParam(index)">
+                              </select>
+                            </div>
+
+
+                            <template v-if="settingIv.params[index].device == 'Range Slider'">
+                              <div class="option-2">
+                                Min:&ensp;
+                                <input type="number" v-model.number="settingIv.params[index].min"
+                                  :max="settingIv.params[index].max">
+                              </div>
+                              <div class="option-2">
+                                Max:&ensp;
+                                <input type="number" v-model.number="settingIv.params[index].max"
+                                  :min="settingIv.params[index].min">
+                              </div>
+                            </template>
+                            <template v-else-if="settingIv.params[index].device == 'Smartphone'">
+                              <div class="option-2">
+                                <select class="dropdown-cell" v-model="settingIv.params[index].function">
+                                  <option v-for="(f, index) in ['x1', 'x2', 'x3']" :value="f"> x[[ index ]] </option>
+                                </select>
+                              </div>
+                            </template>
+                            <!--prepare for future multi dimension sensors-->
+                            <template v-else-if="sensorOptions[settingIv.params[index].device].dimension>1">
+                              <div class="option-2">
+                                <select class="dropdown-cell" v-model="settingIv.params[index].function">
+                                  <option v-for="(f, index) in sensorOptions[settingIv.params[index].device].dimension"
+                                          :value="'x'+(index+1)"> x[[ index ]] </option>
+                                </select>
+                              </div>
+                            </template>
+
+                            <div class="option-3">
+                                <div v-if="settingIv.params[index].device=='Range Slider'">
+                                    Default:
+                                     <input type="number" v-model.number="settingIv.params[index].default"
+                                :min="settingIv.params[index].min" :max="settingIv.params[index].max">
+                                </div>
+                                <div v-if="settingIv.params[index].device=='Input Box'">
+                                    Default:
+                                     <input v-if="settingIv.params[index].type=='string'"
+                                             type="text" v-model="settingIv.params[index].default" style="text-align: center;width: 40%">
+                                     <input v-else
+                                             type="number" v-model.number="settingIv.params[index].default" style="text-align: center;width: 40%">
+                                </div>
+                              <template v-if="settingIv.params[index].sensor_unit != 'None'">
+                                Unit: [[ settingIv.params[index].sensor_unit ]]
+                              </template>
+                            </div>
+                            <!--div class="unit-warning" v-if="settingIv.params[index].unit != 'None'
+                          && settingIv.params[index].sensor_unit != 'None'
+                          && settingIv.params[index].sensor_unit != settingIv.params[index].unit">
+                              Warning: the parameter's unit ([[ settingIv.params[index].unit ]]) is different from the
+                              sensor's unit ([[ settingIv.params[index].sensor_unit ]])
+                            </div-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span class="create-err-msg" v-if="err.type == 'df'">
+                  [[ err.msg ]]
+                </span>
+                <button class="btn btn-default" id="submit-btn" v-on:click="update">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="output_variables.length>0" class="modal fade" id="setting-actuator-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div id="setting-card">
+            <!--  Program -->
+            <div class="form-group">
+              <div class="grid">
+                <div class="actuator-variable">
+                  <div class="iv-container">
+                    <div class="iv-header"><label class="iv-title">Physical Feature Binding</label></div>
+                    <div class="iv-content">
+                      <label> Cyber Output variables&ensp; </label>
+                      <select class="actuator-select" id="selected-actuator-select" v-model="selectedActuatorVar">
+                        <option v-for="(v, index) in output_variables" :value="index"> [[ v.name ]]
+                        </option>
+                      </select>
+                      <template v-if="output_variables[selectedActuatorVar]">
+                        <div>
+                          <label> Number of parameters (dimensions)&ensp;: [[ output_variables[selectedActuatorVar].dim ]] &ensp; </label>
+                        </div>
+                        <div>
+                          <label> Type of variable: [[ output_variables[selectedActuatorVar].type ]] &ensp; </label>
+                        </div>
+                          <div style="float:left">
+                        <div v-for="(p, i) in output_variables[selectedActuatorVar].dim" class="setting-cell">
+                          <template v-if="output_variables[selectedActuatorVar].dim>1">
+                              <div class="dim-tag hidden" v-if="output_variables[selectedActuatorVar].type=='vector'"> [[ String.fromCharCode('x'.charCodeAt() + i) ]] </div>
+                              <div class="dim-tag hidden" v-else> [[ i ]] </div>
+                          </template>
+
+                            <div class="dim-options">
+                            <!--div class="option-3">
+                              <select @change="output_variables[selectedActuatorVar].odf=output_variables[selectedActuatorVar].mac_addr=''"
+                                      v-model="output_variables[selectedActuatorVar].actuator" style="width: 95%">
+                                  <template v-for="actuator in availableActuators">
+                                      <option v-if="actuator" :value="actuator"> [[ actuator ]]</option>
+                                      <option v-else :value="actuator" selected> None </option>
+                                  </template>
+                              </select>
+                            </div-->
+
+                              <div class="option-3">
+                              <select :disabled="i!=0" :hidden="i!=0" @change="output_variables[selectedActuatorVar].odf=''; output_variables[selectedActuatorVar].actuator=(availableActuatorDevices.find((d)=>d.mac_addr==$event.target.value) || {model: ''}).model"
+                                      v-model="output_variables[selectedActuatorVar].mac_addr" style="width: 90%">
+                                      <option value="" selected> None </option>
+                                      <option v-if="output_variables[selectedActuatorVar].mac_addr && !available_actuators_device[output_variables[selectedActuatorVar].actuator].find((a)=>a.mac_addr==output_variables[selectedActuatorVar].mac_addr)"
+                                              :value="output_variables[selectedActuatorVar].mac_addr">
+                                            [[ output_variables[selectedActuatorVar].mac_addr ]]
+                                      </option>
+                                      <template v-for="device in availableActuatorDevices">
+                                          <option :value="device.mac_addr"> [[ device.d_name ]] </option>
+                                      </template>
+                                  </select>
+                            </div>
+
+                              <div class="option-2">
+                             <select :disabled="i!=0" :hidden="i!=0" v-model="output_variables[selectedActuatorVar].odf" style="width: 90%">
+                                 <template v-if="availableActuatorOdfs.length>1">
+                                     <template v-for="(odf, index) in availableActuatorOdfs">
+                                        <option v-if="odf" :value="odf"> [[ odf.replace(new RegExp('-O'), '') ]]</option>
+                                        <option v-else :value="odf" disabled> Please select one </option>
+                                     </template>
+                                 </template>
+                                 <template v-else>
+                                     <template v-for="(odf, index) in availableActuatorOdfs">
+                                        <option :value="odf" selected> None </option>
+                                     </template>
+                                 </template>
+                             </select>
+                            </div>
+                          </div>
+                        </div>
+                          </div>
+                        <table v-if="output_variables[selectedActuatorVar].odf && selectedActuatorVar!=undefined && output_variables[selectedActuatorVar].actuator && output_variables[selectedActuatorVar].odf"
+                        style="width: 50%;float: left">
+                            <thead>
+                              <tr>
+                                <td>Type</td>
+                                <td>Min</td>
+                                <td>Max</td>
+                                <td>Unit</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="dim-row" v-for="(p, i) in output_variables[selectedActuatorVar].dim">
+                                <td>
+                                    [[ actuatorDm[output_variables[selectedActuatorVar].actuator].odfs[output_variables[selectedActuatorVar].odf].type[i] || 'float' ]]</td>
+                                <td>
+                                    [[ actuatorDm[output_variables[selectedActuatorVar].actuator].odfs[output_variables[selectedActuatorVar].odf].min[i] || 0 ]]
+                                </td>
+                                <td>
+                                    [[ actuatorDm[output_variables[selectedActuatorVar].actuator].odfs[output_variables[selectedActuatorVar].odf].max[i] || 0 ]]
+                                </td>
+                                <td>
+                                    [[ actuatorDm[output_variables[selectedActuatorVar].actuator].odfs[output_variables[selectedActuatorVar].odf].unit[i] || 'None' ]]
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        <div style="clear:both;"></div>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+                <span class="create-err-msg" v-if="err.type == 'actuator'">
+                  [[ err.msg ]]
+                </span>
+                <button class="btn btn-default" id="submit-actuator-vars-btn" v-on:click="updateActuatorVars">
+                    Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="delete-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Are you sure?</h3>
+        </div>
+        <div class="modal-body ">
+          <p>Do you really want to delete this lecture? </p>
+          <span>This process cannot be undone!</span>
+        </div>
+        <div class="modal-footer">
+          <div class="btn btn-default" data-dismiss="modal">Cancel</div>
+          <div class="btn btn-danger" @click="confirmDelete">Delete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 新增课程模态对话框 -->
+<div class="modal fade" id="addLectureModal" tabindex="-1" role="dialog" aria-labelledby="addLectureModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addLectureModalLabel">Please enter the lecture name:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="newLectureName" v-model="newLectureName">
+        <small class="text-danger" v-if="lectureNameError">{{ lectureNameError }}</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="createNewLecture">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='card.js') }}"></script>

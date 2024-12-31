@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Random Number Generator</title>
+    <style type="text/css">
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: monospace, arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            background: #eee;
+        }
+        main {
+            position: relative;
+            display: block;
+            width: 80%;
+            max-width: 500px;
+            margin: 4em auto;
+        }
+        #sim-pattern {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div id="container"></div>
+        <button id="Add" type="button" class="btn btn-success btn-lg btn-block">
+            Add random number generator
+        </button>
+    </main>
+
+    <div id="sim-pattern">
+        <section class="panel panel-default">
+            <div class="panel-heading">
+                <h3 role="mac" class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Period</label>
+                    <div class="col-sm-10">
+                        <input role="period" type="number" class="form-control" value="250">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Log</label>
+                    <div class="col-sm-10">
+                        <input role="knob" type="text" value="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button role="remove" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="include/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="include/bootstrap.min.css">
+    <script src="include/jquery.knob.min.js"></script>
+    <script type="text/javascript">
+        // Patch
+        (function() {
+            window.requestAnimationFrame = window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function(callback, element) {
+                    window.setTimeout(callback, 1000/60);
+                };
+        })();
+    </script>
+    <script type="text/javascript">
+        // Shared variables
+        var attachedSim = {};
+
+        // Functions
+        function registerSim(mac) {
+            var profile = {
+                'd_name': mac,
+                'dm_name': 'RandNum',
+                'is_sim': false,
+                'df_list': ['Float'],
+            };
+            $.ajax({
+                'url': '/'+mac,
+                'contentType': "application/json; charset=utf-8",
+                'method': 'POST',
+                'data': JSON.stringify({'profile': profile}),
+            }).fail(function(msg) {
+                console.error('Fail to register due to: ', msg);
+            }).done(function(ret) {
+                console.log('Successfully registered', mac);
+                attachedSim[mac] = 0.0;
+                var sim = $('#sim-pattern').children().clone().hide().appendTo('#container');
+                sim.attr('role', mac);
+                sim.find('[role=mac]').text(mac);
+                sim.find('[role=period]').change(function() {
+                    if( $(this).val() < 100 )
+                        $(this).val(100);
+                });
+                sim.find('[role=knob]').knob({
+                    'min': 0,
+                    'max': 1,
+                    'step': 0.01,
+                    'angleOffset': -125,
+                    'angleArc': 250,
+                    'readOnly': true,
+                    'displayPrevious': true,
+                });
+                sim.find('[role=remove]').attr('data-mac', mac).click(function() {
+                    detachOneSim($(this).attr('data-mac'));
+                });
+                sim.slideDown(300);
+                $('#Add').removeAttr('disabled');
+            });
+        }
+
+        function detachOneSim(mac) {
+            $('[role='+mac+']').slideUp(300);
+            $.ajax({
+                'url': '/'+mac,
+                'method': 'DELETE',
+            }).fail(function(msg) {
+                console.error('Fail to detach one due to: ', msg);
+            }).done(function(ret) {
+                console.log('Successfully detach', mac);
+                delete attachedSim[mac];
+                setTimeout(function() {
+                    $('[role='+mac+']').remove();
+                }, 300);
+            });
+        }
+
+        function detachAllSim() {
+            var macs = Object.keys(attachedSim);
+            for(var i=0; i<macs.length; ++i)
+                $.ajax({
+                    'url': '/'+macs[i],
+                    'method': 'DELETE',
+                });
+        }
+
+        function addSim() {
+            lock = true;
+            $('#Add').attr('disabled', 'disabled');
+            $.ajax({
+                'url': '/tree',
+                'method': 'GET',
+                'cache': false,
+            }).fail(function(msg) {
+                console.error('Fail to get /tree due to: ', msg);
+            }).done(function(ret) {
+                var idx = 0;
+                while( ++idx<10000 && ret['RNG'+idx] )
+                    ;
+                registerSim('RNG'+idx);
+            });
+        }
+
+        function updateSim(mac) {
+            var val = Math.random();
+            $('[role='+mac+'] [role=knob]').val(val).trigger('change');
+            $.ajax({
+                'url': '/'+mac+'/Float',
+                'method': "PUT",
+                'contentType': "application/json; charset=utf-8",
+                'data': JSON.stringify({'data': [val]}),
+            }).fail(function(msg) {
+                console.log('Fail to update due to:', msg);
+            });
+        }
+
+
+        // Simulate
+        function simulator() {
+            var macs = Object.keys(attachedSim);
+            for(var i=0; i<macs.length; ++i) {
+                var period = parseFloat($('[role='+macs[i]+'] [role=period]').val());
+                if( period < 100 )
+                    period = 100;
+                if( Date.now()-attachedSim[macs[i]] > period ) {
+                    updateSim(macs[i]);
+                    attachedSim[macs[i]] = Date.now();
+                }
+            }
+            requestAnimationFrame(simulator);
+        }
+        requestAnimationFrame(simulator);
+
+
+        // Binding
+        $('#Add').click(addSim);
+        window.onunload = detachAllSim;
+        window.onbeforeunload = detachAllSim;
+        window.onclose = detachAllSim;
+        window.onpagehide = detachAllSim;
+
+        // First time call
+        addSim();
+    </script>
+</body>
+</html>

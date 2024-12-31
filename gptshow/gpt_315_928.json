@@ -1,0 +1,12 @@
+{
+  "session_id": 928,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the moving ball. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a ball being thrown horizontally in the air, striking the floor, and then bouncing. Draw the ball and the floor. Assume that the ball undergoes an elastic collision with the ground, and consider only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces up when it hits the ground. Allow the ball to move for 10 seconds before stopping the motion.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, the speed of the moving ball should be immediately updated to the new value of Speed_I.\n\n(3) Define and initialize a Cyber Input Variable named Height_I with an initial value set to 15. This variable represents the height of the ball above the ground.\n\n(4) During the animation, whenever the value of the Height_I variable changes, the height of the moving ball above the ground should be immediately updated to the new value of Height_I.\n(5) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nball = sphere(radius=1, color=color.red)\nfloor = box(pos=vector(0, -10, 0), size=vector(20, 0.5, 10), color=color.green)\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 1\nHeight_I = 15\n\nball.pos = vector(0, Height_I, 0)\nball.velocity = vector(Speed_I, 0, 0)\n\nt = 0\ndt = 0.01\n\nwhile t < 10:\n    rate(100)\n    if ball.pos.y <= floor.pos.y + ball.radius and ball.velocity.y < 0:\n        ball.velocity.y *= -1\n    else:\n        ball.velocity.y += -9.8 * dt\n    ball.pos += ball.velocity * dt\n    t += dt\n    ball.velocity.x = Speed_I\n    ball.pos.y = max(ball.pos.y, Height_I)",
+      "mode": "initial",
+      "timestamp": "2024-08-18 20:28:45",
+      "serial_number": 1
+    }
+  ]
+}

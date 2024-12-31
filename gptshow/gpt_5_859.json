@@ -1,0 +1,12 @@
+{
+  "session_id": 859,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 1000 and the height to 800. Draw the trajectory of a small ball. The center point of the canvas must be correctly set, so the order of writing the Parameter Settings should be after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of horizontal projectile motion: Throw a horizontal ball that bounces off the floor upon impact.\nDraw both the ball and the floor. Assume that the ball has an elastic collision with the ground, and only consider the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the ball's motion after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=1000, height=800)\nscene.center = vector(0, 0, 0)\nscene.autoscale = False\n\n# Parameter Settings\ng = 9.8  # Acceleration due to gravity\nt = 0  # Initial time\ndt = 0.01  # Time step\nbounce_coef = -1  # Coefficient of restitution\nspeed_I = 5  # Initial speed\n\n# Object Initialization\nball = sphere(pos=vector(0, 0, 0), radius=0.1, color=color.red)\nball.velocity = vector(speed_I, 0, 0)\nfloor = box(pos=vector(0, -0.1, 0), size=vector(10, 0.01, 10), color=color.green)\n\n# Animation\nwhile t < 6:\n    rate(100)  # Limit frame rate\n    ball.pos = ball.pos + ball.velocity * dt\n    if ball.pos.y < floor.pos.y + ball.radius:\n        ball.velocity.y = bounce_coef * abs(ball.velocity.y)\n    else:\n        ball.velocity.y -= g * dt\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 17:42:09",
+      "serial_number": 1
+    }
+  ]
+}

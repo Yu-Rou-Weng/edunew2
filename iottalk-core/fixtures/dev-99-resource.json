@@ -1,0 +1,12 @@
+{
+    "Resource": {
+        "a54b5bf9-c39b-4248-b611-80d1ed4a36df": {
+            "name": "AlphaCat",
+            "idf_list": [["meow", ["dB"]]],
+            "revision": "cc35867e-1f74-47d3-88c9-7dcc374a5919",
+            "profile": {
+                "model": "AI"
+            }
+        }
+    }
+}

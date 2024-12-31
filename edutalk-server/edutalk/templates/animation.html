@@ -1,0 +1,128 @@
+<script lang="text/javascript" src="//cdn.jsdelivr.net/npm/xlsx@0.17.5/dist/xlsx.full.min.js"></script>
+<script type="text/javascript" src="//unpkg.com/gridjs-jquery/dist/gridjs.development.js"></script>
+<link rel="stylesheet" href="//unpkg.com/gridjs/dist/theme/mermaid.min.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/animation.css') }}">
+<div id='animation-content'>
+  <div class="animation-header row">
+    <span class="content-title col-md-3"> [[ daName ]] </span>
+    <div class="animation-data-source col-md-3">
+      Data Source:&ensp;&ensp;
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle source-dropdown" type="button" id="data-source-dropdown"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          [[ dataSource ]]
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="data-source-dropdown">
+          <li><a href="#" @click="chooseDataSource">Live Data</a></li>
+          <li><a href="#" @click="chooseDataSource">Historical Data</a></li>
+        </ul>
+      </div>
+    </div>
+    <div v-if="dataSource == 'Historical Data'" class="control-panel col-md-6" :style="controlPanelStyle">
+      <div class="control-cell">
+        <span v-if="pause" class="material-symbols-outlined" @click="callPlay"> play_circle </span>
+        <span v-if="!pause" class="material-symbols-outlined" @click="callPause"> pause_circle </span>
+        <span class="material-symbols-outlined" @click="callStop"> stop_circle </span>
+      </div>
+      <div class="percentage-bar" @mousemove="getMouseTime" @click="updatePercentByUser">
+        <div class="mouse-display">
+          [[ mouseTime ]]
+        </div>
+        <div class="progress-wrap progress">
+          <div class="progress-bar progress" :style="progressBarStyle"></div>
+        </div>
+      </div>
+      <div style="margin-left: 10px;">
+        [[ elapsedTime ]]
+      </div>
+      <div style="margin-left: 15px;">
+        Speed:&ensp;
+        <input type="number" v-model.number="inputSpeed" :min="0" :disabled="!isPlayable()" style="width: 60px;">
+      </div>
+    </div>
+    <div class="modal fade" id="choose-date-panel" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div id="data-card">
+              <div class="setting-cell">
+                <label style="width: 20%;"> &ensp;Use data from </label>
+                <div class="dropdown" style="width: 44%;">
+                  <button class="btn btn-default dropdown-toggle source-dropdown" type="button"
+                    id="historical-data-source-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
+                    <span class="source-name"> [[ workbook.name ]] </span>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="historical-data-source-dropdown">
+                    <li>
+                      <input type="file" id="upload" accept=".xlsx,.xls" style="display: none;"
+                        @change="onFileChange" />
+                      <a href="#" @click="chooseHistoricalDataSource">Add New Data</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" @click="chooseHistoricalDataSource">Database</a></li>
+                    <template v-for="(wb) in workbook.list">
+                      <li><a href="#" @click="chooseHistoricalDataSource">[[ wb ]]</a></li>
+                    </template>
+                  </ul>
+                </div>
+                </select>
+              </div>
+              <div class="setting-cell">
+                <label style="width: 20%;"> &ensp;Start Time </label>
+                <input type="datetime-local" v-model="getStartTime" @change="onTimeChange" />
+              </div>
+              <div class="setting-cell">
+                <label style="width: 20%;"> &ensp;End Time </label>
+                <input type="datetime-local" v-model="getEndTime" @change="onTimeChange" />
+              </div>
+              <div class="setting-cell">
+                <label style="width: 20%;"> &ensp;Worksheet </label>
+                <div class="dropdown" style="width: 44%;">
+                  <button class="btn btn-default dropdown-toggle source-dropdown" type="button" id="worksheet-dropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="source-name"> [[ worksheet ]] </span>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="worksheet-dropdown">
+                    <template v-for="(data, ws) in workbook.data">
+                      <li><a href="#" @click="changeWorksheet">[[ ws ]]</a></li>
+                    </template>
+                  </ul>
+                </div>
+                </select>
+                <div class="btn-cell">
+                  <div id="loading-spinner"></div>
+                  <button type="button" class="btn" id="download-btn" @click="downloadWorkbook"
+                    :disabled=" Object.keys(previewData).every((a) => previewData[a].length === 1) ? true : false">
+                    Download
+                  </button>
+                  <button type="button" class="btn" id="use-data-btn" @click="confirmData"
+                    :disabled=" Object.keys(previewData).every((a) => previewData[a].length === 1) ? true : false">
+                    OK
+                  </button>
+                </div>
+              </div>
+              <div id="worksheet-table"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <template v-if="videoURL">
+          <iframe id="device-iframe" src="" frameborder="0" style="width: 60%"></iframe>
+          <iframe v-if="urls.videoIndex" id="video-iframe" src="" frameborder="0" allowfullscreen scrolling="no"></iframe>
+      </template>
+      <template v-else>
+          <iframe id="device-iframe" src="" frameborder="0"></iframe>
+      </template>
+  </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='animation.js') }}"></script>

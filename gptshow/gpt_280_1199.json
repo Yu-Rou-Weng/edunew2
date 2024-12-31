@@ -1,0 +1,12 @@
+{
+  "session_id": 1199,
+  "log": [
+    {
+      "input": "# Projectile Motion\u00a0A small ball is launched from the ground with an initial velocity \\( v_0 \\) at an angle \\( \\theta \\) relative to the horizontal. The ball accelerates downward under the influence of gravity. The goal is to calculate the ball's **flight time** and **horizontal range**.Considering only the effect of gravity, the ball stops moving when it hits the floor.Draw the ball and floor.Let the ball move for 6 seconds and then stop.",
+      "output": "from vpython import *\n\nscene = canvas(title='Projectile Motion', width=800, height=600)\nfloor = box(pos=vector(0, -2, 0), size=vector(10, 0.1, 5), color=color.green)\nball = sphere(pos=vector(0, 0, 0), radius=0.1, color=color.red)\n\nv0 = 10\ntheta = radians(30)\ng = 9.81\nt = 0\ndt = 0.01\n\nball.velocity = vector(v0*cos(theta), v0*sin(theta), 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos.x += ball.velocity.x * dt\n    ball.pos.y += ball.velocity.y * dt - 0.5 * g * t**2\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 12:07:13",
+      "serial_number": 1
+    }
+  ]
+}

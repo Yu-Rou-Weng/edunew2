@@ -1,0 +1,12 @@
+{
+  "session_id": 1198,
+  "log": [
+    {
+      "input": "### Gravity-Induced Simple Harmonic Motion (Circular Ring, Initial Velocity = 0, Starting from Endpoint)---Please use variable names that differ from VPython class names. For example:- Use `my_ring` instead of `ring`.- Use `my_sphere` instead of `sphere`.\u00a0This motion explores **simple harmonic motion caused by gravity** within a system where a small mass **m** starts from rest at one endpoint of a line perpendicular to the center of a massive circular ring of uniform mass distribution **M** and radius **r**.\u00a0The small mass is influenced by the gravitational forces exerted by all the points on the ring. When the displacement of the small mass from the center is relatively small, these forces create a restoring effect proportional to the displacement, resulting in oscillatory motion.",
+      "output": "from vpython import *\n\n# Constants\nG = 6.67e-11\nM = 1e13\nm = 1\nR = 10\nr = 9\ntheta = pi\n\n# Initial conditions\nv = vector(0, 0, 0)\na = vector(0, 0, 0)\nposition = vector(r * cos(theta), r * sin(theta), 0)\n\n# Objects\nmy_ring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=R, thickness=0.1)\nmy_sphere = sphere(pos=position, radius=0.5, color=color.red)\n\n# Calculation Loop\ndt = 0.01\nwhile True:\n    rate(100)\n    r_vec = my_ring.pos - my_sphere.pos\n    r_mag = mag(r_vec)\n    r_hat = r_vec / r_mag\n    F_gravity = G * M * m / r_mag**2 * r_hat\n    a = F_gravity / m\n    v = v + a * dt\n    position = position + v * dt\n    my_sphere.pos = position",
+      "mode": "initial",
+      "timestamp": "2024-12-30 11:53:26",
+      "serial_number": 1
+    }
+  ]
+}

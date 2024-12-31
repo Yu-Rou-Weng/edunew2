@@ -1,0 +1,12 @@
+{
+  "session_id": 1281,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\"># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span></br></br>3. Cyber Input Variable Mapping Information:\n    (1) initial_height is mapped to the variable named Height_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Height_I changes, let the animation rerun to the starting point and start with the updated initial_height.",
+      "output": "Sure, here is the code to create the VPython animation for the Horizontal Projectile Motion experiment based on the provided physics scenario:\n\n```python\nfrom vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Cyber Input Variable Mapping\nHeight_I = 5  # initial height\n\n# Constants\ng = 9.81  # acceleration due to gravity\n\ndef reset_scene():\n    global ball, ground\n    ball.visible = False\n    ball = sphere(pos=vector(0, Height_I, 0), radius=0.5, color=color.blue, make_trail=True)\n    ground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 1), color=color.green)\n\ndef update_scene():\n    reset_scene()\n    t = 0\n    v0 = sqrt(2 * g * Height_I)\n    while ball.pos.y >= 0:\n        rate(100)\n        t += 0.01\n        ball.pos.x = v0 * t\n        ball.pos.y = Height_I - 0.5 * g * t**2\n\n    v0 *= -0.8  # 80% restitution\n    while ball.pos.x < 20:\n        rate(100)\n        ball.pos.x += v0 * 0.01\n\nreset_scene()\nupdate_scene()\n```\n\nPlease copy and paste this code into a VPython environment (e.g., GlowScript or Jupyter Notebook with vpython library) to see the animation of the Horizontal Projectile Motion experiment.",
+      "mode": "initial",
+      "timestamp": "2024-09-24 10:24:09",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "session_id": 1009,
+  "1009_1_08_25_17_32_46": {
+    "input": "1. Screen Settings:\n\n\u5c06\u753b\u5e03\u5bbd\u5ea6\u8bbe\u7f6e\u4e3a700\uff0c\u9ad8\u5ea6\u8bbe\u7f6e\u4e3a400\u3002\u4e0d\u8981\u66f4\u6539\u753b\u5e03\u5927\u5c0f\u3002\n\n2. Object Motion & Parameter Settings:\n\n\u521b\u5efa\u4e00\u4e2aVpython\u52a8\u753b\u6765\u8bf4\u660e\u4ee5\u4e0b\u7269\u7406\u5b9e\u9a8c\uff1a\n\u6446\u52a8\u8fd0\u52a8\u662f\u6307\u4e00\u4e2a\u60ac\u6302\u5728\u56fa\u5b9a\u67a2\u8f74\u70b9\u4e0b\u65b9\u5e76\u5728\u91cd\u529b\u5f71\u54cd\u4e0b\u6765\u56de\u6446\u52a8\u7684\u7269\u4f53\u7684\u8fd0\u52a8\u3002\n\n3. Cyber Input Variable Mapping Information:\n\n(1) \u6446\u957f\u6620\u5c04\u5230\u540d\u4e3aLength_I\u7684\u53d8\u91cf\uff0c\u521d\u59cb\u503c\u8bbe\u5b9a\u4e3a5\u3002\n\n(2) \u5f53Length_I\u7684\u503c\u53d1\u751f\u53d8\u5316\u65f6\uff0c\u8ba9\u52a8\u753b\u91cd\u65b0\u5f00\u59cb\u5e76\u4ee5\u66f4\u65b0\u540e\u7684\u6446\u957f\u5f00\u59cb\u3002\n(3) Do not import packages that are not supported by VPython such as numpy, math and time",
+    "output": "from vpython import *\nscene = canvas(width=700, height=400, center=vector(0,0,0), background=color.white)",
+    "mode": "initial"
+  }
+}

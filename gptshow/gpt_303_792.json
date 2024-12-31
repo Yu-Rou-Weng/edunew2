@@ -1,0 +1,12 @@
+{
+  "session_id": 792,
+  "log": [
+    {
+      "input": "Please write a VPython program for \"Speed Selector with Baffles at the Exit\":\n\nThere are two parallel blue charged plates located respectively at (0,5,0) and (0,-5,0), each 10 centimeters long. At the end of these charged plates, there are two gray baffles located from (10,5,0) to (10,3,0) and from (10,2.5,0) to (10,0,0). A green arrow representing the electric field points from (0,5,0) to (0,-5,0). An orange arrow representing the magnetic field points from (0,0,0) to (0,0,-5). A red particle with a radius of 0.005 starts from (0,0,0) and travels in a straight line through the gap between the two baffles.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Define and initialize a variable named Radius_I\nRadius_I = 1\n\n# Create objects\ncharged_plate_1 = box(pos=vector(0, 5, 0), size=vector(10, 0.1, 4), color=color.blue)\ncharged_plate_2 = box(pos=vector(0, -5, 0), size=vector(10, 0.1, 4), color=color.blue)\n\nbaffle_1 = box(pos=vector(10, 4, 0), size=vector(0.1, 2, 4), color=color.gray(0.7))\nbaffle_2 = box(pos=vector(10, 1.25, 0), size=vector(0.1, 2.5, 4), color=color.gray(0.7))\n\nelectric_field = arrow(pos=vector(0, 5, 0), axis=vector(0, -10, 0), color=color.green)\nmagnetic_field = arrow(pos=vector(0, 0, 0), axis=vector(0, 0, -5), color=color.orange)\n\nparticle = sphere(pos=vector(0, 0, 0), radius=Radius_I, color=color.red)\n\n# Set the velocity of the particle\nparticle.velocity = vector(0.1, 0, 0)\n\n# Animation loop\nwhile True:\n    rate(100)\n    particle.pos = particle.pos + particle.velocity\n    if particle.pos.x >= 10:\n        if particle.pos.y > baffle_1.pos.y or particle.pos.y < baffle_2.pos.y:\n            particle.velocity = vector(0, 0, 0)\n    particle.radius = Radius_I",
+      "mode": "initial",
+      "timestamp": "2024-07-26 00:44:32",
+      "serial_number": 1
+    }
+  ]
+}

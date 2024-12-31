@@ -1,0 +1,12 @@
+{
+  "session_id": 773,
+  "log": [
+    {
+      "input": "Please write the Vpython code for \"Simple Harmonic Motion Caused by Electrostatic Forces (placed to the right of the midpoint of the center line)\"\n\nAt (-10, 0, 0) and (10, 0, 0), there are two blue spheres each with a radius of 1. A small sphere with a radius of 0.3 starts at position (3, 0, 0) and undergoes simple harmonic motion caused by the electrostatic forces from the two large spheres. There is a yellow line connecting the centers of the two blue spheres. At (-3, 0, 0), (0, 0, 0), and (-3, 0, 0), there are three white columns respectively. These three white columns need to be centered around the yellow connecting line, placed 5 cm above and below it.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import sphere, vector, color, cylinder\n\n# Radius of the ball\nRadius_I = 1\n\n# Create two large blue spheres\nsphere1 = sphere(pos=vector(-10,0,0), radius=Radius_I, color=color.blue)\nsphere2 = sphere(pos=vector(10,0,0), radius=Radius_I, color=color.blue)\n\n# Create small sphere that undergoes harmonic motion\nsmall_sphere = sphere(pos=vector(3,0,0), radius=0.3, color=color.red)\n\n# Create the yellow line connecting the centers of the two large blue spheres\nyellow_line = cylinder(pos=sphere1.pos, axis=sphere2.pos-sphere1.pos, radius=0.1, color=color.yellow)\n\n# Create three white columns\ncolumn1 = cylinder(pos=vector(-3,5,0), axis=vector(0,-10,0), radius=0.5, color=color.white)\ncolumn2 = cylinder(pos=vector(0,5,0), axis=vector(0,-10,0), radius=0.5, color=color.white)\ncolumn3 = cylinder(pos=vector(3,5,0), axis=vector(0,-10,0), radius=0.5, color=color.white)",
+      "mode": "initial",
+      "timestamp": "2024-07-25 20:43:57",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/iottalk/ccm/static/images/favicon.ico">
+    <link rel="shortcut icon" href="/iottalk/ccm/static/images/favicon.ico">
+    <title>IoTtalk</title>
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    -->
+
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/codemirror5.33.0.min.css">
+
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/style.css">
+
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
+
+    <script src="/iottalk/ccm/static/js/mqttws31_1.0.1.min.js"></script>
+    <script src="/iottalk/ccm/static/js/jquery1.12.4.min.js"></script>
+    <script src="/iottalk/ccm/static/js/bootstrap3.3.7.min.js"></script>
+    <script src="/iottalk/ccm/static/js/codemirror5.33.0.min.js"></script>
+    <script src="/iottalk/ccm/static/js/codemirror-python.min.js"></script>
+
+    <script src="/iottalk/ccm/static/gui.js"></script>
+    <script src="/iottalk/ccm/static/gui_make.js"></script>
+    <script src="/iottalk/ccm/static/mqtt.js"></script>
+
+    <script>
+    var p_id = -1;
+    var _id = "{{_id}}";
+    var username = "{{username}}";
+    var u_id = {{u_id}};
+    var simtalk = "{{simtalk}}";
+    var sa_gen = "{{sa_gen}}";
+    $(function(){ mqtt_init(); });
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default lcyan">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse navbar-nav-lcyan" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li id="project-list-container" class="menu dropdown">
+              <a id="project-list-header" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
+              <ul id="project-list" class="dropdown-menu">
+                <li class="project-select" p_id="0"><a>add project</a></li>
+                {% for project in projects %}
+                <li class="project-select" p_id="{{project.p_id}}" p_name="{{project.p_name}}"><a>{{project.p_name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+
+            <li class="dm-list-container menu dropdown hidden">
+              <a id="dm-list-header" aria-haspopup="true" aria-expanded="false">Model <span class="caret"></span></a>
+              <ul id="dm-list" class="dropdown-menu">
+                {% for dm in dm_list %}
+                <li class="dm-select" dm_id="{{dm.dm_id}}"><a>{{dm.dm_name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+
+            {% for dm_menu in subsystem_dms if dm_menu.endpoints.gui %}
+              <li class="dm-list-container menu dropdown hidden"
+                  data-dmtype="{{ dm_menu.header }}"
+                  data-gui-endpoint="{{ dm_menu.endpoints.gui }}"
+                  data-da-endpoint="{{ dm_menu.endpoints.da }}">
+                <a aria-haspopup="true" aria-expanded="false">
+                  {{ dm_menu.header }} <span class="caret"></span>
+                </a>
+                <ul id="dm-list-{{ dm_menu.sysname }}" class="dropdown-menu">
+                  <li class="dm-select dm-add-new"><a>add new</a></li>
+                </ul>
+              </li>
+            {% endfor %}
+
+            <li id="change-project-status" value="1" class="hidden">
+              <a>Flush<span class="light"></span></a>
+            </li>
+            <li id="delete-project" class="hidden"><a>Delete</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li id="change-simulator-status" class="hidden"><a>Simulation<label class="switch" id="simulator-status-switch"><input type="checkbox" checked disabled><span class="slider round"></span></label></a></li>
+            <li id="import-file">
+              <a id="/iottalk/ccm/import_project" href="#" data-toggle="modal" data-target="#importfile">
+                Import
+              </a>
+            </li>
+            <li id="export-file" class="hidden"><a id="export_project" href="#" onclick="$('#export_project').attr('href', '/iottalk/ccm/export_project?p_id='+p_id); return true;" target="_blank">Export</a></li>
+            <li><a href="/iottalk/ccm/logout">Logout</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+
+        <div class="modal fade" id="importfile">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form action="/iottalk/ccm/import_project" method="POST" enctype="multipart/form-data">
+                <div class="modal-header">
+                  <h4 class="modal-title">Import Project</h4>
+                </div> <!-- .modal-header -->
+
+                <div class="modal-body">
+                  <div class="form-group">
+                    <input type="text" name="p_name" class="form-control"
+                           placeholder="New project name"/>
+                  </div>
+                  <div class="form-group">
+                    <input type="file" name="importfilename" class="form-control-file" />
+                  </div>
+                </div> <!-- .modal-body -->
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default"
+                          data-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button type="button" class="btn btn-primary"
+                          onclick="this.form.submit()">
+                    Submit
+                  </button>
+                </div> <!-- .modal-footer -->
+              </form>
+            </div>
+          </div> <!-- .modal-dialog -->
+        </div> <!-- #importfile.modal -->
+
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="content">
+      <div id="left-window" class="col-sm-6">
+        <h1>Please select or add a project.</h1>
+        <canvas id="background"></canvas>
+        <div id="in-device-column"></div>
+        <div id="join-column">
+          {% for i in range(15) %}
+          <div class="join-container hidden-flag">
+              <div na_idx="{{i}}" class="join-title">Join {{i + 1}}</div>
+              <img na_idx="{{i}}" class="join-image" src="/iottalk/ccm/static/images/circle.png"/>
+          </div>
+          {% endfor %}
+        </div>
+        <div id="out-device-column"></div>
+      </div>
+
+      <div id="right-window" class="col-sm-6"></div>
+    </div>
+
+  <div class="alert alert-danger hidden" role="alert" id="alert-bar">
+    <strong>Error!</strong>   Lost MQTT connect, try reconnect...
+  </div>
+  </body>
+</html>

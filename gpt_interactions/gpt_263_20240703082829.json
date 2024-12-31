@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-07-03T08:28:30.249Z",
+  "mode": "modification",
+  "input": "Please update the following program based on this instruction: Make the pendulum swings more times and don't stop it\n\nCurrent program:\nfrom vpython import *\n\n# Initial conditions\nLength_I = 10\ntheta = 0.1\ng = 9.8\n\n# Create pendulum\nball = sphere(pos=vector(Length_I*sin(theta), -Length_I*cos(theta), 0), radius=0.5, color=color.yellow)\nrod = cylinder(pos=vector(0,0,0), axis=ball.pos, radius=0.1)\n\n# Time step\ndt = 0.01\nt = 0\n\nwhile True:\n    rate(100)\n    theta = theta*cos(sqrt(g/Length_I)*t)\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos\n    t += dt",
+  "output": "from vpython import *\n\n# Initial conditions\nLength_I = 10\ntheta = 0.1\ng = 9.8\nomega = 0\n\n# Create pendulum\nball = sphere(pos=vector(Length_I*sin(theta), -Length_I*cos(theta), 0), radius=0.5, color=color.yellow)\nrod = cylinder(pos=vector(0,0,0), axis=ball.pos, radius=0.1)\n\n# Time step\ndt = 0.01\n\nwhile True:\n    rate(100)\n    theta += omega*dt\n    omega -= (g/Length_I)*sin(theta)*dt\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos"
+}

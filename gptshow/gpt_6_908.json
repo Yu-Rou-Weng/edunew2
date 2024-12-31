@@ -1,0 +1,12 @@
+{
+  "session_id": 908,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the ball's motion. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease draw a VPython animation of horizontal projectile motion: A ball is thrown horizontally from mid-air and bounces off the ground.\nDraw both the ball and the ground. Assume that the ball undergoes an elastic collision with the ground and only consider the effect of gravity, meaning the ball accelerates downward due to gravity and bounces back up upon hitting the ground. Let the ball's motion stop after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun from the starting point with the updated ball speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nground = box(length=10, height=0.2, width=1, color=color.green)\n\nball = sphere(pos=vec(0,0,0), radius=0.1, color=color.red)\nball.velocity = vector(1, 0, 0) # initial velocity\nball.trail = curve(color=ball.color) # for drawing trajectory\n\n# Define and initialize a Cyber Input Variable\nSpeed_I = 1\n\ng = vector(0, -9.8, 0) # gravity\nt = 0\ndt = 0.01 # time step\nbounce = 1 # bouncing factor\n\nwhile t < 6:\n    rate(100) # 100 frames per second\n    if ball.pos.y < ground.height/2 and ball.velocity.y < 0: # collision with ground\n        ball.velocity.y *= -bounce\n    else:\n        ball.velocity = ball.velocity + g*dt \n    ball.pos = ball.pos + Speed_I*ball.velocity*dt # update position\n    ball.trail.append(pos=ball.pos) # draw trajectory\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 21:47:06",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "session_id": 1010,
+  "1010_1_08_25_17_46_16": {
+    "input": "1. Pantalla Configuraci\u00f3n:\n\nEstablezca el ancho del lienzo en 700 y la altura en 400. No cambie el tama\u00f1o del lienzo.\n\n2. Movimiento de Objetos y Configuraci\u00f3n de Par\u00e1metros:\n\nCree una animaci\u00f3n de Vpython para ilustrar el siguiente experimento de f\u00edsica:\nEl movimiento de p\u00e9ndulo se refiere al movimiento de un objeto que est\u00e1 suspendido de un punto fijo de pivote y oscila de un lado a otro bajo la influencia de la gravedad.\n\n3. Informaci\u00f3n de Mapeo de Variables de Entrada Cibern\u00e9tica:\n\n(1) La longitud del p\u00e9ndulo se mapea a la variable llamada Longitud_I con un valor inicial establecido en 5.\n\n(2) Cuando el valor de Longitud_I cambie, permita que la animaci\u00f3n se reinicie al punto de inicio y comience con la longitud actualizada del p\u00e9ndulo.\n(3) Do not import packages that are not supported by VPython such as numpy, math and time",
+    "output": "canvas(width=700, height=400)",
+    "mode": "initial"
+  },
+  "1010_2_08_25_17_47_23": {
+    "input": "Please update the following program based on this instruction: Change the pendulum color to red.\n\nCurrent program:\ncanvas(width=700, height=400)",
+    "output": "canvas(width=700, height=400)\npendulum = sphere(pos=vector(0,0,0), radius=0.05, color=color.red)",
+    "mode": "modification"
+  },
+  "1010_3_08_25_17_53_05": {
+    "input": "Please update the following program based on this instruction: Change the pendulum color to red.\n\nCurrent program:\ncanvas(width=700, height=400)",
+    "output": "from vpython import *\n\nscene = canvas(width=700, height=400)\npivot = vector(0,0,0)\nrod = cylinder(pos=pivot, axis=vector(1,0,0), radius=0.01)\nbob = sphere(pos=vector(1,0,0), radius=0.1, color=color.red)",
+    "mode": "modification"
+  },
+  "1010_4_08_25_17_53_28": {
+    "input": "Please update the following program based on this instruction: Change the pendulum color to red.\n\nCurrent program:\ncanvas(width=700, height=400)",
+    "output": "pendulum.color = vector(1,0,0)",
+    "mode": "modification"
+  },
+  "1010_5_08_25_17_53_30": {
+    "input": "Please update the program by fixing the following error:\npendulum is not defined\n\nHere's the current program:\npendulum.color = vector(1,0,0)",
+    "output": "pendulum = sphere()\npendulum.color = vector(1,0,0)",
+    "mode": "fix_error"
+  },
+  "1010_6_08_25_17_53_32": {
+    "input": "Please update the program by fixing the following error:\npendulum is not defined\n\nHere's the current program:\nfrom vpython import *\n\nscene = canvas(width=700, height=400)\npivot = vector(0,0,0)\nrod = cylinder(pos=pivot, axis=vector(1,0,0), radius=0.01)\nbob = sphere(pos=vector(1,0,0), radius=0.1, color=color.red)",
+    "output": "from vpython import *\n\nscene = canvas(width=700, height=400)\npivot = vector(0,0,0)\nrod = cylinder(pos=pivot, axis=vector(1,0,0), radius=0.01)\nbob = sphere(pos=vector(1,0,0), radius=0.1, color=color.red)\n\nbob.color = vector(1,0,0)",
+    "mode": "fix_error"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 852,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the small ball. Do not adjust the size of the scene. The center point of the canvas must be correctly set, therefore the order of writing the Parameter Settings in the program should be after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease draw a VPython animation of horizontal projectile motion: a small ball is thrown horizontally, hits the floor, and bounces. Draw both the small ball and the floor. Assume that the ball and the ground undergo elastic collision, only considering the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Let the ball stop moving after 5 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the `Speed_I` variable changes, the speed of the ball should immediately update to the new value of `Speed_I`.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0, 0, 0))\n\n# Parameter Settings\ng = vector(0, -9.8, 0) # gravity\nspeed_I = 5 # initial speed\nt = 0 # time\ndt = 0.01 # time step\nv = vector(speed_I, 0, 0) # initial velocity\n\n# Objects\nball = sphere(pos=vector(0, 0, 0), radius=0.1, color=color.red)\nfloor = box(pos=vector(0, -0.1, 0), size=vector(10, 0.01, 10), color=color.green)\n\nwhile t < 5:\n    rate(100) # 100 frames per second\n    ball.pos = ball.pos + v*dt # update position\n    if ball.pos.y <= floor.pos.y + ball.radius: # collision with floor\n        v.y = -v.y # reverse y velocity\n    else:\n        v = v + g*dt # update velocity due to gravity\n    if v.mag != speed_I: # if speed_I has changed\n        v.mag = speed_I # update speed\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-15 23:23:28",
+      "serial_number": 1
+    }
+  ]
+}

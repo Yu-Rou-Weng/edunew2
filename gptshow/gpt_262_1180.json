@@ -1,0 +1,82 @@
+{
+  "session_id": 1180,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\nFree Fall with Inelastic Collision (Coefficient of Restitution, \\(e\\)):\nSimilar to the elastic collision case, the ball falls under gravity and rebounds after contacting the ground. However, the coefficient of restitution (\\(e\\)) determines how much of the kinetic energy is retained after each bounce, resulting in progressively lower bounce heights. For example:\n- **\\(e = 0.9\\)**: The ball retains 90% of its velocity after each bounce.\n- **\\(e = 0.8\\)**: The ball retains 80% of its velocity after each bounce.\n\n\nDraw the ball and floor.\nLet the ball move for 6 seconds and then stop.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) angle is mapped to the variable named Angle_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated angle.</br>",
+      "output": "from vpython import *\nimport numpy as np\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 10:43:41",
+      "serial_number": 1
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot import from numpy, line 3: import numpy as np\n\nHere's the current program:\nfrom vpython import *\nimport numpy as np\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:44",
+      "serial_number": 2
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:46",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:47",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:47",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:47",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:49",
+      "serial_number": 6
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:49",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:49",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading 'red')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.blue)\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\nfrom vpython import vector\n\nscene = canvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:49",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\nfrom vpython import vector\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "output": "from vpython import *\n\ncanvas(width=700, height=400)\n\nball = sphere(pos=vector(0, 10, 0), radius=1, color=vector(1, 0, 0), make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=vector(0, 0, 1))\n\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\ne = 0.9\nv = vector(0, 0, 0)\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + v*dt\n    if ball.pos.y <= ball.radius:\n        v.y = -e*v.y\n    else:\n        v = v + g*dt\n    t += dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 10:43:50",
+      "serial_number": 8
+    }
+  ]
+}

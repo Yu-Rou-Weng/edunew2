@@ -1,0 +1,4 @@
+{
+  "cyberInputMappingInfo": "</br>3. Cyber Input Variable Mapping Information:</br>\n(1) position is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated position.</br>\n\n(3) velocity is mapped to the variable named Number_I with an initial value set to a 1-dimensional float [5]</br>\n(4) When the value of Number_I changes, let the animation rerun to the starting point and start with the updated velocity.</br>\n",
+  "created_at": "2024-11-27T06:26:44.217510+00:00"
+}

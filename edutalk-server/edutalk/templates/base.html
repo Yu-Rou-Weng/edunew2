@@ -1,0 +1,112 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ title | default('Index') }} | EduTalk</title>
+  {% include "resource.html" %}
+  {% block head %}
+  {% endblock head %}
+  <script src="{{ url_for('static', filename='js/lecture-utils.js') }}"></script>
+  <script>
+    let csrf = {
+      token: '{{ csrf_token() }}',
+      refreshUrl: '{{ url_for("root.csrf_refresh") }}',
+    };
+    let currentLectureId = {{ lecture.id if lecture else 'null' }};
+  </script>
+</head>
+<body>
+  {% if not disable_nav and (request.path.startswith('/edutalk/genai') or request.path.startswith('/edutalk/lecture')) %}
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!--left part of navigation bar-->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#edutalk-navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        {% block nav_header %}
+        {% endblock nav_header %}
+      </div> <!-- navbar-header-->
+      <div class="collapse navbar-collapse" id="edutalk-navbar-collapse">
+        <ul class="nav navbar-nav">
+          {% block nav_left %}
+          {% endblock %}
+        </ul>
+        <!--right part of navigation bar-->
+        <div class="nav navbar-nav navbar-right">
+          {% block nav_right %}
+          {% endblock nav_right %}
+          {% include 'user-nav.html' %}
+        </div> <!-- div navbar-right -->
+      </div> <!-- navbar-collapse -->
+    </div> <!-- div.container-fluid -->
+  </nav>
+  {% endif %}
+  <div id="wrapper">
+    <div id="sidemenu-wrapper">
+      {% block sidemenu %}
+      {% endblock sidemenu %}
+    </div> <!-- div#sidemenu-wrapper -->
+    {% block error_banner %}
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+    <div class="navbar" style="margin-top: 41px;">
+      {% if errors %}
+      {% for msg in errors %}
+      <div class="alert alert-danger text-center" role="alert" style="border-radius: 5;">
+        <span>{{ msg }}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      {% endfor -%}
+      {% endif %}
+    </div>
+    {% endwith %}
+    {% endblock error_banner %}
+    <div id='content-wrapper'>
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </div>
+  <!-- /#wrapper -->
+  
+  <script>
+    function openAddLectureModal(event) {
+      event.preventDefault();
+      if (typeof app !== 'undefined' && app.createNewLecture) {
+        app.newLectureName = '';
+        app.lectureNameError = '';
+        $('#addLectureModal').modal('show');
+      } else {
+        // 如果 Vue 实例不可用，直接重定向到创建页面
+        window.location.href = '/edutalk/lecture/create';
+      }
+    }
+
+    function createAndRedirect(event) {
+    event.preventDefault();
+    
+    $.ajax({
+        url: '{{ url_for("root.lecture.create_and_redirect") }}',
+        type: 'GET',
+        success: function(response) {
+            console.log("Success response:", response);
+            if (response.redirect_url) {
+                window.location.href = response.redirect_url;
+            } else {
+                console.error("No redirect URL in response");
+                alert("Error creating new lecture. Please try again.");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error response:", xhr.responseText);
+            alert("Error creating new lecture. Please check the console for more information.");
+        }
+    });
+}
+  </script>
+</body>
+</html>

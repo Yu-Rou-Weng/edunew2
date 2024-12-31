@@ -1,0 +1,12 @@
+{
+  "session_id": 886,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 1000 and height to 800. Please draw the trajectory of the ball's movement. The center point of the canvas must be correctly set, therefore the sequence of writing the Parameter Settings must follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation for horizontal projectile motion: Launch a horizontal ball, which bounces off the floor upon impact.\nDraw the ball and the floor. Assume that the ball undergoes an elastic collision with the ground, only considering the effect of gravity, meaning the ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Let the ball stop moving after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=1000, height=800, center=vector(0,0,0), autoscale=False)\n\n# Parameter Settings\nSpeed_I = 5\ng = 9.81\nball_radius = 1\nfloor_length = 10\nfloor_height = 0.5\ndt = 0.01\n\n# Object Motion\nball = sphere(pos=vector(-floor_length/2, ball_radius, 0), radius=ball_radius, color=color.red)\nfloor = box(pos=vector(0, -floor_height/2, 0), size=vector(floor_length, floor_height, floor_length), color=color.blue)\n\nball.velocity = vector(Speed_I, 0, 0)\n\nt = 0\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    if ball.pos.y <= ball_radius:\n        ball.velocity.y = abs(ball.velocity.y) # Bounce\n    else:\n        ball.velocity.y = ball.velocity.y - g*dt # Gravity\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:53:03",
+      "serial_number": 1
+    }
+  ]
+}

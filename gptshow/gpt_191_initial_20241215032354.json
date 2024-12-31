@@ -1,0 +1,5 @@
+{
+  "prompt": "Identify all the variables that can be controlled in this experiment. Reply with only a JSON array of variable names, like [\"var1\",\"var2\"]. No other text or formatting.",
+  "response": "[\"position\", \"velocity\", \"acceleration\", \"mass\", \"force\"]",
+  "mode": "initial"
+}

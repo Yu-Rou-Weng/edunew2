@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/iottalk/ccm/static/images/favicon.ico">
+    <!-- css start -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- css end -->
+    <title>IoTtalk - Device</title>
+
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/style.css">
+    <style>
+    #content {
+      padding-top: 2%;
+    }
+    </style>
+
+    <script src="/iottalk/ccm/static/js/jquery1.12.4.min.js"></script>
+    <script src="/iottalk/ccm/static/js/bootstrap3.3.7.min.js"></script>
+    <script>
+    var own_device = function(d_id) {
+      $.ajax({
+        url: '/iottalk/ccm/device_confirm',
+        type: 'POST',
+        data: {d_id: d_id},
+      }).done(function() {
+        $('#' + d_id).remove();
+      }).error(function() {
+        alert('Something wrong!');
+      });
+    }
+    </script>
+  </head>
+  
+  <body>
+    <!-- navbar start -->
+    <nav class="navbar navbar-default lcyan">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse navbar-nav-lcyan" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a>Device Owndership</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- navbar end -->
+
+    <div id="content">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <table>
+          <thead>
+            <td colspan="3">Devices</td>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Device ID</td>
+              <td>Device Name</td>
+              <td>Private</td>
+            </tr>
+            {% for device in devices %}
+              <tr id="{{device.d_id}}">
+                <td>{{device.mac_addr}}</td>
+                <td>{{device.d_name}}</td>
+                <td>
+                  <button type="button" class="btn btn-success" onclick="own_device({{device.d_id}})">
+                    Yes
+                  </button>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+  </body>
+</html>

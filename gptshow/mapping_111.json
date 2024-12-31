@@ -1,0 +1,4 @@
+{
+  "cyberInputMappingInfo": "</br>3. Cyber Input Variable Mapping Information:</br>\n(1) radius is mapped to the variable named Friction_I with an initial value set to a 1-dimensional value 5</br>\n(2) When the value of Friction_I changes, let the animation rerun to the starting point and start with the updated radius.</br>\n",
+  "created_at": "2024-11-18T04:47:38.321666+00:00"
+}

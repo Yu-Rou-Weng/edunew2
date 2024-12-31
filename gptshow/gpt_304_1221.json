@@ -1,0 +1,12 @@
+{
+  "session_id": 1221,
+  "log": [
+    {
+      "input": "Vertical circular motionIf a small ball has a mass of \\( m \\), a velocity of \\( v \\), an angular velocity of \\( \\omega \\), and a turning radius of curvature \\( R \\), then the required centripetal acceleration for the turn is:\\[a_c = \\frac{v^2}{R} = R \\omega^2\\]From Newton's second law of motion, the centripetal force is:\\[F_c = m a_c = m \\cdot \\frac{v^2}{R} = m \\cdot R \\omega^2\\]For vertical circular motion, draw the velocity, tangential acceleration, and normal acceleration.",
+      "output": "from vpython import *\n\nscene = canvas(width=800, height=600)\n\nball = sphere(pos=vector(0, 5, 0), radius=0.5, color=color.red)\npath = curve(color=color.green)\n\nball.v = vector(3, 0, 0)\nball.a_tan = vector(0, 0, 0)\nball.a_norm = vector(0, -9.8, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    ball.pos = ball.pos + ball.v * dt\n    ball.v = ball.v + ball.a_norm * dt\n    ball.a_tan = cross(ball.v, ball.a_norm) / mag(ball.v)\n    \n    path.append(pos=ball.pos)\n    \n    arrow(pos=ball.pos, axis=ball.v, color=color.blue)\n    arrow(pos=ball.pos, axis=ball.a_tan, color=color.green)\n    arrow(pos=ball.pos, axis=ball.a_norm, color=color.orange)",
+      "mode": "initial",
+      "timestamp": "2024-12-26 23:41:58",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "session_id": 1077,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">Add import time to your code. 1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Elasticity_I is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional value 5\n(2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated Elasticity_I.\n</span>",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.blue, make_trail=True)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\nh = 10\nv0 = 5\ng = 9.81\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    t += dt\n    ball.pos.x = v0 * t\n    ball.pos.y = h - 0.5 * g * t**2\n    if ball.pos.y <= 0:\n        v0 *= -5\n        t = 0",
+      "mode": "initial",
+      "timestamp": "2024-11-03 11:31:45",
+      "serial_number": 1
+    },
+    {
+      "input": "Please update the following program based on this instruction:\nWrite a VPython script that creates a sphere and sets it in motion. The script should have a runtime error due to an incorrect property name or undefined variable. Specifically, create a sphere, set its velocity, and move it in a loop using `ball.pos += ball.velocity * dt`. Include an intentional error where an undefined or incorrect attribute is used, such as `ball.position` instead of `ball.pos`, to cause an `AttributeError`.\n\nCurrent program:\nfrom vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.blue, make_trail=True)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\nh = 10\nv0 = 5\ng = 9.81\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    t += dt\n    ball.pos.x = v0 * t\n    ball.pos.y = h - 0.5 * g * t**2\n    if ball.pos.y <= 0:\n        v0 *= -5\n        t = 0",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(0, 10, 0), radius=1, color=color.blue, make_trail=True)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\nh = 10\nv0 = 5\ng = 9.81\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    t += dt\n    ball.position.x = v0 * t\n    ball.position.y = h - 0.5 * g * t**2\n    if ball.position.y <= 0:\n        v0 *= -5\n        t = 0",
+      "mode": "modification",
+      "timestamp": "2024-11-03 11:32:04",
+      "serial_number": 2
+    }
+  ]
+}

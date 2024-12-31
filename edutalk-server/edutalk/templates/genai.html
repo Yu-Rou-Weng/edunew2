@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<style>
+.navbar-nav li {
+    display: inline-block;
+}
+</style>
+{% endblock head %}
+
+{% block nav_right %}
+<div id="shown-nav">
+    {% include 'user-nav.html' %}
+</div>
+{% endblock nav_right %}
+
+{% block content %}
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-12 sign'>
+            EduTalk(GenAI)
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#shown-nav').show();
+    
+    // 获取课程数据
+    $.ajax({
+        url: "{{ url_for('root.lecture.get_lectures') }}",
+        type: 'GET',
+        success: function(response) {
+            updateLessonList(response.lectures);
+        },
+        error: function(error) {
+            console.error('Error fetching lectures:', error);
+        }
+    });
+
+    function updateLessonList(lectures) {
+        var lessonList = $('#lessonList');
+        lessonList.empty();
+        lectures.forEach(function(lecture) {
+            lessonList.append(
+                '<li data-id="' + lecture.id + '">' +
+                '<a href="' + "{{ url_for('root.lecture.detail', id_=0) }}".replace('0', lecture.id) + '">' +
+                lecture.name +
+                '</a></li>'
+            );
+        });
+    }
+});
+</script>
+{% endblock scripts %}

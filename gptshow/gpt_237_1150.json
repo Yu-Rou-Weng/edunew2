@@ -1,0 +1,12 @@
+{
+  "session_id": 1150,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nDraw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nDo not resize the scene. \nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) var1 is mapped to the variable named Angle_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated var1.</br>",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\nscene.center = vector(0, 5, 0)  # Adjust the center to focus on the motion\n\n# Parameters\ng = 9.8  # acceleration due to gravity in m/s^2\nh = 10   # initial height in meters\nv0 = 5   # initial velocity in m/s\nradius = 0.5  # radius of the ball\ndt = 0.01  # time step in seconds\n\n# Objects\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\nball = sphere(pos=vector(-10, h, 0), radius=radius, color=color.red, make_trail=True)\n\n# Initial velocity\nball.velocity = vector(v0, 0, 0)\n\n# Simulation loop\nt = 0\nwhile t < 3:\n    rate(100)\n    ball.pos += ball.velocity * dt\n    ball.velocity.y -= g * dt\n    \n    # Check for collision with the floor\n    if ball.pos.y <= radius and ball.velocity.y < 0:\n        ball.velocity.y = -ball.velocity.y\n    \n    t += dt\n\n# Cyber Input Variable Mapping Information\nAngle_I = 5  # Initial value set as a 1-dimensional float\n\ndef rerun():\n    global t\n    t = 0\n    ball.pos = vector(-10, h, 0)\n    ball.velocity = vector(v0, 0, 0)\n    ball.clear_trail()\n\n# Watch for changes in Angle_I and rerun animation\nscene.bind('keydown', lambda evt: rerun() if evt.key == 'r' else None)",
+      "mode": "initial",
+      "timestamp": "2024-12-19 15:07:28",
+      "serial_number": 1
+    }
+  ]
+}

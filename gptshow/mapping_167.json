@@ -1,0 +1,4 @@
+{
+  "cyberInputMappingInfo": "</br>3. Cyber Input Variable Mapping Information:</br>\n(1) length1 is mapped to the variable named Length_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Length_I changes, let the animation rerun to the starting point and start with the updated length1.</br>\n",
+  "created_at": "2024-12-06T06:20:10.645832+00:00"
+}

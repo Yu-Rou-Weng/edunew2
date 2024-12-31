@@ -1,0 +1,12 @@
+{
+  "session_id": 1181,
+  "log": [
+    {
+      "input": "### One-Dimensional Elastic CollisionOne-dimensional elastic collision is covered in Chapter 4 of Mechanics 2 (old syllabus, Basic Physics 2B final chapter). In this scenario, two small balls are placed on a frictionless horizontal surface, with masses \\( m_1 \\) and \\( m_2 \\), and initial velocities \\( v_1 \\) and \\( v_2 \\), respectively. After the collision, the velocities of the two balls become \\( v_1' \\) and \\( v_2' \\). Assuming no external forces act during the collision, the system's momentum is conserved.If the collision does not result in energy loss, the total kinetic energy of the two balls before and after the collision remains the same:\\[m_1 v_1^2 + m_2 v_2^2 = m_1 v_1'^2 + m_2 v_2'^2\\]Dividing the above equation by the momentum equation yields the following formula for the velocities after the collision:\\[v_1' = \\frac{(m_1 - m_2)}{(m_1 + m_2)} v_1 + \\frac{2 m_2}{(m_1 + m_2)} v_2\\]\\[v_2' = \\frac{2 m_1}{(m_1 + m_2)} v_1 + \\frac{(m_2 - m_1)}{(m_1 + m_2)} v_2\\]These equations describe the velocities of two objects after a perfectly elastic collision, where both momentum and kinetic energy are conserved.---#### One-Dimensional Elastic Collision ProcessThe following programs demonstrate two methods: the first calculates the velocities after the collision directly using the formula, and the second introduces an ideal spring as a buffer between the blocks to visualize the entire collision process.*The calculations and visualizations are handled through a VPython-based simulation to demonstrate the elastic collision dynamics.*",
+      "output": "from vpython import *\n\n# Constants\nm1 = 1\nm2 = 2\nv1 = 3\nv2 = -1\n\n# Formulas for velocities after collision\nv1_final = ((m1 - m2) / (m1 + m2)) * v1 + (2 * m2 / (m1 + m2)) * v2\nv2_final = (2 * m1 / (m1 + m2)) * v1 + ((m2 - m1) / (m1 + m2)) * v2\n\nprint(\"Final velocity of ball 1:\", v1_final)\nprint(\"Final velocity of ball 2:\", v2_final)",
+      "mode": "initial",
+      "timestamp": "2024-12-26 18:49:23",
+      "serial_number": 1
+    }
+  ]
+}

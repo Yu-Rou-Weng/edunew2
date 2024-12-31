@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/iottalk/ccm/static/images/favicon.ico">
+    <title>DF Management</title>
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
+    <script src="/iottalk/ccm/static/js/mqttws31_1.0.1.min.js"></script>
+    <script src="/iottalk/ccm/static/js/jquery1.12.4.min.js"></script>
+    <script src="/iottalk/ccm/static/js/bootstrap3.3.7.min.js"></script>
+
+    <script src="/iottalk/ccm/static/management.js"></script>
+    <script src="/iottalk/ccm/static/management_make.js"></script>
+    <script src="/iottalk/ccm/static/mqtt.js"></script>
+
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/style.css">
+    
+    <script>
+      var _id = "{{_id}}";
+      $(function(){ mqtt_init(); });
+    </script>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default lcyan">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse navbar-nav-lcyan" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li id="manage-feature"><a>Device Feature</a></li>
+            <li id="manage-model"><a>Device Model</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/iottalk/ccm/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="content">
+      <div id="left-window" class="col-sm-6">
+        <div id="feature-container"></div>
+      </div>
+      <div id="right-window" class="col-sm-6">
+        <div id="model-container"></div>
+      </div>
+    </div>
+  </body>
+</html>

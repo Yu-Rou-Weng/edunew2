@@ -1,0 +1,12 @@
+{
+  "session_id": 776,
+  "log": [
+    {
+      "input": "Please write the Vpython code for \"Simple Harmonic Motion Caused by Electrostatic Force (located to the right of the midpoint of the line connecting the centers)\"\n\nAt positions (-10, 0, 0) and (10, 0, 0), there are two blue spheres with a radius of 1. A small sphere with a radius of 0.3 starts at position (0, 0, 0) and undergoes simple harmonic motion caused by the electrostatic forces from the two large spheres, moving only between (-3, 0, 0) and (3, 0, 0). A yellow line connects the centers of the two blue spheres. At positions (-3, 0, 0), (0, 0, 0), and (3, 0, 0), there are three white pillars. These three white pillars need to be centered around the yellow connecting line and placed 5 cm above and below it. The three white pillars should be very thin.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nscene = canvas()\n\nRadius_I = 1\nk = 8.99e9\nq1 = 1e-6\nq2 = 1e-6\nm = 1e-6\ndt = 0.01\n\nblue1 = sphere(pos=vector(-10, 0, 0), radius=Radius_I, color=color.blue)\nblue2 = sphere(pos=vector(10, 0, 0), radius=Radius_I, color=color.blue)\nsmall = sphere(pos=vector(0, 0, 0), radius=0.3, color=color.red)\nyellow_line = cylinder(pos=blue1.pos, axis=blue2.pos-blue1.pos, radius=0.1, color=color.yellow)\n\npillar1 = cylinder(pos=vector(-3, -5, 0), axis=vector(0, 10, 0), radius=0.1, color=color.white)\npillar2 = cylinder(pos=vector(0, -5, 0), axis=vector(0, 10, 0), radius=0.1, color=color.white)\npillar3 = cylinder(pos=vector(3, -5, 0), axis=vector(0, 10, 0), radius=0.1, color=color.white)\n\nsmall.velocity = vector(0, 0, 0)\n\ndef force_on_small(ball):\n    r1 = ball.pos - blue1.pos\n    r2 = ball.pos - blue2.pos\n    F1 = k * q1 * q2 / mag(r1)**2 * norm(r1)\n    F2 = k * q1 * q2 / mag(r2)**2 * norm(r2)\n    return F1 + F2\n\nwhile True:\n    rate(100)\n    F = force_on_small(small)\n    small.velocity = small.velocity + F/m*dt\n    small.pos = small.pos + small.velocity*dt\n    Radius_I = Radius_I # Update radius of the ball\n    small.radius = Radius_I # Set radius to new value",
+      "mode": "initial",
+      "timestamp": "2024-07-25 20:53:57",
+      "serial_number": 1
+    }
+  ]
+}

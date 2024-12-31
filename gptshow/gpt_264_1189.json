@@ -1,0 +1,12 @@
+{
+  "session_id": 1189,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\nVertical circular motion\n\nIf a small ball has a mass of \\( m \\), a velocity of \\( v \\), an angular velocity of \\( \\omega \\), and a turning radius of curvature \\( R \\), then the required centripetal acceleration for the turn is:\n\n\\[\na_c = \\frac{v^2}{R} = R \\omega^2\n\\]\n\nFrom Newton's second law of motion, the centripetal force is:\n\n\\[\nF_c = m a_c = m \\cdot \\frac{v^2}{R} = m \\cdot R \\omega^2\n\\]\n\nFor vertical circular motion, draw the velocity, tangential acceleration, and normal acceleration.\n</br>3. Cyber Input Variable Mapping Information:</br>\n(1) mass is mapped to the variable named Mass_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Mass_I changes, let the animation rerun to the starting point and start with the updated mass.</br>",
+      "output": "canvas(width=700, height=400)\n\nscene = vp.canvas(background=vp.color.white)\nball = vp.sphere(pos=vp.vector(0, 10, 0), radius=1, color=vp.color.blue)\narrow_v = vp.arrow(pos=ball.pos, axis=vp.vector(0, 3, 0), color=vp.color.red)\narrow_at = vp.arrow(pos=ball.pos, axis=vp.vector(0, -2, 0), color=vp.color.green)\narrow_an = vp.arrow(pos=ball.pos, axis=vp.vector(0, 0, 2), color=vp.color.orange)\n\nmass = 5\nv = 5\nR = 2\nomega = v / R\nac = v**2 / R\nFc = mass * ac\n\nwhile True:\n    vp.rate(30)\n    ball.rotate(angle=omega, axis=vp.vector(0, 0, 1), origin=vp.vector(0, 0, 0))\n    arrow_v.axis = vp.vector(0, v, 0)\n    arrow_at.axis = vp.vector(0, -ac, 0)\n    arrow_an.axis = vp.vector(0, 0, -Fc/mass)",
+      "mode": "initial",
+      "timestamp": "2024-12-30 11:01:49",
+      "serial_number": 1
+    }
+  ]
+}

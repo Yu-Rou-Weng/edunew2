@@ -1,0 +1,12 @@
+{
+  "session_id": 844,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene. The center point of the canvas must be correctly set, therefore the order of writing the Parameter Settings must follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally projected ball: throw a horizontal ball that bounces upon hitting the floor.\nDraw the ball and the floor. Assume that the ball and the ground have an elastic collision, only considering the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Let the ball stop moving after 5 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Speed_I as a cyber input variable, set Speed_I=5\n\n(2) Speed_I is the initial horizontal velocity of the ball. When Speed_I changes to a new value, the initial horizontal velocity of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0,0,0))\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(0,5,0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0,0,0), size=vector(20,0.5,10), color=color.green)\n\n# Define and initialize a variable named Speed_I\nSpeed_I = 5\n\n# Initial conditions\nball.velocity = vector(Speed_I,0,0)\ng = vector(0,-9.8,0)\ndt = 0.01\n\n# Time variable\nt = 0\n\nwhile t < 5:\n\trate(100)\n\tif ball.pos.y - ball.radius < floor.pos.y + 0.5*floor.size.y:\n\t\tball.velocity.y = abs(ball.velocity.y)\n\telse:\n\t\tball.velocity = ball.velocity + g*dt\n\tball.pos = ball.pos + ball.velocity*dt\n\tt += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-14 17:38:54",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 983,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\nObject Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nHorizontal projectile motion refers to the process in which an object is thrown horizontally from a certain height and moves along a curved path under the influence of gravity. When the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) initial_velocity is mapped to the variable named Gyroscope_I with an initial value set to [0, 2, 2].\n(2) When the value of Gyroscope_I changes, let the animation rerun to the starting point and start with the updated initial_velocity.\n\n(3) height is mapped to the variable named SS with an initial value set to 22.\n(4) When the value of SS changes, let the animation rerun to the starting point and start with the updated height.\n",
+      "output": "from vpython import *\n\n# Screen Settings\ncanvas(width=700, height=400)\n\n# Constants\ngravity = vector(0, -9.81, 0)\nground_y = 0\n\n# Objects\nball = sphere(pos=vector(0, SS, 0), radius=1, color=color.red, make_trail=True)\n\n# Initial Parameters\ninitial_velocity = vector(0, 2, 2)\nheight = 22\n\n# Functions\ndef update_position():\n    t = 0\n    dt = 0.01\n    while t < 6:\n        rate(100)\n        ball.pos += initial_velocity * dt\n        initial_velocity += gravity * dt\n        if ball.pos.y <= ground_y:\n            initial_velocity.y *= -0.9\n            ball.pos.y = ground_y\n        t += dt\n\n# Main Animation Loop\nwhile True:\n    Gyroscope_I = vector(0, 2, 2)\n    SS = 22\n\n    initial_velocity = Gyroscope_I\n    height = SS\n    ball.pos = vector(0, height, 0)\n\n    update_position()",
+      "mode": "initial",
+      "timestamp": "2024-09-03 23:42:52",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-07-03T08:58:09.867Z",
+  "mode": "modification",
+  "input": "Please update the following program based on this instruction: Make the ball's color to red\n\nCurrent program:\nfrom vpython import *\nscene = canvas()\n\nLength_I = 10\ng = 9.81\ntheta0 = 5 * pi / 180\n\nball = sphere(pos=vector(Length_I*sin(theta0), -Length_I*cos(theta0), 0), radius=Length_I/10)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=ball.radius/2)\n\nt = 0\ndt = 0.01\nwhile True:\n    rate(100)\n    theta = theta0 * cos(sqrt(g/Length_I) * t)\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos\n    t += dt",
+  "output": "from vpython import *\nscene = canvas()\n\nLength_I = 10\ng = 9.81\ntheta0 = 5 * pi / 180\n\nball = sphere(pos=vector(Length_I*sin(theta0), -Length_I*cos(theta0), 0), radius=Length_I/10, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=ball.radius/2)\n\nt = 0\ndt = 0.01\nwhile True:\n    rate(100)\n    theta = theta0 * cos(sqrt(g/Length_I) * t)\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos\n    t += dt"
+}

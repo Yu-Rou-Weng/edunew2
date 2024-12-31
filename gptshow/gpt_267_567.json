@@ -1,0 +1,12 @@
+{
+  "session_id": 567,
+  "log": [
+    {
+      "input": "Free Fall, Ball Bounces When It Hits the Ground\n\nThe objective is to simulate the effect of gravity on an object, specifically to depict a ball accelerating downwards from a certain height and bouncing when it hits the floor.\n\nThe program for the ball bouncing upon hitting the ground during free fall is almost identical to that of simple free fall. However, to make the ball bounce when it contacts the floor, an addition has been made to the motion part of the object:\n\n```python\nif ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n    ball.v.y = -ball.v.y\n```\n\nIf `ball.pos.y - floor.pos.y <= size + 0.5*floor.height` indicates that the ball has touched the floor, and `ball.v.y < 0` indicates that the ball's velocity is downwards. When both conditions are met, it means the ball is moving downwards and hits the floor. After the bounce, the velocity of the ball changes from negative to positive, hence `ball.v.y` is multiplied by a negative sign and then reassigned to `ball.v.y`.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named `Radius_I` as a cyber input variable, set `Radius_I=1`.\n(2) `Radius_I` is the radius of the ball. When `Radius_I` changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math and time.",
+      "output": "from vpython import *\n\n# Create an object sphere\nRadius_I = 1\nball = sphere(pos=vector(0,0,0), radius=Radius_I, color=color.red)\n\n# Create a floor\nfloor = box(pos=vector(0,-1.5,0), length=4, height=0.05, width=4, color=color.green)\n\n# Define variables\nball.v = vector(0,0,0) # velocity\ng = vector(0,-9.8,0) # gravity\nsize = 0.5 # size of the ball\nt = 0 # start time\ndt = 0.01 # time step\n\n# Animation\nwhile True:\n    rate(100) # limit the animation speed to 100 times per second\n    ball.pos = ball.pos + ball.v*dt # update the position of the ball\n    ball.v = ball.v + g*dt # update the velocity of the ball\n    \n    # Bounce\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        ball.v.y = -ball.v.y",
+      "mode": "initial",
+      "timestamp": "2024-07-23 21:25:37",
+      "serial_number": 1
+    }
+  ]
+}

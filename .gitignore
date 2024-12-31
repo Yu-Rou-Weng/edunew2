@@ -1,0 +1,11 @@
+iottalk/*/*
+!iottalk/conf/.PADDING
+!iottalk/data/.PADDING
+
+nginx/nginx.conf.sample
+
+edutalk/*
+!edutalk/.PADDING
+
+mosquitto/mosquitto.conf.sample
+.env

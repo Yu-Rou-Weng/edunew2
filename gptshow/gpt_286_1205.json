@@ -1,0 +1,12 @@
+{
+  "session_id": 1205,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: ## Turning Ball Motion If a small ball has a mass of \\( m \\), a velocity of \\( v \\), an angular velocity of \\( \\omega \\), and a turning radius of curvature \\( R \\), then the required centripetal acceleration for the turn is: \\[ a_c = \\frac{v^2}{R} = R \\omega^2 \\] From Newton's second law of motion, the centripetal force is: \\[ F_c = m a_c = m \\cdot \\frac{v^2}{R} = m \\cdot R \\omega^2 \\] Only the uniform circular motion of the ball is depicted.",
+      "output": "scene.width = 700\nscene.height = 400\n\nm = 1\nv = 2\nomega = 1\nR = 5\n\nball = sphere(pos=vector(-R,0,0), radius=0.5, color=color.red)\narrow_v = arrow(pos=ball.pos, axis=vector(v,0,0), color=color.green)\narrow_omega = arrow(pos=ball.pos, axis=vector(0,0,omega), color=color.blue)\n\nwhile True:\n    rate(60)\n    ball.pos = vector(-R*cos(omega*scene.time), R*sin(omega*scene.time), 0)\n    arrow_v.pos = ball.pos\n    arrow_omega.pos = ball.pos",
+      "mode": "initial",
+      "timestamp": "2024-12-26 12:42:01",
+      "serial_number": 1
+    }
+  ]
+}

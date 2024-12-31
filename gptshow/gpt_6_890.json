@@ -1,0 +1,12 @@
+{
+  "session_id": 890,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the ball's motion. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally launched projectile: Launch a ball horizontally that bounces off the floor upon impact.\nDraw the ball and the floor. Assume that the ball undergoes an elastic collision with the ground, only considering the effect of gravity, meaning the ball accelerates downward due to gravity and bounces off the ground when it hits. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun from the starting point with the updated ball speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Create canvas\nscene = canvas(width=700, height=400)\n\n# Create objects\nball = sphere(radius=0.2, color=color.red, make_trail=True)\nfloor = box(length=4, height=0.05, width=4, color=color.green)\n\n# Set initial parameters\ngravity = 9.8\ntime = 0\ndt = 0.01\n\nSpeed_I = 1 # Initialize Cyber Input Variable representing the speed of the ball\nball.velocity = vector(Speed_I, 0, 0)\n\ndef run_animation():\n    global Speed_I, time\n    ball.pos = vector(0, 1, 0)\n    ball.velocity.x = Speed_I\n    time = 0\n\n# Animation loop\nwhile True:\n    rate(100)\n    ball.velocity.y -= gravity*dt\n    ball.pos += ball.velocity*dt\n    time += dt\n   \n    # Bounce off floor\n    if ball.pos.y < ball.radius:\n        ball.velocity.y *= -1\n    if time >= 6:\n        Speed_I = scene.mouse.pick # Update Speed_I variable based on user input\n        if Speed_I is not None:\n            run_animation()",
+      "mode": "initial",
+      "timestamp": "2024-08-16 19:12:55",
+      "serial_number": 1
+    }
+  ]
+}

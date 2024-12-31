@@ -1,0 +1,12 @@
+{
+  "session_id": 986,
+  "log": [
+    {
+      "input": "Please update the following program based on this instruction: 1. Screen Settings:\nAdjust the canvas width to 700 and height to 400. Do not alter the canvas size.\n\n2. Object Motion & Parameter Settings:\nGenerate a VPython animation to demonstrate the physics experiment described below: Horizontal projectile motion involves an object being thrown horizontally from a specific height and following a curved trajectory due to the effects of gravity. Once the ball hits the ground, it rebounds. The ball should come to a stop after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.\n\n\u2022 Initial velocity is mapped to the variable named Speed_I with an initial value set to 1.\n\u2022 When the value of Speed_I changes, let the animation rerun to the starting point and start with the updated initial velocity.\n\n\u2022 Height is mapped to the variable named Height_I with an initial value set to 15.\n\u2022 When the value of Height_I changes, let the animation rerun to the starting point and start with the updated height.\n\n\n\n",
+      "output": "from vpython import *\n\n# Initialize parameters\nSpeed_I = 1\nHeight_I = 15\n\n# Set up the canvas\ncanvas(width=700, height=400)\n\n# Create objects\nball = sphere(pos=vector(0, Height_I, 0), radius=0.5, color=color.cyan, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(50, 0.05, 0), color=color.green)\n\n# Set initial conditions\nball.velocity = vector(Speed_I, 0, 0)\nball.mass = 1\ng = vector(0, -9.8, 0)\n\n# Time settings\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile t < 6.0:\n    rate(100)\n    F_net = ball.mass * g\n    ball.velocity += F_net/ball.mass * dt\n    ball.pos += ball.velocity * dt\n    if ball.pos.y <= 0.5:\n        ball.velocity.y = -ball.velocity.y\n    t += dt\n\n# Reset the ball\nball.pos = vector(0, Height_I, 0)\nball.velocity = vector(Speed_I, 0, 0)\n\n# Rerun the animation with updated speed and height\nwhile t < 6.0:\n    rate(100)\n    F_net = ball.mass * g\n    ball.velocity += F_net/ball.mass * dt\n    ball.pos += ball.velocity * dt\n    if ball.pos.y <= 0.5:\n        ball.velocity.y = -ball.velocity.y\n    t += dt",
+      "mode": "modification",
+      "timestamp": "2024-08-22 02:27:45",
+      "serial_number": 1
+    }
+  ]
+}

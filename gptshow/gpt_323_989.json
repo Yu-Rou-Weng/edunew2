@@ -1,0 +1,19 @@
+{
+  "session_id": 989,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\nObject Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nHorizontal projectile motion refers to the process in which an object is thrown horizontally from a certain height and moves along a curved path under the influence of gravity. When the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) initial_velocity is mapped to the variable named Gravity_I with an initial value set to 5.\n(2) When the value of Gravity_I changes, let the animation rerun to the starting point and start with the updated initial_velocity.\n",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Object Motion & Parameter Settings\nground = box(pos=vec(0, -1, 0), size=vec(10, 0.1, 2), color=color.green)\nball = sphere(pos=vec(-5, 0, 0), radius=0.5, color=color.blue, make_trail=True)\n\nGravity_I = 5\ninitial_velocity = vector(Gravity_I, 0, 0)\nball.velocity = initial_velocity\n\nwhile True:\n    t = 0\n    dt = 0.01\n    while t < 6:\n        rate(100)\n        ball.pos += ball.velocity * dt\n        ball.velocity.y -= 9.8 * dt\n        if ball.pos.y < 0.5:\n            ball.velocity.y = -ball.velocity.y\n        t += dt",
+      "mode": "initial",
+      "timestamp": "2024-09-04 00:24:57",
+      "serial_number": 1
+    },
+    {
+      "input": "# **Horizontal Projectile**\n\nA small ball is thrown horizontally with an initial velocity v0 from a height h. The ball is accelerated downwards due to gravity and rebounds when it hits the ground. There are three different scenarios to consider:\n\nOnly gravity is taken into account, and there is an elastic collision between the ball and the ground.\n\n(1) Define and initialize a variable named Length_I as a cyber input variable, set Length_I=5\n(3) Length_I is the length of the pendulum. When Length_I changes to a new value, the length of the pendulum also changes to that value.\n(4) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by Vpython, such as numpy or math.",
+      "output": "```python\nfrom vpython import *\n\n# Constants\ng = 9.81  # acceleration due to gravity\n\n# Initial conditions\nv0 = 5  # initial velocity\nh = 10  # initial height above ground\nLength_I = 5  # initial length of the pendulum\nRadius_I = 0.5  # initial radius of the ball\n\n# Create the scene\nscene = canvas(title='Horizontal Projectile', width=800, height=600)\n\n# Create the ground\nground = box(pos=vector(0, -h/2, 0), size=vector(20, 0.1, 2), color=color.green)\n\n# Create the ball\nball = sphere(pos=vector(0, h, 0), radius=Radius_I, color=color.red, make_trail=True)\n\n# Set initial velocity of the ball\nball.velocity = vector(v0, 0, 0)\n\n# Time step\ndt = 0.01\n\n# Simulation loop\nwhile True:\n    rate(100)\n    \n    # Update ball position\n    ball.pos.x += ball.velocity.x * dt\n    ball.pos.y += ball.velocity.y * dt\n    \n    # Update ball velocity due to gravity\n    ball.velocity.y -= g * dt\n    \n    # Check for collision with ground\n    if ball.pos.y - Radius_I <= -h/2:\n        ball.velocity.y *= -1  # reverse the y velocity for elastic collision\n```",
+      "mode": "initial",
+      "timestamp": "2024-09-10 22:46:55",
+      "serial_number": 1
+    }
+  ]
+}

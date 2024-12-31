@@ -1,0 +1,82 @@
+{
+  "session_id": 1196,
+  "log": [
+    {
+      "input": "### Gravity-Induced Simple Harmonic Motion (Circular Ring, Initial Velocity = 0, Starting from Endpoint)---Please note that VPython includes the following classes: arrow, box, cone, curve, cylinder, ellipsoid, helix, label, points, pyramid, ring, sphere, text, compound, vertex, triangle, quad, extrusion, shapes, paths, graph, gcurve, gdots, gvbars, ghbars, button, checkbox, menu, radio, slider, wtext, canvas, scene. To prevent naming conflicts, avoid using these names as variable names in your code.---This motion explores **simple harmonic motion caused by gravity** within a system where a small mass **m** starts from rest at one endpoint of a line perpendicular to the center of a massive circular ring of uniform mass distribution **M** and radius **r**.\u00a0The small mass is influenced by the gravitational forces exerted by all the points on the ring. When the displacement of the small mass from the center is relatively small, these forces create a restoring effect proportional to the displacement, resulting in oscillatory motion.",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "initial",
+      "timestamp": "2024-12-30 11:50:27",
+      "serial_number": 1
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0) # Initialize v as a vector\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:30",
+      "serial_number": 2
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:30",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:31",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, thickness=0.1, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:31",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:33",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:33",
+      "serial_number": 6
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:34",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:34",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:34",
+      "serial_number": 8
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot read properties of undefined (reading '__argnames__')\n\nHere's the current program:\nfrom vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nG = 6.67e-11\nM = 1e12\nm = 1e5\nr = 10\n\nring = cylinder(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=r, color=color.blue)\nmass = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\nv = vector(0, 0, 0)\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    r_vec = mass.pos - ring.pos\n    r_mag = mag(r_vec)\n    \n    F = -G * M * m / r_mag**2 * norm(r_vec)\n    \n    a = F / m\n    \n    v += a * dt\n    mass.pos += v * dt",
+      "mode": "fix_error",
+      "timestamp": "2024-12-30 11:50:34",
+      "serial_number": 9
+    }
+  ]
+}

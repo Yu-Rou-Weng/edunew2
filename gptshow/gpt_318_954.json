@@ -1,0 +1,12 @@
+{
+  "session_id": 954,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the ball's movement. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of horizontal projectile motion: Launch a ball horizontally from mid-air, which then hits the floor and bounces due to the impact.\nDraw the ball and the floor. Assume that the collision between the ball and the ground is elastic, only considering the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Allow the ball to move for 10 seconds before stopping.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, the speed of the moving ball should be immediately updated to the new value of Speed_I.\n\n(3) Define and initialize a Cyber Input Variable named Gravity_I with an initial value set to 9.8. This variable represents the gravitational acceleration.\n\n(4) During the animation, whenever the value of the Gravity_I variable changes, the gravitational acceleration should be immediately updated to the new value of Gravity_I.\n(5) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Define and initialize Cyber Input Variables\nSpeed_I = 1\nGravity_I = 9.8\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(0, 5, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(10, 0.2, 10), color=color.green)\n\nball.velocity = vector(Speed_I, 0, 0)\nball.acceleration = vector(0, - Gravity_I, 0)\n\n# Time settings\ndt = 0.01\nt = 0\n\nwhile t < 10:\n    rate(100)\n    ball.velocity.y += ball.acceleration.y * dt\n    ball.pos += ball.velocity * dt\n    if ball.pos.y <= floor.pos.y + floor.size.y/2 + ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    ball.velocity.x = Speed_I\n    ball.acceleration.y = -Gravity_I\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-20 17:25:56",
+      "serial_number": 1
+    }
+  ]
+}

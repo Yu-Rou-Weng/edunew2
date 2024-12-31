@@ -1,0 +1,12 @@
+{
+  "session_id": 1030,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Gravity_I is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional value 5\n(2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated Gravity_I.\n</span>",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Constants\nh = 10  # initial height of the ball\nv0 = 5  # initial velocity of the ball\ng = 9.81  # acceleration due to gravity\n\n# Object Initialization\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.blue, make_trail=True)\n\n# Variable Mapping\nElasticity_I = slider(min=1, max=10, value=5, step=1, bind=lambda: reset_animation(Elasticity_I.value))\n\ndef reset_animation(value):\n    scene.delete()\n    scene = canvas(width=700, height=400)\n    ball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.blue, make_trail=True)\n    h = 10\n    v0 = 5\n    g = 9.81\n\n# Motion Calculation\ndt = 0.01\nt = 0\nwhile True:\n    rate(100)\n    \n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * t**2\n    \n    if ball.pos.y <= 0:\n        t = 0\n        ball.pos.y = 0\n        v0 *= Elasticity_I.value  # Bounce with updated velocity using Elasticity_I",
+      "mode": "initial",
+      "timestamp": "2024-10-23 20:03:34",
+      "serial_number": 1
+    }
+  ]
+}

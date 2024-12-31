@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IDF Control Panel</title>
+    <style>
+        .slider-container {
+            margin: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        .slider-control {
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .value-display {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .var-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        /* 向量類型的特殊樣式 */
+        .vector-group {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .vector-group .var-name {
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        {% for var in control_vars %}
+        <div class="slider-control {% if var.type == 'vector' %}vector-component{% endif %}">
+            <div class="var-name">{{ var.display_name }}</div>
+            <input type="range" 
+                   class="slider" 
+                   min="{{ var.min }}" 
+                   max="{{ var.max }}" 
+                   value="{{ var.default }}"
+                   step="0.1"
+                   data-var-name="{{ var.name }}"
+                   oninput="updateValue(this)">
+            <div class="value-display">
+                <span>{{ var.min }}</span>
+                <span id="{{ var.name }}_value">{{ var.default }}</span>
+                <span>{{ var.max }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // 儲存所有變量的當前值
+        let currentValues = {};
+        
+        // 初始化當前值
+        {% for var in control_vars %}
+        currentValues['{{ var.name }}'] = {{ var.default }};
+        {% endfor %}
+
+        function updateValue(slider) {
+            const varName = slider.dataset.varName;
+            const value = parseFloat(slider.value);
+            
+            // 更新顯示值
+            document.getElementById(varName + '_value').textContent = value;
+            
+            // 更新儲存的值
+            currentValues[varName] = value;
+            
+            // 檢查是否是向量的一部分
+            if (varName.endsWith('_x') || varName.endsWith('_y') || varName.endsWith('_z')) {
+                const baseVarName = varName.slice(0, -2);
+                const vectorValue = [
+                    currentValues[baseVarName + '_x'] || 0,
+                    currentValues[baseVarName + '_y'] || 0,
+                    currentValues[baseVarName + '_z'] || 0
+                ];
+                
+                // 發送向量值到父窗口
+                if (window.parent) {
+                    window.parent.postMessage({
+                        type: 'idf_update',
+                        variable: baseVarName,
+                        value: vectorValue,
+                        isVector: true
+                    }, '*');
+                }
+            } else {
+                // 發送標量值到父窗口
+                if (window.parent) {
+                    window.parent.postMessage({
+                        type: 'idf_update',
+                        variable: varName,
+                        value: value,
+                        isVector: false
+                    }, '*');
+                }
+            }
+        }
+
+        // 定期發送所有值的更新
+        setInterval(() => {
+            if (window.parent) {
+                window.parent.postMessage({
+                    type: 'idf_update_all',
+                    values: currentValues
+                }, '*');
+            }
+        }, 1000); // 每秒更新一次
+    </script>
+</body>
+</html>

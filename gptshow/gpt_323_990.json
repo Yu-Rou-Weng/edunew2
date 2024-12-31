@@ -1,0 +1,19 @@
+{
+  "session_id": 990,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\nObject Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nHorizontal projectile motion refers to the process in which an object is thrown horizontally from a certain height and moves along a curved path under the influence of gravity. When the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) initial_velocity is mapped to the variable named Angle_I with an initial value set to 5.\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated initial_velocity.\n",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Object Parameters\ninitial_height = 10  # Initial height of the ball\ninitial_velocity = 5  # Initial horizontal velocity of the ball\ng = 9.81  # Acceleration due to gravity\n\n# Create the ground\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.green)\n\n# Create the ball\nball = sphere(pos=vector(0, initial_height, 0), radius=0.5, color=color.blue, make_trail=True)\n\n# Animation Loop\nt = 0\ndt = 0.01\n\nwhile t < 6:\n    rate(100)\n    ball.pos.x = initial_velocity * t\n    ball.pos.y = initial_height - 0.5 * g * t**2\n    t += dt\n    \n# Bounce back\ninitial_velocity *= -1\nt = 0\n\nwhile t < 6:\n    rate(100)\n    ball.pos.x = initial_velocity * t\n    ball.pos.y = initial_height - 0.5 * g * t**2\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-09-04 01:54:42",
+      "serial_number": 1
+    },
+    {
+      "input": "# **\u6c34\u5e73\u629b\u5c04**\n\n\n\u5c07\u4e00\u500b\u5c0f\u7403\u7531\u9ad8\u5ea6 h \u8655\u4ee5\u6c34\u5e73\u521d\u901f v0 \u629b\u51fa\uff0c\u5c0f\u7403\u53d7\u5230\u91cd\u529b\u4f5c\u7528\u5411\u4e0b\u52a0\u901f\uff0c\u5c0f\u7403\u649e\u5230\u5730\u677f\u6642\u53cd\u5f48\uff0c\u5171\u6709\u4ee5\u4e0b3\u7a2e\u4e0d\u540c\u7684\u72c0\u6cc1\uff1a\n\n\u53ea\u8003\u616e\u91cd\u529b\u7684\u4f5c\u7528\uff0c\u5c0f\u7403\u8207\u5730\u677f\u9593\u70ba\u5f48\u6027\u78b0\u649e\u3002",
+      "output": "\u4e0b\u9762\u662f\u4f7f\u7528VPython\u6a21\u64ec\u6c34\u5e73\u629b\u5c04\u7684Python\u4ee3\u7801\uff1a\n\n```python\nfrom vpython import *\n\n# \u5b9a\u7fa9\u5834\u666f\nscene = canvas(title='Horizontal Projectile', width=800, height=600)\n\n# \u5b9a\u7fa9\u5730\u677f\nfloor = box(pos=vector(0, -1, 0), size=vector(10, 0.1, 5), color=color.green)\n\n# \u5b9a\u7fa9\u5c0f\u7403\nball = sphere(pos=vector(-4, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\n# \u5b9a\u7fa9\u521d\u59cb\u689d\u4ef6\nh = 2  # \u521d\u901f\u5ea6\u9ad8\u5ea6\nv0 = 5  # \u521d\u901f\u5ea6\u5927\u5c0f\ng = 9.8  # \u91cd\u529b\u52a0\u901f\u5ea6\n\n# \u8a2d\u5b9a\u5c0f\u7403\u521d\u59cb\u901f\u5ea6\nball.v = vector(v0, 0, 0)\n\n# \u6a21\u64ec\u904b\u52d5\ndt = 0.01\nwhile ball.pos.y >= 0:\n    rate(100)\n    ball.pos += ball.v * dt\n    ball.v.y -= g * dt\n    if ball.pos.y <= floor.pos.y + floor.size.y / 2 + ball.radius:  # \u5c0f\u7403\u78b0\u649e\u5730\u677f\n        ball.v.y = -ball.v.y\n\n```\n\n\u9019\u6bb5\u7a0b\u5f0f\u78bc\u4f7f\u7528VPython\u5efa\u7acb\u4e86\u4e00\u500b\u5834\u666f\uff0c\u5305\u542b\u4e86\u5730\u677f\u548c\u5c0f\u7403\u3002\u5c0f\u7403\u5f9e\u9ad8\u5ea6h\u8655\u4ee5\u6c34\u5e73\u901f\u5ea6v0\u629b\u51fa\uff0c\u53d7\u5230\u91cd\u529b\u52a0\u901f\u5ea6\u7684\u5f71\u97ff\u5411\u4e0b\u904b\u52d5\u3002\u7576\u5c0f\u7403\u78b0\u5230\u5730\u677f\u6642\u6703\u53cd\u5f48\u3002",
+      "mode": "initial",
+      "timestamp": "2024-09-10 23:26:47",
+      "serial_number": 1
+    }
+  ]
+}

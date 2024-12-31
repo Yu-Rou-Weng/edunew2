@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap4-btn.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animation-creation.css') }}">
+    <style>
+      /* 其他样式保持不变 */
+      .idf-dropdown {
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .idf-dropdown ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      .idf-dropdown li {
+        margin-bottom: 5px;
+      }
+      .idf-dropdown .add-new-variable {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .idf-list-container {
+        max-height: 200px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+      }
+      .red-text {
+    color: red;
+    }
+    </style>
+  </head>
+<body>
+<script>
+  let lectureName = '{{ lecture.name }}';
+  let hackmdURL = '{{ lecture.url }}';
+  try {
+    let urlHistory = JSON.parse('{{ lecture.url_history | tojson | safe }}');
+} catch (error) {
+    console.error("Error parsing JSON:", error);
+    urlHistory = []; // 你可以設定一個默認值
+}
+  let sensorOptions = JSON.parse('{{ sensorOptions | tojson | safe }}');
+  let actuatorVarTypeOfDim = JSON.parse('{{ actuatorVarTypeOfDim | tojson | safe }}');
+  let actuatorDm = JSON.parse('{{ actuatorDm | tojson | safe }}');
+</script>
+
+<div id="animation-creation" class="animation-creation edit-lesson">
+  <!-- 提示框 -->
+  <div v-if="isSubmittingToGpt" class="submit-overlay">
+    <div class="loading-message">
+      <p>{{ message }}</p>
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="animation-creation-block">
+    <div class="animation-creation-text">
+      <div class="animation-creation-header">
+        <h5 class="text-center">Animation Program</h5>
+        <div class="mode-toggle">
+          <button @click="toggleMode" :class="{ 'btn-primary': !debugMode, 'btn-danger': debugMode }" class="btn btn-sm">
+            [[ debugMode ? 'Debug' : 'Normal' ]]
+          </button>
+          <span v-if="!debugMode" class="ml-2">Session ID: [[ currentSessionId ]]</span>
+        </div>
+        <div class="history-select" v-if="debugMode">
+          <div class="session-select">
+            <label for="session-select">Session_Id</label>
+            <select v-model="selectedSessionId" @change="fetchSerialNumbers" id="session-select">
+              <option v-for="sessionId in sessionIds" :value="sessionId">[[ sessionId ]]</option>
+            </select>
+          </div>
+          <div class="serial-number-select">
+            <label for="serial-number-select">Serial_Num</label>
+            <select v-model="selectedSerialNumber" @change="fetchLog" id="serial-number-select">
+              <option v-for="serialNumber in serialNumbers" :key="serialNumber.value" :value="serialNumber.value">
+                [[ serialNumber.label ]]
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <h4 class="animation-creation-title">
+        <div class="row" style="width: 100%;">
+          <div class="col-sm-2">  <!-- 将 col-sm-3 改为 col-sm-2 -->
+            <h5 style="margin: 0;">Lecture</h5>
+          </div>
+          <div class="col-sm-10">  <!-- 将 col-sm-9 改为 col-sm-10 -->
+            <div class="animation-creation-lesson-title">
+              <span class="lecture-name" :title="lectureName">[[lectureName]]</span>
+              <a class="rename-btn" @click="showInput('title')" style="display: none;">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+              </a>
+              <div class="success-message" id="title">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </h4>
+    <div v-if="!isInitialMode">
+      <div class="program-config">
+        <div class="row">
+          <div class="col-sm-3 visually-hidden">
+            <h5>Lecture Information</h5>
+          </div>
+          <div class="col-sm-9 visually-hidden">
+            <div class="animation-creation-lesson-url">
+              <div>
+                <a class="hackmd-url" :href="hackmdURL" target="_blank">[[ hackmdURL ]]</a>
+                <a class="edit-url-btn" @click="showInput('url')">
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="success-message" id="url">
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="animation-creation-input-url" v-if="editHackmdURL">
+              <div class="dropdown" style="width: 200px; display: inline-block; position: relative;">
+                <input class="animation-creation-input form-control" id="url" stype="text" :value="hackmdURL" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="true">
+                <div v-if="urlHistory.length > 1" class="dropdown-menu" id="history">
+                  <template v-for="index in urlHistory.length - 1">
+                    <li><a href="#" @click="setUrl">[[ urlHistory[index] ]]</a></li>
+                  </template>
+                </div>
+              </div>
+              <button class="btn btn-success btn-outline" @click="updateLectureUrl">儲存</button>
+              <button class="btn btn-default btn-outline" @click="hideInput('url')">取消</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 visually-hidden">
+            <h5>Cyber Input Variable</h5>
+          </div>
+          <div class="col-sm-9 visually-hidden">
+            <div class="da-info">
+              {% for iv in lecture.iv_list %}
+              <span class="label df-label">{{ iv.giv_name }}{{ iv.index }}</span>
+              {% endfor %}
+              <span class="material-symbols-outlined" data-toggle="modal" data-target="#setting-modal"
+                id="settings-icon"> settings </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新增 IDF 變數顯示區 -->
+  <div id="idf-container">
+    <!-- 這裡將動態生成並顯示 IDF 變數 -->
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h5 class="prompt-window-title">Prompt</h5>
+      <div v-if="isLoadingHackMD" class="text-center">
+        <p>Loading prompt, please wait...</p>
+        <div class="loading-spinner"></div>
+      </div>
+      <div v-html="gptPrompt" 
+     class="form-control" 
+     contenteditable="true" 
+     style="height: 300px; min-height: 300px; max-height: 300px; overflow-y: auto;" 
+     :class="{ 'disabled': isSubmittingToGpt || isLoadingHackMD }">
+</div>
+      <div v-if="gptPrompt.startsWith('Error:')" class="error-message">{{ gptPrompt }}</div>
+      <button @click="submitToGptWithModification" 
+        class="btn btn-success mt-2" 
+        :disabled="isSubmittingToGpt || isLoadingHackMD || !gptPrompt.trim()"
+        v-if="showSubmitButton">Submit to GPT-4</button>
+      <button @click="connectToCyberVariable" class="btn btn-primary mt-2 ml-2">Cyber Variables Setup</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <div id="status-messages">
+        <p v-if="isSubmittingToGpt && !isFixingError && !debugMode" class="alert-message">Waiting for GPT-4 to generate the program.</p>
+        <p v-if="isSubmittingToGpt && manualSubmit && !debugMode" class="alert-message">Follow-up prompt submitted</p>
+        <p v-if="isFixingError && fixAttempts < maxFixAttempts && !debugMode" class="alert-message-error">[[ fixingMessage ]]</p>
+        <p v-if="needRewrite && !debugMode" class="alert-message-error">Gpt-4 cannot fix errors. Please modify your prompt.</p>
+        <div v-if="isSubmittingToGpt && !debugMode" class="loading-spinner"></div>
+        <p v-if="gptResponse && !isFixingError && !needRewrite && manualSubmit && !debugMode" class="alert-message">The program is renewed by the modified prompt</p>
+        <p v-if="gptResponse && !isFixingError && !needRewrite && !debugMode && !manualSubmit && !isLoadingHackMD" class="alert-message">GPT-4 returns a program without error</p>
+        <p v-if="debugMode && showRuntimeError" class="alert-message-error">The generated code has runtime error.</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h5 class="generated-program">Generated Program</h5>
+      <div id="generated-program-container">
+        <textarea id="generated-program" class="form-control" rows="10" readonly>{{ vpythonCode }}</textarea>
+      </div>
+      <div id="runtime-error" class="alert alert-danger mt-2" style="display: none;"></div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div id="cyberVariableModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Cyber Variables Setup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div v-for="variable in cyberVariables" :key="variable" class="form-check d-flex align-items-center mb-2">
+            <input class="form-check-input" type="checkbox" :id="variable.replace(/\s+/g, '')" @change="toggleButtons(variable)">
+            <label class="form-check-label mr-2" :for="variable.replace(/\s+/g, '')">{{ variable }}</label>
+            <div :id="'buttons-' + variable.replace(/\s+/g, '')" style="display: none;">
+              <button class="btn btn-sm btn-secondary mr-2 idf-list-btn" :data-variable="variable" :id="'idf-btn-' + variable.replace(/\s+/g, '')" @click="showIDFList(variable)">
+                [[ selectedIDFs[variable] || 'IDF List' ]]
+              </button>
+              <button class="btn btn-sm btn-secondary sensor-select-btn" @click="showSensorSelection(variable)">Sensor Selection</button>
+            </div>
+          </div>
+          <!-- 新增输入框 -->
+          <div class="form-group mt-3">
+            <label for="newVariableName">Add new:</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="newVariableName" v-model="newVariableName">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" @click="addNewVariable">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" @click="saveCyberVariables">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- IDF Modal -->
+<div id="idfListModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">IDF List</h5>
+        <button type="button" class="close" @click="closeIDFModal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Content will be dynamically inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="saveIDFSelection">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sensor Modal -->
+<div v-if="showSensorModal" class="modal fade show" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">感應器選擇 for [[ currentVariable ]]</h5>
+        <button type="button" class="close" @click="closeSensorModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- 這裡需要根據您的感應器列表來生成內容 -->
+        <button v-for="sensor in ['Sensor1', 'Sensor2', 'Sensor3']" @click="selectSensor(sensor)" class="btn btn-secondary m-1">
+          [[ sensor ]]
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Physical Feature Binding Modal -->
+<div id="physicalFeatureBindingModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Physical Feature Binding for [[ currentVariable ]]</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Cyber Input variables</label>
+          <input type="text" class="form-control" :value="selectedIDF.name" readonly>
+        </div>
+        <div>
+          <label id="dimensions-label">Number of parameters (dimensions): [[ selectedIDF.dimensions ]]</label>
+        </div>
+        <div>
+          <label id="type-label">Type of variable: [[ selectedIDF.type ]]</label>
+        </div>
+        <div v-for="(param, index) in settingIv.params" :key="index" class="setting-cell">
+          <div class="d-flex align-items-center">
+            <span class="mr-2" v-if="selectedIDF.type !== 'vector' || selectedIDF.dimensions !== 3">[[ index ]]</span>
+            <select class="form-control device-address-select" v-model="param.mac_addr" @change="updateSensors(index)" style="flex: 1; max-width: 150px;">
+              <option v-for="sensor in availableSensorDevices" :value="sensor.mac_addr" :selected="sensor.mac_addr === param.mac_addr">[[ sensor.d_name ]]</option>
+            </select>
+            <select class="form-control sensor-select ml-2" v-model="param.sensor" @change="initParam(index)" style="flex: 1; max-width: 150px;">
+              <option v-for="sensor in availableSensors(param.model)" :value="sensor" :selected="sensor === param.sensor">[[ sensor ]]</option>
+            </select>
+          </div>
+          <div v-if="['Acceleration', 'Gyroscope', 'Magnetometer', 'Orientation'].includes(param.sensor) || (selectedIDF.type === 'vector' && selectedIDF.dimensions === 3)" class="d-flex align-items-center mt-2">
+            <input v-model="param.x0" placeholder="x" class="form-control ml-2" style="flex: 1; max-width: 60px;">
+            <input v-model="param.x1" placeholder="y" class="form-control ml-2" style="flex: 1; max-width: 60px;">
+            <input v-model="param.x2" placeholder="z" class="form-control ml-2" style="flex: 1; max-width: 60px;">
+          </div>
+          <div v-if="param.sensor === 'Range Slider' && (selectedIDF.type !== 'vector' || selectedIDF.dimensions !== 3)" class="d-flex align-items-center mt-2">
+            <input v-model="param.min" placeholder="Min" class="form-control" style="flex: 1; max-width: 60px;">
+            <input v-model="param.max" placeholder="Max" class="form-control ml-2" style="flex: 1; max-width: 60px;">
+            <input v-model="param.default" placeholder="Default" class="form-control ml-2" style="flex: 1; max-width: 60px;">
+          </div>
+          <div v-if="(param.sensor === 'Input Box (Number)' || param.sensor === 'Input Box (String)') && (selectedIDF.type !== 'vector' || selectedIDF.dimensions !== 3)" class="mt-2">
+            <input v-model="param.default" placeholder="Default" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" @click="savePhysicalFeatureBinding">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新增變數名稱的模態框 -->
+<div id="addNewVariableModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please enter a new variable name:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" v-model="newVariableName">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="showDimensionPrompt">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新增维度选择的模态框 -->
+<div id="addDimensionModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please enter the number of parameters (dimensions):</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="number" id="dimension-selector" v-model="numberOfDimensions" min="1" max="9" class="form-control" @change="updateTypeSelector">
+
+        <!-- Type selector 根据 numberOfDimensions 动态显示选项 -->
+        <div class="setting-cell" style="margin-top: 15px;">
+          <label>Type of variable</label>
+          <select class="form-control" v-model="settingIv.type">
+            <!-- 当 numberOfDimensions 等于 1 时，提供 'value' 选项 -->
+            <option v-if="numberOfDimensions == 1" value="value">value</option>
+
+            <!-- 当 numberOfDimensions 等于 3 时，提供 'array' 和 'vector' 选项，默认选中 'array' -->
+            <template v-if="numberOfDimensions == 3">
+              <option value="array">array</option>
+              <option value="vector">vector</option>
+            </template>
+
+            <!-- 当 numberOfDimensions 等于 2 或 4 到 9 时，只提供 'array' 选项 -->
+            <option v-if="numberOfDimensions == 2 || (numberOfDimensions >= 4 && numberOfDimensions <= 9)" value="array">array</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="addNewIDFVariable(newVariableName, numberOfDimensions)">Add Variable</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='animation-creation.js') }}"></script>
+</body>
+</html>

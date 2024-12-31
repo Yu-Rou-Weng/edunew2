@@ -1,0 +1,12 @@
+{
+  "session_id": 900,
+  "log": [
+    {
+      "input": "Please create a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the scene with the center point at (0, 7.5, 0). The floor should have a length of 25. A small ball is horizontally launched from the X-coordinate position of -5 at a height of 15, with an initial velocity of 5. Assuming an elastic collision occurs between the ball and the floor, and only considering the effect of gravity, the ball accelerates downward and bounces upon hitting the ground. The ball stops moving when it reaches an X-coordinate position of 25. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Cyber input variable\nRadius_I = 0.5\n\n# Scene setup\nscene = canvas(center=vector(0, 7.5, 0))\n\n# Create floor and ball objects\nfloor = box(pos=vector(0, 0, 0), size=vector(25, 0.2, 0), color=color.green)\nball = sphere(pos=vector(-5, 15, 0), radius=Radius_I, color=color.blue)\n\n# Initial conditions\nball.velocity = vector(5, 0, 0)\ng = 9.8\ndt = 0.01\nt = 0\n\nwhile ball.pos.x <= 25:\n    rate(100)  # Limit the number of calculations per second\n\n    # Update ball's velocity and position\n    ball.velocity.y = ball.velocity.y - g*dt\n    ball.pos = ball.pos + ball.velocity*dt\n\n    # Ball bounce when hit the floor\n    if ball.pos.y <= ball.radius:\n        ball.velocity.y = -ball.velocity.y\n\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-07-31 13:10:47",
+      "serial_number": 1
+    }
+  ]
+}

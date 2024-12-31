@@ -1,0 +1,4 @@
+{
+  "cyberInputMappingInfo": "\n\n3. Cyber Input Variable Mapping Information:\n\n(1) h is mapped to the variable named Magnetometer_I with an initial value set to a 3-dimensional vector [0, 0, 0]\n(2) When the value of Magnetometer_I changes, let the animation rerun to the starting point and start with the updated h.\n",
+  "created_at": "2024-11-02T03:18:25.902484+00:00"
+}

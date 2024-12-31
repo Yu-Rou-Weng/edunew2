@@ -1,0 +1,12 @@
+{
+  "session_id": 862,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please plot the trajectory of the ball. The center point of the canvas must be correctly set, therefore the order of writing the Parameter Settings must follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally projected ball: Launch a horizontal ball, which bounces off the floor.\nDraw both the ball and the floor. Assume that the ball undergoes an elastic collision with the ground, considering only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0,0,0))\nscene.autoscale = False\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 5\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(0,5,0), radius=0.5, color=color.red)\nball.velocity = vector(Speed_I, 0, 0)\nfloor = box(pos=vector(0,0,0), size=vector(10,0.2,2), color=color.green)\ng = 9.8\ndt = 0.01\nt = 0\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    if ball.pos.y - ball.radius < floor.pos.y + floor.size.y/2:\n        ball.velocity.y = abs(ball.velocity.y)\n    else:\n        ball.velocity.y = ball.velocity.y - g*dt\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:05:01",
+      "serial_number": 1
+    }
+  ]
+}

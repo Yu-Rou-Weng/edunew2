@@ -1,0 +1,19 @@
+{
+  "session_id": 1171,
+  "log": [
+    {
+      "input": "A small ball is launched horizontally from a height ( h ) with an initial velocity ( v_0 ). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.Draw the ball and floor.\nLet the ball move for 3 seconds and then stop.Do not resize the scene.\nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "from vpython import *\n\nscene.width = 800\nscene.height = 600\nscene.center = vector(0, -5, 0)\n\nh = 10\nv0 = 5\ng = 9.81\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red, make_trail=True)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * (t ** 2) * dt\n    t += dt\n\n    if ball.pos.y < ball.radius:\n        v0 *= -0.9\n\n    ball.pos.y = max(ball.pos.y, ball.radius)",
+      "mode": "initial",
+      "timestamp": "2024-12-24 18:56:36",
+      "serial_number": 1
+    },
+    {
+      "input": "# Kepler's Third Law of Planetary Motion## DescriptionKepler's Third Law states that the square of the orbital period (\\( T \\)) of a planet is proportional to the cube of the semi-major axis (\\( a \\)) of its orbit:\\[\\frac{a^3}{T^2} = \\text{constant}\\]This relationship holds for all planets orbiting the Sun and can be derived using the gravitational force as the centripetal force.---## Simulation Setup- **Gravitational constant**: \\( G = 6.67408 \\times 10^{-11} \\, \\text{m}^3\\text{kg}^{-1}\\text{s}^{-2} \\)- **Sun mass**: \\( 1.9885 \\times 10^{30} \\, \\text{kg} \\)- **Earth orbital radius**: \\( 1.5 \\times 10^{11} \\, \\text{m} \\)- **Earth orbital velocity**: \\( 29,780 \\, \\text{m/s} \\)- **Custom planet orbital radius**: \\( n \\cdot d \\) (e.g., \\( n = 4 \\))- **Eccentricity**: \\( e = 0.0 \\)### VisualizationThe simulation uses **VPython** to represent:- **The Sun**: a sphere at the center emitting light.- **The Earth and Custom Planet**: spheres orbiting the Sun with trails to visualize their paths.",
+      "output": "from vpython import sphere, vector, color, rate\n\n# Constants\nG = 6.67408e-11\nmass_sun = 1.9885e30\norbital_radius_earth = 1.5e11\norbital_velocity_earth = 29780\neccentricity = 0.0\n\n# Custom planet parameters\nn = 4\nd = orbital_radius_earth / n\norbital_radius_custom = n * d\n\n# Calculate period and velocity of custom planet\nperiod_custom = (orbital_radius_custom ** 1.5) / (mass_sun ** 0.5)\norbital_velocity_custom = ((G * mass_sun) / orbital_radius_custom) ** 0.5\n\n# VPython objects\nsun = sphere(pos=vector(0, 0, 0), radius=1e10, color=color.yellow)\nearth = sphere(pos=vector(orbital_radius_earth, 0, 0), radius=5e9, color=color.blue)\ncustom_planet = sphere(pos=vector(orbital_radius_custom, 0, 0), radius=5e9, color=color.red)\n\n# Simulation loop\nwhile True:\n    rate(100)\n    earth.rotate(angle=2 * 3.14159 / period_custom, axis=vector(0, 0, 1), origin=sun.pos)\n    custom_planet.rotate(angle=2 * 3.14159 / period_custom, axis=vector(0, 0, 1), origin=sun.pos)",
+      "mode": "initial",
+      "timestamp": "2024-12-26 17:08:00",
+      "serial_number": 1
+    }
+  ]
+}

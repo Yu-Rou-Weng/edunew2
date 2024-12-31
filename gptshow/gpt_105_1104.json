@@ -1,0 +1,12 @@
+{
+  "session_id": 1104,
+  "log": [
+    {
+      "input": "Please update the following program based on this instruction:\nHorizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Only the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nCurrent program:\nfrom vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nh = 10\nv0 = 20\ng = 9.81\nball = sphere(pos=vector(0, h, 0), radius=1, color=color.red)\nground = box(pos=vector(0, 0, 0), size=vector(50, 0.2, 10))\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= ball.radius:\n        v0 *= -1\n        t = 0",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nh = 10\nv0 = 20\ng = 9.81\nball = sphere(pos=vector(0, h, 0), radius=1, color=color.red)\nground = box(pos=vector(0, 0, 0), size=vector(50, 0.2, 10))\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= ball.radius:\n        ball.pos.y = ball.radius\n        t = 0\n        v0 *= -1",
+      "mode": "modification",
+      "timestamp": "2024-11-18 01:53:28",
+      "serial_number": 1
+    }
+  ]
+}

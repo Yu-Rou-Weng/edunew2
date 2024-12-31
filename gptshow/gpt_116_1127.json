@@ -1,0 +1,12 @@
+{
+  "session_id": 1127,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">Add import time to your code.</br># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span></br>3. Cyber Input Variable Mapping Information:</br>\n(1) velocity is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional value 5</br>\n(2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated velocity.</br>\n",
+      "output": "scene.width = 700\nscene.height = 400\n\nfrom vpython import *\n\nball = sphere(pos=vector(-5, 10, 0), radius=1, color=color.red)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\n\nElasticity_I = 5\n\nwhile True:\n    ball.pos.x = -5\n    ball.pos.y = 10\n    ball.velocity = vector(Elasticity_I, 0, 0)\n    \n    while ball.pos.y >= 0:\n        rate(60)\n        ball.pos = ball.pos + ball.velocity * 0.01\n        ball.velocity.y = ball.velocity.y - 9.8 * 0.01\n\n    ball.velocity.y = -ball.velocity.y * Elasticity_I",
+      "mode": "initial",
+      "timestamp": "2024-11-10 13:40:49",
+      "serial_number": 1
+    }
+  ]
+}

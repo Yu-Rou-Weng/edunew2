@@ -1,0 +1,12 @@
+{
+  "session_id": 922,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and height to 400. Please draw the trajectory of the ball's motion. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease draw a VPython animation for horizontal projectile motion: launch a ball horizontally from the air, which then bounces off the floor.\nDraw both the ball and the floor. Assume that the collision between the ball and the ground is elastic, considering only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces when it hits the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun from the starting point with the updated ball speed.\n\n(3) Define and initialize a Cyber Input Variable named Height_I with an initial value set to 15. This variable represents the height of the ball above the ground.\n\n(4) During the animation, whenever the value of the Height_I variable changes, let the animation rerun from the starting point with the updated height of the ball above the ground.\n(5) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Cyber Input Variables\nSpeed_I = 1\nHeight_I = 15\n\n# Create the canvas\nscene = canvas(width=700, height=400)\n\n# Create the ball and floor\nball = sphere(pos=vector(0, Height_I, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, -1, 0), size=vector(50, 1, 1), color=color.green)\n\n# Initialize velocity and acceleration\nball.velocity = vector(Speed_I, 0, 0)\ng = 9.8\nball.accel = vector(0, -g, 0)\n\n# Time settings\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile t < 6:\n    rate(100)\n\n    # Update position and velocity\n    ball.pos = ball.pos + ball.velocity * dt\n    ball.velocity = ball.velocity + ball.accel * dt\n\n    # Check for collision with the floor\n    if ball.pos.y <= ball.radius:\n        ball.velocity.y = abs(ball.velocity.y)\n\n    # Increment time\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-18 19:43:12",
+      "serial_number": 1
+    }
+  ]
+}

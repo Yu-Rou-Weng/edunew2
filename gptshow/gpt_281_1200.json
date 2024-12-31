@@ -1,0 +1,12 @@
+{
+  "session_id": 1200,
+  "log": [
+    {
+      "input": "* # Oblique Projectile MotionA small ball is launched from the ground with an initial velocity \\( v_0 \\) at an angle \\( \\theta \\) relative to the horizontal. The ball accelerates downward under the influence of gravity. The goal is to calculate the ball's **flight time** and **horizontal range**.Considering only the effect of gravity, the ball stops moving when it hits the floor.Draw the ball and floor.Let the ball move for 6 seconds and then stop.",
+      "output": "from vpython import *\n\n# Constants\ng = 9.81  # acceleration due to gravity (m/s^2)\nv0 = 20  # initial velocity (m/s)\ntheta = 45  # launch angle (degrees)\ntheta_rad = theta * pi / 180  # convert angle to radians\n\n# Components of initial velocity\nvx0 = v0 * cos(theta_rad)\nvy0 = v0 * sin(theta_rad)\n\n# Create scene\nscene = canvas(title='Oblique Projectile Motion', width=800, height=600)\n\n# Create ball\nball = sphere(pos=vector(0, 0, 0), radius=0.5, color=color.red, make_trail=True)\n\n# Create floor\nfloor = box(pos=vector(0, -5, 0), size=vector(20, 0.1, 10), color=color.green)\n\n# Time step and total time\ndt = 0.01\nt = 0\n\n# Motion loop\nwhile t <= 6:\n    rate(100)\n    \n    ball.pos.x += vx0 * dt\n    ball.pos.y += vy0 * dt - 0.5 * g * t**2\n    \n    if ball.pos.y <= floor.pos.y + floor.size.y / 2:\n        break\n    \n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 12:13:10",
+      "serial_number": 1
+    }
+  ]
+}

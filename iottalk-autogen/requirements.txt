@@ -1,0 +1,15 @@
+django~=3.1
+python-dotenv>=0.15.0
+django-cors-headers
+
+# https://docs.djangoproject.com/en/3.1/ref/databases/#mysql-db-api-drivers
+mysqlclient>=1.4.0
+
+# For v2 AutoGen Device
+iottalk-py~=2.3
+
+# For CCM API query
+ccmapi@git+https://gitlab+deploy-token-583794:GPFAk3Me7NpsPQLbswVe@gitlab.com/IoTtalk/ccmapi-py.git
+
+# For AutoGen Device random distribution
+numpy~=1.20.2

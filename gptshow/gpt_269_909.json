@@ -1,0 +1,12 @@
+{
+  "session_id": 909,
+  "log": [
+    {
+      "input": "Please write a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the canvas centered at (0, 7.5, 0). The floor length is 25. From the X-coordinate position -10, horizontally project a ball with a radius of 0.5 and an initial velocity of 5, at a height of 15. Assume that the ball undergoes an elastic collision with the ground, considering only the effect of gravity, meaning that the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion when the ball reaches the X-coordinate position 12.5. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5.\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Define and initialize a variable named Radius_I as a cyber input variable\nRadius_I = 0.5\n\n# set the canvas\nscene = canvas(center=vector(0, 7.5, 0))\n\n# create the floor\nfloor = box(pos=vector(0, 0, 0), size=vector(25, 0.2, 10), color=color.green)\n\n# create the ball\nball = sphere(pos=vector(-10, 15, 0), radius=Radius_I, color=color.yellow,\n              make_trail=True, trail_type='points', interval=10, retain=50)\n\nball.v = vector(5, 0, 0)  # velocity\ng = vector(0, -9.8, 0)  # acceleration due to gravity\n\n# time setup\ndt = 0.01\nt = 0\n\nwhile ball.pos.x < 12.5:\n    rate(100)  # limit the animation speed to 100 iterations per second\n    ball.pos = ball.pos + ball.v*dt\n    ball.v = ball.v + g*dt\n    if ball.pos.y < Radius_I and ball.v.y < 0:  # collision with ground\n        ball.v.y = -ball.v.y\n",
+      "mode": "initial",
+      "timestamp": "2024-07-31 15:05:52",
+      "serial_number": 1
+    }
+  ]
+}

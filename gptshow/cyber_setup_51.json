@@ -1,0 +1,1 @@
+{"selectedVariables": ["canvas_width"], "idfSelections": {"canvas_width": "Gravity_I", "Friction_I": "IDF List"}, "sensorSelections": [{"mac_addr": "smartphone_mac_address", "sensor": "Range Slider", "model": "Smartphone", "device": "Smartphone", "min": "0", "max": 10, "default": 5, "x0": "0", "x1": "0", "x2": "0", "index": 0, "sensor_unit": "None", "type": "float"}]}

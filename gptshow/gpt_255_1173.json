@@ -1,0 +1,12 @@
+{
+  "session_id": 1173,
+  "log": [
+    {
+      "input": "Free fall with elastic collision (bouncing):The ball is dropped from a height and accelerates under gravity. Upon reaching the ground, it rebounds back upwards, repeating this motion cyclically. The rebound is assumed to be perfectly elastic, maintaining the same magnitude of velocity after each bounce.Draw the ball and floor.Let the ball move for 3 seconds and then stop.",
+      "output": "from vpython import *\n\nscene = canvas(title='Elastic Collision (Bouncing)', width=800, height=600)\n\nfloor = box(pos=vector(0, -0.05, 0), size=vector(2, 0.1, 2), color=color.white)\nball = sphere(pos=vector(0, 1, 0), radius=0.05, color=color.red, make_trail=True)\n\nball.velocity = vector(0, 0, 0)\ng = 9.81\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    \n    ball.pos = ball.pos + ball.velocity * dt\n    ball.velocity.y = ball.velocity.y - g * dt\n    \n    if ball.pos.y < ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    \n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 10:31:03",
+      "serial_number": 1
+    }
+  ]
+}

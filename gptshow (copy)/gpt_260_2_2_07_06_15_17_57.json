@@ -1,0 +1,12 @@
+{
+  "session_id": 2,
+  "interactions": [
+    {
+      "serial_number": 2,
+      "timestamp": "2024-07-06 15:17:57",
+      "input": "Please update the following program based on this instruction: Make the ball's color to green\n\nCurrent program:\nfrom vpython import *\n\n# Constants\ng = 9.81\ntheta_0 = 5 * pi / 180  # initial angle\n\n# Cyber input variables\nLength_I = 10  # Length of the pendulum\nRadius_I = 1  # Radius of the ball\n\n# Create pendulum bob and rod\nbob = sphere(pos=vector(Length_I * sin(theta_0), -Length_I * cos(theta_0), 0), radius=Radius_I, color=color.yellow)\nrod = cylinder(pos=vector(0, 0, 0), axis=bob.pos, radius=0.01)\n\n# Initial conditions\nomega = sqrt(g / Length_I)  # angular frequency\ntheta = theta_0  # initial angle\nt = 0  # initial time\ndt = 0.01  # time step\n\n# Animation loop\nwhile True:\n    rate(100)\n    # Update position of bob\n    theta = theta_0 * cos(omega * t)\n    bob.pos = vector(Length_I * sin(theta), -Length_I * cos(theta), 0)\n    # Update rod's axis\n    rod.axis = bob.pos\n    # Update time\n    t += dt",
+      "output": "from vpython import *\n\n# Constants\ng = 9.81\ntheta_0 = 5 * pi / 180  # initial angle\n\n# Cyber input variables\nLength_I = 10  # Length of the pendulum\nRadius_I = 1  # Radius of the ball\n\n# Create pendulum bob and rod\nbob = sphere(pos=vector(Length_I * sin(theta_0), -Length_I * cos(theta_0), 0), radius=Radius_I, color=color.green)\nrod = cylinder(pos=vector(0, 0, 0), axis=bob.pos, radius=0.01)\n\n# Initial conditions\nomega = sqrt(g / Length_I)  # angular frequency\ntheta = theta_0  # initial angle\nt = 0  # initial time\ndt = 0.01  # time step\n\n# Animation loop\nwhile True:\n    rate(100)\n    # Update position of bob\n    theta = theta_0 * cos(omega * t)\n    bob.pos = vector(Length_I * sin(theta), -Length_I * cos(theta), 0)\n    # Update rod's axis\n    rod.axis = bob.pos\n    # Update time\n    t += dt",
+      "mode": "modification"
+    }
+  ]
+}

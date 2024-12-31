@@ -1,0 +1,8 @@
+{
+  "session_id": 1002,
+  "1002_2_08_25_14_49_08": {
+    "input": "Please update the following program based on this instruction: 1. Screen Settings:\nAdjust the canvas width to 700 and height to 400. Keep the canvas size unchanged.\n\n2. Object Motion & Parameter Settings:\nDevelop a VPython animation to demonstrate the following physics experiment:\n[User Must Provide the Animation's Description]\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.\n\n\n\n",
+    "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object & Parameter Settings\nball = sphere(pos=vector(-5, 0, 0), radius=0.5, color=color.cyan)\nwallR = box(pos=vector(6, 0, 0), size=vector(0.2, 12, 12), color=color.green)\n\nball.velocity = vector(25, 0, 0)\ndt = 0.001\n\n# Object Motion\nwhile True:\n    rate(100)\n    if ball.pos.x > wallR.pos.x:\n        ball.velocity.x = -ball.velocity.x\n    ball.pos = ball.pos + ball.velocity * dt",
+    "mode": "modification"
+  }
+}

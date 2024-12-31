@@ -1,0 +1,12 @@
+{
+  "session_id": 924,
+  "log": [
+    {
+      "input": "1. Basic Introduction & Parameter Settings\nPlease create a Vpython animation for a horizontal projectile motion: A small ball is thrown horizontally and bounces upon hitting the floor.\nPlease draw a white floor with a length of 25, width of 10, and height of 0.01. From the X-coordinate position of -10, horizontally launch a ball with a radius of 0.5 at a height of 15, with an initial speed of 5.\n\n2. Screen Settings\nSet the canvas center at (0, 7.5, 0). Set the canvas width to 700 and height to 400. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene. The center point of the canvas needs to be correctly set, thus the sequence of writing the Parameter Settings should be after the Screen Settings.\n\n3. Object Motion\nAssume that the ball undergoes an elastic collision with the ground, only considering the influence of gravity. This means the ball accelerates downward under the force of gravity and bounces upon hitting the ground. Stop the motion of the ball when it reaches the X-coordinate position of 12.5.\n\n4. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I = 0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nRadius_I = 0.5\n\nscene = canvas(center = vector(0, 7.5, 0), width = 700, height = 400)\n\nfloor = box(pos = vector(0, 0, 0), length = 25, height = 0.01, width = 10, color = color.white)\nball = sphere(pos = vector(-10, 15, 0), radius = Radius_I, color = color.red, make_trail = True)\nball.v = vector(5, 0, 0)\n\ng = vector(0, -9.8, 0)\n\nwhile ball.pos.x <= 12.5:\n    rate(100)\n    ball.v = ball.v + g * 0.01\n    ball.pos = ball.pos + ball.v * 0.01\n    if ball.pos.y <= Radius_I:\n        ball.v.y = -ball.v.y",
+      "mode": "initial",
+      "timestamp": "2024-08-01 21:22:11",
+      "serial_number": 1
+    }
+  ]
+}

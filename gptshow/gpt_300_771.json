@@ -1,0 +1,12 @@
+{
+  "session_id": 771,
+  "log": [
+    {
+      "input": "Please write the Vpython code for \"Simple Harmonic Motion Caused by Electrostatic Force (Placed Right of the Center Line Midpoint)\"\n\nAt the positions (-10, 0, 0) and (10, 0, 0), there are two blue spheres each with a radius of 1. A small sphere starts at the position (3, 0, 0) and undergoes simple harmonic motion due to the electrostatic forces from these two spheres. There is a yellow line connecting the centers of the two blue spheres. There are three white lines located at (0, -2, 0), (h, -2, 0), and (-h, -2, 0).\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nRadius_I = 1  # Cyber input variable\n\n# Define and initialize spheres and lines\nsphere1 = sphere(pos=vector(-10,0,0), radius=1, color=color.blue)\nsphere2 = sphere(pos=vector(10,0,0), radius=1, color=color.blue)\nball = sphere(pos=vector(3,0,0), radius=Radius_I, color=color.red)\nline = curve(pos=[sphere1.pos, sphere2.pos], color=color.yellow)\nlines = [curve(pos=[vector(0,-2,0), vector(i,-2,0)], color=color.white) for i in [-1,0,1]]\n\n# Constants\nk = 8.99e9  # Electrostatic constant\nq1 = q2 = 1e-6  # Charges\nm = 1e-3  # Mass of the ball\ndt = 0.01  # Time step\n\n# Initial velocity and acceleration\nball.velocity = vector(0,0,0)\nball.acceleration = vector(0,0,0)\n\n# Animation loop\nwhile True:\n    rate(100)  # Limit the number of calculations per second\n\n    # Calculate forces\n    r1 = ball.pos - sphere1.pos\n    r2 = ball.pos - sphere2.pos\n    F1 = k*q1*q2*norm(r1)/mag(r1)**2\n    F2 = k*q1*q2*norm(r2)/mag(r2)**2\n    F_net = F1 + F2\n\n    # Update acceleration, velocity, and position\n    ball.acceleration = F_net/m\n    ball.velocity += ball.acceleration*dt\n    ball.pos += ball.velocity*dt\n\n    # Update the radius of the ball\n    ball.radius = Radius_I",
+      "mode": "initial",
+      "timestamp": "2024-07-25 20:33:16",
+      "serial_number": 1
+    }
+  ]
+}

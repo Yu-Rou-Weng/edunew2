@@ -1,0 +1,12 @@
+{
+  "session_id": 856,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene. The center point of the canvas must be correctly set, therefore the order of writing the Parameter Settings must follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally launched ball: Launch a horizontal ball, which bounces upon hitting the ground.\nDraw the ball and the ground. Assume that the ball has an elastic collision with the ground, and only consider the effect of gravity, meaning the ball accelerates downwards due to gravity and bounces up when it hits the ground. Let the ball stop moving after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, the value of the Speed_I variable should be dynamically monitored. Whenever the value of Speed_I changes, the speed of the ball should be immediately updated to match the new value of Speed_I. Additionally, the animation should continuously check for any changes in Speed_I and redraw itself accordingly to reflect the updated speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width = 700, height = 400, center = vector(0,0,0))\n\n# Object Motion & Parameter Settings\nball = sphere(pos = vector(-5, 5, 0), radius = 0.5, color = color.red)\nball.velocity = vector(0, 0, 0)\nground = box(pos = vector(0,-5.25,0), size = vector(10.0, 0.5, 10), color = color.green)\ngraph = gcurve(color = color.blue)\ng = vector(0, -9.8, 0)\ndt = 0.01\nt = 0\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 5\n\nwhile t < 6:\n    rate(100)\n    ball.velocity.x = Speed_I\n    ball.velocity.y = ball.velocity.y + g.y*dt\n    ball.pos = ball.pos + ball.velocity*dt\n    graph.plot(ball.pos.x, ball.pos.y)\n    if ball.pos.y < ground.pos.y + ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 16:14:09",
+      "serial_number": 1
+    }
+  ]
+}

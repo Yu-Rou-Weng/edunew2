@@ -1,0 +1,64 @@
+{
+  "DeviceFeature": [
+    {
+      "df_name": "foo-I",
+      "df_type": "input",
+      "df_category": "test",
+      "comment": "",
+      "df_parameter": [
+        {
+          "param_type": "float",
+          "min": -5,
+          "max": 5,
+          "unit": null
+        },
+        {
+          "param_type": "float"
+        }
+      ]
+    },
+    {
+      "df_name": "bar-I",
+      "df_type": "input",
+      "df_parameter": [
+        {
+          "param_type": "int"
+        }
+      ]
+    }
+  ],
+  "DeviceModel": [
+    {
+      "dm_name": "FooBar",
+      "df_list": [
+        "foo-I",
+        {
+          "df_name": "bar-I",
+          "df_parameter": [
+            {
+              "param_type": "int",
+              "min": -100,
+              "max": 100,
+              "unit": "cm/s"
+            }
+          ]
+        },
+        {
+          "df_name": "foo-O",
+          "df_type": "output",
+          "df_parameter": [
+            {
+              "param_type": "float",
+              "min": 0,
+              "max": 0,
+              "unit": null
+            },
+            {
+              "param_type": "json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

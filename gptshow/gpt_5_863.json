@@ -1,0 +1,19 @@
+{
+  "session_id": 863,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball. The center point of the canvas must be correctly set, thus the order of writing in the Parameter Settings must follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally projected ball: launch a horizontal ball that bounces off the ground upon impact.\nDraw the ball and the ground. Assume that the ball undergoes an elastic collision with the ground, only considering the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\nSpeed_I = 5\n\n# Screen Settings\nscene = canvas(width = 700, height = 400, center = vector(0,0,0), autoscale = False)\n\n# Object Motion & Parameter Settings\nball = sphere(pos = vector(-5,5,0), radius = 0.5, color = color.red)\nground = box(pos = vector(0,-0.05,0), length = 20, height = 0.1, width = 10)\nball.velocity = vector(Speed_I,0,0)\ng = vector(0,-9.8,0)\ndt = 0.01\nt = 0\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    ball.velocity = ball.velocity + g*dt\n    if ball.pos.y < ground.pos.y + ball.radius and ball.velocity.y < 0:\n        ball.velocity.y = abs(ball.velocity.y)\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:07:20",
+      "serial_number": 1
+    },
+    {
+      "input": "Please update the following program based on this instruction: During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\nfrom vpython import *\nSpeed_I = 5\n\n# Screen Settings\nscene = canvas(width = 700, height = 400, center = vector(0,0,0), autoscale = False)\n\n# Object Motion & Parameter Settings\nball = sphere(pos = vector(-5,5,0), radius = 0.5, color = color.red)\nground = box(pos = vector(0,-0.05,0), length = 20, height = 0.1, width = 10)\nball.velocity = vector(Speed_I,0,0)\ng = vector(0,-9.8,0)\ndt = 0.01\nt = 0\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    ball.velocity = ball.velocity + g*dt\n    if ball.pos.y < ground.pos.y + ball.radius and ball.velocity.y < 0:\n        ball.velocity.y = abs(ball.velocity.y)\n    t += dt",
+      "output": "from vpython import *\nSpeed_I = 5\n\n# Screen Settings\nscene = canvas(width = 700, height = 400, center = vector(0,0,0), autoscale = False)\n\n# Object Motion & Parameter Settings\nball = sphere(pos = vector(-5,5,0), radius = 0.5, color = color.red)\nground = box(pos = vector(0,-0.05,0), length = 20, height = 0.1, width = 10)\n\ng = vector(0,-9.8,0)\ndt = 0.01\n\nwhile True:\n    ball.velocity = vector(Speed_I,0,0)\n    t = 0\n    while t < 6:\n        rate(100)\n        ball.pos = ball.pos + ball.velocity*dt\n        ball.velocity = ball.velocity + g*dt\n        if ball.pos.y < ground.pos.y + ball.radius and ball.velocity.y < 0:\n            ball.velocity.y = abs(ball.velocity.y)\n        t += dt\n    if Speed_I == 5:\n        Speed_I = 7\n    elif Speed_I == 7:\n        Speed_I = 9\n    else:\n        break",
+      "mode": "modification",
+      "timestamp": "2024-08-16 18:08:04",
+      "serial_number": 2
+    }
+  ]
+}

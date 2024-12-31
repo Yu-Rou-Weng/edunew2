@@ -1,0 +1,12 @@
+{
+  "session_id": 1178,
+  "log": [
+    {
+      "input": "Please fix the following error in the program:\nA variable is 'NaN', not a number.\n\nHere's the current program:\nfrom vpython import *\n\n# Constants\nm1 = 1\nm2 = 2\nk = 1\nL0 = 1\nr1 = 0.1\nr2 = 0.15\nv1 = vec(1, 0, 0)\nv2 = vec(0, 0, 0)\nc1 = color.red\nc2 = color.blue\n\n# Objects\ns1 = sphere(pos=vec(-1, 0, 0), radius=r1, color=c1, make_trail=True)\ns2 = sphere(pos=vec(1, 0, 0), radius=r2, color=c2, make_trail=True)\nspring = helix(pos=s1.pos, axis=s2.pos-s1.pos, radius=0.05, color=color.green)\n\n# Initial conditions\ns1.p = m1 * v1\ns2.p = m2 * v2\n\n# Animation loop\nwhile True:\n    rate(100)\n    \n    spring.axis = s2.pos - s1.pos\n    L = mag(spring.axis)\n    if L == 0:\n        spring_force = vec(0, 0, 0)\n    else:\n        spring_force = -k * (L - L0) * spring.axis.norm()\n    \n    a1 = spring_force / m1\n    a2 = -spring_force / m2\n    \n    s1.p += a1\n    s2.p += a2\n    \n    s1.pos += s1.p / m1\n    s2.pos += s2.p / m2\n\n    if isNaN(s1.pos.x) or isNaN(s1.pos.y) or isNaN(s1.pos.z) or isNaN(s2.pos.x) or isNaN(s2.pos.y) or isNaN(s2.pos.z):\n        break",
+      "output": "from vpython import *\n\n# Constants\nm1 = 1\nm2 = 2\nk = 1\nL0 = 1\nr1 = 0.1\nr2 = 0.15\nv1 = vec(1, 0, 0)\nv2 = vec(0, 0, 0)\nc1 = color.red\nc2 = color.blue\n\n# Objects\ns1 = sphere(pos=vec(-1, 0, 0), radius=r1, color=c1, make_trail=True)\ns2 = sphere(pos=vec(1, 0, 0), radius=r2, color=c2, make_trail=True)\nspring = helix(pos=s1.pos, axis=s2.pos-s1.pos, radius=0.05, color=color.green)\n\n# Initial conditions\ns1.p = m1 * v1\ns2.p = m2 * v2\n\n# Animation loop\nwhile True:\n    rate(100)\n    \n    spring.axis = s2.pos - s1.pos\n    L = mag(spring.axis)\n    if L == 0:\n        spring_force = vec(0, 0, 0)\n    else:\n        spring_force = -k * (L - L0) * spring.axis.norm()\n    \n    a1 = spring_force / m1\n    a2 = -spring_force / m2\n    \n    s1.p += a1\n    s2.p += a2\n    \n    s1.pos += s1.p / m1\n    s2.pos += s2.p / m2\n\n    if any(isnan(s1.pos)) or any(isnan(s2.pos)):\n        break",
+      "mode": "fix_error",
+      "timestamp": "2024-12-26 18:02:21",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+FROM python:3.7.10-slim
+
+WORKDIR /iottalk
+
+COPY ./iottalk-core /iottalk-core
+COPY ./iottalk-classic-gui /iottalk-ccm
+
+RUN apt update && \
+
+    # Install build dependencies
+    apt install -y --no-install-recommends git build-essential && \
+    pip install --no-cache-dir -U pip && \
+
+    # FIXME: `-e` for ccm is a workaround
+    #        there are some alembic path issues
+    pip install --no-cache-dir /iottalk-core -e /iottalk-ccm && \
+
+    # FIXME: workaround for correcting `requests` verison
+    pip install iottalk-py && \
+    mkdir -p /iottalk/conf /iottalk/data && \
+
+    # generate default config
+    iotctl genconf /iottalk/conf/iottalk.ini && \
+
+    # Remove build dependencies, unused packages and the packages index
+    #
+    # Ref: https://unix.stackexchange.com/questions/217369/clear-apt-get-list
+    apt purge -y git build-essential && \
+    apt autoremove -y && \
+    rm -rf /var/lib/apt/lists/*

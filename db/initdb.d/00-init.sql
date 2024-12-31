@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS `iottalk`     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `iottalk_gui` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `iottalk_autogen` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `simtalk`     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `edutalk`     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL privileges ON `iottalk`.*     TO 'iottalk'@'%';
+GRANT ALL privileges ON `iottalk_gui`.* TO 'iottalk'@'%';
+GRANT ALL privileges ON `iottalk_autogen`.* TO 'iottalk'@'%';
+GRANT ALL privileges ON `simtalk`.*     TO 'iottalk'@'%';
+GRANT ALL privileges ON `edutalk`.*     TO 'iottalk'@'%';
+FLUSH PRIVILEGES;

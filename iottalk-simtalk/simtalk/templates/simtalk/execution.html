@@ -1,0 +1,75 @@
+{% extends 'simtalk/base/base.html' %} 
+
+{% block page_content %}
+  <div id="app" v-cloak>
+    {% csrf_token %}
+    <b-container class="w-50">
+      <b-row>
+        <b-col>
+          <div class="title">{{ p_name }}</div>
+        </b-col>
+      </b-row>
+		
+      <b-row class="d-none"> <!-- TODO -->
+        <b-col sm="12" md="4" class="nowrap mb-1">
+          <b-button class="w-100">Observation Period</b-button>
+        </b-col>
+        <b-col sm="12" md="4" class="nowrap mb-1">
+          <b-button class="w-100">Unit</b-button>
+        </b-col>
+        <b-col sm="12" md="4" class="nowrap mb-1">
+          <b-button class="w-100">Paras. Sweeping</b-button>
+        </b-col>
+      </b-row>
+
+      <b-row v-for="obj in do_list" :key="obj.do_id">
+        <b-col>
+          <!-- card -->
+          <b-card class="mt-3 mb-3">
+            <template #header>
+              <div class="mb-0 do-card">
+                <span>[[ obj.dm_name ]]</span>
+              </div>
+            </template>
+
+            <b-card-body class="nowrap">
+              <b-form-group>
+                <b-form-radio v-model="obj.sim" :name="obj.dm_name" value="on">
+                      Simulation <span v-show="obj.is_default">(Default)</span>
+                </b-form-radio>
+                <b-form-radio v-show="obj.ccm_d_id != null" v-model="obj.sim" :name="obj.dm_name" value="off">
+                      Real Device
+                </b-form-radio>
+              </b-form-group>
+            </b-card-body>
+          </b-card>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col class="text-right">
+          <b-button variant="success" @click="saveHandler">Save</b-button>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div> <!--end of #app-->
+{% endblock %}
+
+{% block page_script %}
+  <script type="text/javascript">
+    // TODO: change python boolean to js boolean
+    let None = null, True = true, False = false;
+
+    let data = {
+      do_list: {{ do_list|safe }},
+    };
+
+    // set each DO simulation radio selected.
+    data.do_list.forEach((obj)=>{
+      obj.sim = (obj.ccm_d_id == null)? 'on': 'off';
+    })
+  </script>
+
+  {% load static %}
+  <script src="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/js/execution.js' %}"></script>
+{% endblock %}

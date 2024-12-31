@@ -1,0 +1,12 @@
+{
+  "session_id": 899,
+  "log": [
+    {
+      "input": "Please create a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the scene with the center point at (0, 7.5, 0). The floor should be 25 units long. A small ball, starting from the X-coordinate position of 0 and a height of 15, is thrown horizontally with an initial speed of 5. Assuming an elastic collision occurs between the ball and the floor, only consider the effect of gravity. The ball accelerates downward due to gravity and bounces upon hitting the ground. The ball stops moving when it reaches the X-coordinate position of 25. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Set the scene\nscene = canvas(title = \"Horizontal Projectile Motion\", center = vector(0, 7.5, 0))\n\n# Define the cyber input variable as the radius of the ball\nRadius_I = 0.5\n\n# Create the ball and the floor\nball = sphere(pos = vector(0, 15, 0), radius = Radius_I, color = color.red, make_trail = True)\nfloor = box(pos = vector(0, 0, 0), size = vector(25, 0, 25), color = color.green)\n\n# Set initial conditions\nball.velocity = vector(5, 0, 0)\ng = 9.8\ndt = 0.01\n\nwhile ball.pos.x < 25:\n    rate(100)\n    # Update the ball's velocity\n    ball.velocity.y = ball.velocity.y - g * dt\n    ball.pos = ball.pos + ball.velocity * dt\n    \n    # Check if the ball hits the floor\n    if ball.pos.y < Radius_I:\n        ball.velocity.y = -ball.velocity.y\n    ball.radius = Radius_I",
+      "mode": "initial",
+      "timestamp": "2024-07-31 13:07:51",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 842,
+  "log": [
+    {
+      "input": "1. Basic Introduction & Parameter Settings\nPlease create a Vpython animation for a horizontally projected ball: the ball is thrown horizontally and bounces upon hitting the ground.\nDraw a white floor with a length of 25, a width of 10, and a height of 0.01. From the X-coordinate position -10, launch a ball with a radius of 0.5 at a height of 15, with an initial velocity of 5.\n\n2. Screen Settings\nSet the canvas center at (0, 7.5, 0). The canvas width should be set to 700 and the height to 400. Please plot the trajectory of the ball's movement. Do not adjust the size of the scene. The center of the canvas must be correctly set, so the sequence of writing Parameter Settings in the program should be after Screen Settings.\n\n3. Object Motion\nAssume that the ball undergoes an elastic collision with the ground, considering only the effect of gravity, i.e., the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion of the ball when it reaches the X-coordinate position of 12.5.\n\n4. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5.\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(center=vector(0, 7.5, 0), width=700, height=400)\n\n# Basic Introduction & Parameter Settings\nRadius_I = 0.5\nfloor = box(pos=vector(0, 0, 0), size=vector(25, 0.01, 10), color=color.white)\nball = sphere(pos=vector(-10, 15, 0), radius=Radius_I, color=color.red, make_trail=True)\n\n# Parameters for object motion\nball.velocity = vector(5, 0, 0)\ng = -9.8\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt\n    if ball.pos.y <= ball.radius:\n        ball.velocity.y = abs(ball.velocity.y)\n    else:\n        ball.velocity.y += g * dt\n    if ball.pos.x >= 12.5:\n        break",
+      "mode": "initial",
+      "timestamp": "2024-08-15 20:29:12",
+      "serial_number": 1
+    }
+  ]
+}

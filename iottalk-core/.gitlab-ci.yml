@@ -1,0 +1,22 @@
+stages:
+  - lint
+  - test
+
+flake8:
+  image: python:3.7-alpine
+  stage: lint
+  before_script:
+    - apk update && apk add git
+    - pip install flake8
+  script:
+    - flake8
+
+test:
+  image: python:3.7
+  stage: test
+  services:
+    - name: eclipse-mosquitto:1.6
+      alias: localhost
+  script:
+    - pip install tox~=3.17
+    - tox -e py37

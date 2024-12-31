@@ -1,0 +1,12 @@
+{
+  "session_id": 982,
+  "log": [
+    {
+      "input": "1. **Screen Settings:**\n   Adjust the canvas width to 700 and height to 400. Ensure that the canvas size remains unchanged.\n\n2. **Object Motion & Parameter Settings:**\n   Create a VPython animation where a small ball is suspended from the ceiling with a string at a 10-degree angle to the vertical line (pendulum angle). Release the ball from rest so it swings back and forth due to gravity.\n\n3. **Cyber Input Variable Mapping Information:**\n\n   (1) Establish and initialize a Cyber Input Variable named `Speed_I` with an initial value of 0. This variable represents the angular velocity of the pendulum bob.\n\n   (2) During the animation, whenever the value of the `Speed_I` variable changes, promptly update the angular velocity of the pendulum bob to match the new value of `Speed_I`.\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "canvas(width=700, height=400, resizable=False)",
+      "mode": "initial",
+      "timestamp": "2024-08-21 19:11:40",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 857,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and height to 400. Please draw the trajectory of the moving ball. The center point of the canvas needs to be correctly set, thus the programming of Parameter Settings should follow the Screen Settings. Do not adjust the size of the scene.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of horizontal projectile motion: Launch a horizontal ball, which bounces off the ground. \nDraw the ball and the ground. Assume that the ball undergoes an elastic collision with the ground, considering only the effect of gravity, meaning the ball accelerates downward under gravity and bounces up upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0, 0, 0))\n\n# Parameter Settings\ng = 9.8\ndt = 0.01\nt = 0\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 5\n\n# Object Motion\nfloor = box(length=8, height=0.5, width=4, color=color.green)\nball = sphere(pos=vector(-3, 0, 0), radius=0.5, color=color.red)\nball.velocity = vector(Speed_I, 0, 0)\n\n# Loop for motion of ball\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    if ball.pos.y < -floor.height/2:\n        ball.velocity.y = abs(ball.velocity.y)\n    else:\n        ball.velocity.y = ball.velocity.y - g*dt\n    t = t + dt\n\n# Whenever the value of Speed_I changes, rerun the animation\nwhile True:\n    rate(100)\n    if Speed_I != ball.velocity.x:\n        ball.pos = vector(-3, 0, 0)\n        ball.velocity = vector(Speed_I, 0, 0)\n        t = 0\n        while t < 6:\n            rate(100)\n            ball.pos = ball.pos + ball.velocity*dt\n            if ball.pos.y < -floor.height/2:\n                ball.velocity.y = abs(ball.velocity.y)\n            else:\n                ball.velocity.y = ball.velocity.y - g*dt\n            t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 17:31:12",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+version: "3.7"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0.10
+    restart: always
+    ports:
+      - 1883:1883
+      - 1884:1884
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-log:/mosquitto/log
+      - mosquitto-data:/mosquitto/data
+    networks:
+      - edutalk-net
+
+  redis:
+    image: redis:5.0.4-alpine
+    restart: always
+    volumes:
+      - redis-data:/data
+    networks:
+      - edutalk-net
+    command: redis-server --appendonly yes
+
+  csm:
+    build:
+      context: .
+      dockerfile: Dockerfile-iottalk
+    image: iottalk:${USER}
+    # TODO: restart: always, need some modification in server to support restart
+    volumes:
+      - ./iottalk:/iottalk
+    networks:
+      - edutalk-net
+    depends_on:
+      - mosquitto
+      #   - db
+    command: iotctl -c /iottalk/conf/iottalk.ini start csm
+
+  # FIXME: might be race condition on startup,
+  #        fixing it via last-will?
+  #        `sleep` is a temporary workaround
+  ccm:
+    image: iottalk:${USER}
+    restart: on-failure
+    volumes:
+      - ./iottalk:/iottalk
+    networks:
+      - edutalk-net
+    depends_on:
+      - mosquitto
+      - redis
+      - csm
+      #   - db
+    # prefix
+    environment:
+      - SCRIPT_NAME=/iottalk/ccm
+    command: >
+      sh -c 'sleep 3 &&
+             iotctl -c /iottalk/conf/iottalk.ini start ccm -w'
+
+  autogen:
+    build:
+      context: ./iottalk-autogen/
+    image: autogen:${USER}
+    environment:
+      DJANGO_SETTINGS_MODULE: _.autogen_settings
+    restart: on-failure
+    volumes:
+      - ./iottalk/conf/autogen_env:/iottalk-autogen/_/env/env:ro
+    networks:
+      - edutalk-net
+    depends_on:
+      - ccm
+      #   - db
+    command: >
+      gunicorn -c ./_/gunicorn/config.py _.wsgi:application
+
+  edutalk:
+    build:
+      context: .
+      dockerfile: Dockerfile-edutalk
+    image: edutalk:${USER}
+    restart: on-failure
+    volumes:
+      - ./edutalk:/edutalk
+      - ./log/edutalk:/log/edutalk
+      - es-cert:/certs
+      - ./gptshow:/app/gptshow
+    networks:
+      - edutalk-net
+    depends_on:
+      - mosquitto
+      - redis
+      - csm
+      - ccm
+      - autogen
+      #   - db
+    command: edutalk -c /edutalk/edutalk.ini start
+
+  # please uncomment this section if you want to relay m2 sensor
+  relay_m2:
+    build:
+      context: ./edutalk-server/edutalk/relay_m2
+    image: relay_m2:${USER}
+    restart: on-failure
+    networks:
+      - edutalk-net
+    depends_on:
+      - csm
+    environment:
+      IoTtalkV1_url: "http://sdwan.iottalk.tw" # please change it
+      IoTtalkV2_url: "http://csm:9992"
+      dname: "my_relay_m2"
+      IoTtalkV1_mac_addr: "C860008BD252" # please change it
+      IoTtalkV2_mac_addr: "0d9d3522-d298-4367-820d-73c7a0df3511"
+
+  fluentd:
+    build: ./fluentd
+    restart: on-failure
+    volumes:
+      - es-cert:/certs
+      - ./fluentd/conf:/fluentd/etc
+    networks:
+      - edutalk-net
+    depends_on:
+      - essetup
+      - es01
+    environment:
+      ELASTIC_PASSWORD: yAmYFfEvcUpCdvJbUe2w  # please change it
+
+  essetup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.0
+    volumes:
+      - es-cert:/usr/share/elasticsearch/config/certs
+    user: "0"
+    command: >
+      bash -c '
+        if [ ! -f config/certs/ca.zip ]; then
+          echo "Creating CA";
+          bin/elasticsearch-certutil ca --silent --pem -out config/certs/ca.zip;
+          unzip config/certs/ca.zip -d config/certs;
+        fi;
+        if [ ! -f certs/certs.zip ]; then
+          echo "Creating certs";
+          echo -ne \
+          "instances:\n"\
+          "  - name: es01\n"\
+          "    dns:\n"\
+          "      - es01\n"\
+          "      - localhost\n"\
+          "    ip:\n"\
+          "      - 127.0.0.1\n"\
+          > config/certs/instances.yml;
+          bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;
+          unzip config/certs/certs.zip -d config/certs;
+        fi;
+        echo "Setting file permissions"
+        chown -R root:root config/certs;
+        find . -type d -exec chmod 770 \{\} \;;
+        find . -type f -exec chmod 660 \{\} \;;
+        echo "All done!";
+      '
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f config/certs/es01/es01.crt ]"]
+      interval: 1s
+      timeout: 5s
+      retries: 120
+
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.0
+    volumes:
+      - es-cert:/usr/share/elasticsearch/config/certs
+      - es01data:/usr/share/elasticsearch/data
+    networks:
+      - edutalk-net
+    depends_on:
+      - essetup
+    environment:
+      node.name: es01
+      cluster.name: es-docker-cluster
+      cluster.initial_master_nodes: es01
+      discovery.seed_hosts: es01
+      ELASTIC_PASSWORD: yAmYFfEvcUpCdvJbUe2w  # please change it
+      bootstrap.memory_lock: "true"
+      xpack.security.enabled: "true"
+      xpack.security.http.ssl.enabled: "true"
+      xpack.security.http.ssl.key: certs/es01/es01.key
+      xpack.security.http.ssl.certificate: certs/es01/es01.crt
+      xpack.security.http.ssl.certificate_authorities: certs/ca/ca.crt
+      xpack.security.http.ssl.verification_mode: certificate
+      xpack.security.transport.ssl.enabled: "true"
+      xpack.security.transport.ssl.key: certs/es01/es01.key
+      xpack.security.transport.ssl.certificate: certs/es01/es01.crt
+      xpack.security.transport.ssl.certificate_authorities: certs/ca/ca.crt
+      xpack.security.transport.ssl.verification_mode: certificate
+      xpack.license.self_generated.type: basic
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: "-1"
+        hard: "-1"
+    expose:
+      - "9200"
+    ports:
+      - "9200:9200"
+
+  # FIXME: waiting for DA maintenance checking
+  # rc:
+  #   image: iottalk
+  #   restart: on-failure
+  #   networks:
+  #     - edutalk-net
+  #   depends_on:
+  #     - mosquitto
+  #     - redis
+  #     - ccm
+  #     - csm
+  #     #   - db
+  #   environment:
+  #     CSM_URL: http://csm:9992
+  #   command: python3 /iottalk-ccm/iotgui/da/Remote_control/server.py
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-certbot
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 8883:8883
+      - 8884:8884
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      # Apply certificate in nginx container
+      # or comment out the line below and mount the certificate into nginx container
+      - nginx-cert:/etc/letsencrypt
+    networks:
+      - edutalk-net
+    depends_on:
+      - mosquitto
+    command: "/bin/sh -c 'while :; do certbot renew --nginx; nginx -s reload; sleep 6h & wait $${!}; done & nginx -g \"daemon off;\"'"
+
+  # db:
+  #   image: mysql:5.7.26
+  #   restart: always
+  #   volumes:
+  #     #   - db-data:/var/lib/mysql
+  #     - ./db/initdb.d:/docker-entrypoint-initdb.d:ro
+  #   command: >
+  #     --sql_mode=''
+  #     --innodb_strict_mode=OFF
+  #     --character-set-server=utf8mb4
+  #     --wait-timeout=31536000
+  #     --interactive-timeout=31536000
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root-password  # please change it
+  #     MYSQL_USER: iottalk
+  #     MYSQL_PASSWORD: iottalk-password  # please change it
+  #   networks:
+  #     - edutalk-net
+
+  # Enable it if you need a web UI for MySQL
+  #
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - edutalk-net
+  #   environment:
+  #     ADMINER_DEFAULT_SERVER: db
+
+
+volumes:
+  mosquitto-log:
+  mosquitto-data:
+  redis-data:
+  db-data:
+  nginx-cert:
+  es-cert:
+  es01data:
+  gpt-interactions:
+
+networks:
+  edutalk-net:

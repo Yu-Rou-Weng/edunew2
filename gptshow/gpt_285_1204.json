@@ -1,0 +1,12 @@
+{
+  "session_id": 1204,
+  "log": [
+    {
+      "input": "# Projectile Motion with Air ResistanceA small ball is launched from the ground with an initial velocity \\( v_0 \\) at an angle \\( \\theta \\) relative to the horizontal. The ball accelerates downward under the influence of gravity.\u00a0Consider both gravity and air resistance where the resistance force is given by \\( f = -b v \\).\u00a0Draw the ball and floor.Draw the ball trajectory",
+      "output": "from vpython import *\n\n# Constants\ng = 9.81  # acceleration due to gravity (m/s^2)\nb = 0.1  # air resistance coefficient\n\n# Initial conditions\nv0 = 20  # initial velocity (m/s)\ntheta = 45  # launch angle (degrees)\n\n# Convert angle to radians\ntheta_rad = radians(theta)\n\n# Components of initial velocity\nv0x = v0 * cos(theta_rad)\nv0y = v0 * sin(theta_rad)\n\n# Create ball\nball = sphere(pos=vector(0, 0, 0), radius=0.5, color=color.red)\n\n# Create floor\nfloor = box(pos=vector(0, -1, 0), size=vector(50, 0.1, 10), color=color.green)\n\n# Time step\ndt = 0.01\n\n# Initial position\nball.pos = vector(0, 0, 0)\n\n# Initial velocity\nball.velocity = vector(v0x, v0y, 0)\n\n# Simulation loop\nwhile ball.pos.y >= 0:\n    rate(100)\n    \n    # Update position\n    ball.pos = ball.pos + ball.velocity * dt\n    \n    # Update velocity\n    v_mag = mag(ball.velocity)\n    v_unit = ball.velocity / v_mag\n    f_resistance = -b * v_mag * v_unit\n    ball.velocity = ball.velocity + vector(0, -g, 0) * dt + f_resistance * dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 12:39:21",
+      "serial_number": 1
+    }
+  ]
+}

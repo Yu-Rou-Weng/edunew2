@@ -1,0 +1,351 @@
+#card {
+  width: 100%;
+  max-width: 100%;
+  margin: 100;
+  font-size: 1em;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 0;
+}
+.card-block {
+  font-size: 1.2em;
+  padding: 0;
+  width: 100%;
+}
+
+.lecture-info {
+  margin-left: -100px; /* 确保Lecture部分向左对齐 */
+  display: inline-flex;
+  align-items: center;
+  margin-right: 40px;
+  white-space: nowrap; /* 防止換行 */
+  min-width: auto; /* 移除固定寬度 */
+}
+.hackmd-info {
+  margin-left: -1px; /* 确保HackMD部分向左对齐 */
+}
+.lecture-info h5, .hackmd-info h5 {
+  font-size: 1em;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 70px; /* 調整這個值以確保 "Lecture" 與 "Prompt" 對齊 */
+  margin-right: -80px; /* 調整這個值來控制標題與內容之間的間距 */
+  text-align: left; /* 確保標題是靠左對齊 */
+  min-width: 523px; /* 如果需要，減少這個寬度來讓標題與內容靠左對齊 */
+}
+.lecture-name, .hackmd-url {
+  margin-right: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20000px;
+}
+
+.rename-btn, .edit-url-btn {
+  cursor: pointer;
+  color: #85ce61;
+}
+
+.rename-btn:hover, .edit-url-btn:hover {
+  color: #5f9942;
+}
+
+.card-text {
+  clear: both;
+  color: rgba(0, 0, 0, .68);
+}
+.card-title {
+  height: 34px;
+  width: 500%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.28571429em;
+  font-weight: 700;
+}
+
+.url {
+  width: 50%;
+  min-width: 350px;
+  margin:30px;
+}
+.form-control:focus {
+  /* border-color: rgba(70, 167, 213, 0.2); */
+  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(70, 167, 213, 0.5); */
+  border-color: #DCDFE6;
+  box-shadow: 0 0px 0 #ccc, 0 -1px #fff inset;
+  outline: 0 none;
+}
+
+.card-input-title{
+  display: none;
+}
+.card-input-url {
+  display: none; /* 初始狀態隱藏 */
+  position: absolute;
+  left: 0;          /* 改為 0 */
+  top: -5px;        /* 微調以對齊 URL 位置 */
+  transform: none;  /* 移除 transform */
+  background-color: white;
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+  white-space: nowrap;
+  width: 57%;  /* 加寬輸入框 */
+}
+
+.card-input-video-url {
+  display: none;
+}
+input.card-input {
+  width: 200px;
+  display: inline;
+  margin-right: 0px;
+  vertical-align: middle
+}
+.card-input-url.active {
+  display: flex !important;
+  align-items: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: normal;
+  margin-left:10px;
+}
+.success-message {
+  color: #6ac259;
+  float: right;
+  font-size: 25px;
+  margin-right: 10px;
+  display: none;
+}
+
+#delete-lesson-btn {
+  float: right;
+  width: 150px;
+  color: white;
+  background-color: #55555599;
+  margin-bottom: 20px;
+}
+#delete-lesson-btn:hover {
+  /* background-color: #f56c6c; */
+  background-color: #f44336;
+  box-shadow: none;
+  /* border-color: #f56c6c; */
+  color: white;
+}
+
+.card-lesson-url {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hackmd-url {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  line-height: 1.1;
+  font-weight: 700;
+  color: inherit;
+}
+.card-lesson-video-url {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.video-url {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  line-height: 1.1;
+  font-weight: 700;
+  color: inherit;
+}
+.da-name {
+  font-weight: 700;
+}
+.da-info {
+  margin: 5px 0;
+}
+.df-label {
+  display: inline-block;
+  margin: 0.2em 0;
+  padding: 0.6em;
+}
+.da-info span:nth-of-type(6n+1) {
+  background: #00bcd4;
+}
+.da-info span:nth-of-type(6n+2) {
+  background: #ff9800;
+}
+.da-info span:nth-of-type(6n+3) {
+  background: #4caf50;
+}
+.da-info span:nth-of-type(6n+4) {
+  background: #3379b7;
+}
+.da-info span:nth-of-type(6n+5) {
+  background: #777;
+}
+.da-info span:nth-of-type(6n+6) {
+  background: #d9534e;
+}
+.da-info span:last-child {
+  background: transparent;
+}
+.da-info .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: #55555599;
+  cursor: pointer;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.da-info .material-symbols-outlined:focus,
+.da-info .material-symbols-outlined:hover {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  color: #0e0d0d99;
+}
+
+/* for setting card */
+.close {
+  position: absolute;
+  right: 1.5%;
+}
+
+option[id="iv-name-option"] {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  width: 60px;
+}
+
+#setting-card {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  padding: 3%;
+}
+
+.sensor-select {
+  width: 85%;
+}
+
+.unit-warning {
+  color: #ff9800;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.card-title .row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.card-lesson-title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.card-lesson-title span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.container-fluid:after,
+.container-fluid:before,
+.container:after,
+.container:before,
+.row:after,
+.row:before {
+  display: none !important;
+}
+#lecture-content {
+  margin-top: -100px; /* 根据实际情况调整数值 */
+  margin-block-end: -100px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  padding-bottom: -150px;
+  gap: 100px;
+  margin-bottom: 12;
+}
+.hackmd-info {
+  display: flex;
+  align-items: center;
+  flex: 1; /* 使其可以擴展 */
+  min-width: 0; /* 允許內容壓縮 */
+}
+
+.hackmd-info h5 {
+  margin-right: -260px; /* 調整標籤和URL之間的間距 */
+  white-space: nowrap; /* 確保標籤不會換行 */
+}
+
+
+.hackmd-url-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+.hackmd-url {
+  position: relative;  /* 添加相對定位 */
+  flex: 1;
+  margin-right: 50px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-input {
+  flex: 1; /* 使輸入框自適應 */
+  margin-right: 10px;
+  min-width: 200px;
+  max-width: 400px; /* 設置最大寬度 */
+}
+
+.edit-url-btn {
+  cursor: pointer;
+  color: #85ce61;
+  margin-right: 200px; /* 增加大量負值的左邊距將筆往左移動 */
+  position: relative; /* 添加相對定位 */
+  z-index: 1; /* 確保筆圖標顯示在上層 */
+}
+.title-section {
+  display: flex;
+  align-items: center;
+  min-width: 70px;
+  margin-right: -80px;
+}
+.title-section h5 {
+  font-size: 1em;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 523px;
+  margin-right: -80px;
+  text-align: left;
+  color: rgba(0, 0, 0, .68);
+}

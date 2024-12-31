@@ -1,0 +1,12 @@
+{
+  "session_id": 1013,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">This is a simulation of projectile motion with only gravitational force acting on the object. The object is launched horizontally with an initial velocity \\( v_0 \\) from a height \\( h \\). The object accelerates downward due to gravity and bounces off the ground elastically when it hits the ground.</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) initial_velocity is mapped to the variable named Angle_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated initial_velocity.\n    \n\n3. Cyber Input Variable Mapping Information:\n    (1) height is mapped to the variable named Gyroscope_I with an initial value set to a 3-dimensional vector [[0, 0, 4]]\n    (2) When the value of Gyroscope_I changes, let the animation rerun to the starting point and start with the updated height.",
+      "output": "```python\nfrom vpython import *\n\n# Screen Settings\nscene.width = 700\nscene.height = 400\n\n# Object Motion & Parameter Settings\ng = 9.81  # acceleration due to gravity\n\ndef projectile_motion(initial_velocity, height):\n    ball = sphere(pos=vector(0, height[0][1], 0), radius=0.5, color=color.blue)\n    ball.velocity = vector(initial_velocity, 0, 0)\n    \n    ground = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n    \n    dt = 0.01\n    t = 0\n    \n    while True:\n        rate(100)\n        \n        ball.pos.x += ball.velocity.x * dt\n        ball.pos.y += ball.velocity.y * dt - 0.5 * g * t**2\n        \n        if ball.pos.y <= ball.radius and ball.velocity.y < 0:\n            ball.velocity.y *= -1\n        \n        t += dt\n\n# Initial values\nAngle_I = 5\nGyroscope_I = [[0, 0, 4]]\n\ndef update_angle_I(value):\n    global Angle_I\n    Angle_I = value\n    projectile_motion(Angle_I, Gyroscope_I)\n\ndef update_gyroscope_I(value):\n    global Gyroscope_I\n    Gyroscope_I = value\n    projectile_motion(Angle_I, Gyroscope_I)\n\nupdate_angle_I(Angle_I)\nupdate_gyroscope_I(Gyroscope_I)\n```",
+      "mode": "initial",
+      "timestamp": "2024-09-12 07:58:08",
+      "serial_number": 1
+    }
+  ]
+}

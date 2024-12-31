@@ -1,0 +1,12 @@
+{
+  "session_id": 1224,
+  "log": [
+    {
+      "input": "# Simple Harmonic MotionOn a smooth horizontal surface, a block with mass \\(m\\) is connected to a wall on the left side by a spring with a spring constant \\(k\\). If the block is pulled to the right by a distance \\(R\\) and then released from rest, the relationship between the net force and acceleration of the block is given by:$$F = -kx = ma \\implies -kx = m \\frac{d^2x}{dt^2}$$The motion of the block under these conditions is called simple harmonic motion (S.H.M.). From the above equation, the solution can be expressed as:$$x(t) = R \\cos(\\omega t + \\phi)$$$$v(t) = -\\omega R \\sin(\\omega t + \\phi)$$$$a(t) = -\\omega^2 R \\cos(\\omega t + \\phi)$$where \\(\\omega\\) is the angular frequency:$$\\omega = \\sqrt{\\frac{k}{m}}$$The period of motion is:$$T = 2\\pi \\sqrt{\\frac{m}{k}}$$This describes the ideal simple harmonic motion.Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "m = 1\nk = 1\nR = 1\n\nomega = sqrt(k/m)\nT = 2*pi*sqrt(m/k)\n\nt = 0\ndt = 0.01\n\nwhile t < 2*T:\n    rate(100)\n    \n    x = R*cos(omega*t)\n    v = -omega*R*sin(omega*t)\n    a = -omega**2*R*cos(omega*t)\n    \n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 23:55:27",
+      "serial_number": 1
+    }
+  ]
+}

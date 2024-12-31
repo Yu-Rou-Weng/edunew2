@@ -1,0 +1,3084 @@
+{
+  "DeviceFeatureCategory": [
+    {"dfc_name": "None"}
+  ],
+  "Unit": [
+    {"unit_name": "None"},
+    {"unit_name": "cm/s"},
+    {"unit_name": "m/s"},
+    {"unit_name": "km/s"}
+  ],
+  "Function": [
+    {
+      "fn_name": "min_index",
+      "code": "def run(*args): \n    return args.index(min(args))"
+    },
+    {
+      "fn_name": "max_index",
+      "code": "def run(*args): \n    return args.index(max(args))"
+    },
+    {
+      "fn_name": "max",
+      "code": "def run(*args): \n    return max(args)"
+    },
+    {
+      "fn_name": "min",
+      "code": "def run(*args): \n    return min(args)"
+    },
+    {
+      "fn_name": "product",
+      "code": "def run(*args): \n    r = 1\n    for i in args: r *= i\n    return r"
+    },
+    {
+      "fn_name": "average",
+      "code": "def run(*args): \n    return sum(args)/len(args)"
+    },
+    {
+      "fn_name": "sum",
+      "code": "def run(*args): \n    return sum(args)"
+    },
+    {
+      "fn_name": "scalar",
+      "code": "def run(*args): \n    return sum(i*i for i in args)**0.5"
+    },
+    {
+      "fn_name": "x1",
+      "code": "def run(*args): \n    return args[0]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x2",
+      "code": "def run(*args): \n    return args[1]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x3",
+      "code": "def run(*args): \n    return args[2]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x4",
+      "code": "def run(*args): \n    return args[3]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x5",
+      "code": "def run(*args): \n    return args[4]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "larger than",
+      "code": "def run(a, b): \n    return 1 if a > b else 0"
+    },
+    {
+      "fn_name": "switch",
+      "code": "state=1\ndef run(*args): \n    global state\n    if state==1: \n        state=0\n        return 0\n    else: \n        state=1\n        return 1"
+    },
+    {
+      "fn_name": "flip",
+      "code": "def run(*args): \n    if args[2]>0: \n        return 1\n    else: \n        return 0"
+    },
+    {
+      "fn_name": "flip_light",
+      "code": "def run(*args): \n    return ((args[2]+10)*4.8)"
+    },
+    {
+      "fn_name": "set_range",
+      "code": "def run(x1, path): \n    csmapi.dfm_push_min_max(path.na_id, path.odf_dfo_id, 'function', [[MIN, MAX]])\n    return x1"
+    },
+    {
+      "fn_name": "shake_shake",
+      "code": "brightness=0\ndef run(*args): \n    global brightness\n    if abs(args[2])>4: brightness=brightness+5\n    else: brightness=brightness-2\n    if brightness<0: brightness=0\n    if brightness>100: brightness=100\n    return brightness"
+    },
+    {
+      "fn_name": "fft",
+      "code": "def run(*arg): \n    import numpy as np\n    import math\n    sampling_rate = 8000\n    fft_size = len(arg)\n\n    xf = np.fft.rfft(arg)/fft_size\n    xfpp = np.clip(np.abs(xf), 1e-20, 1e100)\n    hxfpp = xfpp[: int(len(xfpp)/2)]\n\n    max1 = hxfpp.max()\n    max1index = hxfpp.argmax()\n    masterHZ  = 0\n    tonetmp   = 0\n    tone      = 0\n\n    masterHZ = max1index*(sampling_rate/fft_size)*2\n\n    if masterHZ > 20 and masterHZ < 4000 and max1 > 3.9: \n        tonetmp = 69 + round(12*math.log2(masterHZ/440.0))\n        tone = (tonetmp - 59 ) % 12\n        return tone\n    return 0"
+    },
+    {
+      "fn_name": "sms",
+      "code": "phone_number='0000000000'\nitem_size=10\nimport json\n__data__buffer__=[]\ndef run(*args):\n    global __data__buffer__\n    __data__buffer__.append(str(args[0]))\n    if len (__data__buffer__) >= item_size:\n        SMS_text=\", \".join(__data__buffer__)\n        __data__buffer__=[]\n        return json.dumps({\"phone\": phone_number, \"text\": SMS_text})\n    else: return None"
+    },
+    {
+      "fn_name": "all",
+      "code": "def run(*args): \n    return args"
+    },
+    {
+      "fn_name": "x11",
+      "code": "def run(*args): \n    return args[0][0]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x12",
+      "code": "def run(*args): \n    return args[0][1]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x13",
+      "code": "def run(*args): \n    return args[0][2]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x21",
+      "code": "def run(*args): \n    return args[1][0]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x22",
+      "code": "def run(*args): \n    return args[1][1]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x23",
+      "code": "def run(*args): \n    return args[1][2]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x31",
+      "code": "def run(*args): \n    return args[2][0]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x32",
+      "code": "def run(*args): \n    return args[2][1]",
+      "is_protect": true
+    },
+    {
+      "fn_name": "x33",
+      "code": "def run(*args): \n    return args[2][2]",
+      "is_protect": true
+    }
+  ],
+  "FunctionSDF": [
+    {
+      "df_name": "Color-O",
+      "fn_list": [
+        {"fn_name": "x1"},
+        {"fn_name": "x2"},
+        {"fn_name": "x3"}
+      ]
+    },
+    {
+      "df_name": "Acceleration-I",
+      "fn_list": [
+        {"fn_name": "scalar"}
+      ]
+    },
+    {
+      "df_name": "Mag-I",
+      "fn_list": [
+        {"fn_name": "scalar"}
+      ]
+    },
+    {
+      "df_name": "SmsContent-O",
+      "fn_list": [
+        {"fn_name": "sms"}
+      ]
+    }
+  ],
+  "DeviceFeature": [
+    {
+      "comment": "cyberdevice: 3 float type parameters to catch Orientation-I data in Smartphone",
+      "df_parameter": [
+        {
+          "max": 360.0,
+          "min": 0.0,
+          "param_type": "float"
+        },
+        {
+          "max": 180.0,
+          "min": -180.0,
+          "param_type": "float"
+        },
+        {
+          "max": 90.0,
+          "min": -90.0,
+          "param_type": "float"
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Orientation-O1"
+    },
+    {
+      "comment": "cyberdevice: 3 float type parameters to catch Orientation-I data in Smartphone",
+      "df_parameter": [
+        {
+          "max": 360.0,
+          "min": 0.0,
+          "param_type": "float"
+        },
+        {
+          "max": 180.0,
+          "min": -180.0,
+          "param_type": "float"
+        },
+        {
+          "max": 90.0,
+          "min": -90.0,
+          "param_type": "float"
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Orientation-O2"
+    },
+    {
+      "comment": "cyberdevice: 3 float type parameters to catch Acceleration-I data in Smartphone",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "min": 1.0,
+          "param_type": "float"
+        },
+        {
+          "max": 0.0,
+          "min": 1.0,
+          "param_type": "float"
+        },
+        {
+          "max": 0.0,
+          "min": 1.0,
+          "param_type": "float"
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Acceleration-O1"
+    },
+    {
+      "comment": "cyberdevice: 3 float type parameters to catch Acceleration-I data in Smartphone",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "min": 1.0,
+          "param_type": "float"
+        },
+        {
+          "max": 0.0,
+          "min": 1.0,
+          "param_type": "float"
+        },
+        {
+          "max": 0.0,
+          "min": 1.0,
+          "param_type": "float"
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Acceleration-O2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Acceleration-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Acceleration-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Mode-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Mode-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Forward-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 100.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Smile-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 200.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "HBR-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "C-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "C-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1023,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "A1-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1023,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "A2-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1023,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "A3-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1023,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "A4-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1023,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "A5-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "DummySensor-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0,
+          "param_type": "json",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "SmsContent-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0,
+          "param_type": "json",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "ScratchX-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0,
+          "param_type": "json",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "ScratchX-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 50,
+          "param_type": "int",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "SpringConst-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Button-I9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "json",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Display-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Scale-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "End-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 10.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Gravity-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Keypad-I9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1,
+          "param_type": "json",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Song-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1,
+          "param_type": "json",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Song-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0,
+          "param_type": "json",
+          "min": 0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Location-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Key-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Key-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Gyroscope-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Gyroscope-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Controller-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "PptControl-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Switch-I9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Period-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "UV-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "UV-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Back-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Microphone-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Temp-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Vibration-O"
+    },
+    {
+      "comment": "Magnetometer",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Mag-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Volume-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Volume-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Stick-O"
+    },
+    {
+      "comment": "Random float",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "RnFloat-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O10"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O11"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O12"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O13"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O14"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O15"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Switch-O16"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Suspend-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.1,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Mass-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Orientation-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Orientation-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Number-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Friction-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Height-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Size-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Angle-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "DummyControl-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 255,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Color-I10"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1023,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "A0-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "string",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Name-O9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        },
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Color-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Humidity-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Humidity-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I1"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I2"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I3"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I4"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I5"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I6"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I7"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I8"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Knob-I9"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "L-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "L-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "N-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "N-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 90.0,
+          "param_type": "float",
+          "min": -90.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": -180.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Geolocation-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 4.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Luminance-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D2-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D3-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D4-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D5Pwm-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D6Pwm-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D7-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D8-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 255.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "D9Pwm-O"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Float-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 0.0,
+          "param_type": "int",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "Period-I"
+    },
+    {
+      "comment": "",
+      "df_parameter": [
+        {
+          "max": 50.0,
+          "param_type": "float",
+          "min": 0.0
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "Speed-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduAcc-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduAcc-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduGyr-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 1.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduGyr-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduOri-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 180.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduOri-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 360.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 360.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 360.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduMag-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": 360.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 360.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": 360.0,
+          "param_type": "float",
+          "min": 0.0
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduMag-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduHum-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduHum-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduUV-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduUV-O"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "input",
+      "df_name": "EduAlc-I"
+    },
+    {
+      "comment": "edutalk",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "EduAlc-O"
+    },
+    {
+      "comment": "edutalk, SimpleLogger",
+      "df_parameter": [
+        {
+          "max": null,
+          "param_type": "float",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        },
+        {
+          "max": null,
+          "param_type": "string",
+          "min": null
+        }
+      ],
+      "df_category": "None",
+      "df_type": "output",
+      "df_name": "OneDimLogger-O"
+    }
+  ],
+  "DeviceModel": [
+    {
+      "dm_name": "SnakeMove",
+      "df_list": [
+        "Orientation-O1"
+      ]
+    },
+    {
+      "dm_name": "Bombman",
+      "df_list": [
+        "Acceleration-O1",
+        "Acceleration-O2",
+        "Orientation-O1",
+        "Orientation-O2"
+      ]
+    },
+    {
+      "dm_name": "Paddle",
+      "df_list": [
+        "Orientation-O1",
+        "Orientation-O2"
+      ]
+    },
+    {
+      "dm_name": "SimpleLogger",
+      "df_list": [
+        "OneDimLogger-O",
+        "EduAcc-O",
+        "EduOri-O",
+        "EduGyr-O",
+        "EduMag-O",
+        "EduAlc-O",
+        "EduHum-O",
+        "EduUV-O"
+      ]
+    },
+    {
+      "dm_name": "Koala",
+      "df_list": [
+        "Acceleration-I",
+        "Gyroscope-I"
+      ]
+    },
+    {
+      "dm_name": "SMS",
+      "df_list": [
+        "SmsContent-O"
+      ]
+    },
+    {
+      "dm_name": "Tail",
+      "df_list": [
+        "Vibration-O"
+      ]
+    },
+    {
+      "dm_name": "Ball-Reflect",
+      "df_list": [
+        "Number-O"
+      ]
+    },
+    {
+      "dm_name": "Remote_control",
+      "plural": true,
+      "df_list": [
+        "Button-I1",
+        "Button-I2",
+        "Button-I3",
+        "Button-I4",
+        "Button-I5",
+        "Button-I6",
+        "Button-I7",
+        "Button-I8",
+        "Button-I9",
+        "Color-I1",
+        "Color-I2",
+        "Color-I3",
+        "Color-I4",
+        "Color-I5",
+        "Color-I6",
+        "Color-I7",
+        "Color-I8",
+        "Color-I9",
+        "Color-I10",
+        "Keypad-I1",
+        "Keypad-I2",
+        "Keypad-I3",
+        "Keypad-I4",
+        "Keypad-I5",
+        "Keypad-I6",
+        "Keypad-I7",
+        "Keypad-I8",
+        "Keypad-I9",
+        "Knob-I1",
+        "Knob-I2",
+        "Knob-I3",
+        "Knob-I4",
+        "Knob-I5",
+        "Knob-I6",
+        "Knob-I7",
+        "Knob-I8",
+        "Knob-I9",
+        "Switch-I1",
+        "Switch-I2",
+        "Switch-I3",
+        "Switch-I4",
+        "Switch-I5",
+        "Switch-I6",
+        "Switch-I8",
+        "Switch-I7",
+        "Switch-I9",
+        "PptControl-I"
+      ]
+    },
+    {
+      "dm_name": "ScratchX",
+      "df_list": [
+        "ScratchX-I",
+        "ScratchX-O"
+      ]
+    },
+    {
+      "dm_name": "Smartphone",
+      "df_list": [
+        "Display-O",
+        "Acceleration-I",
+        "Orientation-I",
+        "Microphone-I",
+        "Gyroscope-I"
+      ]
+    },
+    {
+      "dm_name": "Dandelion",
+      "df_list": [
+        "Size-O",
+        "Angle-O",
+        "Color-O"
+      ]
+    },
+    {
+      "dm_name": "MorSensor",
+      "df_list": [
+        "Mag-I",
+        "UV-I",
+        "Temp-I",
+        "Acceleration-I",
+        "Gyroscope-I",
+        "Color-I1",
+        "Humidity-I"
+      ]
+    },
+    {
+      "dm_name": "MBoxCtl",
+      "df_list": [
+        "Key-I",
+        "N-I",
+        "Period-I",
+        "L-I",
+        "Volume-I",
+        "Mode-I",
+        "Song-I",
+        "C-I"
+      ]
+    },
+    {
+      "dm_name": "Jack",
+      "df_list": [
+        "Switch-O1"
+      ]
+    },
+    {
+      "dm_name": "Fan",
+      "df_list": [
+        "Controller-O"
+      ]
+    },
+    {
+      "dm_name": "Webcam",
+      "df_list": [
+        "Smile-I"
+      ]
+    },
+    {
+      "dm_name": "MusicBox",
+      "df_list": [
+        "Volume-O",
+        "Mode-O",
+        "Key-O",
+        "L-O",
+        "C-O",
+        "Song-O",
+        "N-O",
+        "Period-O"
+      ]
+    },
+    {
+      "dm_name": "Dummy_Device",
+      "df_list": [
+        "DummyControl-O",
+        "DummySensor-I"
+      ]
+    },
+    {
+      "dm_name": "Ball-Spring",
+      "df_list": [
+        "Mass-O",
+        "SpringConst-O"
+      ]
+    },
+    {
+      "dm_name": "Intel-Cam",
+      "df_list": [
+        "HBR-I",
+        "Smile-I"
+      ]
+    },
+    {
+      "dm_name": "MCU_board",
+      "df_list": [
+        "A0-I",
+        "A1-I",
+        "A2-I",
+        "A3-I",
+        "A4-I",
+        "A5-I",
+        "D2-O",
+        "D3-O",
+        "D4-O",
+        "D5Pwm-O",
+        "D6Pwm-O",
+        "D7-O",
+        "D8-O",
+        "D9Pwm-O"
+      ]
+    },
+    {
+      "dm_name": "Bulb",
+      "df_list": [
+        "Color-O",
+        "Luminance-O"
+      ]
+    },
+    {
+      "dm_name": "Ball-throw2",
+      "df_list": [
+        "Speed-O"
+      ]
+    },
+    {
+      "dm_name": "Ball-throw1",
+      "df_list": [
+        "Height-O",
+        "Angle-O",
+        "Speed-O"
+      ]
+    },
+    {
+      "dm_name": "Painting",
+      "df_list": [
+        "Back-O",
+        "Forward-O",
+        "End-O",
+        "Suspend-O"
+      ]
+    },
+    {
+      "dm_name": "GPS",
+      "df_list": [
+        "Geolocation-I"
+      ]
+    },
+    {
+      "dm_name": "Cajon",
+      "df_list": [
+        "Stick-O"
+      ]
+    },
+    {
+      "dm_name": "Qmote",
+      "df_list": [
+        "Button-I1"
+      ]
+    },
+    {
+      "dm_name": "Skeleton",
+      "df_list": [
+        "Color-O",
+        "Size-O",
+        "Angle-O"
+      ]
+    },
+    {
+      "dm_name": "RandNum",
+      "df_list": [
+        "RnFloat-I"
+      ]
+    },
+    {
+      "dm_name": "Lamp",
+      "df_list": [
+        "Luminance-O"
+      ]
+    },
+    {
+      "dm_name": "Locator",
+      "df_list": [
+        "Location-I"
+      ]
+    },
+    {
+      "dm_name": "Ball-Slid",
+      "df_list": [
+        "Gravity-O",
+        "Angle-O",
+        "Friction-O",
+        "Speed-O"
+      ]
+    },
+    {
+      "dm_name": "Ball-Spin",
+      "df_list": [
+        "Friction-O",
+        "Speed-O"
+      ]
+    },
+    {
+      "dm_name": "Message",
+      "plural": true,
+      "df_list": [
+        "Name-O1",
+        "Name-O2",
+        "Name-O3",
+        "Name-O4",
+        "Name-O5",
+        "Name-O6",
+        "Name-O7",
+        "Name-O8",
+        "Name-O9"
+      ]
+    }
+  ],
+  "Tag": [
+    {
+      "tag_name": "ID",
+      "param_no": 1
+    },
+    {
+      "tag_name": "Geolocation",
+      "param_no": 2
+    },
+    {
+      "tag_name": "Timestamp",
+      "param_no": 1
+    },
+    {
+      "tag_name": "Battery",
+      "param_no": 1
+    },
+    {
+      "tag_name": "Privacy",
+      "param_no": 1
+    }
+  ]
+}

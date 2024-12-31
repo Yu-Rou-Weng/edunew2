@@ -1,0 +1,12 @@
+{
+  "session_id": 25,
+  "log": [
+    {
+      "input": "Simple Pendulum\n\nIf we define the moment of inertia (I) as:\n\n$$\nI = mr^2\n$$\n\nSince the torque $\\tau$ and angular acceleration $\\alpha$ are in opposite directions, their relationship is:\n\n$$\n\\tau = -I\\alpha \\Rightarrow rF\\sin\\theta = -mr^2 \\frac{d^2\\theta}{dt^2} \\Rightarrow \\frac{F}{m}r\\sin\\theta = -\\frac{d^2\\theta}{dt^2}\n$$\n\nIf $r = L$ and $F = mg$, and when $\\theta < 5^\\circ$, $\\sin \\theta \\approx \\theta$, then the equation can be rewritten as:\n\n$$\n\\frac{g}{L}\\theta = -\\frac{d^2\\theta}{dt^2}\n$$\n\nFrom this, we can derive:\n\n$$\n\\theta(t) = \\theta_0 \\cos\\left(\\sqrt{\\frac{g}{L}} t\\right) = \\theta_0 \\cos(\\omega t)\n$$\n\nIn the above formula, $\\omega$ is the angular frequency of the oscillation, therefore the period is:\n\n$$\nT = \\frac{2\\pi}{\\omega} = 2\\pi \\sqrt{\\frac{L}{g}}\n$$\n\nBelow are two programs:\n\n1. An ideal simple pendulum, changing the initial swing angle to calculate the motion process and period.\n2. A simple pendulum considering air resistance.\n\n(1) Define and initialize a variable named Length_I as a cyber input variable, set Length_I=10\n(2) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(3) Length_I is the length of the pendulum. When Length_I changes to a new value, the length of the pendulum also changes to that value.\n(4) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(5) Do not import packages that are not supported by VPython such as numpy, math and time",
+      "output": "from vpython import *\n\n# Defining and initializing the variables\nLength_I = 10\nRadius_I = 1\n\n# Creating the pendulum\nceil = box(length=0.2, height=0.2, width=3, color=color.blue)\nball = sphere(radius=Radius_I, color=color.red)\nrod = cylinder(radius=0.1, color=color.green)\nball.pos = vector(0,-Length_I,0)\nrod.axis = ball.pos\n\n# Constants and initial values\ng = 9.8\ntheta = pi/4\nomega = 0\ndt = 0.001\nt = 0\n\n# Animation loop\nwhile True:\n    rate(1000)\n    alpha = -(g/Length_I)*sin(theta)\n    omega += alpha*dt\n    theta += omega*dt\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-07-08 11:29:28",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+include requirements.txt
+include iotgui/db/*.json
+graft iotgui/ccm/static
+graft iotgui/ccm/templates
+graft iotgui/da
+global-exclude **/__pycache__/**

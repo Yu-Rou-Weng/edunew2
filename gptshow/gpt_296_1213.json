@@ -1,0 +1,12 @@
+{
+  "session_id": 1213,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nWhen the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds.\nDo not resize the scene.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nh = 5 # Initial height\nv0 = 10 # Initial velocity\ng = 9.81 # Acceleration due to gravity\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.blue, make_trail=True)\nball.velocity = vector(v0, 0, 0)\n\nt = 0\ndt = 0.01\n\nwhile t < 6:\n    rate(100)\n    \n    ball.pos.x += ball.velocity.x * dt\n    ball.pos.y += ball.velocity.y * dt\n    \n    ball.velocity.y -= g * dt\n\n    if ball.pos.y < ball.radius:\n        ball.velocity.y *= -1\n\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 22:36:19",
+      "serial_number": 1
+    }
+  ]
+}

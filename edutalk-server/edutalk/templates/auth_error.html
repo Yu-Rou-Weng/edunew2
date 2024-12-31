@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <title>Error</title>
+{% endblock head%}
+
+{% block error_banner %}
+  <div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-9 col-lg-6 justify-content-center">
+      <div class="card w-100">
+        <div class="card-body">
+          <div class="row my-2">
+            <div class="col-12 d-flex justify-content-center">
+              <h3 class="text-danger">
+                {{ error_reason }}
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock error_banner %}

@@ -1,0 +1,12 @@
+{
+  "session_id": 885,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball. The center point of the canvas must be correctly set, therefore the sequence of writing the Parameter Settings in the program should be after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease draw a VPython animation of a ball being thrown horizontally: A horizontal ball is thrown, hitting the floor and rebounding.\nDraw the ball and the floor. Assume that the ball and the ground undergo an elastic collision, only considering the impact of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0,0,0), background=color.white)\nscene.autoscale = False\n\n# Cyber Input Variable\nSpeed_I = 5\n\n# Parameter Settings\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0,-5,0), length=50, height=0.5, width=10, color=color.green)\nball.velocity = vector(Speed_I,0,0)\ngravity = vector(0,-9.8,0)\nball.momentum = ball.velocity\n\n# Time settings\ndt = 0.01\nt = 0\n\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.momentum*dt\n    ball.momentum = ball.momentum + gravity*dt\n    if ball.pos.y < floor.pos.y + ball.radius:\n        ball.momentum.y = -ball.momentum.y\n    Speed_I = ball.momentum.mag\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:49:59",
+      "serial_number": 1
+    }
+  ]
+}

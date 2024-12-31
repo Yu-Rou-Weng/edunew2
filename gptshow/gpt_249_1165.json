@@ -1,0 +1,12 @@
+{
+  "session_id": 1165,
+  "log": [
+    {
+      "input": "Please modify the following program based on this instruction:\nFree fall with a stop upon ground contact:\nA ball is dropped from a specific height and accelerates downward due to gravity until it reaches the ground, where it stops moving. The motion is influenced solely by gravitational acceleration (9.8 m/s\u00b2), and there is no rebound.Draw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nCurrent program:\nfrom vpython import *\n\nscene = canvas(title='Free Fall with Stop', width=800, height=600)\n\nball = sphere(pos=vector(0, 20, 0), radius=1, color=color.blue)\nfloor = box(pos=vector(0, 0, 0), size=vector(40, 0.5, 40), color=color.green)\n\nball.velocity = vector(0, 0, 0)\nball.acceleration = vector(0, -9.8, 0)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt\n    ball.velocity = ball.velocity + ball.acceleration * dt\n    t = t + dt\n\nball.velocity = vector(0, 0, 0)",
+      "output": "from vpython import *\n\nscene = canvas(title='Free Fall with Stop', width=800, height=600)\n\nball = sphere(pos=vector(0, 20, 0), radius=1, color=color.blue)\nfloor = box(pos=vector(0, 0, 0), size=vector(40, 0.5, 40), color=color.green)\n\nball.velocity = vector(0, 0, 0)\nball.acceleration = vector(0, -9.8, 0)\n\nt = 0\ndt = 0.01\n\nwhile ball.pos.y > ball.radius:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt\n    ball.velocity = ball.velocity + ball.acceleration * dt\n    t = t + dt\n\nball.velocity = vector(0, 0, 0)",
+      "mode": "modification",
+      "timestamp": "2024-12-26 10:03:24",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 912,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the ball's motion. Do not change the size of the canvas.\n\nObject Motion & Parameter Settings:\nPlease create a VPython animation of horizontal projectile motion: Launch a ball horizontally from mid-air, which bounces upon hitting the ground.\nDraw the ball and the ground. Assume that the ball has an elastic collision with the ground, and consider only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, rerun the animation with the updated ball speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Set the canvas\nscene = canvas(width=700, height=400, center=vector(0,0,0))\n\n# Define and initialize a Cyber Input Variable named Speed_I\nSpeed_I = 1\n\n# Create a ball and the ground\nball = sphere(pos=vector(0,5,0), radius=0.5, color=color.red)\nground = box(pos=vector(0,-5,0), size=vector(10,0.2,10), color=color.green)\n\n# Set the initial velocity and acceleration due to gravity\nball.velocity = vector(Speed_I,0,0)\ng = vector(0,-9.8,0)\n\n# Set the time and time-step\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile t < 6:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity*dt\n    ball.velocity.y = ball.velocity.y + g.y*dt\n    if ball.pos.y <= ground.pos.y + ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 22:03:46",
+      "serial_number": 1
+    }
+  ]
+}

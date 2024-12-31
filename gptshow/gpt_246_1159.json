@@ -1,0 +1,12 @@
+{
+  "session_id": 1159,
+  "log": [
+    {
+      "input": "Please update the following VPython program based on this instruction:\n1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nDraw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nDo not resize the scene. \nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) angle1 is mapped to the variable named Angle_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated angle1.</br>\n\n\nCurrent program:\n# Initial VPython code will be generated",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\nscene.center = vec(0, 0, 0)\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vec(0, 10, 0), radius=1, color=color.red, make_trail=True)\nfloor = box(pos=vec(0, 0, 0), size=vec(30, 0.5, 10), color=color.green)\n\n# Cyber Input Variable Mapping Information\nAngle_I = [5]\n\ndef update_angle(angle):\n    ball.pos = vec(0, 10, 0)\n    ball.clear_trail()\n    ball.velocity = vec(5, 0, 0)\n    ball.angle = radians(angle[0])\n\ndef run_simulation(angle):\n    update_angle(angle)\n    t = 0\n    dt = 0.01\n    \n    while t < 3:\n        rate(100)\n        ball.pos.x += ball.velocity.x * dt\n        ball.pos.y += ball.velocity.y * dt - 0.5 * 9.81 * (dt ** 2)\n        \n        if ball.pos.y <= 0:\n            ball.velocity.y *= -1\n        \n        t += dt\n\nrun_simulation(Angle_I)",
+      "mode": "modification",
+      "timestamp": "2024-12-20 14:42:29",
+      "serial_number": 1
+    }
+  ]
+}

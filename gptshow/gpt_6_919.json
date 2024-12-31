@@ -1,0 +1,12 @@
+{
+  "session_id": 919,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the moving ball. Do not change the size of the canvas.\n\nObject Motion & Parameter Settings:\nPlease create a VPython animation of a ball being thrown horizontally: A ball is thrown horizontally from midair and bounces upon hitting the ground.\nDraw the ball and the ground. Assume that the ball has an elastic collision with the ground and only the effect of gravity is considered, meaning the ball accelerates downward due to gravity and bounces up when it hits the ground. Let the ball stop moving after 6 seconds.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, the speed of the moving ball should be immediately updated to the new value of Speed_I.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Create canvas\nscene = canvas(width=700, height=400)\n\n# Define initial parameters\ng = vector(0,-9.8,0) # gravity\nt = 0 # time\ndt = 0.01 # time step\nSpeed_I = 1 # initial speed\n\n# Create ball and ground\nball = sphere(pos=vector(0,5,0), radius=0.5, color=color.red)\nball.velocity = vector(Speed_I, 0, 0) # initial velocity\nground = box(pos=vector(0,-5,0), size=vector(10,0.5,10), color=color.green)\n\n# Animation loop\nwhile t < 6:\n    rate(100) # limit the animation speed to 100 iterations per second\n    ball.pos = ball.pos + ball.velocity*dt # update position\n    ball.velocity.y = ball.velocity.y + g.y*dt # update velocity due to gravity\n\n    # check if ball hits the ground\n    if ball.pos.y - ball.radius <= ground.pos.y + ground.size.y/2:\n        ball.velocity.y = -ball.velocity.y # reverse y velocity upon collision\n\n    Speed_I = scene.mouse.pick # update speed from Cyber Input Variable\n    if Speed_I is not None:\n        ball.velocity.x = Speed_I # update x velocity from Cyber Input Variable\n\n    t = t + dt # update time",
+      "mode": "initial",
+      "timestamp": "2024-08-16 22:30:50",
+      "serial_number": 1
+    }
+  ]
+}

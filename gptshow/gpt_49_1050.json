@@ -1,0 +1,12 @@
+{
+  "session_id": 1050,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) canvas width is mapped to the variable named Angle_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated canvas width.\n    ",
+      "output": "scene.width = 700\nscene.height = 400\n\nball = sphere(pos=vec(-6, 0, 0), radius=0.5, color=color.blue)\nground = box(pos=vec(0, -5, 0), size=vec(15, 0.2, 10), color=color.green)\n\nh = 5\nv0 = 10\ng = 9.81\n\nt = 0\ndt = 0.01\n\nwhile True:\n    ball.pos.x = -6 + v0 * t\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    rate(100)\n    \n    if ball.pos.y <= 0:\n        t = 0",
+      "mode": "initial",
+      "timestamp": "2024-10-24 16:08:22",
+      "serial_number": 1
+    }
+  ]
+}

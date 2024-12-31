@@ -1,0 +1,12 @@
+{
+  "session_id": 1177,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: Free fall with elastic collision (bouncing): The ball is dropped from a height and accelerates under gravity. Upon reaching the ground, it rebounds back upwards, repeating this motion cyclically. The rebound is assumed to be perfectly elastic, maintaining the same magnitude of velocity after each bounce. Draw the ball and floor. Let the ball move for 3 seconds and then stop. 3. Cyber Input Variable Mapping Information: (1) radius is mapped to the variable named radius with an initial value set to a 1-dimensional value 5 (2) When the value of radius changes, let the animation rerun to the starting point and start with the updated radius.",
+      "output": "scene.width = 700\nscene.height = 400\n\nball = sphere(pos=vector(0, 10, 0), radius=5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 20), color=color.green)\n\ng = 9.81\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.y = ball.pos.y - 0.5 * g * t * t\n    t += dt\n\nt = 0\n\nwhile t < 3:\n    rate(100)\n    ball.pos.y = ball.pos.y + 0.5 * g * t * t\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 10:38:06",
+      "serial_number": 1
+    }
+  ]
+}

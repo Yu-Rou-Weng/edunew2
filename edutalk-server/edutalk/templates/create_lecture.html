@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Create New Lecture</h2>
+    <form id="createLectureForm">
+        <div class="form-group">
+            <label for="lectureName">Lecture Name</label>
+            <input type="text" class="form-control" id="lectureName" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Lecture</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('createLectureForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var lectureName = document.getElementById('lectureName').value;
+    
+    fetch('{{ url_for("root.lecture.create_lecture_genai") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            name: lectureName,
+            csrf_token: '{{ csrf_token() }}'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            window.location.href = data.url;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while creating the lecture.');
+    });
+});
+</script>
+{% endblock %}

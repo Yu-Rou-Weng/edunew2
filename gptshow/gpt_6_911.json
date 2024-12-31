@@ -1,0 +1,12 @@
+{
+  "session_id": 911,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of a small ball. Do not change the size of the canvas.\n\nObject Motion & Parameter Settings:\nPlease create a VPython animation of horizontal projectile motion: launch a small ball horizontally from mid-air, which then bounces off the floor.\nDraw the small ball and the floor. Assume that the ball has an elastic collision with the ground, only considering the impact of gravity, i.e., the ball accelerates downward under the influence of gravity and bounces up when it hits the ground. Let the ball stop moving after 6 seconds.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Define and initialize Cyber Input Variable\nSpeed_I = 1\n\n# Create canvas and objects\ncanvas(width=700, height=400)\nfloor = box(length=4, height=0.05, width=4, color=color.green)\nball = sphere(pos=vector(0,5,0), radius=0.1, color=color.red)\n\n# Set initial values for motion parameters\nball.velocity = vector(Speed_I,0,0)\ngravity = vector(0,-9.8,0)\nt = 0\ndt = 0.01\n\n# Animation\nwhile t < 6:\n    rate(100)\n    ball.velocity = ball.velocity + gravity*dt\n    ball.pos = ball.pos + ball.velocity*dt\n    \n    # Bounce off the floor\n    if ball.pos.y < ball.radius:\n        ball.velocity.y = abs(ball.velocity.y)\n    \n    t = t + dt\n\n# Reset Speed_I and rerun the animation when Speed_I changes\nwhile True:\n    rate(100)\n    if Speed_I != ball.velocity.x:\n        Speed_I = ball.velocity.x\n        # Reset initial values for motion parameters\n        ball.pos = vector(0,5,0)\n        ball.velocity = vector(Speed_I,0,0)\n        t = 0\n        # Rerun the animation\n        while t < 6:\n            rate(100)\n            ball.velocity = ball.velocity + gravity*dt\n            ball.pos = ball.pos + ball.velocity*dt\n            # Bounce off the floor\n            if ball.pos.y < ball.radius:\n                ball.velocity.y = abs(ball.velocity.y)\n            t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 22:02:46",
+      "serial_number": 1
+    }
+  ]
+}

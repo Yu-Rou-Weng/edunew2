@@ -1,0 +1,12 @@
+{
+  "session_id": 1118,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">Do NOT Add import time to your code.</br># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) radius is mapped to the variable named radius with an initial value set to a 1-dimensional value 5\n    (2) When the value of radius changes, let the animation rerun to the starting point and start with the updated radius.\n    ",
+      "output": "scene.width = 700\nscene.height = 400\n\nradius = 5\n\nball = sphere(pos=vector(0, radius, 0), radius=radius, color=color.blue, make_trail=True)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.green)\n\nball.velocity = vector(5, 0, 0)\ng = 9.81\n\nwhile True:\n    rate(60)\n    ball.pos.x += ball.velocity.x * 0.01\n    ball.velocity.y -= g * 0.01\n    ball.pos.y += ball.velocity.y * 0.01\n    \n    if ball.pos.y <= radius:\n        ball.velocity.y *= -1\n        ball.pos.y = radius",
+      "mode": "initial",
+      "timestamp": "2024-11-14 04:39:06",
+      "serial_number": 1
+    }
+  ]
+}

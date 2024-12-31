@@ -1,0 +1,12 @@
+{
+  "session_id": 838,
+  "log": [
+    {
+      "input": "Please write the VPython code for \"Simple harmonic motion caused by gravity, circular ring, initial velocity zero, starting from the endpoint.\"\n\nIn the center of the screen, there is a blue circular ring in 3D space, with its center located at the origin (0, 0, 0). The ring is placed horizontally on the horizontal plane with its normal vector pointing in the vertical direction (z-axis direction). A small ball moves back and forth between the heights above (0, 15, 0) and below (0, -15, 0) the center of the ring (0, 0, 0), performing simple harmonic motion in the vertical direction. Please generate arrows representing the velocity and acceleration of the ball, updating the values over time, and moving with the ball.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nRadius_I = 1\nball_origin = vector(0, 15, 0)\nball = sphere(pos=ball_origin, radius=Radius_I, color=color.red)\nring = ring(pos=vector(0, 0, 0), axis=vector(0, 0, 1), radius=15, thickness=0.3, color=color.blue)\nv_arrow = arrow(pos=ball.pos, axis=vector(0, 0, 0), color=color.green)\na_arrow = arrow(pos=ball.pos, axis=vector(0, 0, 0), color=color.yellow)\n\nt = 0\ndt = 0.01\ng = 9.8\nomega = sqrt(g / abs(ball_origin.y))\n\nwhile True:\n    rate(100)\n    ball.radius = Radius_I\n    ball.pos = vector(0, ball_origin.y * cos(omega * t), 0)\n    v = vector(0, -ball_origin.y * omega * sin(omega * t), 0)\n    a = vector(0, -ball_origin.y * omega**2 * cos(omega * t), 0)\n    \n    v_arrow.pos = ball.pos\n    v_arrow.axis = v\n    a_arrow.pos = ball.pos\n    a_arrow.axis = a\n    \n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-07-26 11:01:59",
+      "serial_number": 1
+    }
+  ]
+}

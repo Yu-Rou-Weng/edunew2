@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-07-03T08:39:02.168Z",
+  "mode": "modification",
+  "input": "Please update the following program based on this instruction: Make the ball's color to green\n\nCurrent program:\nfrom vpython import *\n\nLength_I = 10\ng = 9.8\ntheta = 0.2\n\nbob = sphere(pos=vector(Length_I*sin(theta), -Length_I*cos(theta), 0), radius=1, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=bob.pos, radius=0.1)\n\ndt = 0.01\nomega = 0.0\n\nwhile True:\n    rate(100)\n    alpha = -(g/Length_I)*sin(theta)\n    omega = omega + alpha*dt\n    theta = theta + omega*dt\n    bob.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = bob.pos",
+  "output": "from vpython import *\n\nLength_I = 10\ng = 9.8\ntheta = 0.2\n\nbob = sphere(pos=vector(Length_I*sin(theta), -Length_I*cos(theta), 0), radius=1, color=color.green)\nrod = cylinder(pos=vector(0, 0, 0), axis=bob.pos, radius=0.1)\n\ndt = 0.01\nomega = 0.0\n\nwhile True:\n    rate(100)\n    alpha = -(g/Length_I)*sin(theta)\n    omega = omega + alpha*dt\n    theta = theta + omega*dt\n    bob.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = bob.pos"
+}

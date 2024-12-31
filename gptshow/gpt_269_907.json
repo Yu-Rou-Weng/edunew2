@@ -1,0 +1,12 @@
+{
+  "session_id": 907,
+  "log": [
+    {
+      "input": "Please write a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the canvas center at (0, 7.5, 0). The floor length is 25. Launch a small ball with a radius of 0.5 from the X-coordinate position of -10 at a height of 15, with an initial velocity of 5. Assume that the ball has an elastic collision with the ground and only the effect of gravity is considered, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Stop the motion when the ball reaches the X-coordinate position of 12.5. Please plot the trajectory of the ball\u2019s motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Define and initialize a variable named Radius_I as a cyber input variable\nRadius_I = 0.5\n\n# Create canvas\nscene = canvas(title='Horizontal Projectile Motion', center=vector(0, 7.5, 0))\n\n# Create floor\nfloor = box(pos=vector(0, 0, 0), size=vector(25, 0.1, 0), color=color.green)\n\n# Create ball\nball = sphere(pos=vector(-10, 15, 0), radius=Radius_I, color=color.red)\nball.velocity = vector(5, 0, 0)\n\n# Create arrow for ball's trajectory\ntrajectory = arrow(pos=ball.pos, axis=ball.velocity, color=color.yellow)\n\n# Constants\ng = 9.8\ndt = 0.01\n\nwhile ball.pos.x < 12.5:\n    rate(100)\n    # Update ball's velocity and position\n    ball.velocity.y = ball.velocity.y - g*dt\n    ball.pos = ball.pos + ball.velocity*dt\n\n    # Update trajectory arrow\n    trajectory.pos = ball.pos\n    trajectory.axis = ball.velocity\n\n    # Check for collision with floor\n    if ball.pos.y - Radius_I < floor.pos.y + floor.height/2:\n        ball.velocity.y = -ball.velocity.y\n\n# Update final trajectory arrow\ntrajectory.pos = ball.pos\ntrajectory.axis = ball.velocity",
+      "mode": "initial",
+      "timestamp": "2024-07-31 15:02:32",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 765,
+  "log": [
+    {
+      "input": "Please write the VPython code for \"11-3. Simple harmonic motion caused by gravity, a ring, initial velocity 0, starting from the endpoint\"\n\nIn the center of the screen, there is a ring with its center located at the origin (0, 0, 0) of the space. The ring lies on the horizontal plane, with its normal vector pointing in the vertical direction (z-axis direction). A red ball with a radius of 0.4 moves back and forth between heights of 15 upwards and 15 downwards in the vertical direction, performing simple harmonic motion.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Create the ring and the ball\nring(radius=1, thickness=0.1, color=color.yellow)\nball = sphere(radius=0.4, color=color.red, make_trail=True)\n\n# Initialize\nball.pos = vector(0, 0, 15)\nRadius_I = 1\nball.radius = Radius_I\nball.velocity = vector(0, 0, 0)\nball.acceleration = vector(0, 0, -9.8)\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.velocity = ball.velocity + ball.acceleration * dt\n    ball.pos = ball.pos + ball.velocity * dt\n\n    # Check if the ball has reached the top or bottom and reverse its direction\n    if abs(ball.pos.z) >= 15:\n        ball.velocity = -ball.velocity\n\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-07-25 19:58:14",
+      "serial_number": 1
+    }
+  ]
+}

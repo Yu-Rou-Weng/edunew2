@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/QRcode-modal.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/animation.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">
+{% include 'vp/head.html' %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/qrcode.min.js') }}"></script>
+<script>
+  const videoIndex = '{{ url_for("root.video.index", lec_id=lecture.id) if lecture else "" }}';
+  const vpIndex = '{{ url_for("root.vp.index", lec_id=lecture.id) if lecture else "" }}';
+  const rcIndex = '{{ url_for("root.rc.index", lec_id=lecture.id, _external=True, token=token) if lecture else "" }}';
+  const deeplink = '{{ deeplinkURL }}';
+  var urls = {
+    m2Bind: function () {
+      return '{{ url_for("root.m2.bind", lec_id=lecture.id)}}'
+    },
+  };
+</script>
+{% endblock head %}
+
+{% block nav_header %}
+<div style="padding-right: 15px; display: inline-block;">
+  <a class="navbar-brand" href="{{ url_for('root.index') }}" style="margin: 0px auto;"> EduTalk </a>
+</div>
+{% endblock nav_header %}
+
+{% block content %}
+<div id="page-content-wrapper">
+  <div class="container-fluid main-div">
+    <div class="row">
+      <div class="col-sm-10 col-md-10 col-lg-9">
+        <!-- show vPython animation -->
+        {% if lecture %}
+        {% with da_name=lecture.da_name %}
+        <div id="animation-content" style="display: block;">
+                <div>
+                  <iframe id="device-iframe" src="" frameborder="0"></iframe>
+                </div>
+        </div>
+        {% endwith %}
+        {% endif %}
+      </div>
+      <div class="col-sm-2 col-md-2 col-lg-3">
+        <!-- show QR code -->
+        <div>
+            {% if lecture.video %}
+               <iframe id="video-iframe" src="" frameborder="0" style="width: 100%"
+                       allowfullscreen scrolling="no"></iframe>
+            {% endif %}
+          <br><br>
+          <canvas id="qrcode"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% if lecture %}
+<script type="text/javascript" src="{{ url_for('static', filename='demo.js') }}"></script>
+<script>
+  // creating a wrapper for promises
+  function timeout(milliseconds, promise) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(new Error('timeout exceeded'));
+      }, milliseconds);
+      promise.then(resolve, reject);
+    });
+  }
+
+  // using that wrapper with fetch
+  timeout(1000, fetch(`${deeplink}/support.json`)).then((r) => r.json())
+    .then((response) => {
+      // response success
+      QRCode.toCanvas(
+        document.getElementById('qrcode'),
+        `${deeplink}/check?data=${encodeURIComponent(rcIndex)}`,
+        {
+          width: 250,
+        },
+        (err) => {
+          if (err) console.error(err);
+          console.log(rcIndex);
+        },
+      );
+    }).catch((error) => {
+      // timeout error or server error
+      QRCode.toCanvas(
+        document.getElementById('qrcode'),
+        rcIndex,
+        {
+          width: 250,
+        },
+        (err) => {
+          if (err) console.error(err);
+          console.log(rcIndex);
+        },
+      );
+    });
+</script>
+{% endif %}
+{% endblock content %}

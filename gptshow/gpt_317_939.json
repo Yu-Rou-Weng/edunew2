@@ -1,0 +1,12 @@
+{
+  "session_id": 939,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please plot the trajectory of the moving ball. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease animate a VPython horizontal projectile motion: Launch a ball horizontally from mid-air, which bounces off the ground upon impact.\nDraw the ball and the ground. Assume that the ball and the ground have an elastic collision, only considering the effect of gravity, meaning the ball accelerates downward under gravity and bounces up when it hits the ground. Stop the ball's motion after 10 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, the speed of the moving ball should be immediately updated to the new value of Speed_I.\n\n(3) Define and initialize a Cyber Input Variable named Gravity_I with an initial value set to 9.8. This variable represents the gravitational acceleration.\n\n(4) During the animation, whenever the value of the Gravity_I variable changes, the gravitational acceleration should be immediately updated to the new value of Gravity_I.\n(5) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen settings\nscene = canvas(width=700, height=400, center=vector(0, 0, 0))\n\n# Object motion & parameter settings\nball = sphere(pos=vector(0, 5, 0), radius=0.5, color=color.red)\nground = box(pos=vector(0, -5, 0), size=vector(10, 0.5, 10), color=color.green)\nball.velocity = vector(1, 0, 0)\ng = 9.8\nt = 0\ndt = 0.01\nt_end = 10\n\n# Cyber input variable mapping information\nSpeed_I = 1\nGravity_I = 9.8\n\nwhile t < t_end:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity * dt \n    if ball.pos.y < ground.pos.y + ball.radius:  \n        ball.velocity.y = abs(ball.velocity.y)  \n    else:\n        ball.velocity.y = ball.velocity.y - g*dt  \n    t = t + dt\n    if Speed_I != ball.velocity.x:\n        ball.velocity.x = Speed_I\n    if Gravity_I != g:\n        g = Gravity_I",
+      "mode": "initial",
+      "timestamp": "2024-08-18 20:57:58",
+      "serial_number": 1
+    }
+  ]
+}

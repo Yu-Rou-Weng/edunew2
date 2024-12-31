@@ -1,0 +1,12 @@
+{
+  "session_id": 387,
+  "log": [
+    {
+      "input": "Simple Pendulum\n\nIf we define the moment of inertia (I) as:\n\n$$\nI = mr^2\n$$\n\nSince the directions of torque $\\tau$ and angular acceleration $\\alpha$ are opposite, the relationship between them is:\n\n$$\n\\tau = -I\\alpha \\Rightarrow rF\\sin\\theta = -mr^2 \\frac{d^2\\theta}{dt^2} \\Rightarrow \\frac{F}{m}r\\sin\\theta = -\\frac{d^2\\theta}{dt^2}\n$$\n\nIf $r = L$ and $F = mg$, and when $\\theta < 5^\\circ$, $\\sin \\theta \\approx \\theta$, then the equation can be rewritten as:\n\n$$\n\\frac{g}{L}\\theta = -\\frac{d^2\\theta}{dt^2}\n$$\n\nFrom this, we can solve:\n\n$$\n\\theta(t) = \\theta_0 \\cos\\left(\\sqrt{\\frac{g}{L}} t\\right) = \\theta_0 \\cos(\\omega t)\n$$\n\nIn the above formula, $\\omega$ is the angular frequency of the oscillation, therefore the period is:\n\n$$\nT = \\frac{2\\pi}{\\omega} = 2\\pi \\sqrt{\\frac{L}{g}}\n$$\n\nProgram to be written:\n\nAn ideal simple pendulum, changing the initial swing angle to calculate the motion process and period.\n\nThe pendulum should swing back and forth naturally, starting from an initial angle and oscillating under the influence of gravity. The motion should not complete a full circle.\n\n(1) Define and initialize a variable named Length_I as a cyber input variable, set Length_I=10\n(2) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(3) Length_I is the length of the pendulum. When Length_I changes to a new value, the length of the pendulum also changes to that value.\n(4) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(5) You must generate lots of runtime errors in your code but don't import packages like time, numpy, math!",
+      "output": "from vpython import *\n\nLength_I = 10\nRadius_I = 1\ng = 9.8\ntheta = 0.1\n\nrod = cylinder(pos=vector(0,0,0), axis=vector(0,-Length_I,0), radius=0.01)\nball = sphere(pos=rod.axis, radius=Radius_I, color=color.yellow)\nball.m = 1\nball.v = vector(0,0,0)\n\ndt = 0.001\nt = 0\n\nwhile t<10:\n    rate(1000)\n    ball.a = vector(0, g*cos(theta), 0)\n    ball.v = ball.v + ball.a*dt\n    ball.pos = ball.pos + ball.v*dt\n    rod.axis = ball.pos\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-07-20 15:15:07",
+      "serial_number": 1
+    }
+  ]
+}

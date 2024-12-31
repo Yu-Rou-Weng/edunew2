@@ -1,0 +1,54 @@
+{
+  "session_id": 1108,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.add import time to your code",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nball = sphere(pos=vector(-5, 10, 0), radius=1, color=color.red)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nh = 10\nv0 = 5\ng = 9.81\n\nt = 0\ndt = 0.01\n\nwhile ball.pos.y > 0:\n    rate(100)\n    ball.pos.x = v0 * t\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y < 0:\n        v0 = -v0 * 0.9\n        t = 0",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:36:25",
+      "serial_number": 1
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nbox = vp.box(pos=vp.vector(0,0,0), size=vp.vector(1,1,1))\ntime.sleep(2)\nbox.pos = vp.vector(1,1,1)",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:36:37",
+      "serial_number": 2
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\n# Create a 3D object\nvp.sphere()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:36:40",
+      "serial_number": 3
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nvp.sphere()",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:36:40",
+      "serial_number": 4
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import vpython as vp\nimport time\n\nball = vp.sphere(pos=vp.vector(0,0,0), radius=0.5, color=vp.color.blue)\nfloor = vp.box(pos=vp.vector(0,-1,0), size=vp.vector(4,0.1,4), color=vp.color.green)\n\nball.velocity = vp.vector(0,1,0)\n\nwhile True:\n    vp.rate(30)\n    ball.pos = ball.pos + ball.velocity * 0.01\n    if ball.pos.y < floor.pos.y + 0.5:\n        ball.velocity.y = -ball.velocity.y\n    time.sleep(0.01)",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:36:42",
+      "serial_number": 5
+    },
+    {
+      "input": "add import time to your code",
+      "output": "import time",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:36:55",
+      "serial_number": 6
+    },
+    {
+      "input": "add import time import np to your code",
+      "output": "import time\nimport numpy as np",
+      "mode": "modification",
+      "timestamp": "2024-11-19 21:37:35",
+      "serial_number": 7
+    }
+  ]
+}

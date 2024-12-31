@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/QRcode-modal.css') }}">
+
+<div class="modal fade" tabindex="-1" role="dialog" id="QRcode_modal">
+  <div class="modal-dialog modal-dialog-centered qrcode-modal-dialog" role="document">
+    <div class="modal-content qrcode-modal-content">
+      <div class="close-modal" data-dismiss="modal">
+        <div class="slash">
+          <div class="backslash"></div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <h3>Please scan the QR code.</h3>
+
+        <div>
+          <canvas id="qrcode"></canvas>
+        </div>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/qrcode.min.js') }}"></script>
+        <script>
+          // creating a wrapper for promises
+          function timeout(milliseconds, promise) {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                reject(new Error('timeout exceeded'));
+              }, milliseconds);
+              promise.then(resolve, reject);
+            });
+          }
+
+          // using that wrapper with fetch
+          timeout(1000, fetch(`${urls.deeplink}/support.json`)).then((r) => r.json())
+            .then(() => {
+              // response success
+              QRCode.toCanvas(
+                document.getElementById('qrcode'),
+                `${urls.deeplink}/check?data=${encodeURIComponent(urls.rcIndex)}`,
+                {
+                  width: 250,
+                },
+                (error) => {
+                  if (error) console.error(error);
+                  console.log('success!');
+                },
+              );
+            }).catch(() => {
+              // timeout error or server error
+              QRCode.toCanvas(
+                document.getElementById('qrcode'),
+                urls.rcIndex,
+                {
+                  width: 250,
+                },
+                (error) => {
+                  if (error) console.error(error);
+                  console.log('success!');
+                },
+              );
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(() => $('[data-toggle="tooltip"]').tooltip());
+</script>

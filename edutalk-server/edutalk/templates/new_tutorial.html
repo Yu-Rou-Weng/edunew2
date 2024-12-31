@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% set title = 'Tutorial' %}
+{% if lecture %}
+{% set title = lecture.name + ' | Tutorial' %}
+{% endif %}
+
+{% block head %}
+{% include 'vp/head.html' %}
+{% if lecture %}
+{% include 'codemirror.html' %}
+{% endif %}
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/superagent/4.1.0/superagent.min.js"></script>
+<!--script type="text/javascript" src="//iottalk.github.io/iottalk-js/iottalkjs-v2.3.3.js"></script-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/iottalk/index.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new_animation_creation.css') }}">
+    <script src="{{ url_for('static', filename='js/new_animation_creation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/new_card.js') }}"></script>
+
+<script>
+  let daName = '{{ lecture.da_name if lecture else "" }}';
+  let lesson = '{{ lecture.id if lecture else "" }}';
+  let unitList = JSON.parse('{{ unit_list | tojson | safe }}');
+  {% if lecture %}
+  let ivList = JSON.parse('{{ lecture.iv_list | tojson | safe }}');
+  let output_variables = JSON.parse('{{ lecture.output_variables | tojson | safe }}');
+  let available_actuators_device = JSON.parse('{{ available_actuators_device | tojson | safe }}');
+  let available_sensors_device = JSON.parse('{{ available_sensors_device | tojson | safe }}');
+  let odfToIdfMapping = JSON.parse('{{ lecture.odf_to_idf_mapping | tojson | safe }}');
+  let idfs = JSON.parse('{{ idfs | tojson | safe }}');
+  let idfList = JSON.parse('{{ idf_list | tojson }}');
+  let fileList = JSON.parse('{{ file_list | tojson }}');
+  let dmName = '{{ lecture.idm }}';
+  let dev = '{{ "replay" ~ lecture.idm }}';
+  let title = '{{ title }} | EduTalk';
+  let videoURL = '{{ lecture.video }}';
+  {% else %}
+  let ivList = JSON.parse('{{ [] | tojson | safe }}');
+  let tList = JSON.parse('{{ t_list | tojson | safe }}');
+  let globalIvList = JSON.parse('{{ global_iv_list | tojson | safe }}');
+  let actuatorVarList = JSON.parse('{{ output_var_list | tojson | safe }}');
+  {% endif -%}
+
+  let urls = {
+    videoIndex: '{{ url_for("root.video.index", lec_id=lecture.id) if lecture else "" }}',
+    vpIndex: '{{ url_for("root.vp.index", lec_id=lecture.id) if lecture else "" }}',
+    vpCode: '{{ url_for("root.vp.code", lec_id=lecture.id) if lecture else "" }}',
+    studentCode: function (id) {
+        return '{{ url_for("root.vp.student_code", lec_id=lecture.id, u_id="") if lecture else "" }}' + id;
+    },
+    students: '{{ url_for("root.vp.students", lec_id=lecture.id) if lecture else "" }}',
+    vpReset: '{{ url_for("root.vp.code_reset", lec_id=lecture.id) if lecture else "" }}',
+    studentVpReset: function (id){
+        return '{{ url_for("root.vp.student_code_reset", lec_id=lecture.id, u_id="") if lecture else "" }}' + id;;
+    },
+    vpDefault: '{{ url_for("root.vp.code_default", lec_id=lecture.id) if lecture else "" }}',
+    studentVpDefault: function (id){
+        return '{{ url_for("root.vp.student_code_default", lec_id=lecture.id, u_id="") if lecture else "" }}' + id;;
+    },
+    vpResource: '{{ url_for("static", filename="js/vp-resource/") }}',
+    commentUrl: function(id){
+        if (id)
+            return '{{ url_for("root.comment.get_comment", lec_id=lecture.id, u_id="") if lecture else "" }}' + id;
+        else
+            return '{{ url_for("root.comment.index", lec_id=lecture.id) if lecture else "" }}';
+    },
+    csmUrl: '{{ csm_url }}',
+    rcIndex: '{{ url_for("root.rc.index", lec_id=lecture.id, _external=True, token=token) if lecture else "" }}',
+    rcBind: function (id) {
+      return '{{ url_for("root.rc.bind", lec_id=lecture.id, d_id="") if lecture else "" }}' + id
+    },
+    m2Bind: function (id = "") {
+      return '{{ url_for("root.m2.bind", lec_id=lecture.id, d_id="") if lecture else "" }}' + id
+    },
+    m2UnBind: function () {
+      return '{{ url_for("root.m2.unbind", lec_id=lecture.id) if lecture else "" }}'
+    },
+    vpUnBind: function () {
+      return '{{ url_for("root.vp.unbind", lec_id=lecture.id) if lecture else "" }}'
+    },
+    lecture: {
+      rename: '{{ url_for("root.new_lecture.rename", id_=lecture.id) if lecture else "" }}',
+      create: '{{ url_for("root.new_lecture.create") }}',
+      delete: '{{ url_for("root.new_lecture.delete", id_=lecture.id) if lecture else "" }}',
+      physical: '{{ url_for("root.new_lecture.physical_feature_binding", id_=lecture.id) if lecture else "" }}',
+      actuator: '{{ url_for("root.new_lecture.actuator_feature_binding", id_=lecture.id) if lecture else "" }}',
+      url: '{{ url_for("root.new_lecture.update_url", id_=lecture.id) if lecture else "" }}',
+      video_url: '{{ url_for("root.new_lecture.update_video_url", id_=lecture.id) if lecture else "" }}',
+      bind: '{{ url_for("root.new_lecture.bind", id_=lecture.id) if lecture else "" }}',
+      unbind: '{{ url_for("root.new_lecture.unbind", id_=lecture.id) if lecture else "" }}',
+      iv: '{{ url_for("root.new_lecture.new_iv") }}',
+      ov: '{{ url_for("root.new_lecture.new_ov") }}',
+      unit: '{{ url_for("root.new_lecture.new_unit") }}',
+      upload_historical_data: '{{ url_for("root.new_lecture.upload_historical_data", id_=lecture.id) if lecture else "" }}',
+      query_historical_data: '{{ url_for("root.new_lecture.query_historical_data", id_=lecture.id) if lecture else "" }}',
+    },
+    deeplink: '{{ deeplinkURL }}',
+  };
+</script>
+{% endblock head %}
+
+{% block nav_header %}
+<div style="padding-right: 15px; display: inline-block;">
+  <a class="navbar-brand" href="{{ url_for('root.index') }}" style="margin: 0px auto;"> EduTalk </a>
+</div>
+{% endblock nav_header %}
+
+{% block nav_left %}
+{% if lecture %}
+<li id='lecture-btn' class='active'>
+  <a class='states btn-link'>
+    Lecture
+  </a>
+</li>
+<li id='animation-creation-btn'>
+  <a class='states btn-link'>
+    Animation Program
+  </a>
+</li>
+<li id='program-btn'>
+  <a class='states btn-link'>
+    Program
+  </a>
+</li>
+<li id='animation-btn'>
+  <a class='states btn-link'>
+    Animation
+  </a>
+</li>
+<!-- if lecture -->
+{% else %}
+<li id='lecture-btn' class='active'>
+  <a class='states btn-link'>
+    Add New Lecture
+  </a>
+</li>
+{% endif %}
+{% endblock nav_left %}
+
+{% block content %}
+<div id="page-content-wrapper">
+  <div class='container-fluid main-div'>
+    <div class='row'>
+      <div class='content' id='lecture-content'>
+        {% if current_user.is_teacher or current_user.is_admin %}
+        <div class='tutorial-editor'>
+          {% if lecture %}
+          {% include 'card.html' %}
+          {% else %}
+          {% include 'new-card.html' %}
+          {% endif %}
+        </div>
+        {% endif %}
+
+        {% if lecture %}
+        {% with url=lecture.url %}
+        {% include 'iframe-resizer.html' %}
+        {% endwith %}
+        {% endif %}
+      </div>
+      <!--endof content-->
+
+      {% if lecture %}
+      {% with da_name=lecture.da_name %}
+      <div id="ide-container">
+        {% include 'ide.html' %}
+      </div>
+      <div id="animation-container">  
+        {% include 'animation.html' %}
+      </div>
+      <div id="animation-creation-container">
+        {% include 'animation-creation.html' %}
+      </div>
+      {% include 'qrcode.html' %}
+      {% endwith %}
+      {% endif %}
+    </div>
+    <!--endof row-->
+  </div>
+</div> <!-- /#page-content-wrapper -->
+
+{% if lecture %}
+<script type="text/javascript" src="{{ url_for('static', filename='new_tutorial.js') }}"></script>
+{% endif %}
+{% endblock content %}

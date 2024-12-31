@@ -1,0 +1,12 @@
+{
+  "session_id": 1170,
+  "log": [
+    {
+      "input": "A small ball is launched horizontally from a height ( h ) with an initial velocity ( v_0 ). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.Considering both gravity and air resistance ( f = -bv ).Draw the ball and floor.Let the ball move for 3 seconds and then stop.Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.Do not resize the scene.The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene.autoscale = False\n\n# Parameter Settings\nh = 5 # initial height in meters\nv0 = 10 # initial velocity in m/s\nb = 0.2 # air resistance coefficient\n\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red, make_trail=True)\n\nt = 0\ndt = 0.01\nwhile t < 3:\n    rate(100)\n    t += dt\n    ball.pos.x = v0 * t\n    ball.pos.y = h - 0.5 * 9.81 * t**2\n    if ball.pos.y <= 0:\n        ball.pos.y = 0\n        v0 *= -0.9 # coefficient of restitution\n        v0 -= b * v0 * dt\n        t = 0",
+      "mode": "initial",
+      "timestamp": "2024-12-23 20:13:43",
+      "serial_number": 1
+    }
+  ]
+}

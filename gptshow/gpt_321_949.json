@@ -1,0 +1,12 @@
+{
+  "session_id": 949,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and the height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nPlease create a Vpython animation of simple harmonic motion:\nOn a horizontal smooth table, there is a block connected to the wall on the left by an elastic spring. Pull the block to the right by a certain distance and then release it from rest, allowing the block and spring to perform simple harmonic motion.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Speed_I as a cyber input variable, set Speed_I=0.\n\n(2) Speed_I is the initial velocity of the block. When Speed_I changes to a new value, the initial velocity of the block also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Create a canvas\nscene = canvas(width=700, height=400)\n\n# Create the block\nblock = box(pos=vector(5, 0, 0), size=vector(1, 1, 1), color=color.red)\n\n# Create the spring\nspring = helix(pos=vector(0, 0, 0), axis=block.pos, radius=0.4, color=color.yellow)\n\n# Define and initialize a variable named Speed_I as a cyber input variable\nSpeed_I = 0\n\n# Initial conditions\nblock.mass = 1\nblock.velocity = vector(Speed_I, 0, 0)\nspring.k = 1\nspring.L0 = 5\n\n# Define the time and the time interval dt\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile True:\n    rate(100)\n    # Calculate the force on the block\n    spring.axis = block.pos - spring.pos\n    spring_force = -spring.k * (mag(spring.axis) - spring.L0) * norm(spring.axis)\n    # Update the block's velocity\n    block.velocity = block.velocity + spring_force / block.mass * dt\n    # Update the block's position\n    block.pos = block.pos + block.velocity * dt\n    # Update the time\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-19 15:02:33",
+      "serial_number": 1
+    }
+  ]
+}

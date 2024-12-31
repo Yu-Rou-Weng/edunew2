@@ -1,0 +1,161 @@
+{% extends 'simtalk/base/base.html' %} 
+
+{% block page_content %}
+  <div id="app" v-cloak>
+    <b-container class="w-50">
+      <b-row>
+        <b-col>
+          <div id="accordion">
+            {% csrf_token %}
+            <!-- card -->
+            <b-card class="mt-5 mb-3">
+
+              <template #header>
+                <div class="mb-0 do-card">
+                  <span>[[ dm_name ]]</span>
+                </div>
+              </template>
+  
+              <div>
+                <b-card-body>
+                  <b-container>
+                    <b-row>
+                      <b-col sm="12" md="12" lg="6" class="nowrap mb-4" v-for="dfo in dfo_list" :key="dfo.dfo_id" v-b-modal="'modal-'+dfo.dfo_id">
+                        <div class="p-3 py-4 btn text-center rounded df-card">[[ dfo.df_name ]]</div>
+                      </b-col>
+                    </b-row>
+                  </b-container>
+                </b-card-body>
+              </div>
+            </b-card>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
+
+    <!-- modal start -->
+    <div v-for="obj in dfo_list" :key="obj.dfo_id">
+      <b-modal :id="'modal-'+obj.dfo_id" :title="obj.df_name" size="lg"
+               ok-variant="success" ok-title="Save" @ok="saveHandler(obj, $event)">
+        <b-container>
+          <b-row>
+            <b-col>
+              <h3>Inter-arrival Time</h3>
+
+              <div v-show="obj.time_distribution.error.length > 0" v-for="(e_msg, idx) in obj.time_distribution.error" :key="obj.dfo_id+'te'+idx" class="error-message">[[ e_msg ]]</div>
+
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col sm="12" md="6" lg="3" class="mb-3">
+              <h5>Distribution</h5>
+              <div>
+                <b-form-select v-model="obj.time_distribution.distribution" @change="checkParameter(obj.time_distribution)" :options="options"></b-form-select>
+              </div>
+            </b-col>
+            <b-col sm="0" md="6" lg="0"></b-col>
+            <b-col v-show="obj.time_distribution.distribution != 'UN'" sm="12" md="6" lg="3" class="align-self-stretch mb-3">
+              <h5 class="nowrap">Mean (ms)</h5>
+              <input type="number" class="w-100" @change="checkParameter(obj.time_distribution)" v-model.number="obj.time_distribution.mean">
+            </b-col>
+            <b-col v-show="obj.time_distribution.distribution != 'UN'" sm="12" md="6" lg="3" class="mb-3">
+              <h5>Variance</h5>
+              <input type="number" class="w-100" @change="checkParameter(obj.time_distribution)" v-model="obj.time_distribution.var">
+            </b-col>
+            <b-col v-show="obj.time_distribution.distribution == 'UN'" sm="12" md="6" lg="3" class="mb-3">
+              <h5>Min</h5>
+              <input type="number" class="w-100" @change="checkParameter(obj.time_distribution)" v-model="obj.time_distribution.min">
+            </b-col>
+            <b-col v-show="obj.time_distribution.distribution == 'UN'" sm="12" md="6" lg="3" class="mb-3">
+              <h5>Max</h5>
+              <input type="number" class="w-100" @change="checkParameter(obj.time_distribution)" v-model="obj.time_distribution.max">
+            </b-col>
+            <b-col sm="12" md="6" lg="3" class="mb-3">
+              <h5>Seed</h5>
+              <input type="number" class="w-100" v-model.number="obj.time_distribution.seed" @keydown.69.capture.prevent.stop>
+            </b-col>
+          </b-row>
+          <!-- Time's min/max ? -->
+
+          <hr>
+  
+          <b-row>
+            <b-col>
+              <h3>Sensor Value</h3>
+            </b-col>
+          </b-row>
+
+          <div v-for="(vd, index) in obj.value_distributions" :key="index">
+
+            param: [[ vd.param_i ]]<br>
+			      [[ vd.param_type ]]
+
+            <div v-show="vd.error.length > 0" v-for="(e_msg, idx) in vd.error" :key="obj.dfo_id+'ve'+idx" class="error-message"> [[ e_msg ]]</div>
+
+            <b-row>
+              <b-col sm="12" md="6" lg="3" class="mb-3">
+                <h5>Distribution</h5>
+                <div>
+                  <b-form-select v-model="vd.distribution" @change="checkParameter(vd)" :options="options"></b-form-select>
+                </div>
+              </b-col>
+              <b-col sm="0" md="6" lg="0"></b-col>
+              <b-col sm="12" md="12" lg="6">
+                <b-row>
+                  <b-col v-show="vd.distribution != 'UN'" sm="12" md="6" lg="6" class="mb-3 align-self-stretch">
+                    <h5 class="nowrap">Mean</h5>
+                    <input type="number" step="any" class="w-100" @keydown.69.capture.prevent.stop @change="checkParameter(vd)" v-model.number="vd.mean">
+                  </b-col>
+                  <b-col v-show="vd.distribution != 'UN'" sm="12" md="6" lg="6" class="mb-3">
+                    <h5>Variance</h5>
+                    <input type="number" step="any" class="w-100" @keydown.69.capture.prevent.stop @change="checkParameter(vd)" v-model.number="vd.var">
+                  </b-col>
+                  <b-col sm="12" md="6" lg="6" class="mb-3">
+                    <h5>Min</h5>
+                    <input type="number" step="any" class="w-100" @keydown.69.capture.prevent.stop @change="checkParameter(vd)" v-model.number="vd.min">
+                  </b-col>
+                  <b-col sm="12" md="6" lg="6" class="mb-3">
+                    <h5>Max</h5>
+                    <input type="number" step="any" class="w-100" @keydown.69.capture.prevent.stop @change="checkParameter(vd)" v-model.number="vd.max">
+                  </b-col>
+                </b-row>
+              </b-col>
+              <b-col sm="12" md="6" lg="3" class="mb-3">
+                <h5>Seed</h5>
+                <input type="number" step="any" class="w-100" @keydown.69.capture.prevent.stop v-model.number="vd.seed">
+              </b-col>
+              
+            </b-row>
+            <br>
+
+          </div>
+          
+          <b-row class="mt-4 d-none"> <!-- TODO -->
+            <b-col sm="12" md="12" lg="6" offset-lg="3">
+              <b-form-group label="Trace File:" label-cols-sm="3">
+                <b-form-file id="file1"></b-form-file>
+              </b-form-group>
+            </b-col>
+          </b-row>
+
+        </b-container>
+  
+      </b-modal>
+    </div><!-- modal end -->
+  </div> <!--end of #app-->
+{% endblock %}
+
+{% block page_script %}
+  <script type="text/javascript">
+    let data = {
+      p_id: {{ p_id }},
+      do_id: {{ do_id }},
+      dm_name: '{{ dm_name }}',
+      dfo_list: {{ dfo_list|safe }},
+      file1: null,
+      options: {{ distribution_options|safe }},
+    };
+  </script>
+  {% load static %}
+  <script src="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/js/setup.js' %}"></script>
+{% endblock %}

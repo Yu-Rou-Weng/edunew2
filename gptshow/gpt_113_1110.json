@@ -1,0 +1,138 @@
+{
+  "session_id": 1110,
+  "log": [
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nNo prompt provided\n\nHere's the current program:\n",
+      "output": "import time\n\nball.pos = vector(0,0,0)\nball.velocity = vector(1,1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    if ball.pos.x > 10:\n        ball.velocity.x = -ball.velocity.x\n    if ball.pos.x < -10:\n        ball.velocity.x = -ball.velocity.x\n    if ball.pos.y > 10:\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y < -10:\n        ball.velocity.y = -ball.velocity.y",
+      "mode": "fix_error",
+      "timestamp": "2024-11-10 22:04:14",
+      "serial_number": 8
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nNo prompt provided\n\nHere's the current program:\n",
+      "output": "import time\n\nball.pos = vector(0,0,0)\nball.velocity = vector(1,2,0)\n\nwhile True:\n    rate(30)\n    ball.pos = ball.pos + ball.velocity\n    if ball.pos.y < -3:\n        ball.velocity.y = -ball.velocity.y\n    else:\n        ball.velocity.y = ball.velocity.y - 0.01",
+      "mode": "fix_error",
+      "timestamp": "2024-11-10 22:04:15",
+      "serial_number": 9
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nNo prompt provided\n\nHere's the current program:\n",
+      "output": "import time\n\nbox()\n\nbox(length=5, width=4, height=3, color=color.blue)\n\nsphere(pos=vector(5,5,5), radius=2, color=color.red)\n\ncylinder(pos=vector(-5,-5,-5), axis=vector(5,5,5), radius=1, color=color.green)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-10 22:04:15",
+      "serial_number": 10
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\n\nball.pos = vector(0,0,0)\nball.velocity = vector(1,2,0)\n\nwhile True:\n    rate(30)\n    ball.pos = ball.pos + ball.velocity\n    if ball.pos.y < -3:\n        ball.velocity.y = -ball.velocity.y\n    else:\n        ball.velocity.y = ball.velocity.y - 0.01",
+      "output": "from vpython import *\n\nball = sphere(pos=vector(0,0,0))\nball.velocity = vector(1,2,0)\n\nwhile True:\n    rate(30)\n    ball.pos = ball.pos + ball.velocity\n    if ball.pos.y < -3:\n        ball.velocity.y = -ball.velocity.y\n    else:\n        ball.velocity.y = ball.velocity.y - 0.01",
+      "mode": "fix_error",
+      "timestamp": "2024-11-10 22:04:18",
+      "serial_number": 11
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\n\nball.pos = vector(0,0,0)\nball.velocity = vector(1,1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    if ball.pos.x > 10:\n        ball.velocity.x = -ball.velocity.x\n    if ball.pos.x < -10:\n        ball.velocity.x = -ball.velocity.x\n    if ball.pos.y > 10:\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y < -10:\n        ball.velocity.y = -ball.velocity.y",
+      "output": "from vpython import *\n\nball = sphere(pos=vector(0,0,0))\nball.velocity = vector(1,1,0)\n\nwhile True:\n    rate(100)\n    ball.pos = ball.pos + ball.velocity\n    if ball.pos.x > 10:\n        ball.velocity.x = -ball.velocity.x\n    if ball.pos.x < -10:\n        ball.velocity.x = -ball.velocity.x\n    if ball.pos.y > 10:\n        ball.velocity.y = -ball.velocity.y\n    if ball.pos.y < -10:\n        ball.velocity.y = -ball.velocity.y",
+      "mode": "fix_error",
+      "timestamp": "2024-11-10 22:04:18",
+      "serial_number": 11
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nimport time\n\nbox()\n\nbox(length=5, width=4, height=3, color=color.blue)\n\nsphere(pos=vector(5,5,5), radius=2, color=color.red)\n\ncylinder(pos=vector(-5,-5,-5), axis=vector(5,5,5), radius=1, color=color.green)",
+      "output": "import vpython as vp\n\nvp.box()\n\nvp.box(length=5, width=4, height=3, color=vp.color.blue)\n\nvp.sphere(pos=vp.vector(5, 5, 5), radius=2, color=vp.color.red)\n\nvp.cylinder(pos=vp.vector(-5, -5, -5), axis=vp.vector(5, 5, 5), radius=1, color=vp.color.green)",
+      "mode": "modification",
+      "timestamp": "2024-11-10 22:04:19",
+      "serial_number": 12
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\n\nbox()\n\nbox(length=5, width=4, height=3, color=color.blue)\n\nsphere(pos=vector(5,5,5), radius=2, color=color.red)\n\ncylinder(pos=vector(-5,-5,-5), axis=vector(5,5,5), radius=1, color=color.green)",
+      "output": "from vpython import *\n\nbox()\n\nbox(length=5, width=4, height=3, color=color.blue)\n\nsphere(pos=vector(5,5,5), radius=2, color=color.red)\n\ncylinder(pos=vector(-5,-5,-5), axis=vector(5,5,5), radius=1, color=color.green)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-10 22:04:19",
+      "serial_number": 13
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nNo prompt provided\n\nHere's the current program:\n",
+      "output": "import time\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:43:59",
+      "serial_number": 12
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)",
+      "output": "from vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:02",
+      "serial_number": 13
+    },
+    {
+      "input": "Please update the following program based on this instruction:\n\n\nCurrent program:\nimport time\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow.color = color.yellow\nbox.color = color.green\ncone.color = color.red",
+      "mode": "modification",
+      "timestamp": "2024-11-12 21:44:03",
+      "serial_number": 14
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow.color = color.yellow\nbox.color = color.green\ncone.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:08",
+      "serial_number": 15
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:13",
+      "serial_number": 16
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:17",
+      "serial_number": 17
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:21",
+      "serial_number": 18
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:25",
+      "serial_number": 19
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:29",
+      "serial_number": 20
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:34",
+      "serial_number": 21
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:37",
+      "serial_number": 22
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 2: import time\n\nHere's the current program:\nimport time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "output": "import time\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.red)\narrow_obj = arrow(pos=vector(0,0,0), axis=vector(1,2,0), color=color.green)\nbox_obj = box(pos=vector(1,0,0), size=vector(1,1,1), color=color.blue)\ncone_obj = cone(pos=vector(0,1,0), axis=vector(1,2,0), color=color.yellow)\n\ntime.sleep(5)\n\nball.color = color.blue\narrow_obj.color = color.yellow\nbox_obj.color = color.green\ncone_obj.color = color.red",
+      "mode": "fix_error",
+      "timestamp": "2024-11-12 21:44:41",
+      "serial_number": 23
+    }
+  ]
+}

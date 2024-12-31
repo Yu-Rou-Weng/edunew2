@@ -1,0 +1,26 @@
+{
+  "session_id": 571,
+  "log": [
+    {
+      "input": "Horizontal Projectile Motion with Coefficient of Restitution, e\n\nA small ball is thrown horizontally from a height h with an initial velocity v0. The ball accelerates downward due to gravity and bounces upon hitting the ground. Only considering the effect of gravity, the coefficient of restitution when the ball hits the ground is e.\n\nThe code for horizontal projectile motion with coefficient of restitution e is almost identical to the standard horizontal projectile motion code, with the addition of the coefficient of restitution e. The code is modified at the point of the ball's impact with the ground as follows:\n\n```python\nif ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n    i += 1\n    print(i, t, ball.pos.x + L/2)\n    ball.v.y = -ball.v.y * e\n```\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Speed_I as a cyber input variable, set Speed_I=5.\n(2) Speed_I represents the horizontal initial velocity of the ball. When Speed_I is updated to a new value, the horizontal initial velocity of the ball changes accordingly.\n(3) Do not import packages that are not supported by VPython such as numpy, math and time.",
+      "output": "from vpython import *\n\n# Define initial values\nh = 5\nSpeed_I = 5\ng = 9.8\nsize = 0.2\ne = 0.8\ni = 0\ndt = 0.001\n\n# Create ball and floor\nfloor = box(length=30, height=0.01, width=10, color=color.blue)\nball = sphere(radius=size, color=color.red)\nball.pos = vector(-15, h, 0)\nball.v = vector(Speed_I, 0, 0)\n\n# Set up the motion\nwhile True:\n    rate(1000)\n    ball.pos = ball.pos + ball.v*dt\n    ball.v.y = ball.v.y - g*dt\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        i += 1\n        print(i, t, ball.pos.x + L/2)\n        ball.v.y = -ball.v.y * e",
+      "mode": "initial",
+      "timestamp": "2024-07-23 21:51:11",
+      "serial_number": 1
+    },
+    {
+      "input": "Please update the program by fixing the following error:\nt is not defined\n\nHere's the current program:\nfrom vpython import *\n\n# Define initial values\nh = 5\nSpeed_I = 5\ng = 9.8\nsize = 0.2\ne = 0.8\ni = 0\ndt = 0.001\n\n# Create ball and floor\nfloor = box(length=30, height=0.01, width=10, color=color.blue)\nball = sphere(radius=size, color=color.red)\nball.pos = vector(-15, h, 0)\nball.v = vector(Speed_I, 0, 0)\n\n# Set up the motion\nwhile True:\n    rate(1000)\n    ball.pos = ball.pos + ball.v*dt\n    ball.v.y = ball.v.y - g*dt\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        i += 1\n        print(i, t, ball.pos.x + L/2)\n        ball.v.y = -ball.v.y * e",
+      "output": "from vpython import *\n\n# Define initial values\nh = 5\nSpeed_I = 5\ng = 9.8\nsize = 0.2\ne = 0.8\ni = 0\ndt = 0.001\nt = 0\nL = 30\n\n# Create ball and floor\nfloor = box(length=L, height=0.01, width=10, color=color.blue)\nball = sphere(radius=size, color=color.red)\nball.pos = vector(-15, h, 0)\nball.v = vector(Speed_I, 0, 0)\n\n# Set up the motion\nwhile True:\n    rate(1000)\n    ball.pos = ball.pos + ball.v*dt\n    ball.v.y = ball.v.y - g*dt\n    t += dt\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        i += 1\n        print(i, t, ball.pos.x + L/2)\n        ball.v.y = -ball.v.y * e",
+      "mode": "fix_error",
+      "timestamp": "2024-07-23 21:51:23",
+      "serial_number": 2
+    },
+    {
+      "input": "Please update the program by fixing the following error:\nt is not defined\n\nHere's the current program:\nfrom vpython import *\n\n# Define initial values\nh = 5\nSpeed_I = 5\ng = 9.8\nsize = 0.2\ne = 0.8\ni = 0\ndt = 0.001\n\n# Create ball and floor\nfloor = box(length=30, height=0.01, width=10, color=color.blue)\nball = sphere(radius=size, color=color.red)\nball.pos = vector(-15, h, 0)\nball.v = vector(Speed_I, 0, 0)\n\n# Set up the motion\nwhile True:\n    rate(1000)\n    ball.pos = ball.pos + ball.v*dt\n    ball.v.y = ball.v.y - g*dt\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        i += 1\n        print(i, t, ball.pos.x + L/2)\n        ball.v.y = -ball.v.y * e",
+      "output": "from vpython import *\n\n# Define initial values\nh = 5\nSpeed_I = 5\ng = 9.8\nsize = 0.2\ne = 0.8\ni = 0\ndt = 0.001\nt = 0\nL = 30\n\n# Create ball and floor\nfloor = box(length=L, height=0.01, width=10, color=color.blue)\nball = sphere(radius=size, color=color.red)\nball.pos = vector(-15, h, 0)\nball.v = vector(Speed_I, 0, 0)\n\n# Set up the motion\nwhile True:\n    rate(1000)\n    ball.pos = ball.pos + ball.v*dt\n    ball.v.y = ball.v.y - g*dt\n    t += dt\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        i += 1\n        print(i, t, ball.pos.x + L/2)\n        ball.v.y = -ball.v.y * e",
+      "mode": "fix_error",
+      "timestamp": "2024-07-23 21:51:24",
+      "serial_number": 3
+    }
+  ]
+}

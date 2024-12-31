@@ -1,0 +1,12 @@
+{
+  "session_id": 901,
+  "log": [
+    {
+      "input": "1. Screen Settings\nPlease draw a horizontal projectile animation in VPython: Set the canvas width to 700 and the height to 400. Draw the trajectory of the ball. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nLaunch a ball horizontally in the air so that it strikes the floor and bounces.\nPlease draw the ball and the floor. Assume that the ball and the ground undergo an elastic collision, considering only the effect of gravity, meaning the ball accelerates downward under gravity and bounces upon hitting the ground. Allow the ball to move for 6 seconds before stopping its motion.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun from the starting point with the updated ball speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0,0,0))\n\n# Object Parameters\nball = sphere(pos=vector(0,5,0), radius=0.5, color=color.cyan)\nfloor = box(pos=vector(0,0,0), length=30, height=0.5, width=10, color=color.green)\nball.velocity = vector(1,0,0) # initial velocity (speed_I = 1)\ng = 9.8 # gravity\n\n# Cyber Input Variable\nSpeed_I = 1 # initial value\n\n# Time settings\nt = 0 # initial time\ndt = 0.01 # time step\nT = 6 # total time\n\n# Animation\nwhile t < T:\n    rate(100) # control the animation speed\n    ball.velocity.y = ball.velocity.y - g*dt # acceleration due to gravity\n    if ball.pos.y < ball.radius: # if the ball hits the floor\n        ball.velocity.y = -ball.velocity.y # elastic collision\n    ball.pos = ball.pos + ball.velocity * dt # update ball position\n    t = t + dt # update time\n\n    # if cyber input variable changes\n    if Speed_I != ball.velocity.x:\n        ball.velocity.x = Speed_I # update velocity\n        ball.pos = vector(0,5,0) # reset position\n        t = 0 # reset time",
+      "mode": "initial",
+      "timestamp": "2024-08-16 20:50:33",
+      "serial_number": 1
+    }
+  ]
+}

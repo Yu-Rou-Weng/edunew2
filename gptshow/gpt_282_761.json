@@ -1,0 +1,12 @@
+{
+  "session_id": 761,
+  "log": [
+    {
+      "input": "Please write the Vpython code for \"11-3. Simple harmonic motion caused by gravity, a circular loop, starting from zero initial velocity, starting from the endpoint.\"\n\nIn the center of the screen, there is a circular loop, and a small ball moves back and forth between heights of 15 above and 15 below in a vertical simple harmonic motion.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Create objects\nball = sphere(pos=vector(0,15,0), radius=1, color=color.red)\nloop = ring(pos=vector(0,0,0), radius=15, thickness=0.5)\n\n# Initialize\nRadius_I = 1\nball.radius = Radius_I\nt = 0\ndt = 0.01\nomega = sqrt(9.8/15)\n\n# Animation\nwhile True:\n    rate(100)\n    ball.pos.y = 15*cos(omega*t)\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-07-25 19:46:14",
+      "serial_number": 1
+    }
+  ]
+}

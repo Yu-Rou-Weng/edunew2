@@ -1,0 +1,12 @@
+{
+  "session_id": 898,
+  "log": [
+    {
+      "input": "Please create a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the scene with the center at (0, 7.5, 0). The length of the floor is 25. A small ball is thrown horizontally from an X-coordinate position of 0 and a height of 15, with an initial velocity of 5. Assuming an elastic collision occurs between the ball and the floor, and only considering the effect of gravity, the ball accelerates downwards due to gravity and bounces upon hitting the ground. The ball stops when it reaches an X-coordinate position of 25. Please draw the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Set up the scene\nscene = canvas(center=vector(0, 7.5, 0))\n\n# Define and initialize the radius of the ball\nRadius_I = 0.5\n\n# Create the floor\nfloor = box(pos=vector(12.5, 0, 0), size=vector(25, 0.01, 10), color=color.green)\n\n# Create the ball\nball = sphere(pos=vector(0, 15, 0), radius=Radius_I, color=color.red, make_trail=True)\n\n# Set up the initial velocity and acceleration\nball.velocity = vector(5, 0, 0)\ng = 9.8\nball.accel = vector(0, -g, 0)\n\n# Set up the time step\ndt = 0.01\n\n# Animation loop\nwhile ball.pos.x <= 25:\n    rate(100)\n    \n    # Update the position and velocity\n    ball.velocity = ball.velocity + ball.accel * dt\n    ball.pos = ball.pos + ball.velocity * dt\n\n    # Check for collision\n    if ball.pos.y <= Radius_I:\n        ball.velocity.y = abs(ball.velocity.y)\n\n    # Update the radius\n    ball.radius = Radius_I",
+      "mode": "initial",
+      "timestamp": "2024-07-31 13:00:40",
+      "serial_number": 1
+    }
+  ]
+}

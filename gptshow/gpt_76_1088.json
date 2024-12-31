@@ -1,0 +1,12 @@
+{
+  "session_id": 1088,
+  "log": [
+    {
+      "input": "Write a VPython script that creates a sphere and sets it in motion. The script should have a runtime error due to an incorrect property name or undefined variable. Specifically, create a sphere, set its velocity, and move it in a loop using `ball.pos += ball.velocity * dt`. Include an intentional error where an undefined or incorrect attribute is used, such as `ball.position` instead of `ball.pos`, to cause an `AttributeError`.",
+      "output": "from vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=0.5, color=color.blue)\nball.velocity = vector(1,1,0)  # Set the initial velocity of the ball\n\ndt = 0.01  # Time step for the motion\n\nwhile True:\n    rate(100)  # Set the refresh rate of the animation\n    ball.pos += ball.velocity * dt\n    ball.position += ball.velocity * dt  # Intentional error to cause AttributeError, should be \"ball.pos\"",
+      "mode": "initial",
+      "timestamp": "2024-11-03 11:41:56",
+      "serial_number": 1
+    }
+  ]
+}

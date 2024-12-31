@@ -1,0 +1,12 @@
+{
+  "session_id": 926,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball's motion. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a ball being horizontally projected: a ball is thrown horizontally from mid-air and bounces off the ground.\nDraw both the ball and the ground. Assume that the ball has an elastic collision with the ground, only considering the effect of gravity, meaning the ball accelerates downward under gravity and bounces up when it hits the ground. Let the ball continue its motion for 10 seconds before stopping.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun from the starting point with the updated ball speed.\n\n(3) Define and initialize a Cyber Input Variable named Height_I with an initial value set to 15. This variable represents the height of the ball above the ground.\n\n(4) During the animation, whenever the value of the Height_I variable changes, let the animation rerun from the starting point with the updated height of the ball above the ground.\n(5) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Define and initialize Cyber Input Variables\nSpeed_I = 1\nHeight_I = 15\n\n# Object Parameters\nball = sphere(radius=1, color=color.red)\nball.pos = vector(-5, Height_I, 0)\nball.velocity = vector(Speed_I, 0, 0)\nground = box(pos=vector(0, 0, 0), size=vector(20, 0.5, 10), color=color.green)\n\n# Gravity\ng = 9.8\n\n# Time Settings\nt = 0\ndt = 0.01\n\n# Animation\nwhile t < 10:\n    rate(100)\n    ball.velocity.y = ball.velocity.y - g * dt\n    ball.pos = ball.pos + ball.velocity * dt\n    if ball.pos.y <= ground.pos.y + 1:\n        ball.velocity.y = -ball.velocity.y\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-18 20:23:53",
+      "serial_number": 1
+    }
+  ]
+}

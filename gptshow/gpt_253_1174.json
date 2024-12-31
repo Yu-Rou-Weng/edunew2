@@ -1,0 +1,12 @@
+{
+  "session_id": 1174,
+  "log": [
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\nDraw the ball and floor.\nLet the ball move for 3 seconds and then stop.\n\nDo not resize the scene. \nThe center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings.</br>3. Cyber Input Variable Mapping Information:</br>\n(1) var1 is mapped to the variable named Angle_I with an initial value set to a 1-dimensional float [5]</br>\n(2) When the value of Angle_I changes, let the animation rerun to the starting point and start with the updated var1.</br>",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\nfloor = box(pos=vector(0, -5, 0), size=vector(20, 0.2, 10), color=color.blue)\nball = sphere(pos=vector(-8, 0, 0), radius=1, color=color.red)\n\n# Cyber Input Variable Mapping Information\nAngle_I = [5]\n\ndef launch_ball(angle):\n    ball.pos = vector(-8, 0, 0)\n    v0 = 5\n    t = 0\n    dt = 0.01\n    g = vector(0, -9.8, 0)\n    ball.velocity = vector(v0*cos(radians(angle[0])), v0*sin(radians(angle[0])), 0)\n\n    while t < 3:\n        rate(100)\n        ball.pos += ball.velocity * dt\n        ball.velocity += g * dt\n        if ball.pos.y < floor.pos.y + floor.size.y/2 + ball.radius:\n            ball.velocity.y *= -1\n\n        t += dt\n\ndef update_variables():\n    global Angle_I\n    launch_ball(Angle_I)\n\nupdate_variables()",
+      "mode": "initial",
+      "timestamp": "2024-12-23 22:05:01",
+      "serial_number": 1
+    }
+  ]
+}

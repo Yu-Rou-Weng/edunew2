@@ -1,0 +1,293 @@
+<div id="new-card">
+  <!--  Lecture -->
+  <div class="form-group">
+    <h4 class="heading"> Lecture </h4>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="float-label">
+          <input type="text" v-model.trim="lectureName" name="lecture-name">
+          <label for="lecture-name"> Lecture Name </label>
+          <span class="create-err-msg" v-if="err.type == 'lecture'">
+            [[ err.msg ]]
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="float-label">
+          <input type="text" v-model.trim="url" name="url" @change="checkUrl" @input="checkUrl">
+          <label for="url"> HackMD URL </label>
+          <span class="create-err-msg" v-if="err.type == 'url'">
+            [[ err.msg ]]
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Program -->
+  <div class="form-group">
+    <h4 class="heading"> Program </h4>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="float-label">
+          <input type="text" v-model.trim="odm" name="program-name">
+          <label for="program-name">Program Name</label>
+          <span class="create-err-msg" v-if="err.type == 'dm'">
+            [[ err.msg ]]
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="float-label">
+          <select v-model="vpTemplate" name="code" @change="changeTemplate">
+            <option disabled value="">please select one</option>
+            <option v-for="(t_info, t_name) in tList">[[ t_name ]]</option>
+          </select>
+          <label for="code" class="active">Code</label><i class="fa fa-chevron-down"></i>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="input-variable">
+        <div class="iv-container">
+          <div class="iv-header"><label class="iv-title"> Cyber Input Variables </label></div>
+          <div class="iv-content">
+            <div class="row">
+              <div class="col-sm-4">
+                <label class="list-title setting-cell"> Variables for selection </label>
+                <div class="giv-list">
+                  <div class="list-content">
+                    <div class="list-block">
+                      <div class="list-cell">
+                        <label class="add-new-giv" @click="addNewIv"> add new variable </label>
+                      </div>
+                    </div>
+                    <div class="list-block">
+                      <div id="freq-cell" class="list-cell" v-for="giv in frequencyOfGiv">
+                        [[ giv[0] ]]
+                        <select multi="9" :name="giv[0]" @change="reloadIvManage()"
+                          v-model="globalIvList[giv[0]]['selected']">
+                          <option :value="0">0</option>
+                          <option v-for="n in 9" :value="n"> [[ n ]] </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="list-block">
+                      <div class="list-cell" v-for="(iv_info, giv_name) in globalIvList">
+                        [[ giv_name ]]
+                        <select multi="9" :name="giv_name" @change="reloadIvManage()"
+                          v-model="globalIvList[giv_name]['selected']">
+                          <option :value="0">0</option>
+                          <option v-for="n in 9" :value="n"> [[ n ]] </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="setting-cell">
+                  <label> Selected variables&ensp; </label>
+                  <select class="iv-select" id="selected-iv-select" @change="selectDfIv">
+                    <option v-for="(iv, index) in ivList" :value="index"> [[ iv.giv_name + iv.index ]]
+                    </option>
+                  </select>
+                </div>
+                <template v-if="settingIv.show">
+                  <div class="setting-cell">
+                    <label> Number of parameters (dimensions)&ensp;&ensp; </label>
+                    <input type="number" min="1" max="9" v-model="paramsLen">
+                  </div>
+
+                    <div v-if="paramsLen>0" class="setting-cell">
+                        <label> Type of variable&ensp;&ensp; </label>
+                        <select class="dropdown-cell" v-model="settingIv.type.key">
+                          <template v-if="paramsLen==1">
+                            <option selected> value </option>
+                          </template>
+                          <template v-if="paramsLen==2">
+                            <option selected> array </option>
+                          </template>
+                          <template v-if="paramsLen==3">
+                            <option selected> array </option>
+                            <option> vector </option>
+                          </template>
+                          <template v-if="paramsLen>3">
+                            <option selected> array </option>
+                          </template>
+                        </select>
+                      </div>
+
+                  <table>
+                    <thead>
+                      <tr>
+                        <td v-if="paramsLen>1">Index</td>
+                        <!--td>Type</td-->
+                        <!--td>Min</td-->
+                        <!--td>Max</td-->
+                        <td>Default</td>
+                        <!--td>Unit</td-->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="dim-row" v-for="(p, index) in paramsLen">
+                        <template v-if="paramsLen>1">
+                            <td v-if="settingIv.type.key=='vector'">[[ String.fromCharCode('x'.charCodeAt() + index) ]]</td>
+                            <td v-else>[[ index ]]</td>
+                        </template>
+                        <!--td>
+                          <select>
+                            <option>int</option>
+                            <option selected="selected">float</option>
+                            <option>boolean</option>
+                            <option>void</option>
+                            <option>string</option>
+                            <option>json</option>
+                          </select>
+                        </td-->
+                        <!--td>
+                          <input type="number" class="feature-min-input" v-model.number="settingIv.params[index].min"
+                            :max="settingIv.params[index].max">
+                        </td-->
+                        <!--td>
+                          <input type="number" class="feature-max-input" v-model.number="settingIv.params[index].max"
+                            :min="settingIv.params[index].min">
+                        </td-->
+                        <td>
+                          <input type="text" class="feature-default-input" style="text-align: center"
+                            v-model="settingIv.params[index].default">
+                        </td>
+                        <!--td>
+                          <select class="dropdown-cell" v-model="settingIv.params[index].unit"
+                            @change="addNewUnit(index)">
+                            <option> add new unit </option>
+                            <template v-for="unit in unitList">
+                              <option v-if="unit == 'None'" selected="selected"> [[ unit ]] </option>
+                              <option v-else> [[ unit ]] </option>
+                            </template>
+                          </select>
+                        </td-->
+                      </tr>
+                    </tbody>
+                  </table>
+                </template>
+                <span class='create-err-msg' v-if="err.type == 'df'">
+                  [[ err.msg ]]
+                </span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="grid">
+      <div class="actuator-variable">
+        <div class="iv-container">
+          <div class="iv-header"><label class="iv-title"> Cyber Output Variables </label></div>
+          <div class="iv-content">
+            <div class="row">
+              <div class="col-sm-4">
+                <label class="list-title setting-cell"> Variables for selection </label>
+                <div class="actuator-list">
+                  <div class="list-content">
+                    <div class="list-block">
+                      <div class="list-cell">
+                        <label class="add-new-giv" @click="addNewOv"> add new variable </label>
+                      </div>
+                    </div>
+                    <div class="list-block">
+                      <div class="list-cell" v-for="(actuatorVar) in actuatorVarList.slice(0, 5)">
+                        [[ actuatorVar ]]
+                        <select multi="9" :name="actuatorVar" @change="reloadActuatorManage(actuatorVar, $event)"
+                                :value="output_variables.filter((v)=>v.key==actuatorVar).length">
+                          <option :value="0">0</option>
+                          <option v-for="n in 9" :value="n"> [[ n ]] </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="list-block">
+                      <div class="list-cell" v-for="(actuatorVar) in [...actuatorVarList].sort()">
+                        [[ actuatorVar ]]
+                        <select multi="9" :name="actuatorVar" @change="reloadActuatorManage(actuatorVar, $event)"
+                                :value="output_variables.filter((v)=>v.key==actuatorVar).length">
+                          <option :value="0">0</option>
+                          <option v-for="n in 9" :value="n"> [[ n ]] </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="setting-cell">
+                  <label> Selected Variables&ensp; </label>
+                  <select class="actuator-select" id="selected-actuator-select" @change="selectActuatorVar"
+                  v-model="selectedActuatorVar">
+                    <template v-for="(actuatorVar, index) in output_variables" :key="actuatorVar.name">
+                      <option  :value="index">
+                        [[ actuatorVar.name ]]
+                      </option>
+                    </template>
+                  </select>
+                </div>
+                <template v-if="output_variables.length>0">
+                  <template v-if="output_variables[selectedActuatorVar]">
+                    <div class="setting-cell">
+                        <label> Number of parameters (dimensions)&ensp;&ensp; </label>
+                        <input class="actuator-var-dim" type="number" min="1" max="3" v-model.number="actuatorVarLen">
+                    </div>
+                    <template v-if="output_variables[selectedActuatorVar].dim>0">
+                      <div class="setting-cell">
+                        <label> Type of variable&ensp;&ensp; </label>
+                        <select class="dropdown-cell" v-model="output_variables[selectedActuatorVar].type">
+                          <template v-if="output_variables[selectedActuatorVar].dim==1">
+                            <option selected> value </option>
+                          </template>
+                          <template v-if="output_variables[selectedActuatorVar].dim==2">
+                            <option selected> array </option>
+                          </template>
+                          <template v-if="output_variables[selectedActuatorVar].dim==3">
+                            <option selected> array </option>
+                            <option> vector </option>
+                          </template>
+                          <template v-if="paramsLen>3">
+                            <option selected> array </option>
+                          </template>
+                        </select>
+                      </div>
+                      <table>
+                        <thead>
+                          <tr>
+                            <td v-if="output_variables[selectedActuatorVar].dim>1">Index</td>
+                            <td>Default</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="dim-row" v-for="(val, index) in output_variables[selectedActuatorVar].default">
+                            <template v-if="output_variables[selectedActuatorVar].dim>1">
+                              <td v-if="output_variables[selectedActuatorVar].type=='vector'">[[ String.fromCharCode('x'.charCodeAt() + index) ]]</td>
+                              <td v-else>[[ index ]]</td>
+                            </template>
+                            <td>
+                              <input type="text" class="feature-default-input" style="text-align: center"
+                              v-model="output_variables[selectedActuatorVar].default[index]">
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </template>
+                  </template>
+                </template>
+                <span class='create-err-msg' v-if="err.type == 'actuator'">
+                  [[ err.msg ]]
+                </span>
+              </div>
+          </div>
+        </div>
+        <button class="btn btn-default" id="submit-btn" v-on:click="create">Save</button>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='create-lecture.js') }}"></script>

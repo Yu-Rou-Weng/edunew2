@@ -1,0 +1,9 @@
+coverage
+pytest==3.10.1
+pytest-cov==2.4.0
+pytest-httpserver==0.3.3
+pytest-timeout==1.0.0
+pytest-tornado==0.4.5
+iottalk-py @ git+https://github.com/IoTtalk/iottalk-py.git#egg=iottalk-py
+tox
+mock

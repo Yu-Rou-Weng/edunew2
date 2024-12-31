@@ -1,0 +1,12 @@
+{
+  "session_id": 1111,
+  "log": [
+    {
+      "input": "You must write code as same as this:import numpy as np, time, math# \u5617\u8a66\u5275\u5efa\u4e00\u500b\u7403\u9ad4\u548c\u65b9\u584a\uff0c\u4f46\u8b8a\u6578\u547d\u540d\u932f\u8aa4\u548c\u5c6c\u6027\u932f\u8aa4ball = sphere(position=vector(0,0,0), radius=1, color=color.red)cube = box(pos=vector(5,5,5), size=vector(2,2,2), color=color.blue)# \u8a2d\u7f6e\u901f\u5ea6\u548c\u52a0\u901f\u5ea6\uff0c\u4f46\u8b8a\u6578\u6df7\u4e82\u548c\u62fc\u5beb\u932f\u8aa4ball.velcity = vector(1, -1, 0)cub.acceleration = vector(0, -9.8, 0)# \u52d5\u756b\u53c3\u6578\u932f\u8aa4delta_t = 0.01counter = 0endtime = \"10\"\u00a0 # \u61c9\u70ba\u6578\u503c\u985e\u578b\uff0c\u4f46\u9019\u88e1\u4f7f\u7528\u4e86\u5b57\u7b26\u4e32while counter < endtime:\u00a0 \u00a0 rate(100)\u00a0 \u00a0 # \u6df7\u4e82\u7684\u8a08\u7b97\u548c\u8b8a\u6578\u932f\u8aa4\u00a0 \u00a0 ball.position += ball.velocty * delta_t\u00a0 \u00a0 cub.pos += ball.aceleration * delta_t**2\u00a0 \u00a0 # \u932f\u8aa4\u7684\u908f\u8f2f\u689d\u4ef6\u548c\u672a\u5b9a\u7fa9\u8b8a\u6578\u00a0 \u00a0 if cub.pos.z > cube.pos.x and position > 2:\u00a0 \u00a0 \u00a0 \u00a0 print(\"Error condition reached\")\u00a0 \u00a0 # \u4e0d\u6b63\u78ba\u7684\u905e\u589e\u00a0 \u00a0 counter += \"1\"\u00a0 # \u61c9\u70ba\u6578\u503c\u52a0\u6cd5\uff0c\u4f46\u9019\u88e1\u662f\u5b57\u7b26\u4e32\u52a0\u6cd5",
+      "output": "import numpy as np, time, math\nfrom vpython import *\n\nball = sphere(pos=vector(0,0,0), radius=1, color=color.red)\ncube = box(pos=vector(5,5,5), size=vector(2,2,2), color=color.blue)\n\nball.velocity = vector(1, -1, 0)\ncube.acceleration = vector(0, -9.8, 0)\n\ndelta_t = 0.01\ncounter = 0\nendtime = 10\n\nwhile counter < endtime:\n    rate(100)\n    \n    ball.pos += ball.velocity * delta_t\n    cube.pos += cube.acceleration * delta_t**2\n    \n    if cube.pos.z > cube.pos.x and ball.pos.y > 2:\n        print(\"Error condition reached\")\n        \n    counter += 1",
+      "mode": "initial",
+      "timestamp": "2024-12-16 20:29:46",
+      "serial_number": 1
+    }
+  ]
+}

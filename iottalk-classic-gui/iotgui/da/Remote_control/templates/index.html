@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Control Panel</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/knob/knobKnob.css">
+
+    <!-- <script src="static/mobilecheck.js"></script>  -->
+    <script src="static/jquery.min.js"></script>
+    <script src="static/knob/transform.js"></script>
+    <script src="static/knob/knobKnob.jquery.js"></script>
+    <script src="static/main.js"></script>
+   </head>
+  <body>
+<TD style="FONT-SIZE: 13px; COLOR:#000000; LINE-HIGHT:50px; FONT-FAMILY:Arial,Helvetica,sans-serif">
+    {% if not connect_df %}
+        <legend>Please establish a connection to Remote_control in the IoTtalk GUI!</legend>
+    {% endif %}
+
+    {% set switch_flag = [] %}
+    {% for da in connect_df %}
+        {% if 'Keypad' in da %}
+    <legend>{{da}}</legend>
+    <button onclick="push('{{da}}',1)">1</button>
+    <button onclick="push('{{da}}',2)">2</button>
+    <button onclick="push('{{da}}',3)">3</button> <br>
+    <button onclick="push('{{da}}',4)">4</button>
+    <button onclick="push('{{da}}',5)">5</button>
+    <button onclick="push('{{da}}',6)">6</button> <br>
+    <button onclick="push('{{da}}',7)">7</button>
+    <button onclick="push('{{da}}',8)">8</button>
+    <button onclick="push('{{da}}',9)">9</button> <br>
+    <button onclick="push('{{da}}',10)">*</button>
+    <button onclick="push('{{da}}',0)">0</button>
+    <button onclick="push('{{da}}',11)">#</button>  <br> <br>
+        {% endif %}
+
+        {% if 'Color' in da %}
+    <legend>{{da}}</legend>
+    <button onclick="push('{{da}}',[255,0,0])" style="width:100px; height:100px; background-color:#FF0000"></button>
+    <button onclick="push('{{da}}',[255,85,17])" style="width:100px; height:100px; background-color:#FF5511 "></button>
+    <button onclick="push('{{da}}',[255,255,0])" style="width:100px; height:100px; background-color:#FFFF00"></button> <br>
+    <button onclick="push('{{da}}',[0,255,0])" style="width:100px; height:100px; background-color:#00FF00"></button>
+    <button onclick="push('{{da}}',[0,0,255])" style="width:100px; height:100px; background-color:#0000FF"></button>
+    <button onclick="push('{{da}}',[102,0,255])" style="width:100px; height:100px; background-color:#6600FF"></button> <br>
+    <button onclick="push('{{da}}',[255,0,255])" style="width:100px; height:100px; background-color:#FF00FF"></button>
+    <button onclick="push('{{da}}',[255,255,255])" style="width:100px; height:100px; background-color:#FFFFFF"></button>
+    <button onclick="push('{{da}}',[0,0,0])" style="width:100px; height:100px; background-color:#000000"></button> <br><br>
+        {% endif %}
+
+        {% if 'Button' in da %}
+    <button onclick="push('{{da}}', {{da.replace('Button', '')}})">{{da}}</button> <br>
+        {% endif %}
+
+        {% if 'PPT_Control' in da %}
+    <legend>Power Point Panel</legend>
+    <button onclick="push('{{da}}','F5')" style="width:50px;">S</button>
+    <button onclick="push('{{da}}','up_arrow')" style="width:50px;">&uarr;</button>
+    <button onclick="push('{{da}}','esc')"  style="width:50px;">E</button> <br>
+    <button onclick="push('{{da}}','left_arrow')"  style="width:50px;">&larr;</button>
+    <button onclick="push('{{da}}','down_arrow')"  style="width:50px;">&darr;</button>
+    <button onclick="push('{{da}}','right_arrow')"  style="width:50px;">&rarr;</button> <br><br>
+        {% endif %}
+
+        {% if 'Knob' in da %}
+    <legend>{{da}}</legend>
+    <div type='text' role='{{da}}' class='knob-container'></div>
+        {% endif %}
+
+        {% if 'Switch' in da %}
+            {% if not switch_flag %}
+    <legend>Switch</legend>
+            {% endif %}
+        {% if switch_flag.append(True) %}{% endif %}
+    <span>{{da}}</span>
+    <div id="{{da}}" class="toggle-button">
+        <button></button>
+    </div>
+    <br>
+        {% endif %}
+
+    {% endfor %}
+  </body>
+</html>

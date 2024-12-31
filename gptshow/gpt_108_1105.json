@@ -1,0 +1,12 @@
+{
+  "session_id": 1105,
+  "log": [
+    {
+      "input": "Please update the following program based on this instruction:\n// 3. \u7136\u5f8c\u518d\u986f\u793a\u6a21\u614b\u6846$('#animation-preview-modal').modal('show');\n\nCurrent program:\nscene.width = 700\nscene.height = 400\n\nimport time\n\ndef theta(t):\n    return theta_0 * cos(sqrt(g/L) * t)\n\nL = 1.0  # Length of the string\ng = 9.81  # Acceleration due to gravity\ntheta_0 = radians(10)  # Initial angle in radians\n\nball = sphere(pos=vector(L*sin(theta_0), -L*cos(theta_0), 0), radius=0.05, color=color.red)\nstring = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    t += dt\n    ball.pos = vector(L*sin(theta(t)), -L*cos(theta(t)), 0)\n    string.axis = ball.pos - string.pos",
+      "output": "scene.width = 700\nscene.height = 400\n\nimport time\nfrom vpython import *\n\ndef theta(t):\n    return theta_0 * cos(sqrt(g/L) * t)\n\nL = 1.0  # Length of the string\ng = 9.81  # Acceleration due to gravity\ntheta_0 = radians(10)  # Initial angle in radians\n\nball = sphere(pos=vector(L*sin(theta_0), -L*cos(theta_0), 0), radius=0.05, color=color.red)\nstring = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    t += dt\n    ball.pos = vector(L*sin(theta(t)), -L*cos(theta(t)), 0)\n    string.axis = ball.pos - string.pos\n\n$('#animation-preview-modal').modal('show')",
+      "mode": "modification",
+      "timestamp": "2024-11-18 03:31:50",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 861,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the width of the canvas to 700 and the height to 400. Please draw the trajectory of the ball's movement. The center point of the canvas must be correctly set, thus the order of writing the Parameter Settings in the program should be after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally thrown ball: throw a horizontal ball that bounces off the ground.\nDraw the ball and the ground. Assume that the ball has an elastic collision with the ground, considering only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces upon hitting the ground. Allow the ball to move for 6 seconds before stopping.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, let the animation rerun with the updated ball speed.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nscene = canvas(width=700, height=400, center=vector(0,0,0), background=vector(0.5,0.5,0))\nscene.autoscale = False",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:03:07",
+      "serial_number": 1
+    }
+  ]
+}

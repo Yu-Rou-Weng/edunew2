@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GPS | IoTtalk</title>
+    <link rel="stylesheet" type="text/css" href="css/gsensor.css">
+</head>
+<body>
+
+    <main>
+        <h2></h2>
+        <section id="lat">
+            <label>Latitude</label>
+            <span></span>
+        </section>
+        <section id="lng">
+            <label>Longitude</label>
+            <span></span>
+        </section>
+    </main>
+
+
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/iottalk-api.js"></script>
+    <script type="text/javascript">
+        window.mac = Math.random().toString().slice(2);
+        window.d_name = null;
+
+        var interval = 1000;
+
+        var output = {lat: 0, lng:0};
+        var latDom = $('#lat > span');
+        var lngDom = $('#lng > span');
+
+        // Dom updater
+        function domUpdater() {
+            latDom.text(output.lat);
+            lngDom.text(output.lng);
+            requestAnimationFrame(domUpdater);
+        }
+        requestAnimationFrame(domUpdater);
+
+
+        // IoTtalk updater
+        function iotUpdater() {
+            if( navigator.geolocation )
+                navigator.geolocation.getCurrentPosition(showPosition);
+            if( window.d_name )
+                IoTtalk.update(mac, 'Geolocation', [output.lat, output.lng]);
+            setTimeout(iotUpdater, interval);
+        }
+        setTimeout(iotUpdater, interval);
+
+        function showPosition(position) {
+            output.lat = position.coords.latitude;
+            output.lng = position.coords.longitude;
+        };
+
+        // Register
+        IoTtalk.register(mac, {
+            'dm_name': 'GPS',
+            'is_sim': false,
+            'df_list': ['Geolocation'],
+        }, function(ret) {
+            console.log(ret);
+            ret = JSON.parse(ret);
+            window.d_name = ret.d_name;
+            $('main > h2').text(ret.d_name);
+        });
+
+
+        // Detach when browser close
+        function detach() {
+            window.d_name = null;
+            IoTtalk.detach(mac);
+        }
+        window.onunload = detach;
+        window.onbeforeunload = detach;
+        window.onclose = detach;
+        window.onpagehide = detach;
+
+    </script>
+
+</body>
+</html>

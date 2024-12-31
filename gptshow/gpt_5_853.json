@@ -1,0 +1,12 @@
+{
+  "session_id": 853,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please plot the trajectory of the ball. Do not adjust the size of the scene. The center point of the canvas must be correctly set, so the order of writing the Parameter Settings in the program should follow after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a horizontal projectile motion animation in VPython: Launch a horizontal ball that bounces upon hitting the ground.\nDraw both the ball and the ground. Assume that the ball undergoes an elastic collision with the ground and only consider the effect of gravity, meaning the ball accelerates downward due to gravity and bounces up when it hits the ground. Stop the motion of the ball after 10 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 5. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, the speed of the ball should immediately update to the new value of Speed_I, and the animation should be redrawn to reflect the change in speed.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0,-0.2,0))\n\n# Parameter Settings\ng = 9.8\ndt = 0.01\nSpeed_I = 5\nball = sphere(pos=vector(0,0,0), radius=0.05, color=color.cyan, make_trail=True)\nball.v = vector(Speed_I, 0, 0)\nfloor = box(length=0.8, height=0.005, width=0.8, color=color.green)\n\n# Object Motion\nt = 0\nwhile t < 10:\n    rate(100)\n    ball.pos = ball.pos + ball.v*dt\n    if ball.pos.y < -0.5:\n        ball.v.y = abs(ball.v.y)\n    else:\n        ball.v.y = ball.v.y - g*dt\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 15:54:07",
+      "serial_number": 1
+    }
+  ]
+}

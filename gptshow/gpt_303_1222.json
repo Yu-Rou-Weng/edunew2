@@ -1,0 +1,12 @@
+{
+  "session_id": 1222,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: --- ## Simple Harmonic Motion with Damping On a smooth horizontal surface, a block with mass \\(m\\) is connected to the left wall by a spring with a spring constant \\(k\\). If the block is pulled to the right by a distance \\(R\\) and then released from rest, the relationship between the net force and acceleration of the block is: $$ F = -kx = ma \\implies -kx = m \\frac{d^2x}{dt^2} $$ The motion of the block under these conditions is called simple harmonic motion (S.H.M.). From the above equation, the solution can be expressed as: $$ x(t) = R \\cos(\\omega t + \\phi) $$ $$ v(t) = -\\omega R \\sin(\\omega t + \\phi) $$ $$ a(t) = -\\omega^2 R \\cos(\\omega t + \\phi) $$ where \\(\\omega\\) is the angular frequency: $$ \\omega = \\sqrt{\\frac{k}{m}} $$ The period of motion is: $$ T = 2\\pi \\sqrt{\\frac{m}{k}} $$ Consider the case where damping is introduced.",
+      "output": "scene.width = 700\nscene.height = 400\n\nm = 1\nk = 1\nR = 0.5\nomega = sqrt(k/m)\nphi = 0\n\nblock = box(pos=vector(-R, 0, 0), size=vector(0.2, 0.2, 0.2), color=color.blue)\nspring = helix(pos=vector(0, 0, 0), axis=block.pos, radius=0.1, color=color.green)\nwall = box(pos=vector(0, 0, 0), size=vector(0.2, 0.1, 0.1), color=color.red)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    t += dt\n    x = R * cos(omega * t + phi)\n    v = -omega * R * sin(omega * t + phi)\n    a = -omega**2 * R * cos(omega * t + phi)\n    \n    block.pos.x = x\n    spring.axis = block.pos",
+      "mode": "initial",
+      "timestamp": "2024-12-26 15:49:17",
+      "serial_number": 1
+    }
+  ]
+}

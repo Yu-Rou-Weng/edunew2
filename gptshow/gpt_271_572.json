@@ -1,0 +1,12 @@
+{
+  "session_id": 572,
+  "log": [
+    {
+      "input": "### Horizontal Projectile Motion, Considering Gravity and Air Resistance f = -bv\n\nA small ball is thrown horizontally from a height h with an initial velocity v0. The ball accelerates downward due to gravity, while also considering both gravity and air resistance f = -bv.\n\nThe program for \"Horizontal Projectile Motion, Considering Gravity and Air Resistance f = -bv\" is almost identical to the program for \"Horizontal Projectile Motion, with Coefficient of Restitution e.\" The difference is:\n\nThe coefficient of air resistance b is added.\n\nWithin the while loop, add:\n\n    f = -b*ball.v\n    ball.a = vec(0, -g, 0) + f/m\nThis calculates the current air resistance and the acceleration of the ball.\n\nTo prevent the ball from experiencing excessive resistance and failing to reach the right edge of the floor, the condition in the while loop includes i < 20, stopping the animation after the ball hits the floor 20 times.\n\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Speed_I as a cyber input variable, set Speed_I=5\n(2) Speed_I is the horizontal initial velocity of the ball. When Speed_I changes to a new value, the horizontal initial velocity of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math and time.",
+      "output": "from vpython import *\n\n# Constants\ng = 9.8\nh = 10.0\nb = 0.1\nm = 1.0\nSpeed_I = 5.0\n\n# Ball and floor\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.cyan, make_trail=True)\nball.v = vector(Speed_I, 0, 0)\nfloor = box(pos=vector(0, 0, 0), size=vector(30, 0.01, 30), color=color.green)\n\n# Time and air resistance\nt = 0\ndt = 0.01\nf = vector(0,0,0)\n\nwhile ball.pos.y >= 0:\n    rate(100)\n    f = -b*ball.v\n    ball.a = vec(0, -g, 0) + f/m\n    ball.v = ball.v + ball.a*dt\n    ball.pos = ball.pos + ball.v*dt\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-07-23 21:56:09",
+      "serial_number": 1
+    }
+  ]
+}

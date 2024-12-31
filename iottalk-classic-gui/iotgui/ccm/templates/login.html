@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/iottalk/ccm/static/images/favicon.ico">
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/bootstrap3.3.7.min.css">
+    <link rel="stylesheet" href="/iottalk/ccm/static/css/login.css">
+    <script src="/iottalk/ccm/static/js/bootstrap3.3.7.min.js"></script>
+  <title>{% if is_login %}Login{% else %}Register{% endif %}</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="/iottalk/ccm/static/images/avatar.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" method="post">
+
+          <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+
+          <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+
+          {% if not is_login %}
+          <input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm Password" required>
+          {% endif %}
+
+          <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" value="{% if is_login %}Login{% else %}Register{% endif %}">{% if is_login %}Login{% else %}Register{% endif %}</button>
+
+        </form>
+
+        {% if is_login %}
+        <a class='link' href="/iottalk/ccm/register">Register</a><p>
+        {% else %}
+        <a class='link' href="/iottalk/ccm/login">Login</a><p>
+        {% endif %}
+        <script>
+          document.getElementsByClassName('link')[0].href += window.location.search;
+        </script>
+        <label style="color:red;">{{error_msg}}</label>
+      </div>
+    </div>
+	<script>
+    // clear cookie for simtalk
+    (function () {
+      var cookies = document.cookie.split("; ");
+      for (var c = 0; c < cookies.length; c++) {
+          var d = window.location.hostname.split(".");
+          while (d.length > 0) {
+              var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path=';
+              var p = location.pathname.split('/');
+              document.cookie = cookieBase + '/';
+              while (p.length > 0) {
+                  document.cookie = cookieBase + p.join('/');
+                  p.pop();
+              };
+              d.shift();
+          }
+      }
+      console.log('cookie cleared');
+    })();
+
+	</script>
+  </body>
+</html>

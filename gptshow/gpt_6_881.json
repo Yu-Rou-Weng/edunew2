@@ -1,0 +1,12 @@
+{
+  "session_id": 881,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please draw the trajectory of the ball's motion. The center point of the canvas must be set correctly, so the order of writing the Parameter Settings in the program must come after the Screen Settings.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of a horizontally projected ball: Launch a horizontal ball which bounces off the ground upon impact.\nDraw the ball and the ground. Assume that the ball undergoes an elastic collision with the ground, considering only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces back upon hitting the ground. Stop the motion of the ball after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named `Speed_I` with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, remake the animation with the updated ball speed according to the new value of Speed_I.\n\n(3) Do not resize the scene.\n(4) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400, center=vector(0, -0.2, 0), resizable=False)\n\n# Object Motion & Parameter Settings\nball = sphere(radius=0.2, color=color.yellow, make_trail=True)\nground = box(length=4, height=0.05, width=4, color=color.green)\nSpeed_I = 1\nball.m = 1\nball.v = vector(Speed_I, 0, 0)\ng = vector(0, -9.8, 0)\nt = 0\ndt = 0.01\nend_time = 6\n\nwhile t < end_time:\n    rate(100)\n    ball.v = ball.v + g*dt\n    ball.pos = ball.pos + ball.v*dt\n    if ball.pos.y < -1.95:\n        ball.v.y = -ball.v.y\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-08-16 18:44:27",
+      "serial_number": 1
+    }
+  ]
+}

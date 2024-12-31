@@ -1,0 +1,12 @@
+{
+  "session_id": 1229,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # Simple Harmonic Motion Caused by Gravity A small mass **m** is initially at rest and positioned at the midpoint of the perpendicular bisector of the line connecting two fixed massive spheres of equal mass **M**. The motion begins from one endpoint of this perpendicular bisector. The mass **m** experiences gravitational forces from the two spheres, which result in a restoring force proportional to its displacement when the displacement is small. This leads to oscillatory motion. The theoretical period of this oscillation is calculated using the following parameters: - Gravitational constant **G** - Masses **m** and **M** - Relevant distances",
+      "output": "scene.width = 700\nscene.height = 400\n\nG = 6.67430e-11\nm = 1\nM = 10\nr = 5\n\ns1 = sphere(pos=vector(-r, 0, 0), radius=0.5, color=color.red)\ns2 = sphere(pos=vector(r, 0, 0), radius=0.5, color=color.blue)\nmass = sphere(pos=vector(0, -r, 0), radius=0.25, color=color.green, make_trail=True)\n\ndt = 0.01\nt = 0\nv = vector(0, 0, 0)\na = vector(0, 0, 0)\n\nwhile True:\n    rate(100)\n    \n    r1 = mass.pos - s1.pos\n    r2 = mass.pos - s2.pos\n    \n    F1 = -G * m * M / mag(r1)**2 * norm(r1)\n    F2 = -G * m * M / mag(r2)**2 * norm(r2)\n    \n    F_net = F1 + F2\n    a = F_net / m\n    \n    v = v + a * dt\n    mass.pos = mass.pos + v * dt\n    \n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 16:36:09",
+      "serial_number": 1
+    }
+  ]
+}

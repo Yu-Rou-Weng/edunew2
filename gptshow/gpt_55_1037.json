@@ -1,0 +1,12 @@
+{
+  "session_id": 1037,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\"># **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.</span>\n\n3. Cyber Input Variable Mapping Information:\n    (1) initial_height is mapped to the variable named Height_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Height_I changes, let the animation rerun to the starting point and start with the updated initial_height.\n    \n\n3. Cyber Input Variable Mapping Information:\n    (1) initial_height is mapped to the variable named Height_I with an initial value set to a 1-dimensional value 5\n    (2) When the value of Height_I changes, let the animation rerun to the starting point and start with the updated initial_height.",
+      "output": "```python\nfrom vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Motion & Parameter Settings\ng = 9.81  # acceleration due to gravity\ndt = 0.01  # time step\n\n# Cyber Input Variable Mapping Information\nHeight_I = 5\n\ndef reset_scene():\n    global ball, ground, h, v0\n    scene.delete()\n    scene = canvas(width=700, height=400)\n    h = Height_I\n    v0 = 10\n    ball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.blue)\n    ground = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 5), color=color.green)\n\ndef update_height(value):\n    global Height_I\n    Height_I = value\n    reset_scene()\n\nreset_scene()\n\nwhile True:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * dt**2\n    if ball.pos.y <= 0:\n        ball.pos.y = 0\n        v0 *= -1\n```",
+      "mode": "initial",
+      "timestamp": "2024-09-23 23:12:54",
+      "serial_number": 1
+    }
+  ]
+}

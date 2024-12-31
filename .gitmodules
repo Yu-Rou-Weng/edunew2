@@ -1,0 +1,15 @@
+[submodule "iottalk-classic-gui"]
+	path = iottalk-classic-gui
+	url = git@github.com:IoTtalk/iottalk-classic-gui.git
+[submodule "iottalk-core"]
+	path = iottalk-core
+	url = git@github.com:IoTtalk/iottalk-core.git
+[submodule "iottalk-autogen"]
+	path = iottalk-autogen
+	url = git@github.com:IoTtalk/iottalk-autogen.git
+[submodule "iottalk-simtalk"]
+	path = iottalk-simtalk
+	url = git@github.com:IoTtalk/iottalk-simtalk.git
+[submodule "edutalk"]
+	path = edutalk-server
+	url = git@github.com:IoTtalk/EduTalk-iottalk_edu.git

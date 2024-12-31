@@ -1,0 +1,75 @@
+{
+  "session_id": 1102,
+  "log": [
+    {
+      "input": "1. Screen Settings:</br>Set the canvas width to 700 and height to 400. Do not change the canvas size.</br>2. Object Motion & Parameter Settings:</br>Create a VPython animation to illustrate the following physics experiment:<br><span style=\"color:red;\">Add import time to your code.## Small Ball Pendulum\n\nA small ball is suspended from the ceiling using an ideal string. If the angle between the string and the vertical line (the pendulum angle) is \ud835\udf03\u2080, and the ball is released from rest, then when the pendulum angle is \ud835\udf03, the ball is subjected to gravitational force and the tension in the string. The torque relative to the suspension point is given by:\n\n$$\n\\vec{\\tau} = \\vec{r} \\times \\vec{F} \\quad \\Rightarrow \\quad \\tau = r F \\sin \\theta\n$$\n\nIf the moment of inertia (\ud835\udc3c) is defined as:\n\n$$\nI = m r^2\n$$\n\nSince the torque (\ud835\udf0f) is in the opposite direction of the angular acceleration (\ud835\udefc), the relationship between them is:\n\n$$\n\\tau = -I \\alpha \\quad \\Rightarrow \\quad r F \\sin \\theta = -m r^2 \\frac{d^2 \\theta}{dt^2} \\quad \\Rightarrow \\quad \\frac{F}{m r} \\sin \\theta = - \\frac{d^2 \\theta}{dt^2}\n$$\n\nIf $r = L$ and $F = mg$, and when $\\theta < 5^\\circ$, we can approximate $\\sin \\theta \\approx \\theta$. The above equation can be rewritten as:\n\n$$\n\\frac{g}{L} \\theta = - \\frac{d^2 \\theta}{dt^2}\n$$\n\nThe solution is:\n\n$$\n\\theta(t) = \\theta_0 \\cos \\left( \\sqrt{\\frac{g}{L}} t \\right) = \\theta_0 \\cos(\\omega t)\n$$\n\nIn the above equation, $\\omega$ is the angular frequency of the pendulum\u2019s oscillation, and the period is:\n\n$$\nT = \\frac{2\\pi}{\\omega} = 2\\pi \\sqrt{\\frac{L}{g}}\n$$</span>",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "initial",
+      "timestamp": "2024-11-19 23:48:54",
+      "serial_number": 1
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:48:57",
+      "serial_number": 2
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:01",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:04",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vector(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vector(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vector(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:07",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:11",
+      "serial_number": 6
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:14",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:17",
+      "serial_number": 8
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:20",
+      "serial_number": 9
+    },
+    {
+      "input": "Please fix the following error in the program and add import time to your program:\nCannot import from time, line 3: import time\n\nHere's the current program:\nfrom vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "output": "from vpython import *\nimport time\n\ncanvas(width=700, height=400)\n\ng = 9.81\nL = 1.0\ntheta0 = 0.3\n\nball = sphere(pos=vec(L*sin(theta0), -L*cos(theta0), 0), radius=0.05, color=color.red)\nrod = cylinder(pos=vec(0, 0, 0), axis=ball.pos, radius=0.01)\n\nt = 0\ndt = 0.01\n\nwhile True:\n    rate(100)\n    \n    theta = theta0 * cos(sqrt(g / L) * t)\n    ball.pos = vec(L*sin(theta), -L*cos(theta), 0)\n    rod.axis = ball.pos\n    \n    t += dt\n    time.sleep(dt)",
+      "mode": "fix_error",
+      "timestamp": "2024-11-19 23:49:24",
+      "serial_number": 10
+    }
+  ]
+}

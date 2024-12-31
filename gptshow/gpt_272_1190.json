@@ -1,0 +1,12 @@
+{
+  "session_id": 1190,
+  "log": [
+    {
+      "input": "# **Horizontal Projectile Motion**A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.Only considering the effect of gravity, the coefficient of restitution of the ball with the ground is \\( e \\).Draw the ball and floor.Let the motion run for 6 seconds and then stop.Do not resize the scene.",
+      "output": "from vpython import *\n\nscene.autoscale = False\n\nh = 5 # initial height\nv0 = 10 # initial velocity\ne = 0.8 # coefficient of restitution\ng = 9.81 # acceleration due to gravity\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red, make_trail=True)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.1, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 6:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y -= 0.5 * g * (t**2) * dt\n    if ball.pos.y < 0:\n        ball.pos.y = 0\n        v0 *= e\n        t = 0\n    t += dt",
+      "mode": "initial",
+      "timestamp": "2024-12-26 11:26:41",
+      "serial_number": 1
+    }
+  ]
+}

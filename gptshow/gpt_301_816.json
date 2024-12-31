@@ -1,0 +1,12 @@
+{
+  "session_id": 816,
+  "log": [
+    {
+      "input": "Please write the VPython code for \"Simple Harmonic Motion Caused by Electrostatic Force (placed above the vertical line)\"\n\nAt the positions (-10, 0, 0) and (10, 0, 0), there are two blue spheres, each with a radius of 1 and carrying a positive charge. A small ball with a radius of 0.3 carrying a negative charge is released at the position (0, 3, 0) and starts to undergo simple harmonic motion caused by the electrostatic forces from the two charged spheres. The small ball can only move between the positions (0, 3, 0) and (0, -3, 0). There is a yellow line connecting the centers of the two blue spheres. At (0, 3, 0) and (0, -3, 0), there are two white horizontal lines each with a length of 5.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\nRadius_I = 1\n\nball1 = sphere(pos=vector(-10,0,0), radius=1, color=color.blue)\nball2 = sphere(pos=vector(10,0,0), radius=1, color=color.blue)\nsmall_ball = sphere(pos=vector(0,3,0), radius=Radius_I, color=color.red)\n\nline1 = cylinder(pos=vector(-10,0,0), axis=vector(20,0,0), radius=0.1, color=color.yellow)\nline2 = cylinder(pos=vector(-2.5,3,0), axis=vector(5,0,0), radius=0.1, color=color.white)\nline3 = cylinder(pos=vector(-2.5,-3,0), axis=vector(5,0,0), radius=0.1, color=color.white)\n\nq1 = 1e-10\nq2 = -1e-10\nk = 8.99e9\nm = 1e-3\ng = vector(0,-9.8,0)\n\ndt = 0.001\nt = 0\n\nwhile True:\n    rate(1000)\n    r1 = small_ball.pos - ball1.pos\n    r2 = small_ball.pos - ball2.pos\n    F1 = k*q1*q2*r1.hat/mag(r1)**2\n    F2 = k*q1*q2*r2.hat/mag(r2)**2\n    F_net = F1 + F2\n    a = F_net/m\n    small_ball.pos = small_ball.pos + a*dt\n    t = t + dt\n    if small_ball.pos.y > 3:\n        small_ball.pos.y = 3\n    elif small_ball.pos.y < -3:\n        small_ball.pos.y = -3\n\n    small_ball.radius = Radius_I",
+      "mode": "initial",
+      "timestamp": "2024-07-26 08:11:11",
+      "serial_number": 1
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "session_id": 945,
+  "log": [
+    {
+      "input": "1. Screen Settings\nSet the canvas width to 700 and the height to 400. Please plot the trajectory of the ball's motion. Do not change the size of the canvas.\n\n2. Object Motion & Parameter Settings\nPlease create a VPython animation of horizontal projectile motion: a ball is thrown horizontally from the air and bounces upon hitting the ground.\nDraw the ball and the ground. Assume that the ball undergoes an elastic collision with the ground, taking into account only the effect of gravity, meaning the ball accelerates downward due to gravity and bounces up when it hits the ground. Stop the motion of the ball after 10 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) Define and initialize a Cyber Input Variable named Speed_I with an initial value set to 1. This variable represents the speed of the ball.\n\n(2) During the animation, whenever the value of the Speed_I variable changes, the speed of the moving ball should be immediately updated to the new value of Speed_I.\n\n(3) Define and initialize a Cyber Input Variable named Gravity_I with an initial value set to 9.8. This variable represents the gravitational acceleration.\n\n(4) During the animation, whenever the value of the Gravity_I variable changes, the gravitational acceleration should be immediately updated to the new value of Gravity_I.\n(5) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Define the canvas\nscene = canvas(width=700, height=400)\n\n# Define variables\nSpeed_I = 1\nGravity_I = 9.8\n\n# Define the ball and the ground\nball = sphere(pos=vector(0,5,0), radius=0.2, color=color.red)\nground = box(pos=vector(0,0,0), size=vector(10,0.2,10), color=color.green)\n\n# Define the motion of the ball\nball.velocity = vector(Speed_I,0,0)\n\n# Define the time and dt\nt = 0\ndt = 0.01\n\n# Animation loop\nwhile t < 10:\n    rate(100)\n    \n    # Update the velocity of the ball\n    ball.velocity.y = ball.velocity.y - Gravity_I*dt\n    \n    # Update the position of the ball\n    ball.pos = ball.pos + ball.velocity*dt\n    \n    # Bounce the ball when it hits the ground\n    if ball.pos.y <= ground.pos.y + ground.height/2 + ball.radius:\n        ball.velocity.y = -ball.velocity.y\n    \n    # Increment the time\n    t = t + dt",
+      "mode": "initial",
+      "timestamp": "2024-08-19 07:37:27",
+      "serial_number": 1
+    }
+  ]
+}

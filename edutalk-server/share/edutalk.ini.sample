@@ -1,0 +1,96 @@
+[edutalk]
+
+debug = 0
+
+# please set the public IP
+# in case of Docker, please set it to `0.0.0.0`
+bind = 0.0.0.0
+http_port = 7000
+
+# please change this
+secret_key = dev
+
+# by default, it's `.edutalk` dir under your home dir
+# userdir = /your/home/.edutalk
+
+web_server_prefix = /
+
+# do not change this unless you know what you are doing
+deeplink = https://iottalk.github.io/applink/edutalk
+
+# kurento server for video streaming
+kurento_server_url = wss://hi1.iottalk.tw:8433/kurento
+
+# Username of administrator in profile
+admin_username = Username
+
+# ID of administrator in profile
+admin_sub = ID
+
+# E-mail of administrator in profile
+admin_email = E-mail
+
+# api token in account system to get access token for initdb
+aaa_api_token = api token
+
+# by default, the register needs to be approved
+# otherwise, set this value to False
+register_need_approve = True
+
+[edutalk-db]
+
+# Default database is SQLite
+#
+# type = sqlite
+# url = ${edutalk:userdir}/edutalk.db
+
+# Example setting for MySQL
+#
+# type = mysql
+# url = edutalk
+# host = localhost
+# port = 3306
+# user = edutalk
+# passwd = passwd
+
+[iottalk]
+
+# please change these url to public accessible url
+csm_api = http://localhost/csm
+ccm_api = http://localhost/ccm/api/v0
+ag_url = http://localhost/autogen
+
+[oauth2]
+
+# A flag indicates if proxy is used, leave it empty if you do not use proxy.
+# Fill in any value if you use proxy.
+proxy_used = ""
+
+# OAuth 2.0 Client ID
+client_id = Client ID
+
+# OAuth 2.0 Client Secret
+client_secret = Client Secret
+
+# OAuth 2.0 Redirect URI
+redirect_uri = Redirect URI
+
+# Base URL of Account System
+account_host = base url of account system
+
+# OpenID Connect Discovery Endpoint
+discovery_endpoint = ${account_host}/.well-known/openid-configuration
+
+# OAuth 2.0 authorization endpoint
+authorization_endpoint = ${account_host}/oauth2/v1/authorize/
+
+# OAuth 2.0 token endpoint
+token_endpoint = ${account_host}/oauth2/v1/token/
+
+# OAuth 2.0 revocation endpoint
+revocation_endpoint = ${account_host}/oauth2/v1/revoke/
+
+[elasticsearch]
+
+# please change this
+es_password = dev

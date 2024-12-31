@@ -1,0 +1,12 @@
+{
+  "session_id": 1,
+  "interactions": [
+    {
+      "serial_number": 2,
+      "timestamp": "2024-07-06 14:10:52",
+      "input": "Please update the following program based on this instruction: Make the pendulum swing 20 times faster\n\nCurrent program:\nfrom vpython import *\n\n# Initial parameters\nLength_I = 10\nRadius_I = 1\ng = 9.8\ntheta = 0.1\n\n# Create 3D objects\nceiling = box(length=0.2, height=0.01, width=0.2, color=color.blue)\nball = sphere(radius=Radius_I, color=color.red)\nrod = cylinder(radius=0.01)\n\n# Animation settings\nball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\nrod.axis = ball.pos\ndt = 0.01\n\n# Simulation\nwhile True:\n    rate(100)\n    alpha = -g*sin(theta)/Length_I\n    theta = theta + alpha*dt\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos",
+      "output": "from vpython import *\n\n# Initial parameters\nLength_I = 10\nRadius_I = 1\ng = 9.8\ntheta = 0.1\n\n# Create 3D objects\nceiling = box(length=0.2, height=0.01, width=0.2, color=color.blue)\nball = sphere(radius=Radius_I, color=color.red)\nrod = cylinder(radius=0.01)\n\n# Animation settings\nball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\nrod.axis = ball.pos\ndt = 0.01\n\n# Simulation\nwhile True:\n    rate(100)\n    alpha = -20*g*sin(theta)/Length_I\n    theta = theta + alpha*dt\n    ball.pos = vector(Length_I*sin(theta), -Length_I*cos(theta), 0)\n    rod.axis = ball.pos",
+      "mode": "modification"
+    }
+  ]
+}

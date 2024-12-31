@@ -1,0 +1,26 @@
+{
+  "session_id": 960,
+  "log": [
+    {
+      "input": "1. **Screen Settings:**\n   Adjust the canvas width to 700 and height to 400. Keep the canvas size unchanged.\n\n2. **Object Motion & Parameter Settings:**\n   Please set up a VPython animation as follows: Hang a small ball from the ceiling using a string at a 10-degree angle with the vertical line (pendulum angle). Release the ball from rest and observe it swinging back and forth due to gravity.\n\n3. **Cyber Input Variable Mapping Information:**\n\n   (1) Create and initialize a Cyber Input Variable named `Speed_I` with an initial value of 0. This variable represents the angular velocity of the pendulum bob.\n\n   (2) During the animation, whenever the value of the `Speed_I` variable changes, the angular velocity of the pendulum bob should be updated immediately to the new value of `Speed_I`.\n(1) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Screen Settings\ncanvas(width = 700, height = 400)\n\n# Object Motion & Parameter Settings\nceiling = box(length=0.8, height=0.01, width=0.8, color=color.blue)  # ceiling\nball = sphere(radius=0.1, color=color.red)  # ball\nstring = cylinder(radius=0.01, color=color.yellow)  # string\nball.pos, string.axis = vector(0.2, 0, 0), vector(0.2, 0, 0)  # initial positions\ngravity = vector(0, -9.8, 0)  # gravity\nball.m = 1  # mass\ndt = 0.001  # time step\nball.v = vector(0, 0, 0)  # initial velocity\ntheta = radians(10)  # initial pendulum angle\nL = 1  # length of string\nball.pos = vector(L*sin(theta), -L*cos(theta), 0)  # initial position of ball\n\n# Cyber Input Variable Mapping Information\nSpeed_I = 0  # initialize Speed_I\n\ndef update_speed(val):\n    global Speed_I\n    Speed_I = val\n\nwhile True:\n    rate(1000)\n    accel = -gravity - (Speed_I**2)*ball.pos/L  # acceleration\n    ball.v += accel*dt  # update velocity\n    ball.pos += ball.v*dt  # update position\n    string.axis = ball.pos  # update string position",
+      "mode": "initial",
+      "timestamp": "2024-08-21 12:20:01",
+      "serial_number": 1
+    },
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2.  Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nHorizontal projectile motion refers to the process in which an object is thrown horizontally from a certain height and moves along a curved path under the influence of gravity. When the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds.",
+      "output": "from vpython import *\nscene = canvas(width=700, height=400)",
+      "mode": "initial",
+      "timestamp": "2024-08-26 21:32:27",
+      "serial_number": 1
+    },
+    {
+      "input": "1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\n2.  Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nUser Must Fill in the Animation's Description",
+      "output": "{\n  \"Screen_Settings\": {\n    \"canvas_width\": 700,\n    \"canvas_height\": 400\n  },\n  \"Object_Motion_Parameter_Settings\": {\n    \"Animation_Description\": \"User_Input_Required\"\n  }\n}",
+      "mode": "initial",
+      "timestamp": "2024-08-27 00:40:48",
+      "serial_number": 1
+    }
+  ]
+}

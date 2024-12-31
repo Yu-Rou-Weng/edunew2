@@ -1,0 +1,12 @@
+{
+  "lecture_id": 61,
+  "session_id": "1730376865.010201",
+  "interactions": [
+    {
+      "timestamp": "2024-10-31T12:14:25.010582",
+      "mode": "initial",
+      "prompt": "\u8acb\u7528\u82f1\u6587\u6558\u8ff0\u4e0b\u9762\u662f\u5728\u9032\u884c\u4f55\u7a2e\u7269\u7406\u904b\u52d5, \u904e\u6ffe\u6389\u6558\u8ff0\u7a0b\u5f0f\u64b0\u5beb\u7684\u90e8\u5206:\n1. Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n2. Object Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\n# **Horizontal Projectile Motion**\n\nA small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground.\nOnly the effect of gravity is considered, and the collision between the ball and the ground is elastic.\n\n\n3. Cyber Input Variable Mapping Information:\n\n(1) initial_height is mapped to the variable named Elasticity_I with an initial value set to a 1-dimensional value 5\n(2) When the value of Elasticity_I changes, let the animation rerun to the starting point and start with the updated initial_height.\n",
+      "response": "scene.width = 700\nscene.height = 400\n\nball = sphere(pos=vector(0, initial_height, 0), radius=0.5, color=color.red, make_trail=True)\n\nv0 = 5\ng = 9.81\nt = 0\ndt = 0.01\n\nwhile ball.pos.y >= 0:\n    rate(100)\n    ball.pos.x = v0 * t\n    ball.pos.y = initial_height - 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= 0:\n        v0 *= -0.9\n        t = 0\n        initial_height = Elasticity_I"
+    }
+  ]
+}

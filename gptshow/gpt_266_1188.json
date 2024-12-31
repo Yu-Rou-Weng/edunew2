@@ -1,0 +1,12 @@
+{
+  "session_id": 1188,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Considering both gravity and air resistance \\( f = -bv \\). Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings. 3. Cyber Input Variable Mapping Information: (1) radius is mapped to the variable named Radius_I with an initial value set to a 1-dimensional value 5 (2) When the value of Radius_I changes, let the animation rerun to the starting point and start with the updated radius.",
+      "output": "scene.width = 700\nscene.height = 400\n\nRadius_I = 5\n\ndef reset_scene():\n    global ball, floor\n    scene.delete()\n    floor = box(pos=vector(0,-Radius_I,0), size=vector(40, 0.2, 10), color=color.green)\n    ball = sphere(pos=vector(-20,-Radius_I,0), radius=Radius_I, color=color.blue, make_trail=True)\n\nreset_scene()\n\nv0 = 10\ng = 9.81\nb = 0.1\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    t += dt\n    ball.pos.x += v0*dt\n    v0 += g*dt\n    v0 -= b*v0*dt\n    if ball.pos.x + Radius_I >= floor.pos.x + floor.size.x/2:\n        v0 = -v0\n    \n    if ball.pos.y - Radius_I <= floor.pos.y + floor.size.y/2:\n        ball.pos.y = floor.pos.y + floor.size.y/2 + Radius_I\n        v0 = -v0",
+      "mode": "initial",
+      "timestamp": "2024-12-28 14:35:51",
+      "serial_number": 1
+    }
+  ]
+}

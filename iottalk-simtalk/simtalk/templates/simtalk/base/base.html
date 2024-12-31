@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    {% load static %}
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>SimTalk</title>
+    <!-- Required Stylesheets -->
+    <link rel="shortcut icon" href="#">
+    <link type="text/css" rel="stylesheet" href="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/css/bootstrap.min.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/css/bootstrap-vue.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/css/simtalk.css' %}"/>
+  </head>
+
+  <body>
+    {% block page_content %}{% endblock %}
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
+
+    <!-- Required scripts -->
+    <script src="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/js/vue.js' %}"></script>
+    <script src="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/js/bootstrap-vue.js' %}"></script>
+    <script src="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/js/axios.min.js' %}"></script>
+
+    <script src="{{ WEB_SERVER_PREFIX }}{% static 'simtalk/js/csrf.js' %}"></script>
+
+    {% block page_script %}{% endblock %}
+  </body>
+</html>

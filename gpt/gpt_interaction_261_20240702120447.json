@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-07-02T12:04:47.297Z",
+  "mode": "initial",
+  "input": "Uniform Linear Motion\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1.\n\n(2) Radius_I represents the speed of the cube. When Radius_I changes to a new value, the speed of the cube also changes to that value.",
+  "output": "from vpython import *\n\n# Define and initialize the cyber input variable\nRadius_I = 1\n\n# create a cube\ncube = box(pos=vector(0,0,0), size=vector(1,1,1), color=color.red)\n\n# animation loop\nwhile True:\n    rate(100)\n\n    # update position of the cube based on the speed\n    cube.pos.x += Radius_I\n\n    # check if the cube has moved off the edge of the scene\n    if cube.pos.x > 5:\n        cube.pos.x = -5\n    elif cube.pos.x < -5:\n        cube.pos.x = 5\n\n    # update the speed of the cube when Radius_I changes\n    cube.velocity = vector(Radius_I, 0, 0)"
+}

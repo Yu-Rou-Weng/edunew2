@@ -1,0 +1,211 @@
+.show {
+  display: inline !important;
+}
+
+.alert {
+  margin: 0;
+}
+
+.navbar {
+  min-height: 0px;
+  margin-bottom: 0px;
+  box-shadow: 0 -1px #fff inset;
+}
+
+.navbar li form{
+  margin-block-end: 0px;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+  text-decoration: none;
+  color: #777;
+}
+
+.navbar-default .navbar-nav > .active > a.states,
+.navbar-default .navbar-nav > .active > a.states:focus,
+.navbar-default .navbar-nav > .active > a.states:hover
+{
+/*
+ * states - active
+*/
+}
+
+.navbar-default .navbar-nav > li > a.states,
+.navbar-default .navbar-nav > li > a.states:focus,
+.navbar-default .navbar-nav > li > a.states:hover,
+.navbar-default .navbar-nav > .active > a.states,
+.navbar-default .navbar-nav > .active > a.states:focus,
+.navbar-default .navbar-nav > .active > a.states:hover
+{
+/*
+ * states - text color
+*/
+}
+.navbar-default .navbar-nav > li > a.states:focus,
+.navbar-default .navbar-nav > li > a.states:hover {
+/*
+ * states - hover, focus
+*/
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar-right > li {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+.dropdown-menu {
+  max-height: 547px;
+  overflow-y: auto;
+}
+.dropdown-menu li {
+  margin: 5px 0;
+}
+.dropdown-menu li > a {
+  line-height: 32px;
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.dropdown-menu li>a:focus,
+.dropdown-menu li>a:hover {
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.dropdown-item {
+  padding: 3px 20px;
+}
+
+.user-name {
+  font-size: 16px;
+}
+.user-group {
+  font-size: 12px;
+  color: #777;
+}
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled {
+  padding-left: 197px;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 197px;
+  width: 0;
+  height: 110%;
+  margin-left: -197px;
+  overflow-y: auto;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+  width: 197px;
+}
+
+#lessonList {
+  height: 75%;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -197px;
+}
+
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 197px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+  background: #f8f8f8;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #42b983;
+  background: rgba(256, 256, 256, 0.2);
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+  height: 65px;
+  font-size: 24px;
+  line-height: 60px;
+  margin-top: 10;
+}
+
+.sidebar-nav>.sidebar-brand span {
+  color: #000;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 0;
+  }
+  #wrapper.toggled {
+    padding-left: 197px;
+  }
+  #sidebar-wrapper {
+    width: 0;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 197px;
+  }
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+/* pop out modal*/
+.modal-msg {
+  font-size: 18px;
+  padding-bottom: 15px;
+}

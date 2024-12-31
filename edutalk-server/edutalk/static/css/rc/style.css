@@ -1,0 +1,80 @@
+input {
+	width: 150px;
+}
+
+h4, div {
+	font-family: monospace, Arial, Sans-serif;
+	font-weight: normal;
+}
+
+section>h4{
+	padding-left: 12px;
+}
+
+.error-msg {
+	font-family: monospace, Arial, Sans-serif;
+	color: red;
+	margin-top: -3px;
+}
+
+.idf-block {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.idf-title {
+	font-family: monospace, Arial, Sans-serif;
+	margin-bottom: 5px;
+}
+
+.iv-name {
+	font-weight: 600;
+	margin: 2% 4%;
+}
+
+.sensor-container {
+	margin: 3%;
+	border: none;
+	border-radius: 2px;
+}
+
+.sensor-block {
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+}
+
+span:only-child, .param-label {
+	margin: 0% 4%;
+}
+
+.param-label[id='R'] {
+	height: 70%;
+	margin: 0% 4%;
+	display: flex;
+	align-items: center;
+}
+
+input[type=text]{
+	width:100%;
+	border:2px solid #aaa;
+	border-radius:4px;
+	margin:8px 0;
+	outline:none;
+	padding:8px;
+	box-sizing:border-box;
+	transition:.3s;
+}
+
+input[type=text]:focus{
+	border-color:dodgerBlue;
+	box-shadow:0 0 8px 0 dodgerBlue;
+}
+
+.hint-message {
+	display: flex;
+	flex-direction: column;
+	margin: 15px;
+	color: red;
+}

@@ -1,0 +1,52 @@
+[core]
+
+# The default value is a `.iottalk` dir under user's HOME.
+#
+# userdir = /your/home/.iottalk
+
+# The public ip should be binded.
+# In case of Docker, set it to `0.0.0.0`
+#
+bind = 0.0.0.0
+# http-port = 9992
+
+# When the offline time period of a device application is longer than the give
+# `da_expiration` time, it will be deregistered.
+# By default, the expiration time is 3 days (3*24*60*60 seconds).
+#
+da-expiration = 30
+
+[core-db]
+
+# Default development database is sqlite.
+# Please use MySQL in production for better performance and stability.
+#
+# type = sqlite
+# url = ${core:userdir}/iottalk.db
+
+# Example for MySQL
+#
+# type = mysql
+# url = iottalk
+# host = localhost
+# port = 3306
+# user = iottalk
+# passwd = passwd
+
+[core-mqtt]
+
+# MQTT broker config
+# Please assign the public IP and port of the MQTT server.
+# This configures will be sent to the device application as the connection info.
+#
+scheme = mqtt
+host = localhost
+port = 1883
+
+[core-ws]
+
+# WebSocket config
+#
+scheme = ws
+host = ${core-mqtt:host}
+port = 1884

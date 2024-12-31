@@ -1,0 +1,12 @@
+{
+  "session_id": 908,
+  "log": [
+    {
+      "input": "Please write a Vpython animation to simulate \"horizontal projectile motion.\"\n\nSet the canvas centered at (0, 7.5, 0). Set the floor length to 25. From the X-coordinate position -10, horizontally launch a ball with a radius of 0.5 at a height of 15, with an initial velocity of 5. Assume that the ball has an elastic collision with the ground, considering only the effects of gravity, meaning the ball accelerates downward under gravity and bounces upon hitting the ground. Stop the motion when the ball reaches the X-coordinate position of 12.5. Please plot the trajectory of the ball's motion. Do not adjust the size of the scene.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=0.5\n\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# project parameters\nRadius_I = 0.5\ng = 9.8\nh = 15\nv = 5\ndt = 0.01\nx_max = 12.5\nx_min = -10\n\n# set up the scene\nscene = canvas(center = vector(0, 7.5, 0))\n\n# objects\nfloor = box(pos=vector(0,0,0), size=vector(25,0.2,0), color=color.blue)\nball = sphere(pos=vector(x_min, h, 0), radius=Radius_I, color=color.red)\nball.v = vector(v, 0, 0)\n\n# plot trajectory\ngd = graph(xtitle='X', ytitle='Y', ymax = 20, xmax=13, xmin=-11, width=600, height=450)\nfunct = gcurve(color=color.red, graph=gd)\n\nwhile ball.pos.x < x_max:\n    rate(100)\n    ball.pos = ball.pos + ball.v*dt\n    if ball.pos.y > Radius_I:\n        ball.v.y -= g*dt\n    else:\n        ball.v.y = abs(ball.v.y)\n    funct.plot(ball.pos.x,ball.pos.y)",
+      "mode": "initial",
+      "timestamp": "2024-07-31 15:03:22",
+      "serial_number": 1
+    }
+  ]
+}

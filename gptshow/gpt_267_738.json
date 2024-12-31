@@ -1,0 +1,12 @@
+{
+  "session_id": 738,
+  "log": [
+    {
+      "input": "Free Fall with Bounce When the Ball Hits the Ground\n\nThe objective is to simulate the effect of gravity on an object, specifically to illustrate a ball accelerating downwards from a certain height and then bouncing upon hitting the floor.\n\nThe program for free fall with a bounce when the ball hits the ground is almost identical to that of simple free fall, except for the addition of a bounce effect when the ball contacts the floor. In the motion part of the object, the following is added:\n\nif ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n    ball.v.y = -ball.v.y\n\nIf \"ball.pos.y - floor.pos.y <= size + 0.5*floor.height\" indicates that the ball has hit the floor, and \"ball.v.y < 0\" indicates that the ball's velocity is directed downwards, then when both conditions are met, it signifies that the ball is moving downwards and hitting the floor. After bouncing, the ball's velocity changes from negative to positive, hence the velocity ball.v.y is multiplied by a negative sign and then reassigned to ball.v.y.\n\nCyber Input Variable Mapping Information:\n\n(1) Define and initialize a variable named Radius_I as a cyber input variable, set Radius_I=1\n(2) Radius_I is the radius of the ball. When Radius_I changes to a new value, the radius of the ball also changes to that value.\n(3) Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time.",
+      "output": "from vpython import *\n\n# Constants\ng = vec(0,-9.8,0)\nheight = 10\n\n# Parameters\nRadius_I = 1\nsize = Radius_I\nfloor = box(length=10, height=0.01, width=10, pos=vec(0,-0.005,0), color=color.blue)\n\n# Ball\nball = sphere(radius = Radius_I, pos = vec(0, height, 0), color=color.red, make_trail=True)\n\n# Initial velocity\nball.v = vec(0,0,0)\n\n# Time step\ndt = 0.01\n\nwhile True:\n    rate(100)\n    ball.v = ball.v + g*dt\n    ball.pos = ball.pos + ball.v*dt\n    if ball.pos.y - floor.pos.y <= size + 0.5*floor.height and ball.v.y < 0:\n        ball.v.y = -ball.v.y",
+      "mode": "initial",
+      "timestamp": "2024-07-25 14:53:18",
+      "serial_number": 1
+    }
+  ]
+}

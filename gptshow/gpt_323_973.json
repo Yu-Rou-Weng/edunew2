@@ -1,0 +1,12 @@
+{
+  "session_id": 973,
+  "log": [
+    {
+      "input": "Screen Settings:\nSet the canvas width to 700 and height to 400. Do not change the canvas size.\n\nObject Motion & Parameter Settings:\nCreate a VPython animation to illustrate the following physics experiment:\nHorizontal projectile motion refers to the process in which an object is thrown horizontally from a certain height and moves along a curved path under the influence of gravity. When the ball hit the ground, it bounces back. The ball should stop moving after 6 seconds.\n\n3. Cyber Input Variable Mapping Information:\n\n(1) initial_velocity is mapped to the variable named Velocity_I with an initial value set to .\n(2) When the value of Velocity_I changes, let the animation rerun to the starting point and start with the updated initial_velocity.\n",
+      "output": "from vpython import *\n\n# Screen Settings\nscene = canvas(width=700, height=400)\n\n# Object Parameters\nground = box(pos=vector(0, -2, 0), size=vector(20, 0.1, 2), color=color.green)\nball = sphere(pos=vector(-10, 0, 0), radius=1, color=color.red, make_trail=True)\ninitial_velocity = 10  # Initial velocity of the ball\n\n# Physics Parameters\ng = 9.81  # Acceleration due to gravity\n\n# Animation Setup\ndt = 0.01  # Time step for animation\nt = 0  # Initial time\n\nwhile t < 6:\n    ball.pos.x = initial_velocity * t\n    ball.pos.y = 0.5 * (-g) * t ** 2\n\n    if ball.pos.y < 0:\n        initial_velocity *= -0.8  # Bounce back with reduced velocity\n\n    t += dt\n    rate(100)\n\n    if initial_velocity == 0:\n        break",
+      "mode": "initial",
+      "timestamp": "2024-09-03 14:28:35",
+      "serial_number": 1
+    }
+  ]
+}

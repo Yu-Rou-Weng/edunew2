@@ -1,0 +1,89 @@
+{
+  "session_id": 1170,
+  "log": [
+    {
+      "input": "1. Screen Settings: Set the canvas width to 700 and height to 400. Do not change the canvas size. 2. Object Motion & Parameter Settings: Create a VPython animation to illustrate the following physics experiment: # **Horizontal Projectile Motion** A small ball is launched horizontally from a height \\( h \\) with an initial velocity \\( v_0 \\). The ball accelerates downward under the influence of gravity and bounces upon hitting the ground. Considering both gravity and air resistance \\( f = -bv \\). Draw the ball and floor. Let the ball move for 3 seconds and then stop. Do not import packages that are not supported by VPython such as numpy, math, sympy, scipy and time. Do not resize the scene. The center point of the canvas needs to be set correctly, so the writing order of Parameter Settings of the program needs to be after Screen Settings. 3. Cyber Input Variable Mapping Information: (1) mass2 is mapped to the variable named mass2 with an initial value set to a 1-dimensional value 5 (2) When the value of mass2 changes, let the animation rerun to the starting point and start with the updated mass2.",
+      "output": "scene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5",
+      "mode": "initial",
+      "timestamp": "2024-12-24 17:19:30",
+      "serial_number": 1
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:34",
+      "serial_number": 2
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\nball.old_pos = ball.pos\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:36",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5\nball.old_pos = ball.pos",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:36",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass2 = 5",
+      "output": "scene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass2 = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:36",
+      "serial_number": 3
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nfrom vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:38",
+      "serial_number": 4
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nfrom vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\nball.old_pos = ball.pos\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:38",
+      "serial_number": 5
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nfrom vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:40",
+      "serial_number": 6
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nfrom vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\nball.old_pos = ball.pos\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f\n\nmass = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:40",
+      "serial_number": 6
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass2 = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nball.old_pos = ball.pos\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass2 = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:40",
+      "serial_number": 7
+    },
+    {
+      "input": "Please fix the following error in the program:\nCannot subtract a scalar and a vector.\n\nHere's the current program:\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass2 = 5",
+      "output": "from vpython import *\n\nscene.width = 700\nscene.height = 400\n\nh = 5\nv0 = 10\ng = 9.81\nb = 0.1\n\nball = sphere(pos=vector(0, h, 0), radius=0.5, color=color.red)\nfloor = box(pos=vector(0, 0, 0), size=vector(20, 0.2, 10), color=color.green)\n\nt = 0\ndt = 0.01\n\nwhile t < 3:\n    rate(100)\n    ball.pos.x += v0 * dt\n    ball.pos.y = h - 0.5 * g * t**2\n    t += dt\n    if ball.pos.y <= 0:\n        v0 = -v0\n        t = 0\n\n    v = (ball.pos - ball.old_pos) / dt\n    f = -b * v\n    ball.old_pos = ball.pos\n\n    ball.pos += f*dt\n\nmass2 = 5",
+      "mode": "fix_error",
+      "timestamp": "2024-12-24 17:19:41",
+      "serial_number": 7
+    },
+    {
+      "input": "# Kepler's Third Law of Planetary Motion## DescriptionKepler's Third Law states that the square of the orbital period (\\( T \\)) of a planet is proportional to the cube of the semi-major axis (\\( a \\)) of its orbit:\\[\\frac{a^3}{T^2} = \\text{constant}\\]This relationship holds for all planets orbiting the Sun and can be derived using the gravitational force as the centripetal force.---## Simulation Setup- **Gravitational constant**: \\( G = 6.67408 \\times 10^{-11} \\, \\text{m}^3\\text{kg}^{-1}\\text{s}^{-2} \\)- **Sun mass**: \\( 1.9885 \\times 10^{30} \\, \\text{kg} \\)- **Earth orbital radius**: \\( 1.5 \\times 10^{11} \\, \\text{m} \\)- **Earth orbital velocity**: \\( 29,780 \\, \\text{m/s} \\)- **Custom planet orbital radius**: \\( n \\cdot d \\) (e.g., \\( n = 4 \\))- **Eccentricity**: \\( e = 0.0 \\)### VisualizationThe simulation uses **VPython** to represent:- **The Sun**: a sphere at the center emitting light.- **The Earth and Custom Planet**: spheres orbiting the Sun with trails to visualize their paths.",
+      "output": "from vpython import sphere, vector, color, rate\n\nG = 6.67408e-11\nM_sun = 1.9885e30\nR_earth = 1.5e11\nV_earth = 29780\ncustom_n = 4\ncustom_d = R_earth / custom_n\ne = 0.0\n\nT_earth = 2 * 3.14159 * R_earth / V_earth\nT_custom = (custom_d ** 1.5) / (R_earth ** 1.5) * T_earth\n\nearth = sphere(pos=vector(0, R_earth, 0), radius=5e9, color=color.blue)\ncustom_planet = sphere(pos=vector(0, custom_d, 0), radius=5e9, color=color.red)\n\nwhile True:\n    rate(100)\n    earth.rotate(angle=2 * 3.14159 / T_earth, axis=vector(0, 0, 1), origin=vector(0, 0, 0))\n    custom_planet.rotate(angle=2 * 3.14159 / T_custom, axis=vector(0, 0, 1), origin=vector(0, 0, 0))",
+      "mode": "initial",
+      "timestamp": "2024-12-26 17:06:26",
+      "serial_number": 1
+    }
+  ]
+}

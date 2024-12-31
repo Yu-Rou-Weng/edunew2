@@ -1,0 +1,81 @@
+.title {
+  text-align:center;
+  font-size: 40px;
+  font-weight: bold;
+}
+.df-card {
+  background: #ccc;
+  font-size: 25px;
+  width: 100%;
+  font-weight: bold;
+}
+.do-card {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* BootstrapVue css */
+.custom-control:focus {
+    outline: none;
+}
+
+/* hide Vue instance until the compilation finishes */
+[v-cloak] { display: none; }
+
+/* input file btn title */
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: 'Upload';
+}
+
+/* hide input arrors/spinners */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* others */
+.error-message {
+  color: red;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/*
+  Login Page
+*/
+.card-title {
+  text-align:center;
+  font-size: 40px;
+  font-weight: bold;
+  color:rgb(58, 56, 56);
+}
+
+.dark-theme {
+  background-color: rgb(80, 78, 78);
+}
+.custom-btn {
+  /* background-color: #304556; */
+  background-color:#318cdd;
+  border-color: #318cdd !important;
+}
+
+.custom-btn:hover {
+  background-color: #256cac !important
+}
+
+@media (min-width: 992px) {
+  .col-lg-0 {
+    flex: 0 0 0%;
+    max-width: 0%;
+    padding: 0;
+  }
+}

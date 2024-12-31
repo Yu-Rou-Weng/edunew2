@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/iottalk/ccm/static/images/favicon.ico">
+    <base target="_blank">
+    <title>IoTtalk Homepage</title>
+  </head>
+
+  <body>
+    <h4>IoTtalk Management:</h4>
+    <ul>
+      <li><a href="/iottalk/ccm/connection">Project Management</a></li>
+      <li><a href="/iottalk/ccm/management">Device Feature and Model Management</a></li>
+      <li><a href="/iottalk/ccm/device">Device Ownership</a></li>
+      <!--
+      <li><a href="/download_feature">Download Device Feature</a></li>
+      <li><a href="/list_all">Device Monitor</a></li>
+      -->
+    </ul>
+
+    <h4>Cyber Device List:</h4>
+    <ul>
+      <li><a id="remote-control">Remote_Control</a></li>
+      <script>
+        document.getElementById("remote-control").href = "http://" + window.location.hostname + ":7789/";
+      </script>
+
+      <li><a href="/iottalk/ccm/da/Bulb/">Bulb</a></li>
+      <li><a href="/iottalk/ccm/da/Smartphone/">Smartphone</a></li>
+      {% for da_name in vp_da_list %}
+      <li><a href="/iottalk/ccm/da/vp/web_py_index.html#{{da_name}}">{{da_name}}</a> 
+      {% endfor %}
+
+      {% for device in device_list %}
+      <li><a href="{{device.device_webpage}}">{{device.d_name}}</a>
+      {% endfor %}
+    </ul>
+
+  </body>
+
+</html>
